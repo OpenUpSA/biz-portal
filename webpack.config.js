@@ -1,5 +1,5 @@
 const autoprefixer = require('autoprefixer');
-
+const BundleTracker = require('webpack-bundle-tracker');
 const path = require('path');
 
 function tryResolve_(url, sourceFilename) {
@@ -29,9 +29,11 @@ function materialImporter(url, prev) {
 }
 
 module.exports = {
-  entry: ['./app.scss', './app.js'],
+  context: __dirname,
+  entry: ['./assets/scss/biz-portal.scss', './assets/js/biz-portal.js'],
   output: {
-    filename: 'bundle.js',
+    path: path.resolve('./assets/bundles/'),
+    filename: "[name].js"
   },
   module: {
     rules: [
@@ -41,7 +43,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: 'bundle.css',
+              name: './[name].css',
             },
           },
           {loader: 'extract-loader'},
@@ -69,4 +71,7 @@ module.exports = {
       }
     ],
   },
+  plugins: [
+    new BundleTracker({filename: './webpack-stats.json'})
+  ]
 };

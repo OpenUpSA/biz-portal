@@ -1,5 +1,5 @@
 {
-  "name": "business-directory-portal",
+  "name": "open-business-portal",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -23,13 +23,14 @@
     "postcss-loader": "^3.0.0",
     "sass-loader": "^7.1.0",
     "webpack": "^4.34.0",
+    "webpack-bundle-tracker": "^0.4.2-beta",
     "webpack-cli": "^3.3.4",
     "webpack-dev-server": "^3.7.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "start": "webpack-dev-server"
+    "build": "webpack --mode production",
+    "dev": "webpack --watch --mode development"
   },
   "author": "",
   "license": "ISC"
