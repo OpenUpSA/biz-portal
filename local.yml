@@ -14,20 +14,17 @@ services:
       - postgres
     volumes:
       - .:/app
-    env_file:
-      - ./.envs/.local/.django
-      - ./.envs/.local/.postgres
+    environment:
+      - USE_DOCKER=yes
+      - DATABASE_URL=postgres://postgres@postgres/biz_portal
     ports:
       - "8000:8000"
-    command: /start
+    command: python manage.py runserver_plus 0.0.0.0:8000
 
   postgres:
-    build:
-      context: .
-      dockerfile: ./compose/production/postgres/Dockerfile
-    image: biz_portal_production_postgres
+    image: postgres:9.4
     volumes:
       - local_postgres_data:/var/lib/postgresql/data
       - local_postgres_data_backups:/backups
-    env_file:
-      - ./.envs/.local/.postgres
+    environment:
+      - POSTGRES_DB=biz_portal
