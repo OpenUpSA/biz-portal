@@ -23,7 +23,6 @@
     "postcss-loader": "^3.0.0",
     "sass-loader": "^7.1.0",
     "webpack": "^4.34.0",
-    "webpack-bundle-tracker": "^0.4.2-beta",
     "webpack-cli": "^3.3.4",
     "webpack-dev-server": "^3.7.2"
   },
@@ -33,5 +32,8 @@
     "dev": "webpack --watch --mode development"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "engines": {
+    "node": "11.15.0"
+  }
 }

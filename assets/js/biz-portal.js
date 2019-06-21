@@ -17,5 +17,3 @@ topAppBar.listen('MDCTopAppBar:nav', () => {
 // Instantiate MDC TextField
 MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
 MDCTextFieldIcon.attachTo(document.querySelector('.mdc-text-field-icon'));
-
-console.log("bob");
