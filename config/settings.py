@@ -211,7 +211,7 @@ X_FRAME_OPTIONS = "DENY"
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 # https://docs.djangoproject.com/en/dev/ref/settings/#secure-ssl-redirect
-SECURE_SSL_REDIRECT = env.bool("DJANGO_SECURE_SSL_REDIRECT", True)
+SECURE_SSL_REDIRECT = False # Because nginx speaks http to the app
 # https://docs.djangoproject.com/en/dev/ref/settings/#session-cookie-secure
 SESSION_COOKIE_SECURE = env.bool("DJANGO_SESSION_COOKIE_SECURE", True)
 # https://docs.djangoproject.com/en/dev/ref/settings/#csrf-cookie-secure
@@ -256,17 +256,17 @@ LOGGING = {
     },
     "root": {"level": "INFO", "handlers": ["console"]},
     "loggers": {
+        'django': {
+            'level': 'DEBUG' if DEBUG else 'INFO',
+        },
         "django.db.backends": {
             "level": "ERROR",
             "handlers": ["console"],
-            "propagate": False,
         },
         # Errors logged by the SDK itself
-        "sentry_sdk": {"level": "ERROR", "handlers": ["console"], "propagate": False},
         "django.security.DisallowedHost": {
             "level": "ERROR",
             "handlers": ["console"],
-            "propagate": False,
         },
     },
 }
@@ -282,6 +282,11 @@ if not env.bool("DISABLE_SENTRY", False):
 
     SENTRY_DSN = env("SENTRY_DSN")
     SENTRY_LOG_LEVEL = env.int("DJANGO_SENTRY_LOG_LEVEL", logging.INFO)
+    LOGGING["loggers"]["sentry_sdk"] = {
+        "level": "ERROR",
+        "handlers": ["console"],
+        "propagate": False
+    },
 
     sentry_logging = LoggingIntegration(
         level=SENTRY_LOG_LEVEL,  # Capture info and above as breadcrumbs
