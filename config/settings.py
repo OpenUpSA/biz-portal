@@ -264,6 +264,7 @@ LOGGING = {
             "handlers": ["console"],
         },
         # Errors logged by the SDK itself
+        "sentry_sdk": {"level": "ERROR", "handlers": ["console"], "propagate": False},
         "django.security.DisallowedHost": {
             "level": "ERROR",
             "handlers": ["console"],
@@ -282,11 +283,6 @@ if not env.bool("DISABLE_SENTRY", False):
 
     SENTRY_DSN = env("SENTRY_DSN")
     SENTRY_LOG_LEVEL = env.int("DJANGO_SENTRY_LOG_LEVEL", logging.INFO)
-    LOGGING["loggers"]["sentry_sdk"] = {
-        "level": "ERROR",
-        "handlers": ["console"],
-        "propagate": False
-    },
 
     sentry_logging = LoggingIntegration(
         level=SENTRY_LOG_LEVEL,  # Capture info and above as breadcrumbs
