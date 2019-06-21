@@ -63,3 +63,28 @@ To run the tests, check your test coverage, and generate an HTML coverage report
 #### Running tests with py.test
 
     pytest
+
+
+Production deployment
+---------------------
+
+```
+dokku condig:set bizportal DATABASE_URL=postgres://bizportal:...@postgresql94-prod.cnc362bhpvfe.eu-west-1.rds.amazonaws.com/bizportal \
+                           DJANGO_SECRET_KEY=... \
+                           DOKKU_LETSENCRYPT_EMAIL=webapps@openup.org.za \
+                           SENTRY_DSN=https://...@sentry.io/...
+```
+
+```
+git remote add dokku dokku@dokku9.code4sa.org:bizportal
+```
+
+If there are migrations:
+
+```
+SENTRY_DSN=... DJANGO_SECRET_KEY=... DATABASE_URL=... python manage.py migrate
+```
+
+```
+git push dokku master
+```
