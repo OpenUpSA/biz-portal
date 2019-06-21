@@ -1,4 +1,9 @@
+## Our javascript packaging
+
+assets/bundles/
+
 ### Python template
+env/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

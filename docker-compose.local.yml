@@ -15,6 +15,7 @@ services:
     volumes:
       - .:/app
     environment:
+      - DJANGO_DEBUG=True
       - USE_DOCKER=yes
       - DATABASE_URL=postgres://postgres@postgres/biz_portal
     ports:

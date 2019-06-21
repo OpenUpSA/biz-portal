@@ -14,6 +14,15 @@ Development
 
 ### Setup
 
+In one shell:
+
+    npm install
+    npm run dev
+
+This will keep running and rebuilding our js and css upon changes.
+
+In another shell:
+
     docker-compose -f docker-compose.local.yml up
 
 If you're setting it up for the first time, in another shell:
@@ -25,6 +34,18 @@ Now you can visit http://localhost:8000
 Normally, `docker-compose down` won't delete the database so your database setup and changes will persist. To delete the database for a completely fresh setup, run
 
     docker-compose -f docker-compose.local.yml down --volumes
+
+### Javascript and CSS
+
+Javascript and CSS build and bundled using Node.js goes in `assets/js` and `asets/scss`.
+See `package.json` and `webpack.config.js`.
+
+The Django staticfiles system picks the bundle up and serves it with, for example:
+
+```html
+<link rel="stylesheet" href="{% static 'biz-portal.bundle.css' %}">
+<script src="{% static 'biz-portal.bundle.js' %}" defer></script>
+```
 
 ### Python
 
