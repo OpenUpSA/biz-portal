@@ -1,15 +1,9 @@
 
 import environ
-
 import logging
 
-import sentry_sdk
-
-from sentry_sdk.integrations.django import DjangoIntegration
-from sentry_sdk.integrations.logging import LoggingIntegration
-
 ROOT_DIR = (
-    environ.Path(__file__) - 3
+    environ.Path(__file__) - 2
 )  # (biz_portal/config/settings/base.py - 3 = biz_portal/)
 APPS_DIR = ROOT_DIR.path("biz_portal")
 
@@ -237,19 +231,6 @@ SECURE_CONTENT_TYPE_NOSNIFF = env.bool(
 )
 
 
-# Sentry
-# ------------------------------------------------------------------------------
-if not env.bool("DISABLE_SENTRY", False):
-    SENTRY_DSN = env("SENTRY_DSN")
-    SENTRY_LOG_LEVEL = env.int("DJANGO_SENTRY_LOG_LEVEL", logging.INFO)
-
-    sentry_logging = LoggingIntegration(
-        level=SENTRY_LOG_LEVEL,  # Capture info and above as breadcrumbs
-        event_level=logging.ERROR,  # Send errors as events
-    )
-    sentry_sdk.init(dsn=SENTRY_DSN, integrations=[sentry_logging, DjangoIntegration()])
-
-
 # LOGGING
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#logging
@@ -288,6 +269,24 @@ LOGGING = {
         },
     },
 }
+
+
+# Sentry
+# ------------------------------------------------------------------------------
+if not env.bool("DISABLE_SENTRY", False):
+    import sentry_sdk
+
+    from sentry_sdk.integrations.django import DjangoIntegration
+    from sentry_sdk.integrations.logging import LoggingIntegration
+
+    SENTRY_DSN = env("SENTRY_DSN")
+    SENTRY_LOG_LEVEL = env.int("DJANGO_SENTRY_LOG_LEVEL", logging.INFO)
+
+    sentry_logging = LoggingIntegration(
+        level=SENTRY_LOG_LEVEL,  # Capture info and above as breadcrumbs
+        event_level=logging.ERROR,  # Send errors as events
+    )
+    sentry_sdk.init(dsn=SENTRY_DSN, integrations=[sentry_logging, DjangoIntegration()])
 
 
 # django-debug-toolbar
