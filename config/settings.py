@@ -20,7 +20,8 @@ DEBUG = env.bool("DJANGO_DEBUG", False)
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["biz-portal.openup.org.za", "localhost"])
+# Rely on nginx to direct only allowed hosts, allow all for dokku checks to work.
+ALLOWED_HOSTS = ["*"]
 
 # Local time zone. Choices are
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
