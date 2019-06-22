@@ -5,7 +5,7 @@ import logging
 ROOT_DIR = (
     environ.Path(__file__) - 2
 )  # (biz_portal/config/settings/base.py - 3 = biz_portal/)
-APPS_DIR = ROOT_DIR.path("biz_portal")
+APPS_DIR = ROOT_DIR.path("biz_portal/apps")
 
 env = environ.Env()
 
@@ -74,7 +74,7 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    # Your stuff: custom apps go here
+    "biz_portal.apps.portal",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
