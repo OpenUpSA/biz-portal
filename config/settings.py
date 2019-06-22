@@ -5,7 +5,7 @@ import logging
 ROOT_DIR = (
     environ.Path(__file__) - 2
 )  # (biz_portal/config/settings/base.py - 3 = biz_portal/)
-APPS_DIR = ROOT_DIR.path("biz_portal/apps")
+PROJ_DIR = ROOT_DIR.path("biz_portal")
 
 env = environ.Env()
 
@@ -27,7 +27,7 @@ ALLOWED_HOSTS = ["*"]
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # though not all of them may be available with every OS.
 # In Windows, this must be set to your system time zone.
-TIME_ZONE = "UTC"
+TIME_ZONE = "Africa/Johannesburg"
 # https://docs.djangoproject.com/en/dev/ref/settings/#language-code
 LANGUAGE_CODE = "en-us"
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
@@ -137,7 +137,7 @@ STATIC_ROOT = str(ROOT_DIR("staticfiles"))
 STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = [
-    str(APPS_DIR.path("static")),
+    str(PROJ_DIR.path("static")),
     str(ROOT_DIR.path("assets/bundles")),
 ]
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
@@ -150,14 +150,6 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 WHITENOISE_AUTOREFRESH = env.bool("DJANGO_WHITENOISE_AUTOREFRESH", False)
 
 
-# MEDIA
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#media-root
-MEDIA_ROOT = str(APPS_DIR("media"))
-# https://docs.djangoproject.com/en/dev/ref/settings/#media-url
-MEDIA_URL = "/media/"
-
-
 # TEMPLATES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#templates
@@ -166,7 +158,7 @@ TEMPLATES = [
         # https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-TEMPLATES-BACKEND
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         # https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
-        "DIRS": [str(APPS_DIR.path("templates"))],
+        "DIRS": [str(PROJ_DIR.path("templates"))],
         "OPTIONS": {
             # https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
             "debug": env.bool("DJANGO_TEMPLATE_DEBUG", False),
@@ -195,7 +187,7 @@ TEMPLATES = [
 # FIXTURES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#fixture-dirs
-FIXTURE_DIRS = (str(APPS_DIR.path("fixtures")),)
+FIXTURE_DIRS = (str(PROJ_DIR.path("fixtures")),)
 
 
 # SECURITY
@@ -256,9 +248,8 @@ LOGGING = {
     },
     "root": {"level": "INFO", "handlers": ["console"]},
     "loggers": {
-        'django': {
-            'level': 'DEBUG' if DEBUG else 'INFO',
-        },
+        'django': {'level': 'DEBUG' if DEBUG else 'INFO'},
+        '': {'level': 'DEBUG'},
         # Errors logged by the SDK itself
         "sentry_sdk": {"level": "ERROR", "handlers": ["console"], "propagate": False},
         "django.security.DisallowedHost": {
