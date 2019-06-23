@@ -13,5 +13,10 @@ python:
   - "3.6"
 install:
   - pip install -r requirements/local.txt
+env:
+  DATABASE_URL: postgres://postgres@localhost/postgres
+  DJANGO_SECRET_KEY: not-secret-in-test
+  DISABLE_SENTRY: 'True'
+
 script:
   - "pytest"

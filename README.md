@@ -57,7 +57,8 @@ The Django staticfiles system picks the bundle up and serves it with, for exampl
 ### Python
 
 - Format your code using Black
-
+- Create fixtures using `manage.py dumpdata --indent 2 ...` so that they're
+readable and formatted consistently to minimise diffs
 
 #### Test coverage
 
