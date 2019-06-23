@@ -77,6 +77,8 @@ To run the tests, check your test coverage, and generate an HTML coverage report
 Production deployment
 ---------------------
 
+### First time setup
+
 First time the app is set up on a server:
 
 ```
@@ -91,6 +93,14 @@ Locally, add the dokku git remote to be able to push
 ```
 git remote add dokku dokku@dokku9.code4sa.org:bizportal
 ```
+
+After the first deploy as per the next section, create an admin user:
+
+```
+dokku run bizportal python manage.py createsuperuser
+```
+
+### Ongoing development
 
 Migrations are run by the python buildpack upon deploy to dokku.
 
