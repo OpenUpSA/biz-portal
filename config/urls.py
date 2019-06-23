@@ -1,8 +1,7 @@
 from django.conf import settings
-from django.urls import include, path
 from django.contrib import admin
+from django.urls import include, path
 from django.views import defaults as default_views
-
 
 urlpatterns = [
     path("", include("biz_portal.apps.portal.urls")),

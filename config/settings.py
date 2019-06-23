@@ -1,5 +1,6 @@
-import environ
 import logging
+
+import environ
 
 ROOT_DIR = (
     environ.Path(__file__) - 2
