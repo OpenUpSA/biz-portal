@@ -36,6 +36,12 @@ Normally, `docker-compose down` won't delete the database so your database setup
 
     docker-compose -f docker-compose.local.yml down --volumes
 
+
+### Running tests
+
+    docker-compose -f docker-compose.local.yml run --rm django pytest
+
+
 ### Javascript and CSS
 
 Javascript and CSS build and bundled using Node.js goes in `assets/js` and `asets/scss`.
@@ -51,6 +57,7 @@ The Django staticfiles system picks the bundle up and serves it with, for exampl
 ### Python
 
 - Format your code using Black
+
 
 #### Test coverage
 

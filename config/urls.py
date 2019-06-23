@@ -5,7 +5,7 @@ from django.views import defaults as default_views
 
 
 urlpatterns = [
-    path('', include('apps.portal.urls')),
+    path('', include('biz_portal.apps.portal.urls')),
 
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
