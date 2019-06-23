@@ -74,7 +74,6 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    # project dir / local apps dir / app dir / apps.py / app config class
     "biz_portal.apps.portal.apps.PortalConfig",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
