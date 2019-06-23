@@ -1,26 +1,15 @@
 from django.conf import settings
 from django.urls import include, path
-from django.conf.urls.static import static
 from django.contrib import admin
-from django.views.generic import TemplateView
 from django.views import defaults as default_views
 
 
-def trigger_error(request):
-    division_by_zero = 1 / 0
-
-
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
-    path("portal-test", TemplateView.as_view(template_name="pages/portal.html"), name="portal"),
+    path('', include('biz_portal.apps.portal.urls')),
 
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
-
-    # Your stuff: custom urls includes go here
-    path('sentry-debug/', trigger_error),
-
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit

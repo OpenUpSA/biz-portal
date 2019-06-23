@@ -1,6 +1,8 @@
 dist: xenial
+
 services:
   - postgresql
+
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq build-essential gettext python-dev zlib1g-dev libpq-dev xvfb
@@ -8,10 +10,26 @@ before_install:
   - sudo apt-get install -qq graphviz-dev python-setuptools python3-dev python-virtualenv python-pip
   - sudo apt-get install -qq firefox automake libtool libreadline6 libreadline6-dev libreadline-dev
   - sudo apt-get install -qq libsqlite3-dev libxml2 libxml2-dev libssl-dev libbz2-dev wget curl llvm
+
 language: python
+
 python:
   - "3.6"
+
+node_js:
+  - "10"
+
 install:
+  - npm install
   - pip install -r requirements/local.txt
+
+env:
+  DATABASE_URL: postgres://postgres@localhost/postgres
+  DJANGO_SECRET_KEY: not-secret-in-test
+  DISABLE_SENTRY: 'True'
+
 script:
+  - "npm run build"
+  - "python manage.py makemigrations --dry-run --check"  # Fail for missing migrations.
+  - "python manage.py collectstatic --no-input"
   - "pytest"

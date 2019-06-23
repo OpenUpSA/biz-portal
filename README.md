@@ -27,13 +27,20 @@ In another shell:
 
 If you're setting it up for the first time, in another shell:
 
-    docker-compose -f docker-compose.local.yml run django python manage.py migrate
+    docker-compose -f docker-compose.local.yml run --rm django python manage.py migrate
+    docker-compose -f docker-compose.local.yml run --rm django python manage.py createsuperuser --username admin --email admin@admin.admin
 
 Now you can visit http://localhost:8000
 
 Normally, `docker-compose down` won't delete the database so your database setup and changes will persist. To delete the database for a completely fresh setup, run
 
     docker-compose -f docker-compose.local.yml down --volumes
+
+
+### Running tests
+
+    docker-compose -f docker-compose.local.yml run --rm django pytest
+
 
 ### Javascript and CSS
 
@@ -50,6 +57,8 @@ The Django staticfiles system picks the bundle up and serves it with, for exampl
 ### Python
 
 - Format your code using Black
+- Create fixtures using `manage.py dumpdata --indent 2 ...` so that they're
+readable and formatted consistently to minimise diffs
 
 #### Test coverage
 
@@ -68,6 +77,8 @@ To run the tests, check your test coverage, and generate an HTML coverage report
 Production deployment
 ---------------------
 
+First time the app is set up on a server:
+
 ```
 dokku condig:set bizportal DATABASE_URL=postgres://bizportal:...@postgresql94-prod.cnc362bhpvfe.eu-west-1.rds.amazonaws.com/bizportal \
                            DJANGO_SECRET_KEY=... \
@@ -75,15 +86,15 @@ dokku condig:set bizportal DATABASE_URL=postgres://bizportal:...@postgresql94-pr
                            SENTRY_DSN=https://...@sentry.io/...
 ```
 
+Locally, add the dokku git remote to be able to push
+
 ```
 git remote add dokku dokku@dokku9.code4sa.org:bizportal
 ```
 
-If there are migrations:
+Migrations are run by the python buildpack upon deploy to dokku.
 
-```
-SENTRY_DSN=... DJANGO_SECRET_KEY=... DATABASE_URL=... python manage.py migrate
-```
+Deploy the latest master branch by pulling locally and pushing it to the dokku remote
 
 ```
 git push dokku master

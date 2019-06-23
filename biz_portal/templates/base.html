@@ -1,4 +1,4 @@
-{% load static i18n compress%}<!DOCTYPE html>
+{% load static i18n %}<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -18,10 +18,6 @@
     {% block css %}
 
     <!-- Your stuff: Third-party CSS libraries go here -->
-    {% compress css %}
-    <!-- This file stores project-specific CSS -->
-
-    {% endcompress %}
     {% endblock %}
 
   </head>
@@ -39,8 +35,6 @@
 
 
       <!-- place project specific Javascript in this file -->
-      {% compress js %}
-      {% endcompress %}
 
     {% endblock javascript %}
   </body>
