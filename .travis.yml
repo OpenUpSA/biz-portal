@@ -30,6 +30,6 @@ env:
 
 script:
   - "npm run build"
-  - "django-admin makemigrations --dry-run --check"  # Fail for missing migrations.
+  - "python manage.py makemigrations --dry-run --check"  # Fail for missing migrations.
   - "python manage.py collectstatic --no-input"
   - "pytest"
