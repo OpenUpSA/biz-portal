@@ -7,23 +7,30 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Business',
+            name="Business",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('registered_name', models.CharField(max_length=200)),
-                ('registration_number', models.CharField(max_length=200)),
-                ('status', models.CharField(max_length=200)),
-                ('physical_address', models.TextField()),
-                ('postal_address', models.TextField()),
-                ('category', models.CharField(max_length=200)),
-                ('compliance', models.CharField(max_length=200)),
-                ('organisation_type', models.CharField(max_length=200)),
-                ('registration_date', models.DateField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("registered_name", models.CharField(max_length=200)),
+                ("registration_number", models.CharField(max_length=200)),
+                ("status", models.CharField(max_length=200)),
+                ("physical_address", models.TextField()),
+                ("postal_address", models.TextField()),
+                ("category", models.CharField(max_length=200)),
+                ("compliance", models.CharField(max_length=200)),
+                ("organisation_type", models.CharField(max_length=200)),
+                ("registration_date", models.DateField()),
             ],
-        ),
+        )
     ]

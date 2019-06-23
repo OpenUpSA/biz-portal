@@ -1,5 +1,6 @@
 from django.test import TestCase, Client
 
+
 class BusinessPageTestCase(TestCase):
     """Loads the business requested in the URL"""
 
@@ -8,8 +9,8 @@ class BusinessPageTestCase(TestCase):
     def test_load_correct_business(self):
         """Given two businesses, the correct one is loaded by URL"""
         c = Client()
-        response = c.get('/businesses/1')
+        response = c.get("/businesses/1")
         self.assertContains(response, "Y-KWIX-YEET BRASS")
 
-        response = c.get('/businesses/2')
+        response = c.get("/businesses/2")
         self.assertContains(response, "BOORT DEVELOPMENT")

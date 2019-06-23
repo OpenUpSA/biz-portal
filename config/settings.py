@@ -1,4 +1,3 @@
-
 import environ
 import logging
 
@@ -73,18 +72,14 @@ THIRD_PARTY_APPS = [
     "whitenoise.runserver_nostatic",
 ]
 
-LOCAL_APPS = [
-    "biz_portal.apps.portal.apps.PortalConfig",
-]
+LOCAL_APPS = ["biz_portal.apps.portal.apps.PortalConfig"]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#authentication-backends
-AUTHENTICATION_BACKENDS = [
-    "django.contrib.auth.backends.ModelBackend",
-]
+AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend"]
 
 
 # PASSWORDS
@@ -136,10 +131,7 @@ STATIC_ROOT = str(ROOT_DIR("staticfiles"))
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
-STATICFILES_DIRS = [
-    str(PROJ_DIR.path("static")),
-    str(ROOT_DIR.path("assets/bundles")),
-]
+STATICFILES_DIRS = [str(PROJ_DIR.path("static")), str(ROOT_DIR.path("assets/bundles"))]
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
@@ -203,7 +195,7 @@ X_FRAME_OPTIONS = "DENY"
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 # https://docs.djangoproject.com/en/dev/ref/settings/#secure-ssl-redirect
-SECURE_SSL_REDIRECT = False # Because nginx speaks http to the app
+SECURE_SSL_REDIRECT = False  # Because nginx speaks http to the app
 # https://docs.djangoproject.com/en/dev/ref/settings/#session-cookie-secure
 SESSION_COOKIE_SECURE = env.bool("DJANGO_SESSION_COOKIE_SECURE", True)
 # https://docs.djangoproject.com/en/dev/ref/settings/#csrf-cookie-secure
@@ -248,14 +240,11 @@ LOGGING = {
     },
     "root": {"level": "INFO", "handlers": ["console"]},
     "loggers": {
-        'django': {'level': 'DEBUG' if DEBUG else 'INFO'},
-        '': {'level': 'DEBUG'},
+        "django": {"level": "DEBUG" if DEBUG else "INFO"},
+        "": {"level": "DEBUG"},
         # Errors logged by the SDK itself
         "sentry_sdk": {"level": "ERROR", "handlers": ["console"], "propagate": False},
-        "django.security.DisallowedHost": {
-            "level": "ERROR",
-            "handlers": ["console"],
-        },
+        "django.security.DisallowedHost": {"level": "ERROR", "handlers": ["console"]},
     },
 }
 
