@@ -1,3 +1,5 @@
+import buttonRipple from "./business-profile";
+
 import {MDCTopAppBar} from "@material/top-app-bar";
 import {MDCDrawer} from "@material/drawer";
 import {MDCTextField} from '@material/textfield';
