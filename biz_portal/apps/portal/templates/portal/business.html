@@ -1,5 +1,134 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-  <p>{{ object.registered_name }}</p>
+
+  <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{% static 'biz-portal.bundle.css' %}">
+    <title>Business Directory</title>
+  </head>
+  <body class="mdc-typography">
+    <aside class="mdc-drawer mdc-drawer--dismissible">
+      <div class="mdc-drawer__header">
+        <h1 class="mdc-drawer__title">Cape Agulhas</h1>
+        <h3 class="mdc-drawer__subtitle">Business directory</h3>
+      </div>
+      <hr class="mdc-list-divider">
+      <div class="mdc-drawer__content">
+        <nav class="mdc-list">
+          <a class="mdc-list-item mdc-list-item--activated" href="#" aria-selected="true">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">exit_to_app</i>
+            <span class="mdc-list-item__text">Login</span>
+          </a>
+          <a class="mdc-list-item" href="#">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">store</i>
+            <span class="mdc-list-item__text">Add my business</span>
+          </a>
+          <a class="mdc-list-item" href="#">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">arrow_downward</i>
+            <span class="mdc-list-item__text">Download data</span>
+          </a>
+          <a class="mdc-list-item" href="#">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">call</i>
+            <span class="mdc-list-item__text">Contact municipality</span>
+          </a>
+        </nav>
+      </div>
+      </aside>
+      <header class="navbar mdc-top-app-bar mdc-top-app-bar--fixed" id="app-bar">
+        <div class="mdc-top-app-bar__row">
+          <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+            <button class="demo-menu material-icons mdc-top-app-bar__navigation-icon">menu</button>
+          </section>
+        </div>
+      </header>
+      <main class="main-content" id="main-content">
+        <div class="mdc-top-app-bar--fixed-adjust top-bar">
+          <div class="business-details-section">
+            <div class="layout">
+              <div>
+                <div class="business-category">
+                    <span class="business-category-text">{{ object.category }}</span>
+                    <span>
+                      <img src="../../../../static/images/accomodation.svg" />
+                    </span>
+                </div>
+                <div class="business-name">{{ object.registered_name }}</div>
+              </div>
+              <div class="business-profile-cards">
+                <details class="mdc-expansion mdc-theme--background mdc-elevation--z2">
+                  <summary class="mdc-expansion__summary">
+                    <span class="business-profile-location mdc-list-item">
+                      <i class="material-icons mdc-list-item__graphic" aria-hidden="true">location_on</i>
+                      <span class="mdc-expansion__header">{{ object.physical_address }}</span>
+                    </span>
+                    <i class="material-icons mdc-list-item__graphic arrow" aria-hidden="true">keyboard_arrow_down</i>
+                  </summary>
+                  <span class="mdc-list-item">
+                    <span class="mdc-expansion__header">{{ object.physical_address }}</span>
+                  </span>
+                </details>
+                <details class="mdc-theme--background mdc-elevation--z2">
+                  <summary class="mdc-expansion__summary">
+                    <span class="business-profile-location mdc-list-item">
+                      <span class="status-icon-span">
+                        <img class="status-icon" src="../../../../static/images/ellipse.svg" />
+                      </span>
+                      <span class="type-header">Status:</span>
+                      <span class="mdc-expansion__header">{{ object.status }}</span>
+                    </span>
+                    <div data-mdc-tooltip="This is how a tooltip will display when clicked" >
+                      <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
+                    </div>
+                  </summary>
+                </details>
+                <details class="mdc-theme--background mdc-elevation--z2">
+                  <summary class="mdc-expansion__summary">
+                    <span class="business-profile-location mdc-list-item">
+                      <i class="material-icons mdc-list-item__graphic" aria-hidden="true">work</i>
+                      <span class="type-header">Type:</span>
+                      <span class="mdc-expansion__header">{{ object.organisation_type }}</span>
+                    </span>
+                    <div data-mdc-tooltip="This is how a tooltip will display when clicked" >
+                      <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
+                    </div>
+                  </summary>
+                </details>
+                <details class="mdc-theme--background mdc-elevation--z2">
+                  <summary class="mdc-expansion__summary">
+                    <span class="business-profile-location mdc-list-item">
+                        <span class="registration-icon-span">
+                          <img class="registration-icon" src="../../../../static/images/content-paste.svg" />
+                          </span>
+                      <span class="type-header">Reg:</span>
+                      <span class="mdc-expansion__header">{{ object.registration_number }}</span>
+                    </span>
+                    <div data-mdc-tooltip="This is how a tooltip will display when clicked" >
+                      <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
+                    </div>
+                  </summary>
+                </details>
+              </div>
+              <div class="business-profile-more-details">
+                <p class="more-details-text">Want to add more details?</p>
+                <button class="mdc-button more-details-button">
+                  <span class="mdc-button__label">Claim this business</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <script src="{% static 'biz-portal.bundle.js' %}" defer></script>
+  </body>
+</html>
+
 {% endblock content %}
