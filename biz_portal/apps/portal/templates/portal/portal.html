@@ -53,7 +53,7 @@
               <h1 class="mdc-typography--subtitle1 subtitle-find-business">Find a business</h1>
               <div class="mdc-text-field mdc-text-field--with-leading-icon text-field-business">
                 <i class="material-icons mdc-text-field__icon" tabindex="0" role="button">search</i>
-                <input type="text" id="my-input" class="mdc-text-field__input">
+                <input type="text" id="my-input" class="mdc-text-field__input typeahead">
                 <label for="my-input" class="mdc-floating-label">Enter business name</label>
                 <div class="mdc-line-ripple"></div>
               </div>
@@ -63,6 +63,8 @@
       </div>
     </main>
 
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.min.js"></script>
     <script src="{% static 'biz-portal.bundle.js' %}" defer></script>
 </body>
 </html>
