@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Business(models.Model):
@@ -11,6 +12,9 @@ class Business(models.Model):
     compliance = models.CharField(max_length=200)
     organisation_type = models.CharField(max_length=200)
     registration_date = models.DateField()
+
+    def get_absolute_url(self):
+        return reverse("business", args=[str(self.id)])
 
     def __str__(self):
         return f"{self.registered_name} ({self.registration_number})"

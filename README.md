@@ -6,7 +6,20 @@ Local business information centre
 [![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg)](https://github.com/pydanny/cookiecutter-django/)
 [![Black code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
-:License: MIT
+**License:** MIT
+
+API
+---
+
+Access the API exploration GUI at `/api/v1/` using your browser.
+
+### Examples
+
+#### Search businesses by name
+
+e.g. for a name containing "brass"
+
+    GET /api/v1/businesses/?search=brass
 
 
 Development
