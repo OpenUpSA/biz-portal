@@ -1,5 +1,5 @@
 from django.views import generic
-from rest_framework import viewsets, serializers
+from rest_framework import serializers, viewsets
 
 from . import models
 
@@ -11,7 +11,7 @@ class BusinessView(generic.DetailView):
 
 class BusinessSerializer(serializers.ModelSerializer):
 
-    web_url = serializers.URLField(source='get_absolute_url', read_only=True)
+    web_url = serializers.URLField(source="get_absolute_url", read_only=True)
 
     class Meta:
         model = models.Business
@@ -32,7 +32,5 @@ class BusinessSerializer(serializers.ModelSerializer):
 class BusinessViewSet(viewsets.ModelViewSet):
     queryset = models.Business.objects.all()
     serializer_class = BusinessSerializer
-    search_fields = (
-        'registered_name',
-    )
+    search_fields = ("registered_name",)
     filter_fields = search_fields
