@@ -10,6 +10,9 @@ class BusinessView(generic.DetailView):
 
 
 class BusinessSerializer(serializers.ModelSerializer):
+
+    web_url = serializers.URLField(source='get_absolute_url', read_only=True)
+
     class Meta:
         model = models.Business
         fields = (
@@ -22,6 +25,7 @@ class BusinessSerializer(serializers.ModelSerializer):
             "compliance",
             "organisation_type",
             "registration_date",
+            "web_url",
         )
 
 

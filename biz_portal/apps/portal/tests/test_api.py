@@ -12,10 +12,20 @@ class BusinessSearchTestCase(TestCase):
         """Given two businesses, the correct one is returned for the search query"""
         c = Client()
         response = c.get("/api/v1/businesses/?search=brass")
-        self.assertContains(response, "Y-KWIX-YEET BRASS")
+        response_dict = json.loads(response.content)
+        self.assertEqual(1, response_dict["count"])
+        business_dict = response_dict['results'][0]
+        self.assertEqual("Y-KWIX-YEET BRASS", business_dict["registered_name"])
+        business = models.Business.objects.get(registered_name=business_dict["registered_name"])
+        self.assertEqual(business.get_absolute_url(), business_dict["web_url"])
 
+        # Do it again with different business to ensure we
+        # dont' accidentally just have one in DB
         response = c.get("/api/v1/businesses/?search=boort")
-        self.assertContains(response, "BOORT DEVELOPMENT")
+        response_dictionary = json.loads(response.content)
+        self.assertEqual(1, response_dictionary["count"])
+        business = response_dictionary['results'][0]
+        self.assertEqual("BOORT DEVELOPMENT BUSINESS", business["registered_name"])
 
 
 class BusinessCreationTestCase(TestCase):
