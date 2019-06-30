@@ -6,15 +6,17 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('portal', '0002_auto_20190630_1157'),
-    ]
+    dependencies = [("portal", "0002_auto_20190630_1157")]
 
     operations = [
         migrations.AddField(
-            model_name='business',
-            name='region',
-            field=models.ForeignKey(default=0, on_delete=django.db.models.deletion.CASCADE, to='portal.Region'),
+            model_name="business",
+            name="region",
+            field=models.ForeignKey(
+                default=0,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="portal.Region",
+            ),
             preserve_default=False,
-        ),
+        )
     ]

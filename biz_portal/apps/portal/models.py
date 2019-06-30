@@ -33,12 +33,20 @@ class Sector(models.Model):
 class Business(models.Model):
     registered_name = models.CharField(max_length=200)
     registration_number = models.CharField(max_length=200, unique=True)
-    status = models.ForeignKey(BusinessStatus, on_delete=models.CASCADE)
-    region = models.ForeignKey(Region, on_delete=models.CASCADE)
+    status = models.ForeignKey(
+        BusinessStatus, on_delete=models.CASCADE, related_name="businesses"
+    )
+    region = models.ForeignKey(
+        Region, on_delete=models.CASCADE, related_name="businesses"
+    )
     physical_address = models.TextField()
     postal_address = models.TextField()
-    sector = models.ForeignKey(Sector, on_delete=models.CASCADE)
-    business_type = models.ForeignKey(BusinessType, on_delete=models.CASCADE)
+    sector = models.ForeignKey(
+        Sector, on_delete=models.CASCADE, related_name="businesses"
+    )
+    business_type = models.ForeignKey(
+        BusinessType, on_delete=models.CASCADE, related_name="businesses"
+    )
     registration_date = models.DateField()
 
     def get_absolute_url(self):
