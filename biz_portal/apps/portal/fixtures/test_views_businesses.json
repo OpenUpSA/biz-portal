@@ -33,7 +33,7 @@
   "model": "portal.business",
   "pk": 3,
   "fields": {
-    "registered_name": "SAME AS SECOND BUT FOR THE NAME",
+    "registered_name": "SAME AS SECOND BUT FOR THE NAME KWIX",
     "registration_number": "1990/000289/24",
     "status": 4,
     "region": 1,
