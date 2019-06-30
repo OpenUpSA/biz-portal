@@ -1,5 +1,5 @@
 from django.contrib import admin
-from import_export import resources, fields, widgets
+from import_export import fields, resources, widgets
 from import_export.admin import ImportMixin
 
 from . import models

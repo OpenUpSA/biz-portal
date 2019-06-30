@@ -1,6 +1,6 @@
+from django.db.models import Count
 from django.views import generic
 from rest_framework import serializers, viewsets
-from django.db.models import Count
 
 from . import models
 
