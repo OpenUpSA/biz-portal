@@ -1,0 +1,16 @@
+[
+{
+  "model": "portal.businesstype",
+  "pk": null,
+  "fields": {
+    "label": "Close Corporation"
+  }
+},
+{
+  "model": "portal.businesstype",
+  "pk": null,
+  "fields": {
+    "label": "Private Company"
+  }
+}
+]

@@ -71,6 +71,7 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "django_extensions",
     "whitenoise.runserver_nostatic",
+    "import_export",
 ]
 
 LOCAL_APPS = ["biz_portal.apps.portal.apps.PortalConfig"]

@@ -1,0 +1,37 @@
+[
+{
+  "model": "portal.region",
+  "pk": null,
+  "fields": {
+    "label": "Bredasdorp"
+  }
+},
+{
+  "model": "portal.region",
+  "pk": null,
+  "fields": {
+    "label": "Napier"
+  }
+},
+{
+  "model": "portal.region",
+  "pk": null,
+  "fields": {
+    "label": "Riviersonderend"
+  }
+},
+{
+  "model": "portal.region",
+  "pk": null,
+  "fields": {
+    "label": "Unknown"
+  }
+},
+{
+  "model": "portal.region",
+  "pk": null,
+  "fields": {
+    "label": "Struisbaai"
+  }
+}
+]
