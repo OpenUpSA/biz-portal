@@ -1,6 +1,6 @@
 {% load param_replace %}
 
-<h2>Regions {{ region_business_counts | length }}</h2>
+<h2>Regions ({{ region_business_counts | length }})</h2>
 
 {% if request.GET.region %}
 <a href="?{% param_replace page="" region="" %}">
@@ -19,7 +19,7 @@
 </ul>
 
 
-<h2>Sectors {{ sector_business_counts | length }}</h2>
+<h2>Sectors ({{ sector_business_counts | length }})</h2>
 
 {% if request.GET.sector %}
 <a href="?{% param_replace page="" sector="" %}">
@@ -41,7 +41,11 @@
 <h1>Businesses</h1>
 <ul>
 {% for business in object_list %}
-    <li>{{ business.registered_name }} - {{ business.registration_number }}</li>
+<li>
+  <a href="{{ business.get_absolute_url }}">
+    {{ business.registered_name }} - {{ business.registration_number }}
+  </a>
+</li>
 {% empty %}
     <li>No businesses.</li>
 {% endfor %}
