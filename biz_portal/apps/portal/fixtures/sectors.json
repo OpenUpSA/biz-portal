@@ -1,217 +1,217 @@
 [
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 1,
   "fields": {
     "label": "Accommodation and Food Services"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 2,
   "fields": {
     "label": "Advertising"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 3,
   "fields": {
     "label": "Agriculture, Forestry, Fishing and Hunting"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 4,
   "fields": {
     "label": "Arts, Entertainment, and Recreation"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 5,
   "fields": {
     "label": "Automotive Repair and Maintenance"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 6,
   "fields": {
     "label": "Beverage and Tobacco Product Manufacturing"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 7,
   "fields": {
     "label": "Business Services"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 8,
   "fields": {
     "label": "Construction"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 9,
   "fields": {
     "label": "Couriers and Express Delivery Services"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 10,
   "fields": {
     "label": "Educational Services"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 11,
   "fields": {
     "label": "Engineers"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 12,
   "fields": {
     "label": "Finance and Insurance"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 13,
   "fields": {
     "label": "Food Manufacturing"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 14,
   "fields": {
     "label": "generic"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 15,
   "fields": {
     "label": "Janitorial Services"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 16,
   "fields": {
     "label": "Justice, Public Order and Safety Activities"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 17,
   "fields": {
     "label": "Lawn and Garden Services"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 18,
   "fields": {
     "label": "Manufactoring"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 19,
   "fields": {
     "label": "Mining, Quarrying, and Oil and Gas Extraction"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 20,
   "fields": {
     "label": "Miscellaneous Manufacturing"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 21,
   "fields": {
     "label": "Personal and Laundry Services"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 22,
   "fields": {
     "label": "Plumbing, Heating and Air-Conditioning"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 23,
   "fields": {
     "label": "Real Estate"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 24,
   "fields": {
     "label": "Retail Trade"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 25,
   "fields": {
     "label": "Speciality trade contractors"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 26,
   "fields": {
     "label": "Technical"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 27,
   "fields": {
     "label": "textiles"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 28,
   "fields": {
     "label": "Transportation and Warehousing"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 29,
   "fields": {
     "label": "unknown"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 30,
   "fields": {
     "label": "Wholesale Trade"
   }
 },
 {
   "model": "portal.sector",
-  "pk": null,
+  "pk": 31,
   "fields": {
     "label": "Wood Product Manufacturing"
   }

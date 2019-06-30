@@ -1,14 +1,14 @@
 [
 {
   "model": "portal.businesstype",
-  "pk": null,
+  "pk": 1,
   "fields": {
     "label": "Close Corporation"
   }
 },
 {
   "model": "portal.businesstype",
-  "pk": null,
+  "pk": 2,
   "fields": {
     "label": "Private Company"
   }

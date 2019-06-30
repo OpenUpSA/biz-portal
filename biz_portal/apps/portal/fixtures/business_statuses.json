@@ -1,63 +1,63 @@
 [
 {
   "model": "portal.businessstatus",
-  "pk": null,
+  "pk": 1,
   "fields": {
     "label": "AR Final deregistration"
   }
 },
 {
   "model": "portal.businessstatus",
-  "pk": null,
+  "pk": 2,
   "fields": {
     "label": "Cancelled"
   }
 },
 {
   "model": "portal.businessstatus",
-  "pk": null,
+  "pk": 3,
   "fields": {
     "label": "Conversion CO/CC or CC/CO"
   }
 },
 {
   "model": "portal.businessstatus",
-  "pk": null,
+  "pk": 4,
   "fields": {
     "label": "Deregistration Final"
   }
 },
 {
   "model": "portal.businessstatus",
-  "pk": null,
+  "pk": 5,
   "fields": {
     "label": "Deregistration Process"
   }
 },
 {
   "model": "portal.businessstatus",
-  "pk": null,
+  "pk": 6,
   "fields": {
     "label": "Dissolved"
   }
 },
 {
   "model": "portal.businessstatus",
-  "pk": null,
+  "pk": 7,
   "fields": {
     "label": "In Business"
   }
 },
 {
   "model": "portal.businessstatus",
-  "pk": null,
+  "pk": 8,
   "fields": {
     "label": "Re-Instatement Process"
   }
 },
 {
   "model": "portal.businessstatus",
-  "pk": null,
+  "pk": 9,
   "fields": {
     "label": "Voluntary Liquidation"
   }

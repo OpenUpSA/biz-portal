@@ -4,7 +4,7 @@ from django.test import Client, TestCase
 class BusinessPageTestCase(TestCase):
     """Loads the business requested in the URL"""
 
-    fixtures = ["businesses"]
+    fixtures = ["sectors", "business_types", "business_statuses", "regions", "businesses"]
 
     def test_load_correct_business(self):
         """Given two businesses, the correct one is loaded by URL"""

@@ -4,14 +4,14 @@
   "pk": 1,
   "fields": {
     "registered_name": "Y-KWIX-YEET BRASS",
-    "registration_number": "1991/003793/05",
-    "status": "Conversion CO/CC or CC/CO",
-    "physical_address": "10 CHURCH STREET MOSSEL BAY 6500",
-    "postal_address": "P O BOX 732 MOSSEL BAY 6500",
-    "category": "Manufacturing",
-    "compliance": "COMPLIANT",
-    "organisation_type": "Private Company",
-    "registration_date": "1991-07-04"
+    "registration_number": "1990/002791/07",
+    "status": 7,
+    "region": 4,
+    "physical_address": "18 HUXHAM STREET\nARNISTON\n7280",
+    "postal_address": "P O BOX 403\nBREDASDORP\n7280",
+    "sector": 1,
+    "business_type": 2,
+    "registration_date": "1990-05-18"
   }
 },
 {
@@ -19,14 +19,14 @@
   "pk": 2,
   "fields": {
     "registered_name": "BOORT DEVELOPMENT BUSINESS",
-    "registration_number": "1992/006787/08",
-    "status": "Deregistration Process",
-    "physical_address": "NO 10 - 18TH AVENUE MOSSEL BAY MOSSEL BAY WESTERN CAPE 6506",
-    "postal_address": "PO BOX 449 MOSSEL BAY MOSSEL BAY WESTERN CAPE 6500",
-    "category": "Real Estate and Rental and Leasing",
-    "compliance": "COMPLIANT",
-    "organisation_type": "Private Company",
-    "registration_date": "1992-11-12"
+    "registration_number": "1990/000289/23",
+    "status": 4,
+    "region": 1,
+    "physical_address": "DIRKIE UYSSTRAAT 11\nBREDASDORP\n7280\n7280",
+    "postal_address": "POSBUS 195\nBREDASDORP\n7280",
+    "sector": 3,
+    "business_type": 1,
+    "registration_date": "1990-01-04"
   }
 }
 ]

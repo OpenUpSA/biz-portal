@@ -8,7 +8,7 @@ from .. import models
 class BusinessSearchTestCase(TestCase):
     """Loads the business requested in the URL"""
 
-    fixtures = ["businesses"]
+    fixtures = ["sectors", "business_types", "business_statuses", "regions", "businesses"]
 
     def test_search_business(self):
         """Given two businesses, the correct one is returned for the search query"""
@@ -60,7 +60,7 @@ class BusinessCreationTestCase(TestCase):
 class BusinessUpdateTestCase(TestCase):
     """Unauthenticated users are not able to update businesses"""
 
-    fixtures = ["businesses"]
+    fixtures = ["sectors", "business_types", "business_statuses", "regions", "businesses"]
 
     def test_search_business(self):
         """Given two businesses, the correct one is returned for the search query"""
