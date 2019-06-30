@@ -1,4 +1,4 @@
-from django.db.models import Count
+from django.db.models import Count, F
 from django.views import generic
 from rest_framework import serializers, viewsets
 
@@ -18,6 +18,8 @@ class BusinessListView(generic.ListView):
     def setup(self, request, *args, **kwargs):
         super().setup(request, *args, **kwargs)
 
+        self.search_string = request.GET.get("q", "")
+        self.search_words = self.search_string.split()
         self.selected_sector = None
         self.selected_region = None
 
@@ -34,43 +36,35 @@ class BusinessListView(generic.ListView):
             )
 
     def get_queryset(self):
-        queryset = super().get_queryset()
+        self.queryset = super().get_queryset()
 
+        for word in self.search_string.split():
+            self.queryset = self.queryset.filter(registered_name__icontains=word)
         if self.selected_region:
-            queryset = queryset.filter(region=self.selected_region)
+            self.queryset = self.queryset.filter(region=self.selected_region)
         if self.selected_sector:
-            queryset = queryset.filter(sector=self.selected_sector)
-
-        return queryset
+            self.queryset = self.queryset.filter(sector=self.selected_sector)
+        return self.queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        context["search_string"] = self.search_string
+
         # Region counts
-        region_queryset = models.Region.objects
-        if self.selected_region:
-            region_queryset = region_queryset.filter(id=self.selected_region.id)
-        if self.selected_sector:
-            region_queryset = region_queryset.filter(
-                businesses__sector__id=self.selected_sector.id
-            )
-        region_queryset = region_queryset.annotate(
-            business_count=Count("businesses")
-        ).order_by("-business_count")
-        context["selected_region"] = self.selected_region
+        region_queryset = self.queryset
+        region_queryset = region_queryset.\
+            values(label=F('region__label')).\
+            annotate(count=Count("*")).\
+            order_by("-count")
         context["region_business_counts"] = region_queryset
 
         # Sector counts
-        sector_queryset = models.Sector.objects
-        if self.selected_sector:
-            sector_queryset = sector_queryset.filter(id=self.selected_sector.id)
-        if self.selected_region:
-            sector_queryset = sector_queryset.filter(
-                businesses__region__id=self.selected_region.id
-            )
-        sector_queryset = sector_queryset.annotate(
-            business_count=Count("businesses")
-        ).order_by("-business_count")
+        sector_queryset = self.queryset
+        sector_queryset = sector_queryset.\
+            values(label=F('sector__label')).\
+            annotate(count=Count("*")).\
+            order_by("-count")
         context["sector_business_counts"] = sector_queryset
 
         return context

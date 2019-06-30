@@ -1,5 +1,17 @@
 {% load param_replace %}
 
+<form method="get">
+  {% if request.GET.sector %}
+  <input type="hidden" name="sector" value="{{ request.GET.sector }}" />
+  {% endif %}
+
+  {% if request.GET.region %}
+  <input type="hidden" name="region" value="{{ request.GET.region }}" />
+  {% endif %}
+
+  Search <input name="q" type="text" placeholder="Search..." value="{{ search_string }}" />
+</form>
+
 <h2>Regions ({{ region_business_counts | length }})</h2>
 
 {% if request.GET.region %}
@@ -12,7 +24,7 @@
 {% for region in region_business_counts %}
 <li>
   <a href="?{% param_replace page="" region=region.label %}">
-    {{ region.label }} ({{ region.business_count }})
+    {{ region.label }} ({{ region.count }})
   </a>
 </li>
 {% endfor %}
@@ -31,7 +43,7 @@
 {% for sector in sector_business_counts %}
 <li>
   <a href="?{% param_replace page="" sector=sector.label %}">
-    {{ sector.label }} ({{ sector.business_count }})
+    {{ sector.label }} ({{ sector.count }})
   </a>
 </li>
 {% endfor %}
