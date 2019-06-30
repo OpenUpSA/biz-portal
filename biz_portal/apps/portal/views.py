@@ -53,18 +53,20 @@ class BusinessListView(generic.ListView):
 
         # Region counts
         region_queryset = self.queryset
-        region_queryset = region_queryset.\
-            values(label=F('region__label')).\
-            annotate(count=Count("*")).\
-            order_by("-count")
+        region_queryset = (
+            region_queryset.values(label=F("region__label"))
+            .annotate(count=Count("*"))
+            .order_by("-count")
+        )
         context["region_business_counts"] = region_queryset
 
         # Sector counts
         sector_queryset = self.queryset
-        sector_queryset = sector_queryset.\
-            values(label=F('sector__label')).\
-            annotate(count=Count("*")).\
-            order_by("-count")
+        sector_queryset = (
+            sector_queryset.values(label=F("sector__label"))
+            .annotate(count=Count("*"))
+            .order_by("-count")
+        )
         context["sector_business_counts"] = sector_queryset
 
         return context

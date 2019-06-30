@@ -46,7 +46,7 @@ class BusinessResource(resources.ModelResource):
 
 
 class BusinessAdmin(ImportMixin, admin.ModelAdmin):
-    search_fields = ['registered_name']
+    search_fields = ["registered_name"]
 
     readonly_fields = (
         "registered_name",
