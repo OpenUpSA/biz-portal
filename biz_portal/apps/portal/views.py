@@ -20,11 +20,13 @@ class BusinessListView(generic.ListView):
 
         self.selected_sector = None
         self.selected_region = None
+
         selected_sector_label = request.GET.get("sector", "")
         if selected_sector_label:
             self.selected_sector = models.Sector.objects.get(
                 label=selected_sector_label
             )
+
         selected_region_label = request.GET.get("region", "")
         if selected_region_label:
             self.selected_region = models.Region.objects.get(

@@ -2,9 +2,11 @@
 
 <h2>Regions {{ region_business_counts | length }}</h2>
 
+{% if request.GET.region %}
 <a href="?{% param_replace page="" region="" %}">
   Remove filter
 </a>
+{% endif %}
 
 <ul>
 {% for region in region_business_counts %}
@@ -19,9 +21,11 @@
 
 <h2>Sectors {{ sector_business_counts | length }}</h2>
 
+{% if request.GET.sector %}
 <a href="?{% param_replace page="" sector="" %}">
   Remove filter
 </a>
+{% endif %}
 
 <ul>
 {% for sector in sector_business_counts %}
