@@ -20,12 +20,16 @@ class BusinessListView(generic.ListView):
 
         self.selected_sector = None
         self.selected_region = None
-        selected_sector_label = request.GET.get('sector', '')
+        selected_sector_label = request.GET.get("sector", "")
         if selected_sector_label:
-            self.selected_sector = models.Sector.objects.get(label=selected_sector_label)
-        selected_region_label = request.GET.get('region', '')
+            self.selected_sector = models.Sector.objects.get(
+                label=selected_sector_label
+            )
+        selected_region_label = request.GET.get("region", "")
         if selected_region_label:
-            self.selected_region = models.Region.objects.get(label=selected_region_label)
+            self.selected_region = models.Region.objects.get(
+                label=selected_region_label
+            )
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -45,7 +49,9 @@ class BusinessListView(generic.ListView):
         if self.selected_region:
             region_queryset = region_queryset.filter(id=self.selected_region.id)
         if self.selected_sector:
-            region_queryset = region_queryset.filter(businesses__sector__id=self.selected_sector.id)
+            region_queryset = region_queryset.filter(
+                businesses__sector__id=self.selected_sector.id
+            )
         region_queryset = region_queryset.annotate(
             business_count=Count("businesses")
         ).order_by("-business_count")
@@ -57,7 +63,9 @@ class BusinessListView(generic.ListView):
         if self.selected_sector:
             sector_queryset = sector_queryset.filter(id=self.selected_sector.id)
         if self.selected_region:
-            sector_queryset = sector_queryset.filter(businesses__region__id=self.selected_region.id)
+            sector_queryset = sector_queryset.filter(
+                businesses__region__id=self.selected_region.id
+            )
         sector_queryset = sector_queryset.annotate(
             business_count=Count("businesses")
         ).order_by("-business_count")
