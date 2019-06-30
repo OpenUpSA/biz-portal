@@ -6,29 +6,43 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('portal', '0003_business_region'),
-    ]
+    dependencies = [("portal", "0003_business_region")]
 
     operations = [
         migrations.AlterField(
-            model_name='business',
-            name='business_type',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='businesses', to='portal.BusinessType'),
+            model_name="business",
+            name="business_type",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="businesses",
+                to="portal.BusinessType",
+            ),
         ),
         migrations.AlterField(
-            model_name='business',
-            name='region',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='businesses', to='portal.Region'),
+            model_name="business",
+            name="region",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="businesses",
+                to="portal.Region",
+            ),
         ),
         migrations.AlterField(
-            model_name='business',
-            name='sector',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='businesses', to='portal.Sector'),
+            model_name="business",
+            name="sector",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="businesses",
+                to="portal.Sector",
+            ),
         ),
         migrations.AlterField(
-            model_name='business',
-            name='status',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='businesses', to='portal.BusinessStatus'),
+            model_name="business",
+            name="status",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="businesses",
+                to="portal.BusinessStatus",
+            ),
         ),
     ]
