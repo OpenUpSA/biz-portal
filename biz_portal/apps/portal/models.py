@@ -42,7 +42,7 @@ class Business(models.Model):
     registration_date = models.DateField()
 
     def get_absolute_url(self):
-        return reverse("business", args=[str(self.id)])
+        return reverse("business_detail", args=[str(self.id)])
 
     def __str__(self):
         return f"{self.registered_name} ({self.registration_number})"

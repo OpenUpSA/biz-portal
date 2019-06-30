@@ -4,9 +4,15 @@ from rest_framework import serializers, viewsets
 from . import models
 
 
-class BusinessView(generic.DetailView):
+class BusinessDetailView(generic.DetailView):
     model = models.Business
-    template_name = "portal/business.html"
+    template_name = "portal/business_detail.html"
+
+
+class BusinessListView(generic.ListView):
+    model = models.Business
+    paginate_by = 20
+    template_name = "portal/business_list.html"
 
 
 class BusinessSerializer(serializers.ModelSerializer):
@@ -19,11 +25,11 @@ class BusinessSerializer(serializers.ModelSerializer):
             "registered_name",
             "registration_number",
             "status",
+            "region",
             "physical_address",
             "postal_address",
-            "category",
-            "compliance",
-            "organisation_type",
+            "sector",
+            "business_type",
             "registration_date",
             "web_url",
         )
@@ -33,4 +39,3 @@ class BusinessViewSet(viewsets.ModelViewSet):
     queryset = models.Business.objects.all()
     serializer_class = BusinessSerializer
     search_fields = ("registered_name",)
-    filter_fields = search_fields
