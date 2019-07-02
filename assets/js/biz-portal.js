@@ -15,33 +15,24 @@ topAppBar.listen('MDCTopAppBar:nav', () => {
 
 // Instantiate the Bloodhound suggestion engine
 var businesses = new Bloodhound({
-datumTokenizer: function (datum) {
-    return Bloodhound.tokenizers.whitespace(datum.value);
-},
+datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
 queryTokenizer: Bloodhound.tokenizers.whitespace,
 remote: {
     wildcard: '%QUERY',
     url: `/api/v1/businesses/?search=%QUERY`,
-    filter: function (businesses) {
-        // Map the remote source JSON array to a JavaScript object array
-        return $.map(businesses.results, function (business) {
-            return {
-                value: business.registered_name
-            };
-        });
+    transform: response => {
+        return response.results.map(({ registered_name }) => ({
+          value: registered_name
+        }));
     }
   }
 });
 
-// Initialize the Bloodhound suggestion engine
-businesses.initialize();
-
 // Instantiate the Typeahead UI
-
-const suggestions = $('#custom-templates .typeahead').typeahead(null, {
-  name: 'matched-links',
+$('#custom-templates .typeahead').typeahead(null, {
+  name: 'businesses',
   displayKey: 'value',
-  source: businesses.ttAdapter(),
+  source: businesses,
   templates: {
     empty: [
       '<div class="empty-message">',
@@ -49,8 +40,8 @@ const suggestions = $('#custom-templates .typeahead').typeahead(null, {
       '</div>'
     ].join('\n'),
       suggestion: function(data) {
+        console.log(333, data);
         return `<a class="search-result-links" href="/portal-test/${data.value}"><p class="text-menu-search">${data.value}</p></a>`;
     }
   }
 });
-
