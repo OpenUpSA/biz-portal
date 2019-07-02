@@ -39,7 +39,7 @@ $('#custom-templates .typeahead').typeahead(null, {
       'unable to find the business you are looking for',
       '</div>'
     ].join('\n'),
-      suggestion: function(data) {
+      suggestion: data => {
         console.log(333, data);
         return `<a class="search-result-links" href="/portal-test/${data.value}"><p class="text-menu-search">${data.value}</p></a>`;
     }
