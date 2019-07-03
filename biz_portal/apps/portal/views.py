@@ -5,6 +5,45 @@ from rest_framework import serializers, viewsets
 from . import models
 
 
+class SearchSnippet:
+    @staticmethod
+    def get_region_queryset(business_queryset):
+        return (
+            business_queryset.values(label=F("region__label"))
+            .annotate(count=Count("*"))
+            .order_by("-count")
+        )
+
+    @staticmethod
+    def get_sector_queryset(business_queryset):
+        return (
+            business_queryset.values(label=F("sector__label"))
+            .annotate(count=Count("*"))
+            .order_by("-count")
+        )
+
+
+class HomeView(generic.TemplateView):
+    template_name = "portal/home.html"
+
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        queryset = models.Business.objects.all()
+
+        # Region counts
+        region_queryset = SearchSnippet.get_region_queryset(queryset)
+        context["region_business_counts"] = region_queryset
+
+        # Sector counts
+        sector_queryset = SearchSnippet.get_sector_queryset(queryset)
+        context["sector_business_counts"] = sector_queryset
+
+        return context
+
+
 class BusinessDetailView(generic.DetailView):
     model = models.Business
     template_name = "portal/business_detail.html"
@@ -52,21 +91,11 @@ class BusinessListView(generic.ListView):
         context["search_string"] = self.search_string
 
         # Region counts
-        region_queryset = self.queryset
-        region_queryset = (
-            region_queryset.values(label=F("region__label"))
-            .annotate(count=Count("*"))
-            .order_by("-count")
-        )
+        region_queryset = SearchSnippet.get_region_queryset(self.queryset)
         context["region_business_counts"] = region_queryset
 
         # Sector counts
-        sector_queryset = self.queryset
-        sector_queryset = (
-            sector_queryset.values(label=F("sector__label"))
-            .annotate(count=Count("*"))
-            .order_by("-count")
-        )
+        sector_queryset = SearchSnippet.get_sector_queryset(self.queryset)
         context["sector_business_counts"] = sector_queryset
 
         return context

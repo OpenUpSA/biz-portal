@@ -8,7 +8,7 @@ router = routers.DefaultRouter()
 router.register(r"businesses", views.BusinessViewSet)
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="portal/home.html"), name="home"),
+    path("", views.HomeView.as_view(), name="home"),
     path("businesses/", views.BusinessListView.as_view(), name="business_list"),
     path(
         "businesses/<int:pk>",
