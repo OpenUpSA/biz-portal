@@ -35,12 +35,16 @@ $("#custom-templates .typeahead").typeahead(null, {
   name: "businesses",
   displayKey: "value",
   source: businesses,
+  limit: 5,
   templates: {
     empty: [
       '<div class="empty-message">',
       "Business not found",
       "</div>"
     ].join("\n"),
+    footer : [
+      '<a class="search-result-links" href="http://192.168.99.100:8000/bla"><p class="text-menu-search">More results</p></a>'
+    ].join('\n'),
     suggestion: data => {
       const { web_url, registered_name } = data.value;
       return `<a class="search-result-links" href="${web_url}"><p class="text-menu-search">${registered_name}</p></a>`;
