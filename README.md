@@ -40,20 +40,27 @@ In another shell:
 
 If you're setting it up for the first time, in another shell:
 
-    docker-compose -f docker-compose.local.yml run --rm django python manage.py migrate
-    docker-compose -f docker-compose.local.yml run --rm django python manage.py createsuperuser --username admin --email admin@admin.admin
+```
+docker-compose -f docker-compose.local.yml run --rm django python manage.py migrate
+docker-compose -f docker-compose.local.yml run --rm django python manage.py createsuperuser --username admin --email admin@admin.admin
+docker-compose -f docker-compose.local.yml run --rm django python manage.py loaddata business_statuses business_types regions sectors
+```
+
+Next you need to import businesses. Businessess' registration data is not directly-editable, because it should only be official registration data. We import registration data as CSV by clicking Import on the Business admin page (top right).
 
 Now you can visit http://localhost:8000
 
 Normally, `docker-compose down` won't delete the database so your database setup and changes will persist. To delete the database for a completely fresh setup, run
 
-    docker-compose -f docker-compose.local.yml down --volumes
-
+```
+docker-compose -f docker-compose.local.yml down --volumes
+```
 
 ### Running tests
 
-    docker-compose -f docker-compose.local.yml run --rm django pytest
-
+```
+docker-compose -f docker-compose.local.yml run --rm django pytest
+```
 
 ### Javascript and CSS
 

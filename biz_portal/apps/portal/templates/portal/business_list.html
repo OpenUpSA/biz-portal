@@ -1,0 +1,80 @@
+{% load param_replace %}
+
+<form action="{% url "business_list" %}" method="get">
+  {% if request.GET.sector %}
+  <input type="hidden" name="sector" value="{{ request.GET.sector }}" />
+  {% endif %}
+
+  {% if request.GET.region %}
+  <input type="hidden" name="region" value="{{ request.GET.region }}" />
+  {% endif %}
+
+  Search <input name="q" type="text" placeholder="Search..." value="{{ search_string }}" />
+</form>
+
+<h2>Regions ({{ region_business_counts | length }})</h2>
+
+{% if request.GET.region %}
+<a href="{% url "business_list" %}?{% param_replace page="" region="" %}">
+  Remove filter
+</a>
+{% endif %}
+
+<ul>
+{% for region in region_business_counts %}
+<li>
+  <a href="{% url "business_list" %}?{% param_replace page="" region=region.label %}">
+    {{ region.label }} ({{ region.count }})
+  </a>
+</li>
+{% endfor %}
+</ul>
+
+
+<h2>Sectors ({{ sector_business_counts | length }})</h2>
+
+{% if request.GET.sector %}
+<a href="{% url "business_list" %}?{% param_replace page="" sector="" %}">
+  Remove filter
+</a>
+{% endif %}
+
+<ul>
+{% for sector in sector_business_counts %}
+<li>
+  <a href="{% url "business_list" %}?{% param_replace page="" sector=sector.label %}">
+    {{ sector.label }} ({{ sector.count }})
+  </a>
+</li>
+{% endfor %}
+</ul>
+
+
+<h1>Businesses</h1>
+<ul>
+{% for business in object_list %}
+<li>
+  <a href="{{ business.get_absolute_url }}">
+    {{ business.registered_name }} - {{ business.registration_number }}
+  </a>
+</li>
+{% empty %}
+    <li>No businesses.</li>
+{% endfor %}
+</ul>
+
+{% if is_paginated %}
+<div class="pagination">
+  <span class="page-links">
+    {% if page_obj.has_previous %}
+    <a href="{% url "business_list" %}?{% param_replace page=page_obj.previous_page_number %}">previous</a>
+    {% endif %}
+    <span class="page-current">
+      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+    </span>
+    {% if page_obj.has_next %}
+    <a href="{% url "business_list" %}?{% param_replace page=page_obj.next_page_number %}">next</a>
+    {% endif %}
+  </span>
+</div>
+{% endif %}
