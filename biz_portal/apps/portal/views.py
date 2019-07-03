@@ -4,7 +4,8 @@ from rest_framework import serializers, viewsets
 
 from . import models
 
-class SearchSnippet():
+
+class SearchSnippet:
     @staticmethod
     def get_region_queryset(business_queryset):
         return (
