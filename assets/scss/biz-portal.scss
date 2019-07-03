@@ -100,10 +100,11 @@ body {
   .more-results-search {
     font-weight: 700;
     margin: 0;
+    text-transform: uppercase;
   }
 
   .empty-message {
-    color: red;
+    color: rgba(0, 0, 0, 0.87);
     font-size: 14px;
     line-height: 24px;
     padding-left: 20px;
@@ -150,25 +151,28 @@ body {
   }
 
   .tt-menu {
-      width: 100%;
-      padding: 0;
-      background-color: #fff;
-      box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14);
-      position: static !important;
+    width: 100%;
+    padding: 0;
+    background-color: #fff;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14);
+    position: static !important;
   }
 
   .tt-suggestion {
-      font-size: 14px;
-      line-height: 24px;
-      cursor: pointer;
+    font-size: 14px;
+    line-height: 24px;
+    cursor: pointer;
   }
 
-  .tt-suggestion:hover, .more-results-search:hover {
-      color: #f0f0f0;
-      background-color: #0097cf;
+  .tt-suggestion:hover {
+    color: #737373;
+  }
+
+  .more-results-search:hover {
+    background-color: #0097cf;
   }
 
   .tt-suggestion p {
-      margin: 0;
+    margin: 0;
   }
 }
