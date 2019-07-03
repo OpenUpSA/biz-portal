@@ -1,5 +1,5 @@
+const webpack = require("webpack");
 const autoprefixer = require('autoprefixer');
-
 const path = require('path');
 
 function tryResolve_(url, sourceFilename) {
@@ -35,6 +35,14 @@ module.exports = {
     filename: 'biz-portal.bundle.js',
     path: path.resolve('./assets/bundles'),
   },
+  resolve: {
+    alias: {
+      jquery: "jquery/src/jquery"
+    }
+  },
+  plugins: [
+    new webpack.ProvidePlugin({ jQuery: 'jquery', $: 'jquery', "window.jQuery": "jquery" }),
+  ],
   module: {
     rules: [
       {
