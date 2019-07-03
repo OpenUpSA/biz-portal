@@ -1,3 +1,6 @@
+require('corejs-typeahead/dist/typeahead.jquery');
+const Bloodhound = require('corejs-typeahead/dist/bloodhound');
+
 import {MDCTopAppBar} from "@material/top-app-bar";
 import {MDCDrawer} from "@material/drawer";
 
