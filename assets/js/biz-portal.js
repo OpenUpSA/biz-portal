@@ -43,7 +43,7 @@ $("#custom-templates .typeahead").typeahead(null, {
       "</div>"
     ].join("\n"),
     footer : [
-      '<a class="search-result-links" href="http://192.168.99.100:8000/bla"><p class="text-menu-search">More results</p></a>'
+      '<a class="search-result-links" href="http://192.168.99.100:8000/bla"><p class="more-results-search">More results</p></a>'
     ].join('\n'),
     suggestion: data => {
       const { web_url, registered_name } = data.value;
