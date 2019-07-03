@@ -1,0 +1,32 @@
+{% load param_replace %}
+
+{% include 'portal/search_snippet.html' %}
+
+<h1>Businesses</h1>
+<ul>
+{% for business in object_list %}
+<li>
+  <a href="{{ business.get_absolute_url }}">
+    {{ business.registered_name }} - {{ business.registration_number }}
+  </a>
+</li>
+{% empty %}
+    <li>No businesses.</li>
+{% endfor %}
+</ul>
+
+{% if is_paginated %}
+<div class="pagination">
+  <span class="page-links">
+    {% if page_obj.has_previous %}
+    <a href="{% url "business_list" %}?{% param_replace page=page_obj.previous_page_number %}">previous</a>
+    {% endif %}
+    <span class="page-current">
+      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+    </span>
+    {% if page_obj.has_next %}
+    <a href="{% url "business_list" %}?{% param_replace page=page_obj.next_page_number %}">next</a>
+    {% endif %}
+  </span>
+</div>
+{% endif %}
