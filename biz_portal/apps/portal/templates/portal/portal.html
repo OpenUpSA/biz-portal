@@ -51,12 +51,12 @@
           <div class="layout">
             <div class="find-business-container">
               <h1 class="mdc-typography--subtitle1 subtitle-find-business">Find a business</h1>
-              <div class="mdc-text-field mdc-text-field--with-leading-icon text-field-business">
-                <i class="material-icons mdc-text-field__icon" tabindex="0" role="button">search</i>
-                <input type="text" id="my-input" class="mdc-text-field__input">
-                <label for="my-input" class="mdc-floating-label">Enter business name</label>
-                <div class="mdc-line-ripple"></div>
-              </div>
+                <div id="custom-templates">
+                  <div class="search-icon-container">
+                    <i class="material-icons mdc-text-field__icon search-icon" tabindex="0" role="button">search</i>
+                  </div>
+                  <input class="typeahead" type="text" placeholder="Enter business name">
+                </div>
             </div>
           </div>
         </div>

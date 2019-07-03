@@ -6,7 +6,20 @@ Local business information centre
 [![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg)](https://github.com/pydanny/cookiecutter-django/)
 [![Black code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
-:License: MIT
+**License:** MIT
+
+API
+---
+
+Access the API exploration GUI at `/api/v1/` using your browser.
+
+### Examples
+
+#### Search businesses by name
+
+e.g. for a name containing "brass"
+
+    GET /api/v1/businesses/?search=brass
 
 
 Development
@@ -27,20 +40,27 @@ In another shell:
 
 If you're setting it up for the first time, in another shell:
 
-    docker-compose -f docker-compose.local.yml run --rm django python manage.py migrate
-    docker-compose -f docker-compose.local.yml run --rm django python manage.py createsuperuser --username admin --email admin@admin.admin
+```
+docker-compose -f docker-compose.local.yml run --rm django python manage.py migrate
+docker-compose -f docker-compose.local.yml run --rm django python manage.py createsuperuser --username admin --email admin@admin.admin
+docker-compose -f docker-compose.local.yml run --rm django python manage.py loaddata business_statuses business_types regions sectors
+```
+
+Next you need to import businesses. Businessess' registration data is not directly-editable, because it should only be official registration data. We import registration data as CSV by clicking Import on the Business admin page (top right).
 
 Now you can visit http://localhost:8000
 
 Normally, `docker-compose down` won't delete the database so your database setup and changes will persist. To delete the database for a completely fresh setup, run
 
-    docker-compose -f docker-compose.local.yml down --volumes
-
+```
+docker-compose -f docker-compose.local.yml down --volumes
+```
 
 ### Running tests
 
-    docker-compose -f docker-compose.local.yml run --rm django pytest
-
+```
+docker-compose -f docker-compose.local.yml run --rm django pytest
+```
 
 ### Javascript and CSS
 
