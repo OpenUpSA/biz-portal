@@ -59,3 +59,27 @@ class BusinessList(TestCase):
         self.assertEqual(1, unknown_option.get("count"))
         bredasdorp_option = self.facet_option(region_facet, "Breda")
         self.assertEqual(None, bredasdorp_option)
+
+    def test_list_business_search(self):
+        """
+        Given three businesses, two matching, only matching businesss, sectors,
+        and regions are returned.
+        """
+        c = Client()
+        response = c.get("/businesses/?q=kwix")
+        self.assertEqual(2, len(response.context["business_list"]))
+        self.assertTrue(
+            all(
+                [
+                    "KWIX" in x.registered_name
+                    for x in response.context["business_list"]
+                ]
+            )
+        )
+
+        # Facets
+        sector_facet = response.context["sector_business_counts"]
+        accom_option = self.facet_option(sector_facet, "Accom")
+        self.assertEqual(1, accom_option.get("count"))
+        agric_option = self.facet_option(sector_facet, "Agric")
+        self.assertEqual(1, agric_option.get("count"))
