@@ -35,17 +35,22 @@ body {
 
 .layout {
   margin: 0 16px;
+
+  @media screen and (min-width: 960px) {
+    width: 100%;
+    max-width: 960px;
+  }
 }
 
 .find-business-section {
   background: linear-gradient(180deg, #3F96C6 0%, #4498C6 100%);
   width: 100%;
   height: 126px;
-}
 
-.business-section-layout {
-  margin-left:16px;
-  margin-right:16px;
+  @media screen and (min-width: 960px) {
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .find-business-container {
