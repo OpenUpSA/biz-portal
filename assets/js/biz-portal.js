@@ -23,9 +23,7 @@ var businesses = new Bloodhound({
     wildcard: "%QUERY",
     url: `/api/v1/businesses/?search=%QUERY`,
     transform: response => {
-      return response.results.map(business => ({
-        value: business
-      }));
+      return response.results;
     }
   }
 });
@@ -33,20 +31,18 @@ var businesses = new Bloodhound({
 // Instantiate the Typeahead UI
 $("#custom-templates .typeahead").typeahead(null, {
   name: "businesses",
-  displayKey: "value",
+  displayKey: "registered_name",
   source: businesses,
-  limit: 5,
   templates: {
     empty: [
       '<div class="empty-message">',
       "Business not found",
       "</div>"
     ].join("\n"),
-    footer : [
-      '<a class="search-result-links" href="http://192.168.99.100:8000/bla"><p class="more-results-search">More results</p></a>'
-    ].join('\n'),
+    footer : (context) => (
+      `<a class="search-result-links" href="/businesses/?q=${context.query}"><p class="more-results-search">More results</p></a>`),
     suggestion: data => {
-      const { web_url, registered_name } = data.value;
+      const { web_url, registered_name } = data;
       return `<a class="search-result-links" href="${web_url}"><p class="text-menu-search">${registered_name}</p></a>`;
     }
   }
