@@ -6,7 +6,7 @@
     <div class="layout">
       <div>
         <div class="business-category">
-            <span class="business-category-text">{{ object.category }}</span>
+            <span class="business-category-text">{{ object.sector.label }}</span>
             <span>
               <img src="{% static 'images/accomodation.svg' %}" />
             </span>
@@ -33,7 +33,7 @@
                 <img class="status-icon" src="{% static 'images/ellipse.svg' %}" />
               </span>
               <span class="type-header">Status:</span>
-              <span class="mdc-expansion__header">{{ object.status }}</span>
+              <span class="mdc-expansion__header">{{ object.status.label }}</span>
             </span>
             <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
           </summary>
@@ -43,7 +43,7 @@
             <span class="business-profile-location mdc-list-item">
               <i class="material-icons mdc-list-item__graphic" aria-hidden="true">work</i>
               <span class="type-header">Type:</span>
-              <span class="mdc-expansion__header">{{ object.organisation_type }}</span>
+              <span class="mdc-expansion__header">{{ object.business_type.label }}</span>
             </span>
             <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
           </summary>
