@@ -70,10 +70,7 @@ class BusinessList(TestCase):
         self.assertEqual(2, len(response.context["business_list"]))
         self.assertTrue(
             all(
-                [
-                    "KWIX" in x.registered_name
-                    for x in response.context["business_list"]
-                ]
+                ["KWIX" in x.registered_name for x in response.context["business_list"]]
             )
         )
 
