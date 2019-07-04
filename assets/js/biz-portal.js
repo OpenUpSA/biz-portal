@@ -1,10 +1,9 @@
-import buttonRipple from "./business-profile";
-
 require('corejs-typeahead/dist/typeahead.jquery');
 const Bloodhound = require('corejs-typeahead/dist/bloodhound');
 
 import {MDCTopAppBar} from "@material/top-app-bar";
 import {MDCDrawer} from "@material/drawer";
+import buttonRipple from "./business-profile";
 
 // Instantiate MDC Drawer
 const drawerEl = document.querySelector(".mdc-drawer");
@@ -25,9 +24,7 @@ var businesses = new Bloodhound({
     wildcard: "%QUERY",
     url: `/api/v1/businesses/?search=%QUERY`,
     transform: response => {
-      return response.results.map(business => ({
-        value: business
-      }));
+      return response.results;
     }
   }
 });
@@ -35,7 +32,7 @@ var businesses = new Bloodhound({
 // Instantiate the Typeahead UI
 $("#custom-templates .typeahead").typeahead(null, {
   name: "businesses",
-  displayKey: "value",
+  displayKey: "registered_name",
   source: businesses,
   templates: {
     empty: [
@@ -43,9 +40,18 @@ $("#custom-templates .typeahead").typeahead(null, {
       "Business not found",
       "</div>"
     ].join("\n"),
+    footer : (context) => (
+      `<a class="search-result-links" href="/businesses/?q=${context.query}">
+        <p class="more-results-search">View All Results</p>
+      </a>`
+    ),
     suggestion: data => {
-      const { web_url, registered_name } = data.value;
-      return `<a class="search-result-links" href="${web_url}"><p class="text-menu-search">${registered_name}</p></a>`;
+      const { web_url, registered_name } = data;
+      return (
+        `<a class="search-result-links" href="${web_url}">
+          <p class="text-menu-search">${registered_name}</p>
+        </a>`
+      );
     }
   }
 });
