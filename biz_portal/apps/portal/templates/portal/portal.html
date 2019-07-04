@@ -1,60 +1,19 @@
 {% extends "base.html" %}
-{% load static %}
 
 {% block content %}
-  <aside class="mdc-drawer mdc-drawer--dismissible">
-    <div class="mdc-drawer__header">
-      <h1 class="mdc-drawer__title">Cape Agulhas</h1>
-      <h3 class="mdc-drawer__subtitle">Business directory</h3>
-    </div>
-    <hr class="mdc-list-divider">
-    <div class="mdc-drawer__content">
-      <nav class="mdc-list">
-        <a class="mdc-list-item mdc-list-item--activated" href="#" aria-selected="true">
-          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">exit_to_app</i>
-          <span class="mdc-list-item__text">Login</span>
-        </a>
-        <a class="mdc-list-item" href="#">
-          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">store</i>
-          <span class="mdc-list-item__text">Add my business</span>
-        </a>
-        <a class="mdc-list-item" href="#">
-          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">arrow_downward</i>
-          <span class="mdc-list-item__text">Download data</span>
-        </a>
-        <a class="mdc-list-item" href="#">
-          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">call</i>
-          <span class="mdc-list-item__text">Contact municipality</span>
-        </a>
-      </nav>
-    </div>
-  </aside>
-  <header class="navbar mdc-top-app-bar mdc-top-app-bar--fixed" id="app-bar">
-    <div class="mdc-top-app-bar__row">
-      <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
-        <button class="demo-menu material-icons mdc-top-app-bar__navigation-icon">menu</button>
-      </section>
-    </div>
-  </header>
-  <main class="main-content" id="main-content">
-    <div class="mdc-top-app-bar--fixed-adjust top-bar">
-      <div class="find-business-section">
-        <div class="layout">
-          <div class="find-business-container">
-            <h1 class="mdc-typography--subtitle1 subtitle-find-business">Find a business</h1>
-              <div id="custom-templates">
-                <div class="search-icon-container">
-                  <i class="material-icons mdc-text-field__icon search-icon" tabindex="0" role="button">search</i>
-                </div>
-                <input class="typeahead" type="text" placeholder="Enter business name">
-              </div>
+  <div class="find-business-section">
+    <div class="layout">
+      <div class="find-business-container">
+        <h1 class="mdc-typography--subtitle1 subtitle-find-business">Find a business</h1>
+          <div id="custom-templates">
+            <div class="search-icon-container">
+              <i class="material-icons mdc-text-field__icon search-icon" tabindex="0" role="button">search</i>
+            </div>
+            <input class="typeahead" type="text" placeholder="Enter business name">
           </div>
-        </div>
       </div>
     </div>
-  </main>
+  </div>
+
 {% endblock content %}
 
-{% block javascript %}
-  <script src="{% static 'biz-portal.bundle.js' %}" defer></script>
-{% endblock javascript %}
