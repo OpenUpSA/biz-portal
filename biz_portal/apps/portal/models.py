@@ -1,7 +1,8 @@
-from django.db import models
-from django.urls import reverse
 from colorful.fields import RGBColorField
 from django.contrib.sites.models import Site
+from django.db import models
+from django.urls import reverse
+
 
 class Municipality(models.Model):
     class Meta:
@@ -9,7 +10,7 @@ class Municipality(models.Model):
 
     mdb_code = models.CharField(max_length=10, unique=True)
     label = models.CharField(max_length=200)
-    color = RGBColorField(colors=['#4498C6'])
+    color = RGBColorField(colors=["#4498C6"])
     site = models.OneToOneField(Site, on_delete=models.CASCADE)
 
     def __str__(self):

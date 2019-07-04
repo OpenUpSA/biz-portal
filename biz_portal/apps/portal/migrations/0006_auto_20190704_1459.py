@@ -5,13 +5,10 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('portal', '0005_auto_20190704_1447'),
-    ]
+    dependencies = [("portal", "0005_auto_20190704_1447")]
 
     operations = [
         migrations.AlterModelOptions(
-            name='municipality',
-            options={'verbose_name_plural': 'municipalities'},
-        ),
+            name="municipality", options={"verbose_name_plural": "municipalities"}
+        )
     ]
