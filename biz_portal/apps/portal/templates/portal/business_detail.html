@@ -1,5 +1,74 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-  <p>{{ object.registered_name }}</p>
+  <div class="business-details-section">
+    <div class="layout">
+      <div>
+        <div class="business-category">
+            <span class="business-category-text">{{ object.sector.label }}</span>
+            <span>
+              <img src="{% static 'images/accomodation.svg' %}" />
+            </span>
+        </div>
+        <div class="business-name">{{ object.registered_name }}</div>
+      </div>
+      <div class="business-profile-cards">
+        <details class="mdc-expansion mdc-theme--background mdc-elevation--z2">
+          <summary class="mdc-expansion__summary">
+            <span class="business-profile-location mdc-list-item">
+              <i class="material-icons mdc-list-item__graphic" aria-hidden="true">location_on</i>
+              <span class="mdc-expansion__header">{{ object.physical_address }}</span>
+            </span>
+            <i class="material-icons mdc-list-item__graphic arrow" aria-hidden="true">keyboard_arrow_down</i>
+          </summary>
+          <span class="mdc-list-item">
+            <span class="mdc-expansion__header">{{ object.physical_address }}</span>
+          </span>
+        </details>
+        <details class="mdc-theme--background mdc-elevation--z2">
+          <summary class="mdc-expansion__summary">
+            <span class="business-profile-location mdc-list-item">
+              <span class="status-icon-span">
+                <img class="status-icon" src="{% static 'images/ellipse.svg' %}" />
+              </span>
+              <span class="type-header">Status:</span>
+              <span class="mdc-expansion__header">{{ object.status.label }}</span>
+            </span>
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
+          </summary>
+        </details>
+        <details class="mdc-theme--background mdc-elevation--z2">
+          <summary class="mdc-expansion__summary">
+            <span class="business-profile-location mdc-list-item">
+              <i class="material-icons mdc-list-item__graphic" aria-hidden="true">work</i>
+              <span class="type-header">Type:</span>
+              <span class="mdc-expansion__header">{{ object.business_type.label }}</span>
+            </span>
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
+          </summary>
+        </details>
+        <details class="mdc-theme--background mdc-elevation--z2">
+          <summary class="mdc-expansion__summary">
+            <span class="business-profile-location mdc-list-item">
+              <span class="registration-icon-span">
+                <img class="registration-icon" src="{% static 'images/content-paste.svg' %}" />
+              </span>
+              <span class="type-header">Reg:</span>
+              <span class="mdc-expansion__header">{{ object.registration_number }}</span>
+            </span>
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
+          </summary>
+        </details>
+      </div>
+      <div class="business-profile-more-details">
+        <p class="more-details-text">Want to add more details?</p>
+        <button class="mdc-button more-details-button">
+          <span class="mdc-button__label">Claim this business</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock content %}

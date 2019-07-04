@@ -1,3 +1,5 @@
+import buttonRipple from "./business-profile";
+
 require('corejs-typeahead/dist/typeahead.jquery');
 const Bloodhound = require('corejs-typeahead/dist/bloodhound');
 
