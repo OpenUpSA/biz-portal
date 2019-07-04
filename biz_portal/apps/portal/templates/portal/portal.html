@@ -1,16 +1,7 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="{% static 'biz-portal.bundle.css' %}">
-  <title>Business Directory</title>
-</head>
-<body class="mdc-typography">
+
+{% block content %}
   <aside class="mdc-drawer mdc-drawer--dismissible">
     <div class="mdc-drawer__header">
       <h1 class="mdc-drawer__title">Cape Agulhas</h1>
@@ -37,32 +28,33 @@
         </a>
       </nav>
     </div>
-    </aside>
-    <header class="navbar mdc-top-app-bar mdc-top-app-bar--fixed" id="app-bar">
-      <div class="mdc-top-app-bar__row">
-        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
-          <button class="demo-menu material-icons mdc-top-app-bar__navigation-icon">menu</button>
-        </section>
-      </div>
-    </header>
-    <main class="main-content" id="main-content">
-      <div class="mdc-top-app-bar--fixed-adjust top-bar">
-        <div class="find-business-section">
-          <div class="layout">
-            <div class="find-business-container">
-              <h1 class="mdc-typography--subtitle1 subtitle-find-business">Find a business</h1>
-                <div id="custom-templates">
-                  <div class="search-icon-container">
-                    <i class="material-icons mdc-text-field__icon search-icon" tabindex="0" role="button">search</i>
-                  </div>
-                  <input class="typeahead" type="text" placeholder="Enter business name">
+  </aside>
+  <header class="navbar mdc-top-app-bar mdc-top-app-bar--fixed" id="app-bar">
+    <div class="mdc-top-app-bar__row">
+      <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+        <button class="demo-menu material-icons mdc-top-app-bar__navigation-icon">menu</button>
+      </section>
+    </div>
+  </header>
+  <main class="main-content" id="main-content">
+    <div class="mdc-top-app-bar--fixed-adjust top-bar">
+      <div class="find-business-section">
+        <div class="layout">
+          <div class="find-business-container">
+            <h1 class="mdc-typography--subtitle1 subtitle-find-business">Find a business</h1>
+              <div id="custom-templates">
+                <div class="search-icon-container">
+                  <i class="material-icons mdc-text-field__icon search-icon" tabindex="0" role="button">search</i>
                 </div>
-            </div>
+                <input class="typeahead" type="text" placeholder="Enter business name">
+              </div>
           </div>
         </div>
       </div>
-    </main>
+    </div>
+  </main>
+{% endblock content %}
 
-    <script src="{% static 'biz-portal.bundle.js' %}" defer></script>
-</body>
-</html>
+{% block javascript %}
+  <script src="{% static 'biz-portal.bundle.js' %}" defer></script>
+{% endblock javascript %}
