@@ -18,9 +18,5 @@ urlpatterns = [
     # API
     path(r"api/v1/", include(router.urls)),
     # UI WIP to be integrated in django templates
-    path(
-        "portal-test",
-        TemplateView.as_view(template_name="portal/portal.html"),
-        name="portal",
-    ),
+    path("portal-test", views.DevView.as_view(), name="portal"),
 ]

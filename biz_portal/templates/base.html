@@ -16,19 +16,16 @@
 
     <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="{% static 'biz-portal.bundle.css' %}">
 
     {% block css %}
-
-    <!-- Your stuff: Third-party CSS libraries go here -->
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{% static 'biz-portal.bundle.css' %}">
     <style>
       .muni-theme-background-color {
-          background-color: {{ request.site.municipality.color }};
+          background-color: {{ current_site.municipality.color }};
       }
       .muni-theme-color {
-          color: {{ request.site.municipality.color }};
+          color: {{ current_site.municipality.color }};
       }
     </style>
     {% endblock %}

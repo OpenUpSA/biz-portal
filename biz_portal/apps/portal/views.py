@@ -1,3 +1,4 @@
+from django.contrib.sites.models import Site
 from django.db.models import Count, F
 from django.views import generic
 from rest_framework import serializers, viewsets
@@ -23,11 +24,19 @@ class SearchSnippet:
         )
 
 
+class DevView(generic.TemplateView):
+    template_name = "portal/portal.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        Site.objects.clear_cache()
+        context["current_site"] = Site.objects.get_current()
+        return context
+
+
 class HomeView(generic.TemplateView):
     template_name = "portal/home.html"
-
-    def setup(self, request, *args, **kwargs):
-        super().setup(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
