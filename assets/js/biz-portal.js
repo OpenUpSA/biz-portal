@@ -41,10 +41,17 @@ $("#custom-templates .typeahead").typeahead(null, {
       "</div>"
     ].join("\n"),
     footer : (context) => (
-      `<a class="search-result-links" href="/businesses/?q=${context.query}"><p class="more-results-search">More results</p></a>`),
+      `<a class="search-result-links" href="/businesses/?q=${context.query}">
+        <p class="more-results-search">View All Results</p>
+      </a>`
+    ),
     suggestion: data => {
       const { web_url, registered_name } = data;
-      return `<a class="search-result-links" href="${web_url}"><p class="text-menu-search">${registered_name}</p></a>`;
+      return (
+        `<a class="search-result-links" href="${web_url}">
+          <p class="text-menu-search">${registered_name}</p>
+        </a>`
+      );
     }
   }
 });
