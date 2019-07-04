@@ -76,8 +76,13 @@ The Django staticfiles system picks the bundle up and serves it with, for exampl
 
 ### Python
 
+Best practises:
+
 - Format your code using Black: `black config biz_portal`
 - Sort imports using isort: `isort --recursive config biz_portal`
+- Blacken and isort automatically by installing the pre-commit hook:
+  - `pip install pre-commit`
+  - `pre-commit install`
 - Create fixtures using `manage.py dumpdata --indent 2 ...` so that they're
 readable and formatted consistently to minimise diffs
 
