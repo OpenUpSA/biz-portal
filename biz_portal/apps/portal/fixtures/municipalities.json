@@ -1,0 +1,10 @@
+[
+{
+  "model": "portal.municipality",
+  "pk": 1,
+  "fields": {
+    "mdb_code": "WC033",
+    "label": "Cape Agulhas"
+  }
+}
+]

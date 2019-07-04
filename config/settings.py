@@ -23,6 +23,9 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 # Rely on nginx to direct only allowed hosts, allow all for dokku checks to work.
 ALLOWED_HOSTS = ["*"]
 
+if env.int("DJANGO_SITE_ID"):
+    SITE_ID = env.int("DJANGO_SITE_ID", None)
+
 # Local time zone. Choices are
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # though not all of them may be available with every OS.
@@ -66,12 +69,14 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
     # "django.contrib.humanize", # Handy template tags
     "django.contrib.admin",
+    "django.contrib.sites",
 ]
 THIRD_PARTY_APPS = [
     "rest_framework",
     "django_extensions",
     "whitenoise.runserver_nostatic",
     "import_export",
+    "colorful",
 ]
 
 LOCAL_APPS = ["biz_portal.apps.portal.apps.PortalConfig"]
@@ -123,6 +128,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.contrib.sites.middleware.CurrentSiteMiddleware",
 ]
 
 

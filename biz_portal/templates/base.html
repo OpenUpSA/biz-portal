@@ -18,6 +18,15 @@
     {% block css %}
 
     <!-- Your stuff: Third-party CSS libraries go here -->
+
+    <style>
+      .muni-theme-background-color {
+          background-color: {{ request.site.municipality.color }};
+      }
+      .muni-theme-color {
+          color: {{ request.site.municipality.color }};
+      }
+    </style>
     {% endblock %}
 
   </head>

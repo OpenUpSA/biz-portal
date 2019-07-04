@@ -64,3 +64,4 @@ class BusinessAdmin(ImportMixin, admin.ModelAdmin):
 
 
 admin.site.register(models.Business, BusinessAdmin)
+admin.site.register(models.Municipality)
