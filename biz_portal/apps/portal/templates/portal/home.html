@@ -1,7 +1,51 @@
 {% extends "base.html" %}
+{% load param_replace %}
 
 {% block content %}
-{% include 'portal/search_snippet.html' %}
 
-<p>...top sectors</p>
+
+<div class="find-business-section">
+    <div class="layout">
+      <div class="find-business-container">
+        <h1 class="mdc-typography--subtitle1 subtitle-find-business">Find a business</h1>
+          <form id="custom-templates" action="{% url "business_list" %}" method="get">
+            <div class="search-icon-container">
+              <i class="material-icons mdc-text-field__icon search-icon" tabindex="0" role="button">search</i>
+            </div>
+            {% if request.GET.sector %}
+              <input class="typeahead" type="hidden" name="sector" value="{{ request.GET.sector }}" />
+            {% endif %}
+
+            {% if request.GET.region %}
+              <input class="typeahead" type="hidden" name="region" value="{{ request.GET.region }}" />
+            {% endif %}
+            <input class="typeahead" type="text" placeholder="Enter business name" name="q" value="{{ search_string }}">
+
+            <div class="business-directory">
+              <h1 class="mdc-typography--subtitle1 subtitle-business-directory">Business directory</h1>
+              <div class="business-directory-categories-and-counts">
+                <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">Location</h3>
+                <div class="business-directory-count-arrow">
+                  <div class="location-count">{{ region_business_counts | length }}</div>
+                  <i class="material-icons mdc-list-item__graphic arrow-right" aria-hidden="true">keyboard_arrow_right</i>
+                </div>
+              </div>
+              <div class="business-directory-categories-and-counts">
+                <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">Sector</h3>
+                <div class="business-directory-count-arrow">
+                  <div class="location-count">{{ sector_business_counts | length }}</div>
+                  <i class="material-icons mdc-list-item__graphic arrow-right" aria-hidden="true">keyboard_arrow_right</i>
+                </div>
+              </div>
+            </div>
+            <h4 class="mdc-typography--subtitle2 subtitle-clear-search">Clear search</h4>
+            <input class="business-directory-submit" type="submit" value="Search" />
+          </form>
+      </div>
+    </div>
+  </div>
+
+
+<!-- {% include 'portal/search_snippet.html' %} -->
+
 {% endblock content %}
