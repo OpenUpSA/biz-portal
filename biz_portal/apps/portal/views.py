@@ -24,18 +24,19 @@ class SearchSnippet:
         )
 
 
-class DevView(generic.TemplateView):
-    template_name = "portal/portal.html"
-
+class UncachedCurrentSiteMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
         Site.objects.clear_cache()
         context["current_site"] = Site.objects.get_current()
         return context
 
 
-class HomeView(generic.TemplateView):
+class DevView(generic.TemplateView, UncachedCurrentSiteMixin):
+    template_name = "portal/portal.html"
+
+
+class HomeView(generic.TemplateView, UncachedCurrentSiteMixin):
     template_name = "portal/home.html"
 
     def get_context_data(self, **kwargs):
@@ -50,6 +51,8 @@ class HomeView(generic.TemplateView):
         sector_queryset = SearchSnippet.get_sector_queryset(queryset)
         context["sector_business_counts"] = sector_queryset
 
+        Site.objects.clear_cache()
+        context["current_site"] = Site.objects.get_current()
         return context
 
 
