@@ -23,7 +23,6 @@ class Municipality(models.Model):
             int(self.color[5:7], 16) / 255,
         ]
         hsv = colorsys.rgb_to_hsv(*rgb)
-        # black=0, dark base_v/3 ... base v ... light base_v+2*(1-basev/3) white=1
         base_v = hsv[2]
 
         light_v = base_v + 2 * ((1 - base_v) / 3)

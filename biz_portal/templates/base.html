@@ -19,8 +19,6 @@
 
     <pre>debug: {{ current_site }}</pre>
     {% block css %}
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="{% static 'biz-portal.bundle.css' %}">
     <style>
       /*** CSS Municipality Theme ***/
 
@@ -42,14 +40,17 @@
       }
 
       /* CSS color */
-     .muni-theme-midlight-background-color {
-          background-color: {{ current_site.municipality.palette.midlight }};
+     .muni-theme-midlight-color {
+          color: {{ current_site.municipality.palette.midlight }};
       }
-     .muni-theme-base-background-color {
-          background-color: {{ current_site.municipality.palette.base }};
+     .muni-theme-base-color {
+          color: {{ current_site.municipality.palette.base }};
       }
 
+     {% include "mdc_theme.css" %}
     </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{% static 'biz-portal.bundle.css' %}">
     {% endblock %}
 
   </head>
@@ -63,9 +64,11 @@
       <hr class="mdc-list-divider">
       <div class="mdc-drawer__content">
         <nav class="mdc-list">
-          <a class="mdc-list-item mdc-list-item--activated" href="#" aria-selected="true">
-            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">exit_to_app</i>
-            <span class="mdc-list-item__text">Login</span>
+          <a class="mdc-list-item mdc-list-item--activated mdc-theme--secondary-bg" href="#" aria-selected="true">
+            <i class="material-icons mdc-list-item__graphic mdc-theme--on-secondary" aria-hidden="true">
+              exit_to_app
+            </i>
+            <span class="mdc-list-item__text mdc-theme--on-secondary">Login</span>
           </a>
           <a class="mdc-list-item" href="#">
             <i class="material-icons mdc-list-item__graphic" aria-hidden="true">store</i>
@@ -95,6 +98,11 @@
 
     {% endblock content %}
       </div>
+    <div class="muni-theme-light-background-color demo" style="width: 100px; height: 100px"></div>
+    <div class="muni-theme-midlight-background-color demo" style="width: 100px; height: 100px"></div>
+    <div class="muni-theme-base-background-color demo" style="width: 100px; height: 100px"></div>
+    <div class="muni-theme-middark-background-color demo" style="width: 100px; height: 100px"></div>
+    <div class="muni-theme-dark-background-color demo" style="width: 100px; height: 100px"></div>
     </main>
 
 
