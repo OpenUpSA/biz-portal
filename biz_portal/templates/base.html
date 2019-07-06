@@ -17,40 +17,10 @@
     <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
 
-    <pre>debug: {{ current_site }}</pre>
     {% block css %}
-    <style>
-      /*** CSS Municipality Theme ***/
-
-      /* CSS background-color */
-      .muni-theme-light-background-color {
-          background-color: {{ current_site.municipality.palette.light }};
-      }
-      .muni-theme-midlight-background-color {
-          background-color: {{ current_site.municipality.palette.midlight }};
-      }
-      .muni-theme-base-background-color {
-          background-color: {{ current_site.municipality.palette.base }};
-      }
-      .muni-theme-middark-background-color {
-          background-color: {{ current_site.municipality.palette.middark }};
-      }
-      .muni-theme-dark-background-color {
-          background-color: {{ current_site.municipality.palette.dark }};
-      }
-
-      /* CSS color */
-     .muni-theme-midlight-color {
-          color: {{ current_site.municipality.palette.midlight }};
-      }
-     .muni-theme-base-color {
-          color: {{ current_site.municipality.palette.base }};
-      }
-
-     {% include "mdc_theme.css" %}
     </style>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="{% static 'biz-portal.bundle.css' %}">
+    <link rel="stylesheet" href="{% static 'biz-portal.bundle.WC033.css' %}">
     {% endblock %}
 
   </head>

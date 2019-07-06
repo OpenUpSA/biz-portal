@@ -30,7 +30,11 @@ function materialImporter(url, prev) {
 
 module.exports = {
   context: __dirname,
-  entry: ['./assets/scss/biz-portal.scss', './assets/js/biz-portal.js'],
+  entry: [
+    './assets/scss/biz-portal-default.scss',
+    './assets/scss/biz-portal-WC033.scss',
+    './assets/js/biz-portal.js'
+  ],
   output: {
     filename: 'biz-portal.bundle.js',
     path: path.resolve('./assets/bundles'),
@@ -46,12 +50,37 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.scss$/,
+        test: /WC033\.scss$/,
         use: [
           {
             loader: 'file-loader',
             options: {
-              name: 'biz-portal.bundle.css',
+              name: 'biz-portal.bundle.WC033.css',
+            },
+          },
+          {loader: 'extract-loader'},
+          {loader: 'css-loader'},
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [autoprefixer()]
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              importer: materialImporter
+            },
+          }
+        ],
+      },
+      {
+        test: /default\.scss$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'biz-portal.bundle.defaultcss',
             },
           },
           {loader: 'extract-loader'},
