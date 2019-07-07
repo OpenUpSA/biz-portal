@@ -27,6 +27,12 @@
   <body class="mdc-typography">
     <aside class="mdc-drawer mdc-drawer--dismissible">
       <div class="mdc-drawer__header">
+        {% if current_site.municipality.logo %}
+        <img class="drawer-header-image"
+             src="{% static current_site.municipality.logo %}"
+             alt="{{ current_site.municipality.label }} logo"
+             />
+        {% endif %}
         <h1 class="mdc-drawer__title">{{ current_site.municipality.label }}</h1>
         <h3 class="mdc-drawer__subtitle">Business directory</h3>
       </div>
@@ -56,6 +62,9 @@
     </aside>
     <header class="navbar mdc-top-app-bar mdc-top-app-bar--fixed" id="app-bar">
       <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+          <span class="mdc-top-app-bar__title mdc-theme--primary">{{ current_site.municipality.label }}</span>
+        </section>
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
           <button class="demo-menu material-icons mdc-top-app-bar__navigation-icon">menu</button>
         </section>
