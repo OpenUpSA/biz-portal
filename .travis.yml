@@ -26,7 +26,6 @@ install:
 env:
   DATABASE_URL: postgres://postgres@localhost/postgres
   DJANGO_SECRET_KEY: not-secret-in-test
-  DJANGO_SITE_ID: 1
   DISABLE_SENTRY: 'True'
 
 script:

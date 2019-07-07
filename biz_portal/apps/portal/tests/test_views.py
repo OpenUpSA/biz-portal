@@ -22,7 +22,7 @@ class BusinessList(TestCase):
     def test_list_business_no_filter(self):
         """Given three businesses, all are returned without any query or filters"""
         c = Client()
-        response = c.get("/businesses/")
+        response = c.get("/businesses/", HTTP_HOST="biz.capeagulhas.org")
         self.assertEqual(3, len(response.context["business_list"]))
 
         # Facets
@@ -44,7 +44,10 @@ class BusinessList(TestCase):
         and regions are returned.
         """
         c = Client()
-        response = c.get("/businesses/?sector=Accommodation and Food Services")
+        response = c.get(
+            "/businesses/?sector=Accommodation and Food Services",
+            HTTP_HOST="biz.capeagulhas.org",
+        )
         self.assertEqual(1, len(response.context["business_list"]))
 
         # Facets
@@ -66,7 +69,7 @@ class BusinessList(TestCase):
         and regions are returned.
         """
         c = Client()
-        response = c.get("/businesses/?q=kwix")
+        response = c.get("/businesses/?q=kwix", HTTP_HOST="biz.capeagulhas.org")
         self.assertEqual(2, len(response.context["business_list"]))
         self.assertTrue(
             all(
