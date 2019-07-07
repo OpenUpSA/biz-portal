@@ -76,6 +76,12 @@ The Django staticfiles system picks the bundle up and serves it with, for exampl
 
 #### Muni branding/theme
 
+The municipality logo can be shown in the menu. The logo should be added to this
+repository in `assets/images` using the naming convention `logo-{mdb_code}.png`
+where `{mdb_code}` is the municipality's demartcation code. The static path
+for the image should then be set in the municipality in Admin. The logo should
+be no wider or higher than 221px.
+
 We use [Material Components for the web's theming](https://material.io/develop/web/docs/theming/)
 to customise colours for a municipality. To let it calculate colours when SCSS
 is transpiled to CSS, we produce a CSS bundle per theme. Each theme entry-point
