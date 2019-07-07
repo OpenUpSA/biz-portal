@@ -8,8 +8,11 @@ class Municipality(models.Model):
         verbose_name_plural = "municipalities"
 
     mdb_code = models.CharField(max_length=10, unique=True)
-    label = models.CharField(max_length=200)
-    site = models.OneToOneField(Site, on_delete=models.CASCADE)
+    label = models.CharField(max_length=200, unique=True)
+    site = models.OneToOneField(Site, on_delete=models.CASCADE, unique=True)
+    logo = models.CharField(
+        max_length=200, unique=True, blank=True, help_text="e.g. images/logo-WC033.png"
+    )
 
     def __str__(self):
         return f"{self.label} ({self.mdb_code})"

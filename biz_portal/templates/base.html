@@ -27,6 +27,12 @@
   <body class="mdc-typography">
     <aside class="mdc-drawer mdc-drawer--dismissible">
       <div class="mdc-drawer__header">
+        {% if current_site.municipality.logo %}
+        <img class="drawer-header-image"
+             src="{% static current_site.municipality.logo %}"
+             alt="{{ current_site.municipality.label }} logo"
+             />
+        {% endif %}
         <h1 class="mdc-drawer__title">{{ current_site.municipality.label }}</h1>
         <h3 class="mdc-drawer__subtitle">Business directory</h3>
       </div>
