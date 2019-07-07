@@ -148,6 +148,10 @@ Locally, add the dokku git remote to be able to push
 git remote add dokku dokku@dokku9.code4sa.org:bizportal
 ```
 
+**Temporarily** set DJANGO_SITE_ID=1 to be able to run migrations,
+deploy, login to admin and set up the actual sites with appropriate hostnames,
+**then unset it again** so that `current_site` is identified from the Host header.
+
 After the first deploy as per the next section, create an admin user:
 
 ```
