@@ -1,6 +1,7 @@
 -r ./base.txt
 
 ipdb==0.12  # https://github.com/gotcha/ipdb
+pre_commit==1.17.0
 
 # Testing
 # ------------------------------------------------------------------------------

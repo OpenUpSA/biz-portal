@@ -1,9 +1,25 @@
+from django.contrib.sites.models import Site
 from django.db import models
 from django.urls import reverse
 
 
+class Municipality(models.Model):
+    class Meta:
+        verbose_name_plural = "municipalities"
+
+    mdb_code = models.CharField(max_length=10, unique=True)
+    label = models.CharField(max_length=200)
+    site = models.OneToOneField(Site, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.label} ({self.mdb_code})"
+
+
 class Region(models.Model):
     label = models.CharField(max_length=200, unique=True)
+    municipality = models.ForeignKey(
+        Municipality, on_delete=models.CASCADE, related_name="regions"
+    )
 
     def __str__(self):
         return self.label

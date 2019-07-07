@@ -28,9 +28,47 @@ function materialImporter(url, prev) {
   return {file: url};
 }
 
+/**
+Given a string `name`, returns a rule to bundle
+RegExp(`${name}\.scss$`) to `biz-portal.bundle.${name}.css`
+**/
+function themeBundle(name) {
+  return {
+    test: new RegExp(`${name}\.scss$`),
+    use: [
+      {
+        loader: 'file-loader',
+        options: {
+          name: `biz-portal.bundle.${name}.css`,
+        },
+      },
+      {loader: 'extract-loader'},
+      {loader: 'css-loader'},
+      {
+        loader: 'postcss-loader',
+        options: {
+          plugins: () => [autoprefixer()]
+        }
+      },
+      {
+        loader: 'sass-loader',
+        options: {
+          importer: materialImporter
+        },
+      }
+    ],
+  }
+}
+
 module.exports = {
   context: __dirname,
-  entry: ['./assets/scss/biz-portal.scss', './assets/js/biz-portal.js'],
+  entry: [
+    // Entry for each theme
+    './assets/scss/biz-portal-default.scss',
+    './assets/scss/biz-portal-WC033.scss',
+
+    './assets/js/biz-portal.js'
+  ],
   output: {
     filename: 'biz-portal.bundle.js',
     path: path.resolve('./assets/bundles'),
@@ -43,33 +81,13 @@ module.exports = {
   plugins: [
     new webpack.ProvidePlugin({ jQuery: 'jquery', $: 'jquery', "window.jQuery": "jquery" }),
   ],
+
   module: {
     rules: [
-      {
-        test: /\.scss$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: 'biz-portal.bundle.css',
-            },
-          },
-          {loader: 'extract-loader'},
-          {loader: 'css-loader'},
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: () => [autoprefixer()]
-            }
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              importer: materialImporter
-            },
-          }
-        ],
-      },
+      // Rule for each theme
+      themeBundle("WC033"),
+      themeBundle("default"),
+
       {
         test: /\.js$/,
         loader: 'babel-loader',
@@ -79,4 +97,5 @@ module.exports = {
       }
     ],
   },
+  devtool: 'source-map',
 };
