@@ -15,10 +15,9 @@
     <![endif]-->
 
     <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
 
     {% block css %}
-    </style>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="{% static css_bundle %}">
     {% endblock %}
@@ -28,7 +27,7 @@
   <body class="mdc-typography">
     <aside class="mdc-drawer mdc-drawer--dismissible">
       <div class="mdc-drawer__header">
-        <h1 class="mdc-drawer__title">Cape Agulhas</h1>
+        <h1 class="mdc-drawer__title">{{ current_site.municipality.label }}</h1>
         <h3 class="mdc-drawer__subtitle">Business directory</h3>
       </div>
       <hr class="mdc-list-divider">
@@ -64,9 +63,9 @@
     </header>
     <main class="main-content" id="main-content">
       <div class="mdc-top-app-bar--fixed-adjust top-bar">
-    {% block content %}
+        {% block content %}
 
-    {% endblock content %}
+        {% endblock content %}
       </div>
     <div class="muni-theme-light-background-color demo" style="width: 100px; height: 100px"></div>
     <div class="muni-theme-midlight-background-color demo" style="width: 100px; height: 100px"></div>
@@ -78,7 +77,7 @@
 
     {% block javascript %}
 
-    <script src="{% static 'biz-portal.bundle.js' %}" defer></script>
+    <script src="{% static 'biz-portal.bundle.js' %}" async></script>
 
     {% endblock javascript %}
   </body>

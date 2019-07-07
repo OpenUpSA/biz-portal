@@ -63,8 +63,10 @@ function themeBundle(name) {
 module.exports = {
   context: __dirname,
   entry: [
+    // Entry for each theme
     './assets/scss/biz-portal-default.scss',
     './assets/scss/biz-portal-WC033.scss',
+
     './assets/js/biz-portal.js'
   ],
   output: {
@@ -82,8 +84,10 @@ module.exports = {
 
   module: {
     rules: [
+      // Rule for each theme
       themeBundle("WC033"),
       themeBundle("default"),
+
       {
         test: /\.js$/,
         loader: 'babel-loader',
