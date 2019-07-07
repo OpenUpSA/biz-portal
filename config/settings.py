@@ -25,6 +25,7 @@ ALLOWED_HOSTS = ["*"]
 
 if env.int("DJANGO_SITE_ID", None):
     SITE_ID = env.int("DJANGO_SITE_ID", None)
+USE_X_FORWARDED_HOST = env.bool("DJANGO_USE_X_FORWARDED_HOST", False)
 
 # Local time zone. Choices are
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
