@@ -70,9 +70,27 @@ See `package.json` and `webpack.config.js`.
 The Django staticfiles system picks the bundle up and serves it with, for example:
 
 ```html
-<link rel="stylesheet" href="{% static 'biz-portal.bundle.css' %}">
+<link rel="stylesheet" href="{% static muni_theme %}">
 <script src="{% static 'biz-portal.bundle.js' %}" defer></script>
 ```
+
+#### Muni branding/theme
+
+We use [Material Components for the web's theming](https://material.io/develop/web/docs/theming/)
+to customise colours for a municipality. To let it calculate colours when SCSS
+is transpiled to CSS, we produce a CSS bundle per theme. Each theme entry-point
+needs to
+
+- be named `biz-portal-{name}.scss
+  - apart from `default`, `name` should be the municipality [MDB](http://www.demarcation.org.za/) code. e.g. `WC033` for Cape Agulhas
+- define the theme colours
+- import "@material/theme/mdc-theme" after defining the colours
+- import "biz-portal.scss"
+- added as an entry-point in webpack.config.js like `./assets/scss/biz-portal-{name}.scss`
+- added as a rule in webpack.config.js like `themeBundle("{name}")`
+
+If a theme bundle does not exist for a given municipality,
+`biz-portal-default.scss` will be used.
 
 ### Python
 

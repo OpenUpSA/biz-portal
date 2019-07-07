@@ -178,6 +178,7 @@ TEMPLATES = [
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
                 "biz_portal.context_processors.current_site",
+                "biz_portal.context_processors.css_bundle",
             ],
         },
     }

@@ -28,6 +28,38 @@ function materialImporter(url, prev) {
   return {file: url};
 }
 
+/**
+Given a string `name`, returns a rule to bundle
+RegExp(`${name}\.scss$`) to `biz-portal.bundle.${name}.css`
+**/
+function themeBundle(name) {
+  return {
+    test: new RegExp(`${name}\.scss$`),
+    use: [
+      {
+        loader: 'file-loader',
+        options: {
+          name: `biz-portal.bundle.${name}.css`,
+        },
+      },
+      {loader: 'extract-loader'},
+      {loader: 'css-loader'},
+      {
+        loader: 'postcss-loader',
+        options: {
+          plugins: () => [autoprefixer()]
+        }
+      },
+      {
+        loader: 'sass-loader',
+        options: {
+          importer: materialImporter
+        },
+      }
+    ],
+  }
+}
+
 module.exports = {
   context: __dirname,
   entry: [
@@ -47,58 +79,11 @@ module.exports = {
   plugins: [
     new webpack.ProvidePlugin({ jQuery: 'jquery', $: 'jquery', "window.jQuery": "jquery" }),
   ],
+
   module: {
     rules: [
-      {
-        test: /WC033\.scss$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: 'biz-portal.bundle.WC033.css',
-            },
-          },
-          {loader: 'extract-loader'},
-          {loader: 'css-loader'},
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: () => [autoprefixer()]
-            }
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              importer: materialImporter
-            },
-          }
-        ],
-      },
-      {
-        test: /default\.scss$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: 'biz-portal.bundle.defaultcss',
-            },
-          },
-          {loader: 'extract-loader'},
-          {loader: 'css-loader'},
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: () => [autoprefixer()]
-            }
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              importer: materialImporter
-            },
-          }
-        ],
-      },
+      themeBundle("WC033"),
+      themeBundle("default"),
       {
         test: /\.js$/,
         loader: 'babel-loader',
@@ -108,4 +93,5 @@ module.exports = {
       }
     ],
   },
+  devtool: 'source-map',
 };
