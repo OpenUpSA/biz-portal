@@ -81,7 +81,7 @@ to customise colours for a municipality. To let it calculate colours when SCSS
 is transpiled to CSS, we produce a CSS bundle per theme. Each theme entry-point
 needs to
 
-- be named `biz-portal-{name}.scss
+- be named `biz-portal-{name}.scss`
   - apart from `default`, `name` should be the municipality [MDB](http://www.demarcation.org.za/) code. e.g. `WC033` for Cape Agulhas
 - define the theme colours
 - import "@material/theme/mdc-theme" after defining the colours
@@ -91,6 +91,10 @@ needs to
 
 If a theme bundle does not exist for a given municipality,
 `biz-portal-default.scss` will be used.
+
+> To test markup/style changes for the default and muni-specific bundle, change
+the MDB code for the muni in Admin to match the appropriate bundle, or fall back
+to default.
 
 ### Python
 
