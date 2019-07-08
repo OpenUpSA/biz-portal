@@ -15,13 +15,11 @@
     <![endif]-->
 
     <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="{% static 'biz-portal.bundle.css' %}">
 
     {% block css %}
-
-    <!-- Your stuff: Third-party CSS libraries go here -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{% static css_bundle %}">
     {% endblock %}
 
   </head>
@@ -29,15 +27,23 @@
   <body class="mdc-typography">
     <aside class="mdc-drawer mdc-drawer--dismissible">
       <div class="mdc-drawer__header">
-        <h1 class="mdc-drawer__title">Cape Agulhas</h1>
+        {% if current_site.municipality.logo %}
+        <img class="drawer-header-image"
+             src="{% static current_site.municipality.logo %}"
+             alt="{{ current_site.municipality.label }} logo"
+             />
+        {% endif %}
+        <h1 class="mdc-drawer__title">{{ current_site.municipality.label }}</h1>
         <h3 class="mdc-drawer__subtitle">Business directory</h3>
       </div>
       <hr class="mdc-list-divider">
       <div class="mdc-drawer__content">
         <nav class="mdc-list">
-          <a class="mdc-list-item mdc-list-item--activated" href="#" aria-selected="true">
-            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">exit_to_app</i>
-            <span class="mdc-list-item__text">Login</span>
+          <a class="mdc-list-item mdc-list-item--activated mdc-theme--secondary-bg" href="#" aria-selected="true">
+            <i class="material-icons mdc-list-item__graphic mdc-theme--on-secondary" aria-hidden="true">
+              exit_to_app
+            </i>
+            <span class="mdc-list-item__text mdc-theme--on-secondary">Login</span>
           </a>
           <a class="mdc-list-item" href="#">
             <i class="material-icons mdc-list-item__graphic" aria-hidden="true">store</i>
@@ -56,6 +62,9 @@
     </aside>
     <header class="navbar mdc-top-app-bar mdc-top-app-bar--fixed" id="app-bar">
       <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+          <span class="mdc-top-app-bar__title mdc-theme--primary">{{ current_site.municipality.label }}</span>
+        </section>
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
           <button class="demo-menu material-icons mdc-top-app-bar__navigation-icon">menu</button>
         </section>
@@ -63,16 +72,16 @@
     </header>
     <main class="main-content" id="main-content">
       <div class="mdc-top-app-bar--fixed-adjust top-bar">
-    {% block content %}
+        {% block content %}
 
-    {% endblock content %}
+        {% endblock content %}
       </div>
     </main>
 
 
     {% block javascript %}
 
-    <script src="{% static 'biz-portal.bundle.js' %}" defer></script>
+    <script src="{% static 'biz-portal.bundle.js' %}" async></script>
 
     {% endblock javascript %}
   </body>

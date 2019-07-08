@@ -23,11 +23,12 @@ class SearchSnippet:
         )
 
 
+class DevView(generic.TemplateView):
+    template_name = "portal/portal.html"
+
+
 class HomeView(generic.TemplateView):
     template_name = "portal/home.html"
-
-    def setup(self, request, *args, **kwargs):
-        super().setup(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

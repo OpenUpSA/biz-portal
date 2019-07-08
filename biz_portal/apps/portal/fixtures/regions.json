@@ -3,35 +3,40 @@
   "model": "portal.region",
   "pk": 1,
   "fields": {
-    "label": "Bredasdorp"
+    "label": "Bredasdorp",
+    "municipality": 1
   }
 },
 {
   "model": "portal.region",
   "pk": 2,
   "fields": {
-    "label": "Napier"
+    "label": "Napier",
+    "municipality": 1
   }
 },
 {
   "model": "portal.region",
   "pk": 3,
   "fields": {
-    "label": "Riviersonderend"
+    "label": "Riviersonderend",
+    "municipality": 1
   }
 },
 {
   "model": "portal.region",
   "pk": 4,
   "fields": {
-    "label": "Unknown"
+    "label": "Unknown",
+    "municipality": 1
   }
 },
 {
   "model": "portal.region",
   "pk": 5,
   "fields": {
-    "label": "Struisbaai"
+    "label": "Struisbaai",
+    "municipality": 1
   }
 }
 ]

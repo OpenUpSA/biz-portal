@@ -70,14 +70,47 @@ See `package.json` and `webpack.config.js`.
 The Django staticfiles system picks the bundle up and serves it with, for example:
 
 ```html
-<link rel="stylesheet" href="{% static 'biz-portal.bundle.css' %}">
+<link rel="stylesheet" href="{% static muni_theme %}">
 <script src="{% static 'biz-portal.bundle.js' %}" defer></script>
 ```
 
+#### Muni branding/theme
+
+The municipality logo can be shown in the menu. The logo should be added to this
+repository in `assets/images` using the naming convention `logo-{mdb_code}.png`
+where `{mdb_code}` is the municipality's demartcation code. The static path
+for the image should then be set in the municipality in Admin. The logo should
+be no wider or higher than 221px.
+
+We use [Material Components for the web's theming](https://material.io/develop/web/docs/theming/)
+to customise colours for a municipality. To let it calculate colours when SCSS
+is transpiled to CSS, we produce a CSS bundle per theme. Each theme entry-point
+needs to
+
+- be named `biz-portal-{name}.scss`
+  - apart from `default`, `name` should be the municipality [MDB](http://www.demarcation.org.za/) code. e.g. `WC033` for Cape Agulhas
+- define the theme colours
+- import "@material/theme/mdc-theme" after defining the colours
+- import "biz-portal.scss"
+- added as an entry-point in webpack.config.js like `./assets/scss/biz-portal-{name}.scss`
+- added as a rule in webpack.config.js like `themeBundle("{name}")`
+
+If a theme bundle does not exist for a given municipality,
+`biz-portal-default.scss` will be used.
+
+> To test markup/style changes for the default and muni-specific bundle, change
+the MDB code for the muni in Admin to match the appropriate bundle, or fall back
+to default.
+
 ### Python
+
+Best practises:
 
 - Format your code using Black: `black config biz_portal`
 - Sort imports using isort: `isort --recursive config biz_portal`
+- Blacken and isort automatically by installing the pre-commit hook:
+  - `pip install pre-commit`
+  - `pre-commit install`
 - Create fixtures using `manage.py dumpdata --indent 2 ...` so that they're
 readable and formatted consistently to minimise diffs
 
@@ -114,6 +147,10 @@ Locally, add the dokku git remote to be able to push
 ```
 git remote add dokku dokku@dokku9.code4sa.org:bizportal
 ```
+
+**Temporarily** set DJANGO_SITE_ID=1 to be able to run migrations,
+deploy, login to admin and set up the actual sites with appropriate hostnames,
+**then unset it again** so that `current_site` is identified from the Host header.
 
 After the first deploy as per the next section, create an admin user:
 
