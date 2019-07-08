@@ -4,7 +4,7 @@
 {% block content %}
 
 
-<div class="find-business-section">
+<div class="find-business-section mdc-theme--primary-bg">
     <div class="layout">
       <div class="find-business-container">
         <h1 class="mdc-typography--subtitle1 subtitle-find-business">Find a business</h1>
@@ -38,14 +38,15 @@
                 </div>
               </div>
             </div>
-            <h4 class="mdc-typography--subtitle2 subtitle-clear-search">Clear search</h4>
-            <input class="business-directory-submit" type="submit" value="Search" />
+            <a class="link-clear-search" href="/">
+              <h4 class="mdc-typography--subtitle2 subtitle-clear-search">Clear search</h4>
+            </a>
+            <button class="mdc-button mdc-button--raised business-directory-submit">
+              <span class="mdc-button__label">Search</span>
+            </button>
           </form>
       </div>
     </div>
   </div>
-
-
-<!-- {% include 'portal/search_snippet.html' %} -->
 
 {% endblock content %}
