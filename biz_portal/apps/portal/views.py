@@ -42,6 +42,13 @@ class HomeView(generic.TemplateView):
         sector_queryset = SearchSnippet.get_sector_queryset(queryset)
         context["sector_business_counts"] = sector_queryset
 
+        top_sectors_qs = (
+            models.Business.objects.exclude(sector__label__in=["unknown", "generic"])
+            .values(label=F("sector__label"))
+            .annotate(count=Count("*"))
+            .order_by("-count")
+        )
+        context["top_sectors_counts"] = top_sectors_qs
         return context
 
 

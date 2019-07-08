@@ -1,7 +1,21 @@
 {% extends "base.html" %}
+{% load param_replace %}
 
 {% block content %}
 {% include 'portal/search_snippet.html' %}
 
-<p>...top sectors</p>
+<h2>Top Sectors</h2>
+
+<ul>
+  {% for sector in top_sectors_counts|slice:":3" %}
+  <li>
+    <p>
+      <a href="{% url "business_list" %}?{% param_replace page="" sector=sector.label %}">
+        {{ sector.label }}
+      </a>
+    </p>
+    <p>{{ sector.count }} Businesses</p>
+  </li>
+  {% endfor %}
+</ul>
 {% endblock content %}

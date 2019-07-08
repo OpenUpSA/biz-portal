@@ -1,0 +1,47 @@
+[
+{
+  "model": "portal.business",
+  "pk": 1,
+  "fields": {
+    "registered_name": "Y-KWIX-YEET BRASS",
+    "registration_number": "1990/002791/07",
+    "status": 7,
+    "region": 4,
+    "physical_address": "18 HUXHAM STREET\nARNISTON\n7280",
+    "postal_address": "P O BOX 403\nBREDASDORP\n7280",
+    "sector": 14,
+    "business_type": 2,
+    "registration_date": "1990-05-18"
+  }
+},
+{
+  "model": "portal.business",
+  "pk": 2,
+  "fields": {
+    "registered_name": "BOORT DEVELOPMENT BUSINESS",
+    "registration_number": "1990/000289/23",
+    "status": 4,
+    "region": 1,
+    "physical_address": "DIRKIE UYSSTRAAT 11\nBREDASDORP\n7280\n7280",
+    "postal_address": "POSBUS 195\nBREDASDORP\n7280",
+    "sector": 29,
+    "business_type": 1,
+    "registration_date": "1990-01-04"
+  }
+},
+{
+  "model": "portal.business",
+  "pk": 3,
+  "fields": {
+    "registered_name": "SAME AS SECOND BUT FOR THE NAME KWIX",
+    "registration_number": "1990/000289/24",
+    "status": 4,
+    "region": 1,
+    "physical_address": "DIRKIE UYSSTRAAT 11\nBREDASDORP\n7280\n7280",
+    "postal_address": "POSBUS 195\nBREDASDORP\n7280",
+    "sector": 3,
+    "business_type": 1,
+    "registration_date": "1990-01-04"
+  }
+}
+]
