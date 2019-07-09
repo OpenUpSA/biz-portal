@@ -20,7 +20,16 @@
               <input type="hidden" name="region" value="{{ request.GET.region }}" />
             {% endif %}
 
-            <input class="typeahead" type="text" placeholder="Enter business name" name="q" value="{{ search_string }}" autocomplete="off">
+            <input
+              class="typeahead"
+              id="search-bar"
+              type="text"
+              placeholder="Enter business name"
+              name="q"
+              value="{{ search_string }}"
+              autocomplete="off"
+              data-suggestion-url="{% url "api:business-list" %}?{% param_replace q="" sector="" region="" sector__label=request.GET.sector region__label=request.GET.region %}"
+            >
             <div class="business-directory">
               <h1 class="mdc-typography--subtitle1 subtitle-business-directory">Business directory</h1>
               <details class="mdc-expansion">
