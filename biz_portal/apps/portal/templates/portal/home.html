@@ -32,13 +32,13 @@
                   </div>
                 </summary>
                 {% for region in region_business_counts %}
-                  <div class="business-directory-categories-and-counts">
+                  <a class="business-directory-categories-and-counts" href="{% url "business_list" %}?{% param_replace page="" region=region.label %}">
                     <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">{{ region.label }}</h3>
                     <div class="business-directory-count-arrow">
                       <div class="location-count">{{ region.count }}</div>
                       <i class="material-icons mdc-list-item__graphic arrow-right" aria-hidden="true">keyboard_arrow_right</i>
                     </div>
-                  </div>
+                  </a>
                 {% endfor %}
               </details>
               <details class="mdc-expansion">
@@ -50,13 +50,13 @@
                   </div>
                 </summary>
                 {% for sector in sector_business_counts %}
-                  <div class="business-directory-categories-and-counts">
+                  <a class="business-directory-categories-and-counts" href="{% url "business_list" %}?{% param_replace page="" sector=sector.label %}">
                     <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">{{ sector.label }}</h3>
                     <div class="business-directory-count-arrow">
                       <div class="location-count">{{ sector.count }}</div>
                       <i class="material-icons mdc-list-item__graphic arrow-right" aria-hidden="true">keyboard_arrow_right</i>
                     </div>
-                  </div>
+                  </a>
                 {% endfor %}
               </details>
             </div>
