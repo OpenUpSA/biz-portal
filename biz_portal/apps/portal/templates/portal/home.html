@@ -3,7 +3,6 @@
 
 {% block content %}
 
-
 <div class="find-business-section mdc-theme--primary-bg">
     <div class="layout">
       <div class="find-business-container">
@@ -12,6 +11,7 @@
             <div class="search-icon-container">
               <i class="material-icons mdc-text-field__icon search-icon" tabindex="0" role="button">search</i>
             </div>
+
             {% if request.GET.sector %}
               <input class="typeahead" type="hidden" name="sector" value="{{ request.GET.sector }}" />
             {% endif %}
@@ -19,24 +19,46 @@
             {% if request.GET.region %}
               <input class="typeahead" type="hidden" name="region" value="{{ request.GET.region }}" />
             {% endif %}
-            <input class="typeahead" type="text" placeholder="Enter business name" name="q" value="{{ search_string }}">
 
+            <input class="typeahead" type="text" placeholder="Enter business name" name="q" value="{{ search_string }}">
             <div class="business-directory">
               <h1 class="mdc-typography--subtitle1 subtitle-business-directory">Business directory</h1>
-              <div class="business-directory-categories-and-counts">
-                <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">Location</h3>
-                <div class="business-directory-count-arrow">
-                  <div class="location-count">{{ region_business_counts | length }}</div>
-                  <i class="material-icons mdc-list-item__graphic arrow-right" aria-hidden="true">keyboard_arrow_right</i>
-                </div>
-              </div>
-              <div class="business-directory-categories-and-counts">
-                <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">Sector</h3>
-                <div class="business-directory-count-arrow">
-                  <div class="location-count">{{ sector_business_counts | length }}</div>
-                  <i class="material-icons mdc-list-item__graphic arrow-right" aria-hidden="true">keyboard_arrow_right</i>
-                </div>
-              </div>
+              <details class="mdc-expansion">
+                <summary class="mdc-expansion__summary">
+                  <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">Location</h3>
+                  <div class="business-directory-count-arrow">
+                    <div class="location-count">{{ region_business_counts | length }}</div>
+                    <i class="material-icons mdc-list-item__graphic arrow-down" aria-hidden="true">keyboard_arrow_down</i>
+                  </div>
+                </summary>
+                {% for region in region_business_counts %}
+                  <div class="business-directory-categories-and-counts">
+                    <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">{{ region.label }}</h3>
+                    <div class="business-directory-count-arrow">
+                      <div class="location-count">{{ region.count }}</div>
+                      <i class="material-icons mdc-list-item__graphic arrow-right" aria-hidden="true">keyboard_arrow_right</i>
+                    </div>
+                  </div>
+                {% endfor %}
+              </details>
+              <details class="mdc-expansion">
+                <summary class="mdc-expansion__summary">
+                  <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">Sector</h3>
+                  <div class="business-directory-count-arrow">
+                    <div class="location-count">{{ sector_business_counts | length }}</div>
+                    <i class="material-icons mdc-list-item__graphic arrow-down" aria-hidden="true">keyboard_arrow_down</i>
+                  </div>
+                </summary>
+                {% for sector in sector_business_counts %}
+                  <div class="business-directory-categories-and-counts">
+                    <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">{{ sector.label }}</h3>
+                    <div class="business-directory-count-arrow">
+                      <div class="location-count">{{ sector.count }}</div>
+                      <i class="material-icons mdc-list-item__graphic arrow-right" aria-hidden="true">keyboard_arrow_right</i>
+                    </div>
+                  </div>
+                {% endfor %}
+              </details>
             </div>
             <a class="link-clear-search" href="/">
               <h4 class="mdc-typography--subtitle2 subtitle-clear-search">Clear search</h4>
