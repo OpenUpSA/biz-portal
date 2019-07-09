@@ -200,6 +200,7 @@ body {
     align-items: center;
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     border-radius: 1px;
+    text-decoration: none;
 
     &:hover {
       cursor: pointer;
@@ -231,7 +232,7 @@ body {
   }
 
   .mdc-expansion {
-    margin-bottom: 8px;
+    margin-bottom: 16px;
     border: 1px solid rgba(0, 0, 0, 0.12);
     border-bottom: none;
 
@@ -262,6 +263,9 @@ body {
     }
 
     &[open] {
+      .mdc-expansion__summary {
+        background-color: rgb(241, 241, 241);
+      }
       & .arrow-down {
         transform: rotate(180deg);
       }
