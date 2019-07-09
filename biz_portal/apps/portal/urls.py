@@ -1,5 +1,4 @@
 from django.urls import include, path
-from django.views.generic import TemplateView
 from rest_framework import routers
 
 from . import views
@@ -16,7 +15,7 @@ urlpatterns = [
         name="business_detail",
     ),
     # API
-    path(r"api/v1/", include(router.urls)),
+    path(r"api/v1/", include((router.urls, "portal"), namespace="api")),
     # UI WIP to be integrated in django templates
     path("portal-test", views.DevView.as_view(), name="portal"),
 ]
