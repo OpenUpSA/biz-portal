@@ -15,7 +15,7 @@
     type="text"
     placeholder="Search..."
     value="{{ search_string }}"
-    data-suggestion-url="{% url "api:business-list" %}?{% param_replace q="" sector__label=request.GET.sector region__label=request.GET.region %}"
+    data-suggestion-url="{% url "api:business-list" %}?{% param_replace q="" sector="" region="" sector__label=request.GET.sector region__label=request.GET.region %}"
     />
 </form>
 
