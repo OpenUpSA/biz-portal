@@ -16,13 +16,15 @@ topAppBar.listen("MDCTopAppBar:nav", () => {
   drawer.open = !drawer.open;
 });
 
+const input = document.querySelector('#search-bar');
+
 // Instantiate the Bloodhound suggestion engine
-var businesses = new Bloodhound({
+const businesses = new Bloodhound({
   datumTokenizer: Bloodhound.tokenizers.obj.whitespace("value"),
   queryTokenizer: Bloodhound.tokenizers.whitespace,
   remote: {
     wildcard: "%QUERY",
-    url: `/api/v1/businesses/?search=%QUERY`,
+    url: `${input.dataset.suggestionUrl}&search=%QUERY`,
     transform: response => {
       return response.results;
     }
