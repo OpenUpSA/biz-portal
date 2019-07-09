@@ -13,14 +13,14 @@
             </div>
 
             {% if request.GET.sector %}
-              <input class="typeahead" type="hidden" name="sector" value="{{ request.GET.sector }}" />
+              <input type="hidden" name="sector" value="{{ request.GET.sector }}" />
             {% endif %}
 
             {% if request.GET.region %}
-              <input class="typeahead" type="hidden" name="region" value="{{ request.GET.region }}" />
+              <input type="hidden" name="region" value="{{ request.GET.region }}" />
             {% endif %}
 
-            <input class="typeahead" type="text" placeholder="Enter business name" name="q" value="{{ search_string }}">
+            <input class="typeahead" type="text" placeholder="Enter business name" name="q" value="{{ search_string }}" autocomplete="off">
             <div class="business-directory">
               <h1 class="mdc-typography--subtitle1 subtitle-business-directory">Business directory</h1>
               <details class="mdc-expansion">
