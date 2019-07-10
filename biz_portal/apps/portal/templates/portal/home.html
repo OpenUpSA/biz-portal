@@ -3,81 +3,8 @@
 
 {% block content %}
 
-<div class="find-business-section mdc-theme--primary-bg">
-    <div class="layout">
-      <div class="find-business-container">
-        <h1 class="mdc-typography--subtitle1 subtitle-find-business">Find a business</h1>
-          <form id="custom-templates" action="{% url "business_list" %}" method="get">
-            <div class="search-icon-container">
-              <i class="material-icons mdc-text-field__icon search-icon" tabindex="0" role="button">search</i>
-            </div>
+{% include 'portal/search_filter_snippet.html' %}
 
-            {% if request.GET.sector %}
-              <input type="hidden" name="sector" value="{{ request.GET.sector }}" />
-            {% endif %}
 
-            {% if request.GET.region %}
-              <input type="hidden" name="region" value="{{ request.GET.region }}" />
-            {% endif %}
-
-            <input
-              class="typeahead"
-              id="search-bar"
-              type="text"
-              placeholder="Enter business name"
-              name="q"
-              value="{{ search_string }}"
-              autocomplete="off"
-              data-suggestion-url="{% url "api:business-list" %}?{% param_replace q="" sector="" region="" sector__label=request.GET.sector region__label=request.GET.region %}"
-            >
-            <div class="business-directory">
-              <h1 class="mdc-typography--subtitle1 subtitle-business-directory">Business directory</h1>
-              <details class="mdc-expansion">
-                <summary class="mdc-expansion__summary">
-                  <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">Location</h3>
-                  <div class="business-directory-count-arrow">
-                    <div class="location-count">{{ region_business_counts | length }}</div>
-                    <i class="material-icons mdc-list-item__graphic arrow-down" aria-hidden="true">keyboard_arrow_down</i>
-                  </div>
-                </summary>
-                {% for region in region_business_counts %}
-                  <a class="business-directory-categories-and-counts" href="{% url "business_list" %}?{% param_replace page="" region=region.label %}">
-                    <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">{{ region.label }}</h3>
-                    <div class="business-directory-count-arrow">
-                      <div class="location-count">{{ region.count }}</div>
-                      <i class="material-icons mdc-list-item__graphic arrow-right" aria-hidden="true">keyboard_arrow_right</i>
-                    </div>
-                  </a>
-                {% endfor %}
-              </details>
-              <details class="mdc-expansion">
-                <summary class="mdc-expansion__summary">
-                  <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">Sector</h3>
-                  <div class="business-directory-count-arrow">
-                    <div class="location-count">{{ sector_business_counts | length }}</div>
-                    <i class="material-icons mdc-list-item__graphic arrow-down" aria-hidden="true">keyboard_arrow_down</i>
-                  </div>
-                </summary>
-                {% for sector in sector_business_counts %}
-                  <a class="business-directory-categories-and-counts" href="{% url "business_list" %}?{% param_replace page="" sector=sector.label %}">
-                    <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">{{ sector.label }}</h3>
-                    <div class="business-directory-count-arrow">
-                      <div class="location-count">{{ sector.count }}</div>
-                      <i class="material-icons mdc-list-item__graphic arrow-right" aria-hidden="true">keyboard_arrow_right</i>
-                    </div>
-                  </a>
-                {% endfor %}
-              </details>
-            </div>
-            <a class="link-clear-search" href="/">
-              <h4 class="mdc-typography--subtitle2 subtitle-clear-search">Clear search</h4>
-            </a>
-            <button class="mdc-button mdc-button--raised business-directory-submit">
-              <span class="mdc-button__label">Search</span>
-            </button>
-          </form>
-      </div>
-    </div>
-  </div>
 
 {% endblock content %}
