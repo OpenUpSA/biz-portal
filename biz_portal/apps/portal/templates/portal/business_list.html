@@ -1,8 +1,17 @@
+{% extends "base.html" %}
 {% load param_replace %}
 
-{% include 'portal/search_snippet.html' %}
+<!-- {% include 'portal/search_snippet.html' %} -->
+{% block content %}
 
-<h1>Businesses</h1>
+{% include 'portal/search_filter_snippet.html' %}
+
+<div>
+  <h4 class="mdc-typography--subtitle2 subtitle-clear-search">Showing not dynamic at the moment</h4>
+</div>
+
+{% endblock content %}
+
 <ul>
 {% for business in object_list %}
 <li>
