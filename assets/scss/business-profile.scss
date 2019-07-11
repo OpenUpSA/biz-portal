@@ -64,7 +64,7 @@
         .mdc-dialog__content {
           padding: 0px;
 
-          .mdc-list--avatar-list {
+          .mdc-list--avatar-list, a {
             font-size: 14px;
             line-height: 12px;
             letter-spacing: 0.25px;
@@ -74,6 +74,16 @@
             .mdc-list-item {
               padding: 12px;
               height: 100%;
+
+              .share-links {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                .fb-share, .twitter-share {
+                  padding: 4px;
+                }
+              }
             }
           }
         }
