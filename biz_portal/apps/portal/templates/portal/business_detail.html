@@ -5,38 +5,50 @@
   <div class="business-details-section">
     <div class="layout">
       <div>
-        <div class="business-menu">
-            <button class="mdc-button business-menu-button" id="show">
-              <i class="material-icons mdc-button__icon" aria-hidden="true">more_horiz</i>
-            </button>
-        </div>
-        <div class="mdc-dialog"
-           role="alertdialog"
-            aria-modal="true"
-            aria-labelledby="my-dialog-title"
-            aria-describedby="my-dialog-content">
-          <div class="mdc-dialog__container">
-            <div class="mdc-dialog__surface">
-              <div class="mdc-dialog__content" id="my-dialog-content">
-                <ul class="mdc-list mdc-list--avatar-list">
-                  <li class="mdc-list-item" tabindex="0">
-                    <span class="mdc-list-item__text">Share</span>
-                  </li>
-                  <li class="mdc-list-item">
-                    <span class="mdc-list-item__text">Claim this business</span>
-                  </li>
-                  <li class="mdc-list-item">
-                    <span class="mdc-list-item__text">Edit business</span>
-                  </li>
-                  <li class="mdc-list-item">
-                    <span class="mdc-list-item__text">Download data</span>
-                  </li>
-                </ul>
+        {% if request.user.is_staff %} 
+          <div class="business-menu">
+              <button class="mdc-button business-menu-button" id="show">
+                <i class="material-icons mdc-button__icon" aria-hidden="true">more_horiz</i>
+              </button>
+          </div>
+          <div class="mdc-dialog"
+             role="alertdialog"
+              aria-modal="true"
+              aria-labelledby="my-dialog-title"
+              aria-describedby="my-dialog-content">
+            <div class="mdc-dialog__container">
+              <div class="mdc-dialog__surface">
+                <div class="mdc-dialog__content" id="my-dialog-content">
+                  <ul class="mdc-list mdc-list--avatar-list">
+                    <li class="mdc-list-item" tabindex="0">
+                      <span class="mdc-list-item__text">Share</span>
+                      <div class="share-links">
+                        <div class="fb-share" >
+                          <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.localhost:8000/businesses/1614" target="_blank">Facebook</a>
+                        </div>
+                        <div class="twitter-share">
+                          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" target="_blank">Tweet</a>
+                        </div>
+                      </div>
+                    </li>
+                    <!-- <li class="mdc-list-item">
+                      <span class="mdc-list-item__text">Claim this business</span>
+                    </li> -->
+                    <li class="mdc-list-item">
+                      <span class="mdc-list-item__text">
+                          <a href="{% url 'admin:portal_business_change' object.id %}">Edit business</a>
+                      </span>
+                    </li>
+                    <!-- <li class="mdc-list-item">
+                      <span class="mdc-list-item__text">Download data</span>
+                    </li> -->
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="mdc-dialog__scrim"></div>
-        </div> 
+            <div class="mdc-dialog__scrim"></div>
+          </div> 
+        {% endif %}
         <div class="business-category">
             <span class="business-category-text">{{ object.sector.label }}</span>
             <span>
