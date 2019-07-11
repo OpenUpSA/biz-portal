@@ -49,13 +49,19 @@ body {
 
   @media screen and (min-width: 960px) {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
   }
 }
 
 .form-section {
   height: 126px;
   padding-top: 16px;
+  @media screen and (min-width: 960px) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .subtitle-find-business {
