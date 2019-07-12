@@ -50,7 +50,6 @@ class BusinessAdmin(ImportMixin, admin.ModelAdmin):
 
     readonly_fields = (
         "registered_name",
-        "registration_number",
         "registered_physical_address",
         "registered_postal_address",
         "registration_date",
@@ -58,6 +57,44 @@ class BusinessAdmin(ImportMixin, admin.ModelAdmin):
         "registered_business_type",
     )
 
+    fieldsets = (
+        (
+            "Registered details",
+            {
+                "description": (
+                    "Details of the business registered with the"
+                    " appropriate body, e.g. CIPC"
+                ),
+                "fields": [
+                    "registration_number",
+                    "registered_name",
+                    "registered_physical_address",
+                    "registered_postal_address",
+                    "registration_date",
+                    "registration_status",
+                    "registered_business_type",
+                ],
+            },
+        ),
+        (
+            "Contact details",
+            {
+                "fields": [
+                    "website_url",
+                    "cellphone_number",
+                    "phone_number",
+                    "fax_number",
+                    "whatsapp_number",
+                    "facebook_page_url",
+                    "twitter_page_url",
+                    "instagram_page_url",
+                    "supplied_physical_address",
+                    "supplied_postal_address",
+                    "region",
+                ]
+            },
+        ),
+    )
     resource_class = BusinessResource
 
 

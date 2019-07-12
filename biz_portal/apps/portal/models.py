@@ -26,7 +26,7 @@ class Municipality(models.Model):
     )
     site = models.OneToOneField(Site, on_delete=models.CASCADE, unique=True)
     logo = models.CharField(
-        max_length=200, unique=True, blank=True, help_text="e.g. images/logo-WC033.png"
+        max_length=200, blank=True, help_text="e.g. images/logo-WC033.png"
     )
     # Contact details
     website_url = models.CharField(max_length=500, blank=True)
@@ -90,24 +90,28 @@ class Sector(models.Model):
 
 
 class Business(models.Model):
-    registered_name = models.CharField(max_length=200)
+    # Registered details
+    registered_name = models.CharField(max_length=200, blank=True)
     registration_number = models.CharField(max_length=200, unique=True)
     registration_status = models.ForeignKey(
-        BusinessStatus, on_delete=models.CASCADE, related_name="businesses"
+        BusinessStatus,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="businesses",
     )
-    region = models.ForeignKey(
-        Region, on_delete=models.CASCADE, related_name="businesses"
-    )
-    registered_physical_address = models.TextField()
-    registered_postal_address = models.TextField()
-    sector = models.ForeignKey(
-        Sector, on_delete=models.CASCADE, related_name="businesses"
-    )
+    registered_physical_address = models.TextField(blank=True)
+    registered_postal_address = models.TextField(blank=True)
     registered_business_type = models.ForeignKey(
-        BusinessType, on_delete=models.CASCADE, related_name="businesses"
+        BusinessType,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="businesses",
     )
-    registration_date = models.DateField()
+    registration_date = models.DateField(blank=True, null=True)
 
+    # Contact details
     website_url = models.CharField(max_length=500, blank=True)
     cellphone_number = models.CharField(max_length=200, blank=True)
     phone_number = models.CharField(max_length=200, blank=True)
@@ -116,9 +120,28 @@ class Business(models.Model):
     facebook_page_url = models.CharField(max_length=500, blank=True)
     twitter_page_url = models.CharField(max_length=500, blank=True)
     instagram_page_url = models.CharField(max_length=500, blank=True)
+    supplied_physical_address = models.TextField(blank=True)
+    supplied_postal_address = models.TextField(blank=True)
+    region = models.ForeignKey(
+        Region,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="businesses",
+    )
+
+    # Other details
     description = models.TextField(blank=True)
     number_employed = models.IntegerField(null=True, blank=True)
     annual_turnover = models.IntegerField(null=True, blank=True, choices=TURNOVER_BANDS)
+    sector = models.ForeignKey(
+        Sector,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="businesses",
+    )
+    date_started = models.DateField(blank=True, null=True)
 
     def get_absolute_url(self):
         return reverse("business_detail", args=[str(self.id)])
