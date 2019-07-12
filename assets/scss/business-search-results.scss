@@ -97,4 +97,29 @@
   .business-details-content .status-icon {
     margin-right: 8px;
   }
+
+  .pagination {
+    .page-links {
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 0.15px;
+      color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: space-between;
+
+      .previous-link {
+        color: rgba(0, 0, 0, 0.5);
+        font-weight: 500;
+        text-decoration: none;
+      }
+      .page-current {
+        font-weight: 700;
+      }
+      .next-link {
+        color: rgba(0, 0, 0, 0.5);
+        font-weight: 500;
+        text-decoration: none;
+      }
+    }
+  }
 }
