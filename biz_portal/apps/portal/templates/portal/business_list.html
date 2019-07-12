@@ -15,48 +15,46 @@
       <h4 class="mdc-typography--subtitle2 subtitle-clear-search paginator-count">{{ paginator.count }}</h4>
       <h4 class="mdc-typography--subtitle2 subtitle-clear-search">results</h4>
     </span>
-    <!-- <h4 class="mdc-typography--subtitle2 subtitle-clear-search">Showing {{ paginator.count }} results</h4> -->
 
     {% for business in object_list %}
-    <div class="mdc-card business-results-card">
-      <div class="business-category">
-        <span class="business-category-text">{{ business.status.label }}</span>
-        <span>
-          <i class="material-icons mdc-list-item__graphic mdc-theme--primary" aria-hidden="true">home</i>
-        </span>
-      </div>
-      <div class="business-name mdc-theme--primary">{{ business.registered_name }}</div>
+    <a href="{{ business.get_absolute_url }}" class="link-to-business-profile">
+      <div class="mdc-card business-results-card">
+        <div class="business-category">
+          <span class="business-category-text">{{ business.status.label }}</span>
+          <span>
+            <i class="material-icons mdc-list-item__graphic mdc-theme--primary" aria-hidden="true">home</i>
+          </span>
+        </div>
+        <div class="business-name mdc-theme--primary">{{ business.registered_name }}</div>
 
-      <hr class="mdc-list-divider">
+        <hr class="mdc-list-divider">
 
-      <div class="location-and-status-container">
-        <div class="business-details-location">
-            <summary class="business-summary">
-              <span class="business-details-content">
-                <i class="material-icons mdc-list-item__graphic mdc-theme--primary" aria-hidden="true">location_on</i>
-                <span class="header-summary">Address here</span>
-              </span>
-            </summary>
-          </div>
-          <div class="business-details-status">
-            <summary class="business-summary">
-              <span class="business-details-content">
-                <span class="status-icon-span">
-                  <img class="status-icon" src="{% static 'images/ellipse.svg' %}" />
+        <div class="location-and-status-container">
+          <div class="business-details-location">
+              <summary class="business-summary">
+                <span class="business-details-content">
+                  <i class="material-icons mdc-list-item__graphic mdc-theme--primary" aria-hidden="true">location_on</i>
+                  <span class="header-summary">Address here</span>
                 </span>
-                <span class="type-header">Status:</span>
-                <span class="header-summary">status label here</span>
-              </span>
-            </summary>
-          </div>
+              </summary>
+            </div>
+            <div class="business-details-status">
+              <summary class="business-summary">
+                <span class="business-details-content">
+                  <span class="status-icon-span">
+                    <img class="status-icon" src="{% static 'images/ellipse.svg' %}" />
+                  </span>
+                  <span class="type-header">Status:</span>
+                  <span class="header-summary">status label here</span>
+                </span>
+              </summary>
+            </div>
+        </div>
       </div>
+    </a>
+      {% endfor %}
 
-
-    </div>
-    {% endfor %}
-
-
-    {% if is_paginated %}
+      {% if is_paginated %}
       <div class="pagination">
         <span class="page-links">
           {% if page_obj.has_previous %}
@@ -71,9 +69,6 @@
         </span>
       </div>
     {% endif %}
-
-
-
   </div>
 </div>
 
