@@ -61,12 +61,16 @@
           </summary>
         </details>
       </div>
+      {% if current_site.municipality.add_update_business_url %}
       <div class="business-profile-more-details">
         <p class="more-details-text">Want to add more details?</p>
-        <button class="mdc-button more-details-button">
-          <span class="mdc-button__label">Claim this business</span>
-        </button>
+        <a href="{{ current_site.municipality.add_update_business_url }}">
+          <button class="mdc-button more-details-button">
+            <span class="mdc-button__label">Claim this business</span>
+          </button>
+        </a>
       </div>
+      {% endif %}
     </div>
   </div>
 </div>
