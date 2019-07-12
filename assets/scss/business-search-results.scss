@@ -8,6 +8,21 @@
     justify-content: center;
   }
 
+  .search-results-counts {
+    display: flex;
+
+    .subtitle-clear-search {
+      margin-right: 4px;
+      font-size: 12px;
+      line-height: 16px;
+      color: rgba(0, 0, 0, 0.5);
+    }
+
+    .paginator-count {
+      font-weight: 700;
+    }
+  }
+
   .business-results-card {
     margin-bottom: 16px;
   }
