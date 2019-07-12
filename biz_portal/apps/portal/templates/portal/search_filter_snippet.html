@@ -36,9 +36,12 @@
       <h1 class="mdc-typography--subtitle1 subtitle-business-directory">Business directory</h1>
       <div class="search-result"> {# Start Region #}
         <summary class="close_summary">
-          <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">
-            {{ request.GET.region }}
-          </h3>
+          <div class="icon-and-filter-option">
+            <i class="material-icons mdc-list-item__graphic mdc-theme--primary" aria-hidden="true">location_on</i>
+            <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">
+              {{ request.GET.region }}
+            </h3>
+          </div>
           <div class="business-directory-count-arrow">
             <a href="{% url "business_list" %}?{% param_replace page="" region="" %}">
               <i class="material-icons mdc-list-item__graphic close" aria-hidden="true">close</i>
@@ -51,11 +54,14 @@
       <h1 class="mdc-typography--subtitle1 subtitle-business-directory">Business directory</h1>
       <details class="mdc-expansion"> {# Start Region #}
         <summary class="mdc-expansion__summary">
-          <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">
-            Location
-          </h3>
+          <div class="icon-and-filter-option">
+            <i class="material-icons mdc-list-item__graphic mdc-theme--primary" aria-hidden="true">location_on</i>
+            <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">
+              Location
+            </h3>
+          </div>
           <div class="business-directory-count-arrow">
-            <div class="location-count">{{ region_business_counts | length }}</div>
+            <!-- <div class="location-count">{{ region_business_counts | length }}</div> -->
             <i class="material-icons mdc-list-item__graphic arrow-down" aria-hidden="true">keyboard_arrow_down</i>
           </div>
         </summary>
@@ -75,9 +81,12 @@
       {% if request.GET.sector %}
       <div class="search-result"> {# Start Sector #}
         <summary class="close_summary">
-          <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">
-            {{ request.GET.sector }}
-          </h3>
+          <div class="icon-and-filter-option">
+            <i class="material-icons mdc-list-item__graphic mdc-theme--primary" aria-hidden="true">location_on</i>
+            <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">
+              {{ request.GET.sector }}
+            </h3>
+          </div>
           <div class="business-directory-count-arrow">
             <a href="{% url "business_list" %}?{% param_replace page="" sector="" %}">
               <i class="material-icons mdc-list-item__graphic close" aria-hidden="true">close</i>
@@ -87,11 +96,14 @@
     {% else %}
       <details class="mdc-expansion"> {# Start Sector #}
         <summary class="mdc-expansion__summary">
-          <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">
-            Sector
-          </h3>
+          <div class="icon-and-filter-option">
+            <i class="material-icons mdc-list-item__graphic mdc-theme--primary" aria-hidden="true">build</i>
+            <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">
+              Sector
+            </h3>
+          </div>
           <div class="business-directory-count-arrow">
-            <div class="location-count">{{ sector_business_counts | length }}</div>
+            <!-- <div class="location-count">{{ sector_business_counts | length }}</div> -->
             <i class="material-icons mdc-list-item__graphic arrow-down" aria-hidden="true">keyboard_arrow_down</i>
           </div>
         </summary>
