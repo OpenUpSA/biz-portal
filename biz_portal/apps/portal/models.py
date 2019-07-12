@@ -39,9 +39,20 @@ class Municipality(models.Model):
     instagram_page_url = models.CharField(max_length=500, blank=True)
     special_instructions = models.TextField(
         blank=True,
-        help_text="Special instructions for contacting the municipality in relation to their business portal",
+        help_text=(
+            "Special instructions for contacting the municipality in"
+            " relation to their business portal"
+        ),
     )
-    add_update_business_url = models.CharField(max_length=500, blank=True)
+    add_update_business_url = models.CharField(
+        max_length=500,
+        blank=True,
+        verbose_name="Add/Update Business form URL",
+        help_text=(
+            "Public URL for the form where businesses can request for"
+            " their business details to be added or updated"
+        ),
+    )
 
     def __str__(self):
         return f"{self.label} ({self.mdb_code})"
