@@ -18,13 +18,13 @@
           <summary class="mdc-expansion__summary">
             <span class="business-profile-location mdc-list-item">
               <i class="material-icons mdc-list-item__graphic" aria-hidden="true">location_on</i>
-              <span class="mdc-expansion__header">{{ object.physical_address }}</span>
+              <span class="mdc-expansion__header">{{ object.region }}</span>
             </span>
             <i class="material-icons mdc-list-item__graphic arrow" aria-hidden="true">keyboard_arrow_down</i>
           </summary>
-          <span class="mdc-list-item">
-            <span class="mdc-expansion__header">{{ object.physical_address }}</span>
-          </span>
+          <div class="mdc-expansion__content">
+            <span class="mdc-expansion__header address-detail">{{ object.registered_physical_address }}</span>
+          </div>
         </details>
         <details class="mdc-theme--background mdc-elevation--z2">
           <summary class="mdc-expansion__summary">
@@ -33,7 +33,7 @@
                 <img class="status-icon" src="{% static 'images/ellipse.svg' %}" />
               </span>
               <span class="type-header">Status:</span>
-              <span class="mdc-expansion__header">{{ object.status.label }}</span>
+              <span class="mdc-expansion__header">{{ object.registered_status.label }}</span>
             </span>
             <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
           </summary>
@@ -43,7 +43,7 @@
             <span class="business-profile-location mdc-list-item">
               <i class="material-icons mdc-list-item__graphic" aria-hidden="true">work</i>
               <span class="type-header">Type:</span>
-              <span class="mdc-expansion__header">{{ object.business_type.label }}</span>
+              <span class="mdc-expansion__header">{{ object.registered_business_type.label }}</span>
             </span>
             <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
           </summary>

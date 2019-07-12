@@ -121,18 +121,7 @@ class BusinessSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Business
-        fields = (
-            "registered_name",
-            "registration_number",
-            "status",
-            "region",
-            "physical_address",
-            "postal_address",
-            "sector",
-            "business_type",
-            "registration_date",
-            "web_url",
-        )
+        fields = ("registered_name", "registration_number", "web_url")
 
 
 class BusinessViewSet(viewsets.ModelViewSet):
