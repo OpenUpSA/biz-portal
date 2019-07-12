@@ -43,7 +43,7 @@ $("#custom-templates .typeahead").typeahead(null, {
       "</div>"
     ].join("\n"),
     footer : (context) => (
-      `<a class="search-result-links" href="/businesses/?q=${context.query}">
+      `<a class="search-result-links" href="${input.dataset.viewAllUrl}&q=${context.query}">
         <p class="more-results-search">View All Results</p>
       </a>`
     ),
