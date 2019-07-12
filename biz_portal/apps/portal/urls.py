@@ -1,5 +1,4 @@
 from django.urls import include, path
-from django.views.generic import TemplateView
 from rest_framework import routers
 
 from . import views
@@ -9,6 +8,11 @@ router.register(r"businesses", views.BusinessViewSet)
 
 urlpatterns = [
     path("", views.HomeView.as_view(), name="home"),
+    path(
+        "municipality/",
+        views.MunicipalityDetailView.as_view(),
+        name="municipality_detail",
+    ),
     path("businesses/", views.BusinessListView.as_view(), name="business_list"),
     path(
         "businesses/<int:pk>",
