@@ -1,0 +1,100 @@
+@import "@material/card/mdc-card";
+
+.business-results {
+
+  @media screen and (min-width: 960px) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .business-results-card {
+    margin-bottom: 16px;
+  }
+
+  .business-category {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    padding-bottom: 0;
+
+    .business-category-text {
+      font-size: 10px;
+      font-weight: 500;
+      line-height: 14px;
+      letter-spacing: 0.1px;
+      color: rgba(0, 0, 0, 0.5);
+      text-transform: uppercase;
+    }
+
+    .material-icons {
+      margin-right: 0;
+    }
+  }
+
+  .business-name {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    padding: 16px;
+    padding-top: 0;
+  }
+
+  .location-and-status-container {
+    padding: 16px;
+  }
+
+  .business-details-location {
+    padding-bottom: 8px;
+  }
+
+  .business-details-location, .business-details-status {
+    .business-summary {
+
+      .business-details-content {
+        padding: 0;
+        display: flex;
+        align-items: center;
+
+        .status-icon-span {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 24px;
+          height: 24px;
+          margin-right: 8px;
+
+          .status-icon {
+            margin-left: 8px;
+          }
+        }
+      }
+
+      .material-icons {
+        margin-right: 8px;
+      }
+
+      .type-header {
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.5);
+        margin-right: 4px;
+      }
+    }
+
+    .header-summary {
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: normal;
+      color: rgba(0, 0, 0, 0.5);
+      text-transform: capitalize;
+    }
+  }
+
+  .business-details-content .status-icon {
+    margin-right: 8px;
+  }
+}
