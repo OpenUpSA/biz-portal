@@ -10,7 +10,12 @@
 
 <div class="business-results">
   <div class="layout">
-    <h4 class="mdc-typography--subtitle2 subtitle-clear-search">Showing not dynamic at the moment</h4>
+    <span class="search-results-counts">
+      <h4 class="mdc-typography--subtitle2 subtitle-clear-search">Showing</h4>
+      <h4 class="mdc-typography--subtitle2 subtitle-clear-search paginator-count">{{ paginator.count }}</h4>
+      <h4 class="mdc-typography--subtitle2 subtitle-clear-search">results</h4>
+    </span>
+    <!-- <h4 class="mdc-typography--subtitle2 subtitle-clear-search">Showing {{ paginator.count }} results</h4> -->
 
     {% for business in object_list %}
     <div class="mdc-card business-results-card">
