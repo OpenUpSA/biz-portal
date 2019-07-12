@@ -8,6 +8,14 @@
     justify-content: center;
   }
 
+  .no-businesses-found {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: rgba(0, 0, 0, 0.5);
+  }
+
   .search-results-counts {
     display: flex;
 
@@ -125,6 +133,7 @@
       color: rgba(0, 0, 0, 0.5);
       display: flex;
       justify-content: space-between;
+      align-items: center;
 
       .previous-link {
         color: rgba(0, 0, 0, 0.5);
