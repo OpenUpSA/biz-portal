@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@material/button": "^2.3.0",
+    "@material/card": "^3.0.0",
     "@material/drawer": "^2.3.0",
     "@material/ripple": "^2.3.0",
     "@material/textfield": "^2.3.1",
