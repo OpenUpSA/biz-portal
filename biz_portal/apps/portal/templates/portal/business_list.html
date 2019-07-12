@@ -52,20 +52,20 @@
 
 
     {% if is_paginated %}
-<div class="pagination">
-  <span class="page-links">
-    {% if page_obj.has_previous %}
-    <a href="{% url "business_list" %}?{% param_replace page=page_obj.previous_page_number %}">Previous</a>
+      <div class="pagination">
+        <span class="page-links">
+          {% if page_obj.has_previous %}
+          <a class="previous-link" href="{% url "business_list" %}?{% param_replace page=page_obj.previous_page_number %}">Previous</a>
+          {% endif %}
+          <span>
+            Page <span class="page-current">{{ page_obj.number }}</span> of {{ page_obj.paginator.num_pages }}
+          </span>
+          {% if page_obj.has_next %}
+          <a class="next-link" href="{% url "business_list" %}?{% param_replace page=page_obj.next_page_number %}">Next</a>
+          {% endif %}
+        </span>
+      </div>
     {% endif %}
-    <span class="page-current">
-      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-    </span>
-    {% if page_obj.has_next %}
-    <a href="{% url "business_list" %}?{% param_replace page=page_obj.next_page_number %}">Next</a>
-    {% endif %}
-  </span>
-</div>
-{% endif %}
 
 
 
