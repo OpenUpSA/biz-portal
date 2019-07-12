@@ -127,7 +127,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 2;
   }
 
   .search-icon {
@@ -191,7 +191,7 @@ body {
 
 
 .business-directory {
-  margin-top: 45px;
+  margin-top: 36px;
 
   .subtitle-business-directory {
     color: rgba(0, 0, 0, 0.75);;
@@ -199,7 +199,6 @@ body {
     font-weight: 500;
     line-height:23px;
     letter-spacing: 0.15px;
-    margin: 0;
     padding-bottom: 8px;
   }
 
@@ -337,14 +336,15 @@ body {
 .subtitle-clear-search {
   color: rgba(0, 0, 0, 0.5);
   cursor: pointer;
-  font-size: 10px;
-  line-height: 20px;
+  font-size: 12px;
+  line-height: 16px;
   font-weight: normal;
   letter-spacing: 0.25px;
 }
 
 .business-directory-submit {
   width: 100%;
+  margin-bottom: 36px;
   font-weight: 500;
   font-size: 20px;
   line-height: 23px;
