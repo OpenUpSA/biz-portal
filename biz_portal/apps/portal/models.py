@@ -2,6 +2,14 @@ from django.contrib.sites.models import Site
 from django.db import models
 from django.urls import reverse
 
+TURNOVER_BANDS = [
+    (1, "Less than R100,000"),
+    (2, "R100,000 to R500,000"),
+    (3, "R500,000 to R1,500,000"),
+    (4, "R1,500,000 to R5,000,000"),
+    (5, "More than R5,000,000"),
+]
+
 
 class Municipality(models.Model):
     class Meta:
@@ -73,18 +81,18 @@ class Sector(models.Model):
 class Business(models.Model):
     registered_name = models.CharField(max_length=200)
     registration_number = models.CharField(max_length=200, unique=True)
-    status = models.ForeignKey(
+    registration_status = models.ForeignKey(
         BusinessStatus, on_delete=models.CASCADE, related_name="businesses"
     )
     region = models.ForeignKey(
         Region, on_delete=models.CASCADE, related_name="businesses"
     )
-    physical_address = models.TextField()
-    postal_address = models.TextField()
+    registered_physical_address = models.TextField()
+    registered_postal_address = models.TextField()
     sector = models.ForeignKey(
         Sector, on_delete=models.CASCADE, related_name="businesses"
     )
-    business_type = models.ForeignKey(
+    registered_business_type = models.ForeignKey(
         BusinessType, on_delete=models.CASCADE, related_name="businesses"
     )
     registration_date = models.DateField()
@@ -98,6 +106,8 @@ class Business(models.Model):
     twitter_page_url = models.CharField(max_length=500, blank=True)
     instagram_page_url = models.CharField(max_length=500, blank=True)
     description = models.TextField(blank=True)
+    number_employed = models.IntegerField(null=True, blank=True)
+    annual_turnover = models.IntegerField(null=True, blank=True, choices=TURNOVER_BANDS)
 
     def get_absolute_url(self):
         return reverse("business_detail", args=[str(self.id)])
