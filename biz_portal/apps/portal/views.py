@@ -45,6 +45,19 @@ class HomeView(generic.TemplateView):
         return context
 
 
+class MunicipalityDetailView(generic.DetailView):
+    model = models.Municipality
+    template_name = "portal/municipality_detail.html"
+
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+        self.request = request
+
+    def get_object(self, *args):
+        models.Site.objects.clear_cache()
+        return models.Site.objects.get_current(self.request).municipality
+
+
 class BusinessDetailView(generic.DetailView):
     model = models.Business
     template_name = "portal/business_detail.html"
@@ -108,18 +121,7 @@ class BusinessSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Business
-        fields = (
-            "registered_name",
-            "registration_number",
-            "status",
-            "region",
-            "physical_address",
-            "postal_address",
-            "sector",
-            "business_type",
-            "registration_date",
-            "web_url",
-        )
+        fields = ("registered_name", "registration_number", "web_url")
 
 
 class BusinessViewSet(viewsets.ModelViewSet):
