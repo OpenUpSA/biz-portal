@@ -26,6 +26,7 @@
           value="{{ search_string }}"
           autocomplete="off"
           data-suggestion-url="{% url "api:business-list" %}?{% param_replace q="" sector="" region="" sector__label=request.GET.sector region__label=request.GET.region %}"
+          data-view-all-url="{% url "business_list" %}?{% param_replace sector=request.GET.sector region=request.GET.region q="" %}"
         >
     </div>
   </div>
