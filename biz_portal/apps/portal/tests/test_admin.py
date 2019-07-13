@@ -21,7 +21,7 @@ class AdminCustomisationTest(TestCase):
         """
         Superuser who is not listed as muni admin can add businesses
         """
-        self.assertEquals(models.Business.objects.count(), 0)
+        self.assertEqual(models.Business.objects.count(), 0)
         self.assertTrue(self.client.login(username="admin", password="password"))
 
         post_data = {
@@ -31,4 +31,4 @@ class AdminCustomisationTest(TestCase):
         response = self.client.post(reverse("admin:portal_business_add"), post_data)
 
         self.assertRedirects(response, reverse("admin:portal_business_changelist"))
-        self.assertEquals(models.Business.objects.count(), 1)
+        self.assertEqual(models.Business.objects.count(), 1)

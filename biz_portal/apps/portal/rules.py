@@ -7,13 +7,17 @@ logger = logging.getLogger(__name__)
 
 @rules.predicate
 def is_business_muni_admin(user, business):
+    logger.debug(
+        f"Predicate {is_business_muni_admin.__name__} user={user} business={business}"
+    )
+
+    if not user.is_staff:
+        return False
+
     if business is None:
         return True
-    logger.debug("### rules is_business_muni_admin {user} {business}")
-    return (
-        user.is_staff
-        and user.municipality_set.filter(pk=business.region.municipality.pk).exists()
-    )
+
+    return user.municipality_set.filter(pk=business.region.municipality.pk).exists()
 
 
 @rules.predicate

@@ -97,6 +97,8 @@ class BusinessListView(generic.ListView):
             self.queryset = self.queryset.filter(region=self.selected_region)
         if self.selected_sector:
             self.queryset = self.queryset.filter(sector=self.selected_sector)
+
+        self.queryset = self.queryset.order_by("pk")
         return self.queryset
 
     def get_context_data(self, **kwargs):
