@@ -24,7 +24,11 @@ class AdminAddBusinessTest(TestCase):
             "registration_number": "123",
             "region": models.Region.objects.first().pk,
         }
-        response = self.client.post(reverse("admin:portal_business_add"), post_data)
+        response = self.client.post(
+            reverse("admin:portal_business_add"),
+            post_data,
+            HTTP_HOST="biz.capeagulhas.org",
+        )
 
         self.assertRedirects(response, reverse("admin:portal_business_changelist"))
         self.assertEqual(models.Business.objects.count(), 1)
@@ -37,7 +41,11 @@ class AdminAddBusinessTest(TestCase):
             "registration_number": "123",
             "region": models.Region.objects.first().pk,
         }
-        response = self.client.post(reverse("admin:portal_business_add"), post_data)
+        response = self.client.post(
+            reverse("admin:portal_business_add"),
+            post_data,
+            HTTP_HOST="biz.capeagulhas.org",
+        )
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual(models.Business.objects.count(), 0)
@@ -53,7 +61,11 @@ class AdminAddBusinessTest(TestCase):
             "registration_number": "123",
             "region": models.Region.objects.first().pk,
         }
-        response = self.client.post(reverse("admin:portal_business_add"), post_data)
+        response = self.client.post(
+            reverse("admin:portal_business_add"),
+            post_data,
+            HTTP_HOST="biz.capeagulhas.org",
+        )
 
         self.assertRedirects(response, reverse("admin:portal_business_changelist"))
         self.assertEqual(models.Business.objects.count(), 1)
@@ -82,7 +94,9 @@ class AdminModifyBusinessTest(TestCase):
             "supplied_name": "DEADBEEF",
         }
         response = self.client.post(
-            reverse("admin:portal_business_change", args=[business.pk]), post_data
+            reverse("admin:portal_business_change", args=[business.pk]),
+            post_data,
+            HTTP_HOST="biz.capeagulhas.org",
         )
         self.assertRedirects(response, reverse("admin:portal_business_changelist"))
 
@@ -99,7 +113,8 @@ class AdminModifyBusinessTest(TestCase):
         self.assertNotEqual(business.supplied_name, "DEADBEEF")
 
         view_response = self.client.get(
-            reverse("admin:portal_business_change", args=[business.pk])
+            reverse("admin:portal_business_change", args=[business.pk]),
+            HTTP_HOST="biz.capeagulhas.org",
         )
         self.assertContains(view_response, "Save")
 
@@ -109,7 +124,9 @@ class AdminModifyBusinessTest(TestCase):
             "supplied_name": "DEADBEEF",
         }
         response = self.client.post(
-            reverse("admin:portal_business_change", args=[business.pk]), post_data
+            reverse("admin:portal_business_change", args=[business.pk]),
+            post_data,
+            HTTP_HOST="biz.capeagulhas.org",
         )
         self.assertRedirects(response, reverse("admin:portal_business_changelist"))
 
@@ -126,7 +143,8 @@ class AdminModifyBusinessTest(TestCase):
         self.assertNotEqual(business.supplied_name, "DEADBEEF")
 
         view_response = self.client.get(
-            reverse("admin:portal_business_change", args=[business.pk])
+            reverse("admin:portal_business_change", args=[business.pk]),
+            HTTP_HOST="biz.capeagulhas.org",
         )
         self.assertNotContains(view_response, "Save")
 
@@ -136,7 +154,9 @@ class AdminModifyBusinessTest(TestCase):
             "supplied_name": "DEADBEEF",
         }
         response = self.client.post(
-            reverse("admin:portal_business_change", args=[business.pk]), post_data
+            reverse("admin:portal_business_change", args=[business.pk]),
+            post_data,
+            HTTP_HOST="biz.capeagulhas.org",
         )
         self.assertRedirects(response, reverse("admin:portal_business_changelist"))
 
