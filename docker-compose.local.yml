@@ -25,6 +25,7 @@ services:
       - DJANGO_CSRF_COOKIE_SECURE=False
       - DJANGO_TEMPLATE_DEBUG=True
       - DJANGO_DEBUG_TOOLBAR=True
+      - DJANGO_DISABLE_PASSWORD_VALIDATORS=True
       - DISABLE_SENTRY=True
     ports:
       - "8000:8000"

@@ -59,25 +59,37 @@
             <span class="mdc-list-item__text">Contact municipality</span>
           </a>
 
-          {% if request.user %}
-          <a class="mdc-list-item mdc-list-item--activated mdc-theme--secondary-bg"
+          {% if request.user.is_staff %}
+          <a class="mdc-list-item"
+             href="/admin/"
+             aria-selected="true"
+             >
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">
+              edit
+            </i>
+            <span class="mdc-list-item__text">Manage businesses</span>
+          </a>
+          {% endif %}
+
+          {% if request.user.is_staff %}
+          <a class="mdc-list-item"
              href="/admin/logout"
              aria-selected="true"
              >
-            <i class="material-icons mdc-list-item__graphic mdc-theme--on-secondary" aria-hidden="true">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">
               exit_to_app
             </i>
-            <span class="mdc-list-item__text mdc-theme--on-secondary">Logout</span>
+            <span class="mdc-list-item__text">Logout</span>
           </a>
           {% else %}
-          <a class="mdc-list-item mdc-list-item--activated mdc-theme--secondary-bg"
-             href="{% url 'login' "
+          <a class="mdc-list-item"
+             href="/admin/"
              aria-selected="true"
              >
-            <i class="material-icons mdc-list-item__graphic mdc-theme--on-secondary" aria-hidden="true">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">
               exit_to_app
             </i>
-            <span class="mdc-list-item__text mdc-theme--on-secondary">Admin Login</span>
+            <span class="mdc-list-item__text">Admin Login</span>
           </a>
           {% endif %}
         </nav>

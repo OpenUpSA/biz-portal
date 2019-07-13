@@ -1,3 +1,4 @@
+from django.contrib import auth
 from django.contrib.sites.models import Site
 from django.db import models
 from django.urls import reverse
@@ -53,6 +54,7 @@ class Municipality(models.Model):
             " their business details to be added or updated"
         ),
     )
+    administrators = models.ManyToManyField(auth.models.User)
 
     def __str__(self):
         return f"{self.label} ({self.mdb_code})"

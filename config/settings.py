@@ -77,6 +77,7 @@ THIRD_PARTY_APPS = [
     "django_extensions",
     "whitenoise.runserver_nostatic",
     "import_export",
+    "rules",
 ]
 
 LOCAL_APPS = ["biz_portal.apps.portal.apps.PortalConfig"]
@@ -86,7 +87,10 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#authentication-backends
-AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend"]
+AUTHENTICATION_BACKENDS = [
+    "rules.permissions.ObjectPermissionBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
 
 
 # PASSWORDS
@@ -100,14 +104,15 @@ PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
-    },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
-]
+if not env.bool("DJANGO_DISABLE_PASSWORD_VALIDATORS", False):
+    AUTH_PASSWORD_VALIDATORS = [
+        {
+            "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+        },
+        {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+        {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+        {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
+    ]
 
 # ADMIN
 # ------------------------------------------------------------------------------
@@ -255,6 +260,7 @@ LOGGING = {
     "root": {"level": "INFO", "handlers": ["console"]},
     "loggers": {
         "django": {"level": "DEBUG" if DEBUG else "INFO"},
+        "biz_portal": {"level": "DEBUG" if DEBUG else "INFO"},
         "": {"level": "DEBUG"},
         # Errors logged by the SDK itself
         "sentry_sdk": {"level": "ERROR", "handlers": ["console"], "propagate": False},
