@@ -114,11 +114,6 @@ if not env.bool("DJANGO_DISABLE_PASSWORD_VALIDATORS", False):
         {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
     ]
 
-# ADMIN
-# ------------------------------------------------------------------------------
-# Django Admin URL.
-ADMIN_URL = "admin/"
-
 
 # MIDDLEWARE
 # ------------------------------------------------------------------------------

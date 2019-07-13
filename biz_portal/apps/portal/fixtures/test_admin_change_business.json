@@ -4,17 +4,10 @@
   "pk": 1,
   "fields": {
     "password": "argon2$argon2i$v=19$m=512,t=2,p=2$RUZnTFNUVUhCTjg1$kUTw7onWQfUlE6dr/mkvvw",
-    "last_login": "2019-07-07T11:21:13.241Z",
     "is_superuser": true,
     "username": "admin",
-    "first_name": "",
-    "last_name": "",
-    "email": "admin@admin.admin",
     "is_staff": true,
-    "is_active": true,
-    "date_joined": "2019-07-07T11:21:08.296Z",
-    "groups": [],
-    "user_permissions": []
+    "is_active": true
   }
 },
 {
@@ -22,17 +15,10 @@
   "pk": 2,
   "fields": {
     "password": "argon2$argon2i$v=19$m=512,t=2,p=2$NkhKd1BrUmJkUFYz$18diV8b41/ASYUUMzBzWhg",
-    "last_login": "2019-07-13T07:05:33.109Z",
     "is_superuser": false,
-    "username": "capeagulhas",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
+    "username": "capeagulhasadmin",
     "is_staff": true,
-    "is_active": true,
-    "date_joined": "2019-07-13T07:00:21Z",
-    "groups": [],
-    "user_permissions": []
+    "is_active": true
   }
 },
 {
@@ -40,17 +26,10 @@
   "pk": 3,
   "fields": {
     "password": "argon2$argon2i$v=19$m=512,t=2,p=2$ZTh2VVZNZzlLZ2NS$zq4jwJn/MPGMjZMQfChuJQ",
-    "last_login": "2019-07-13T10:52:37.895Z",
     "is_superuser": false,
     "username": "buf",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
     "is_staff": true,
-    "is_active": true,
-    "date_joined": "2019-07-13T07:00:47Z",
-    "groups": [],
-    "user_permissions": []
+    "is_active": true
   }
 },
 {
@@ -76,17 +55,6 @@
     "mdb_code": "WC033",
     "label": "Cape Agulhas",
     "site": 1,
-    "logo": "",
-    "website_url": "",
-    "cellphone_number": "",
-    "phone_number": "",
-    "fax_number": "",
-    "whatsapp_number": "",
-    "facebook_page_url": "",
-    "twitter_page_url": "",
-    "instagram_page_url": "",
-    "special_instructions": "Speak to Gerrie.\r\n\r\nHe's our best guy.",
-    "add_update_business_url": "",
     "administrators": [
       2
     ]
@@ -99,17 +67,6 @@
     "mdb_code": "BUF",
     "label": "Buffalo City",
     "site": 2,
-    "logo": "",
-    "website_url": "",
-    "cellphone_number": "",
-    "phone_number": "",
-    "fax_number": "",
-    "whatsapp_number": "",
-    "facebook_page_url": "",
-    "twitter_page_url": "",
-    "instagram_page_url": "",
-    "special_instructions": "",
-    "add_update_business_url": "",
     "administrators": [
       3
     ]
@@ -122,35 +79,21 @@
     "label": "Somewhere in BUF",
     "municipality": 2
   }
-}
+},
 {
   "model": "portal.business",
   "pk": 1,
   "fields": {
-    "registered_name": "Y-KWIX-YEET BRASS",
     "registration_number": "1990/002791/07",
-    "registration_status": 7,
-    "region": 4,
-    "registered_physical_address": "18 HUXHAM STREET\nARNISTON\n7280",
-    "registered_postal_address": "P O BOX 403\nBREDASDORP\n7280",
-    "sector": 1,
-    "registered_business_type": 2,
-    "registration_date": "1990-05-18"
+    "region": 4
   }
 },
 {
   "model": "portal.business",
   "pk": 2,
   "fields": {
-    "registered_name": "BOORT DEVELOPMENT BUSINESS",
     "registration_number": "1990/000289/23",
-    "registration_status": 4,
-    "region": 1,
-    "registered_physical_address": "DIRKIE UYSSTRAAT 11\nBREDASDORP\n7280\n7280",
-    "registered_postal_address": "POSBUS 195\nBREDASDORP\n7280",
-    "sector": 3,
-    "registered_business_type": 1,
-    "registration_date": "1990-01-04"
+    "region": 6
   }
 }
 ]

@@ -22,7 +22,7 @@ def is_business_muni_admin(user, business):
 
 @rules.predicate
 def is_muni_admin(user):
-    logger.debug("### rules is_muni_admin")
+    logger.debug(f"Predicate {is_muni_admin.__name__}")
     return user.is_staff and user.municipality_set.exists()
 
 

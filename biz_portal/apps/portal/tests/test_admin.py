@@ -5,7 +5,7 @@ from .. import models
 
 
 class AdminAddBusinessTest(TestCase):
-    """ Ensure that non-superusers can only admin businesses in their muni """
+    """ Tests of who can add businesses """
 
     fixtures = [
         "sectors",
@@ -57,3 +57,88 @@ class AdminAddBusinessTest(TestCase):
 
         self.assertRedirects(response, reverse("admin:portal_business_changelist"))
         self.assertEqual(models.Business.objects.count(), 1)
+
+
+class AdminModifyBusinessTest(TestCase):
+    """ Tests of who can edit businesses """
+
+    fixtures = [
+        "sectors",
+        "business_types",
+        "business_statuses",
+        "regions",
+        "test_admin_change_business",
+    ]
+
+    def test_superuser_edit_all_businesses_ok(self):
+        """ Superuser who is not listed as muni edit any businesses """
+        self.assertTrue(self.client.login(username="admin", password="password"))
+
+        business = models.Business.objects.get(pk=1)
+        self.assertNotEqual(business.supplied_name, "DEADBEEF")
+        post_data = {
+            "registration_number": business.registration_number,
+            "region": business.region.id,
+            "supplied_name": "DEADBEEF",
+        }
+        response = self.client.post(
+            reverse("admin:portal_business_change", args=[business.pk]), post_data
+        )
+        self.assertRedirects(response, reverse("admin:portal_business_changelist"))
+
+        business = models.Business.objects.get(pk=business.pk)
+        self.assertEqual(business.supplied_name, "DEADBEEF")
+
+    def test_muni_admin_edit_muni_businesses_ok(self):
+        """ User who is listed as muni admin may edit businesses in muni """
+        self.assertTrue(
+            self.client.login(username="capeagulhasadmin", password="password")
+        )
+
+        business = models.Business.objects.get(pk=1)
+        self.assertNotEqual(business.supplied_name, "DEADBEEF")
+
+        view_response = self.client.get(
+            reverse("admin:portal_business_change", args=[business.pk])
+        )
+        self.assertContains(view_response, "Save")
+
+        post_data = {
+            "registration_number": business.registration_number,
+            "region": business.region.id,
+            "supplied_name": "DEADBEEF",
+        }
+        response = self.client.post(
+            reverse("admin:portal_business_change", args=[business.pk]), post_data
+        )
+        self.assertRedirects(response, reverse("admin:portal_business_changelist"))
+
+        business = models.Business.objects.get(pk=business.pk)
+        self.assertEqual(business.supplied_name, "DEADBEEF")
+
+    def test_muni_admin_edit_non_muni_businesses_denied(self):
+        """ User who is not listed as muni admin may not edit businesses in muni """
+        self.assertTrue(
+            self.client.login(username="capeagulhasadmin", password="password")
+        )
+
+        business = models.Business.objects.get(pk=2)
+        self.assertNotEqual(business.supplied_name, "DEADBEEF")
+
+        view_response = self.client.get(
+            reverse("admin:portal_business_change", args=[business.pk])
+        )
+        self.assertNotContains(view_response, "Save")
+
+        post_data = {
+            "registration_number": business.registration_number,
+            "region": business.region.id,
+            "supplied_name": "DEADBEEF",
+        }
+        response = self.client.post(
+            reverse("admin:portal_business_change", args=[business.pk]), post_data
+        )
+        self.assertRedirects(response, reverse("admin:portal_business_changelist"))
+
+        business = models.Business.objects.get(pk=business.pk)
+        self.assertNotEqual(business.supplied_name, "DEADBEEF")
