@@ -127,11 +127,7 @@ class Business(models.Model):
     supplied_physical_address = models.TextField(blank=True)
     supplied_postal_address = models.TextField(blank=True)
     region = models.ForeignKey(
-        Region,
-        blank=True,
-        null=True,
-        on_delete=models.CASCADE,
-        related_name="businesses",
+        Region, on_delete=models.CASCADE, related_name="businesses"
     )
 
     # Other details
@@ -151,5 +147,8 @@ class Business(models.Model):
     def get_absolute_url(self):
         return reverse("business_detail", args=[str(self.id)])
 
+    def get_presentation_name(self):
+        return self.supplied_name or self.registered_name
+
     def __str__(self):
-        return f"{self.registered_name} ({self.registration_number})"
+        return f"{self.get_presentation_name()} ({self.registration_number})"
