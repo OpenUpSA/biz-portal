@@ -94,6 +94,19 @@ class BusinessAdmin(ImportMixin, admin.ModelAdmin):
                 ]
             },
         ),
+        (
+            "Other details",
+            {
+                "fields": [
+                    "supplied_name",
+                    "description",
+                    "number_employed",
+                    "annual_turnover",
+                    "sector",
+                    "date_started",
+                ]
+            },
+        ),
     )
     resource_class = BusinessResource
 

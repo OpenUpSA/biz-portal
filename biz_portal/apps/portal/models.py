@@ -92,7 +92,11 @@ class Sector(models.Model):
 class Business(models.Model):
     # Registered details
     registered_name = models.CharField(max_length=200, blank=True)
-    registration_number = models.CharField(max_length=200, unique=True)
+    registration_number = models.CharField(
+        max_length=200,
+        unique=True,
+        help_text="This should only be modified if it was initially entered incorrectly.",
+    )
     registration_status = models.ForeignKey(
         BusinessStatus,
         blank=True,
@@ -131,6 +135,7 @@ class Business(models.Model):
     )
 
     # Other details
+    supplied_name = models.CharField(max_length=200, blank=True)
     description = models.TextField(blank=True)
     number_employed = models.IntegerField(null=True, blank=True)
     annual_turnover = models.IntegerField(null=True, blank=True, choices=TURNOVER_BANDS)
