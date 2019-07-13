@@ -111,6 +111,13 @@ class BusinessAdmin(ImportMixin, ObjectPermissionsModelAdmin):
     )
     resource_class = BusinessResource
 
+    def get_municipality(business):
+        return business.region.municipality
+
+    list_display = ("registered_name", "supplied_name", get_municipality, "region")
+    list_display_links = ("registered_name", "supplied_name")
+    list_filter = ("region__municipality", "region", "registration_status", "sector")
+
 
 admin.site.register(models.Business, BusinessAdmin)
 admin.site.register(models.Municipality)
