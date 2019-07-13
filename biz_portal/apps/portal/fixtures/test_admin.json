@@ -1,0 +1,118 @@
+[
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "argon2$argon2i$v=19$m=512,t=2,p=2$RUZnTFNUVUhCTjg1$kUTw7onWQfUlE6dr/mkvvw",
+    "last_login": "2019-07-07T11:21:13.241Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@admin.admin",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2019-07-07T11:21:08.296Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "argon2$argon2i$v=19$m=512,t=2,p=2$NkhKd1BrUmJkUFYz$18diV8b41/ASYUUMzBzWhg",
+    "last_login": "2019-07-13T07:05:33.109Z",
+    "is_superuser": false,
+    "username": "capeagulhas",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2019-07-13T07:00:21Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "argon2$argon2i$v=19$m=512,t=2,p=2$ZTh2VVZNZzlLZ2NS$zq4jwJn/MPGMjZMQfChuJQ",
+    "last_login": "2019-07-13T10:52:37.895Z",
+    "is_superuser": false,
+    "username": "buf",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2019-07-13T07:00:47Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "sites.site",
+  "pk": 1,
+  "fields": {
+    "domain": "biz-portal.openup.org.za",
+    "name": "Cape Agulhas Business Portal"
+  }
+},
+{
+  "model": "sites.site",
+  "pk": 2,
+  "fields": {
+    "domain": "biz.buf.gov.za",
+    "name": "Buffalo City Metro Municipality"
+  }
+},
+{
+  "model": "portal.municipality",
+  "pk": 1,
+  "fields": {
+    "mdb_code": "WC033",
+    "label": "Cape Agulhas",
+    "site": 1,
+    "logo": "",
+    "website_url": "",
+    "cellphone_number": "",
+    "phone_number": "",
+    "fax_number": "",
+    "whatsapp_number": "",
+    "facebook_page_url": "",
+    "twitter_page_url": "",
+    "instagram_page_url": "",
+    "special_instructions": "Speak to Gerrie.\r\n\r\nHe's our best guy.",
+    "add_update_business_url": "",
+    "administrators": [
+      2
+    ]
+  }
+},
+{
+  "model": "portal.municipality",
+  "pk": 2,
+  "fields": {
+    "mdb_code": "BUF",
+    "label": "Buffalo City",
+    "site": 2,
+    "logo": "",
+    "website_url": "",
+    "cellphone_number": "",
+    "phone_number": "",
+    "fax_number": "",
+    "whatsapp_number": "",
+    "facebook_page_url": "",
+    "twitter_page_url": "",
+    "instagram_page_url": "",
+    "special_instructions": "",
+    "add_update_business_url": "",
+    "administrators": [
+      3
+    ]
+  }
+}
+]
