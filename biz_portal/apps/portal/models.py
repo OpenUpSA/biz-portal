@@ -54,7 +54,7 @@ class Municipality(models.Model):
             " their business details to be added or updated"
         ),
     )
-    administrators = models.ManyToManyField(auth.models.User)
+    administrators = models.ManyToManyField(auth.models.User, blank=True)
 
     def __str__(self):
         return f"{self.label} ({self.mdb_code})"
