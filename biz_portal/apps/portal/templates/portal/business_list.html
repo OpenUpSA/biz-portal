@@ -19,7 +19,7 @@
     <a href="{{ business.get_absolute_url }}" class="link-to-business-profile">
       <div class="mdc-card business-results-card">
         <div class="business-category">
-          <span class="business-category-text">{{ business.status.label }}</span>
+          <span class="business-category-text">{{ business.registration_status.label }}</span>
           <span>
             <i class="material-icons mdc-list-item__graphic mdc-theme--primary" aria-hidden="true">home</i>
           </span>
@@ -44,7 +44,7 @@
                     <img class="status-icon" src="{% static 'images/ellipse.svg' %}" />
                   </span>
                   <span class="type-header">Status:</span>
-                  <span class="header-summary">{{ business.status.label }}</span>
+                  <span class="header-summary">{{ business.registration_status.label }}</span>
                 </span>
               </summary>
             </div>
