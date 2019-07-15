@@ -1,4 +1,5 @@
 @import "@material/button/mdc-button";
+@import "./mdc-expansion.scss";
 
 .business-details-section {
   margin-top: 16px;
@@ -63,108 +64,6 @@
       }
     }
 
-    .mdc-expansion {
-      &__summary {
-        transition: height 100s 0s cubic-bezier(.4, 0, .2, 1);
-        padding-right: 16px;
-        padding-left: 16px;
-        height: 48px;
-        display: flex;
-        outline: none;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-        align-items: center;
-        justify-content: space-between;
-        position: relative;
-
-        &::-webkit-details-marker {
-          display: none;
-        }
-
-        &:focus {
-          background-color: #eeeeee;
-          &::after {
-            color: var(--mdc-theme-text-secondary-on-background);
-          }
-        }
-
-        .material-icons {
-          margin-right: 0;
-        }
-
-        .arrow {
-          transition: transform 200ms, color 200ms;
-        }
-
-        [data-mdc-tooltip]:before {
-          position: absolute;
-          top: 25%;
-          right: 50px;
-          background-color: #616161;
-          opacity: .9;
-          color: white;
-          height: 16px;
-          border-radius: 2px;
-          padding: 4px 8px;
-          font-weight: 400;
-          font-size: 10px;
-          content: attr(data-mdc-tooltip);
-          visibility: hidden;
-          display: flex;
-      }
-
-      @keyframes fadeIn {
-        0% {
-          opacity: 0;
-          transform: scale(0.5)
-        }
-        100% {
-          opacity: .9;
-          transform: scale(1)
-        }
-      }
-
-      [data-mdc-tooltip]:hover:before {
-          visibility: visible;
-          animation: .30s fadeIn;
-      }
-
-        .type-header {
-          font-size: 12px;
-          line-height: 16px;
-          font-weight: 500;
-          color: rgba(0, 0, 0, 0.5);
-          margin-right: 4px;
-        }
-      }
-
-      &__header {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        font-size: 12px;
-        line-height: 16px;
-        font-weight: normal;
-        color: rgba(0, 0, 0, 0.5);
-        text-transform: capitalize;
-      }
-
-      &[open] {
-        margin-top: 16px;
-        margin-bottom: 16px;
-        border-radius: 2px;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-        background-color: rgba(0, 0, 0, 0.08);
-
-        & .mdc-expansion__summary {
-          height: 64px;
-        }
-
-        & .arrow {
-          transform: rotate(180deg);
-        }
-      }
-    }
-
     .business-profile-location .material-icons {
       margin-right: 8px;
       color: #4498C6;
@@ -189,5 +88,9 @@
       @include mdc-button-filled-accessible(#f4f4f4);
       @include mdc-button-ink-color(rgba(0, 0, 0, 0.5));
     }
+  }
+
+  .address-detail {
+    white-space: pre-wrap;
   }
 }

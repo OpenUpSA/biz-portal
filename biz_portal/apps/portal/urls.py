@@ -1,5 +1,4 @@
 from django.urls import include, path
-from django.views.generic import TemplateView
 from rest_framework import routers
 
 from . import views
@@ -9,6 +8,11 @@ router.register(r"businesses", views.BusinessViewSet)
 
 urlpatterns = [
     path("", views.HomeView.as_view(), name="home"),
+    path(
+        "municipality/",
+        views.MunicipalityDetailView.as_view(),
+        name="municipality_detail",
+    ),
     path("businesses/", views.BusinessListView.as_view(), name="business_list"),
     path(
         "businesses/<int:pk>",
@@ -16,7 +20,7 @@ urlpatterns = [
         name="business_detail",
     ),
     # API
-    path(r"api/v1/", include(router.urls)),
+    path(r"api/v1/", include((router.urls, "portal"), namespace="api")),
     # UI WIP to be integrated in django templates
     path("portal-test", views.DevView.as_view(), name="portal"),
 ]

@@ -1,3 +1,6 @@
+import json
+
+from bs4 import BeautifulSoup
 from django.test import Client, TestCase
 
 
@@ -17,6 +20,7 @@ class BusinessListTestCase(TestCase):
         c = Client()
         response = c.get("/businesses/", HTTP_HOST="biz.capeagulhas.org")
         self.assertEqual(3, len(response.context["business_list"]))
+        assertSuggestionCountEqual(self, 3, response.content)
 
         # Facets
         sector_facet = response.context["sector_business_counts"]
@@ -42,6 +46,7 @@ class BusinessListTestCase(TestCase):
             HTTP_HOST="biz.capeagulhas.org",
         )
         self.assertEqual(1, len(response.context["business_list"]))
+        assertSuggestionCountEqual(self, 1, response.content)
 
         # Facets
         sector_facet = response.context["sector_business_counts"]
@@ -69,6 +74,7 @@ class BusinessListTestCase(TestCase):
                 ["KWIX" in x.registered_name for x in response.context["business_list"]]
             )
         )
+        assertSuggestionCountEqual(self, 2, response.content)
 
         # Facets
         sector_facet = response.context["sector_business_counts"]
@@ -113,9 +119,41 @@ class HomeTestCase(TestCase):
         self.assertEqual(1, agric_option.get("count"))
 
 
+class BusinessDetailTestCase(TestCase):
+    """Loads the business requested in the URL"""
+
+    fixtures = [
+        "sectors",
+        "business_types",
+        "business_statuses",
+        "regions",
+        "test_views_business_detail",
+    ]
+
+    def test_load_correct_business(self):
+        """Given two businesses, the correct one is loaded by URL"""
+        c = Client()
+        response = c.get("/businesses/1", HTTP_HOST="biz.capeagulhas.org")
+        self.assertContains(response, "Y-KWIX-YEET BRASS")
+
+        response = c.get("/businesses/2", HTTP_HOST="biz.capeagulhas.org")
+        self.assertContains(response, "BOORT DEVELOPMENT")
+
+
 def facet_option(case, facet, starts_with):
     options = [o for o in facet if o["label"].startswith(starts_with)]
     # ensure there's at most one match - needed even if we were using exact match.
     case.assertTrue(len(options) <= 1)
     if options:
         return options[0]
+
+
+def assertSuggestionCountEqual(testCase, expected, content):
+    soup = BeautifulSoup(content, "html.parser")
+    [input] = soup.select('input[name="q"]')
+    suggestion_url = input.attrs["data-suggestion-url"]
+    suggestion_url += "&search=" + input.attrs["value"]
+    c = Client()
+    api_response = c.get(suggestion_url, HTTP_HOST="biz.capeagulhas.org")
+    response_dict = json.loads(api_response.content)
+    testCase.assertEqual(expected, response_dict["count"])

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<p>{{ object.label }}</p>
+{% if object.logo %}<p>{{ object.logo }}</p>{% endif %}
+{% if object.website_url %}<p>{{ object.website_url }}</p>{% endif %}
+{% if object.phone_number %}<p>{{ object.phone_number }}</p>{% endif %}
+{% if object.special_instructions %}<pre>{{ object.special_instructions }}</pre>{% endif %}
+{% endblock content %}
