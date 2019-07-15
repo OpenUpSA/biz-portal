@@ -247,28 +247,6 @@ body {
 
     &__summary {
       padding: 12px 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-radius: 1px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-      outline: none;
-      position: relative;
-
-      &:hover {
-        cursor: pointer;
-      }
-
-      &::-webkit-details-marker {
-        display: none;
-      }
-
-      .arrow-down, .close {
-        margin-right: 0;
-        color: rgba(0, 0, 0, 0.5);
-        margin-left: 20px;
-        transition: transform 200ms, color 200ms;
-      }
 
       .icon-and-filter-option {
         display: flex;
@@ -277,15 +255,6 @@ body {
         .material-icons {
           margin-right: 8px;
         }
-      }
-    }
-
-    &[open] {
-      .mdc-expansion__summary {
-        background-color: rgb(241, 241, 241);
-      }
-      & .arrow-down {
-        transform: rotate(180deg);
       }
     }
   }
