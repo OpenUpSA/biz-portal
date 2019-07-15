@@ -160,3 +160,31 @@ class AdminModifyBusinessTest(TestCase):
 
         business = models.Business.objects.get(pk=business.pk)
         self.assertNotEqual(business.supplied_name, "DEADBEEF")
+
+    def test_superuser_can_select_any_muni(self):
+        """ Superuser who is not listed as muni admin can select any muni businesses """
+        self.assertTrue(self.client.login(username="admin", password="password"))
+
+        business = models.Business.objects.get(pk=1)
+
+        view_response = self.client.get(
+            reverse("admin:portal_business_change", args=[business.pk]),
+            HTTP_HOST="biz-portal.openup.org.za",
+        )
+        self.assertContains(view_response, "Bredasdorp")
+        self.assertContains(view_response, "Somewhere in BUF")
+
+    def test_muni_admin_can_only_select_their_muni(self):
+        """ Admin who is listed as muni admin can select any muni businesses """
+        self.assertTrue(
+            self.client.login(username="capeagulhasadmin", password="password")
+        )
+
+        business = models.Business.objects.get(pk=1)
+
+        view_response = self.client.get(
+            reverse("admin:portal_business_change", args=[business.pk]),
+            HTTP_HOST="biz-portal.openup.org.za",
+        )
+        self.assertContains(view_response, "Bredasdorp")
+        self.assertNotContains(view_response, "Somewhere in BUF")
