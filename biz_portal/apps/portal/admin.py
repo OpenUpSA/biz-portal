@@ -51,13 +51,11 @@ class BusinessAdmin(ImportMixin, admin.ModelAdmin):
     readonly_fields = (
         "registered_name",
         "registration_number",
-        "status",
-        "region",
-        "physical_address",
-        "postal_address",
-        "sector",
-        "business_type",
+        "registered_physical_address",
+        "registered_postal_address",
         "registration_date",
+        "registration_status",
+        "registered_business_type",
     )
 
     resource_class = BusinessResource
@@ -65,3 +63,4 @@ class BusinessAdmin(ImportMixin, admin.ModelAdmin):
 
 admin.site.register(models.Business, BusinessAdmin)
 admin.site.register(models.Municipality)
+admin.site.register(models.Region)
