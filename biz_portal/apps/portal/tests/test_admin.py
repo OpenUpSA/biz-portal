@@ -27,7 +27,7 @@ class AdminAddBusinessTest(TestCase):
         response = self.client.post(
             reverse("admin:portal_business_add"),
             post_data,
-            HTTP_HOST="biz.capeagulhas.org",
+            HTTP_HOST="biz-portal.openup.org.za",
         )
         self.assertEqual(response.status_code, 302)
         self.assertEqual(models.Business.objects.count(), 1)
@@ -43,7 +43,7 @@ class AdminAddBusinessTest(TestCase):
         response = self.client.post(
             reverse("admin:portal_business_add"),
             post_data,
-            HTTP_HOST="biz.capeagulhas.org",
+            HTTP_HOST="biz-portal.openup.org.za",
         )
 
         self.assertEqual(response.status_code, 302)
@@ -63,7 +63,7 @@ class AdminAddBusinessTest(TestCase):
         response = self.client.post(
             reverse("admin:portal_business_add"),
             post_data,
-            HTTP_HOST="biz.capeagulhas.org",
+            HTTP_HOST="biz-portal.openup.org.za",
         )
         self.assertEqual(response.status_code, 302)
         self.assertEqual(models.Business.objects.count(), 1)
@@ -94,7 +94,7 @@ class AdminModifyBusinessTest(TestCase):
         response = self.client.post(
             reverse("admin:portal_business_change", args=[business.pk]),
             post_data,
-            HTTP_HOST="biz.capeagulhas.org",
+            HTTP_HOST="biz-portal.openup.org.za",
         )
         self.assertEqual(response.status_code, 302)
 
@@ -112,7 +112,7 @@ class AdminModifyBusinessTest(TestCase):
 
         view_response = self.client.get(
             reverse("admin:portal_business_change", args=[business.pk]),
-            HTTP_HOST="biz.capeagulhas.org",
+            HTTP_HOST="biz-portal.openup.org.za",
         )
         self.assertContains(view_response, "Save")
 
@@ -124,7 +124,7 @@ class AdminModifyBusinessTest(TestCase):
         response = self.client.post(
             reverse("admin:portal_business_change", args=[business.pk]),
             post_data,
-            HTTP_HOST="biz.capeagulhas.org",
+            HTTP_HOST="biz-portal.openup.org.za",
         )
         self.assertEqual(response.status_code, 302)
 
@@ -142,7 +142,7 @@ class AdminModifyBusinessTest(TestCase):
 
         view_response = self.client.get(
             reverse("admin:portal_business_change", args=[business.pk]),
-            HTTP_HOST="biz.capeagulhas.org",
+            HTTP_HOST="biz-portal.openup.org.za",
         )
         self.assertNotContains(view_response, "Save")
 
@@ -154,7 +154,7 @@ class AdminModifyBusinessTest(TestCase):
         response = self.client.post(
             reverse("admin:portal_business_change", args=[business.pk]),
             post_data,
-            HTTP_HOST="biz.capeagulhas.org",
+            HTTP_HOST="biz-portal.openup.org.za",
         )
         self.assertEqual(response.status_code, 302)
 

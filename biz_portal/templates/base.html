@@ -19,7 +19,9 @@
     {% block css %}
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    {% if css_bundle %}
     <link rel="stylesheet" href="{% static css_bundle %}">
+    {% endif %}
     {% endblock %}
 
   </head>
