@@ -30,6 +30,14 @@
   }
 },
 {
+  "model": "sites.site",
+  "pk": 2,
+  "fields": {
+    "domain": "biz.buf.gov.za",
+    "name": "Buffalo City Metro Municipality"
+  }
+},
+{
   "model": "portal.municipality",
   "pk": 1,
   "fields": {
@@ -39,6 +47,34 @@
     "administrators": [
       2
     ]
+  }
+},
+{
+  "model": "portal.municipality",
+  "pk": 2,
+  "fields": {
+    "mdb_code": "BUF",
+    "label": "Buffalo City",
+    "site": 2,
+    "administrators": [
+      3
+    ]
+  }
+},
+{
+  "model": "portal.region",
+  "pk": 6,
+  "fields": {
+    "label": "Somewhere in BUF",
+    "municipality": 2
+  }
+},
+{
+  "model": "portal.business",
+  "pk": 2,
+  "fields": {
+    "registration_number": "1990/000289/23",
+    "region": 6
   }
 }
 ]

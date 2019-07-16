@@ -23,8 +23,8 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 # Rely on nginx to direct only allowed hosts, allow all for dokku checks to work.
 ALLOWED_HOSTS = ["*"]
 
-if env.int("DJANGO_SITE_ID", None):
-    SITE_ID = env.int("DJANGO_SITE_ID", None)
+if env("DJANGO_SITE_ID", None):
+    SITE_ID = env.int("DJANGO_SITE_ID")
 USE_X_FORWARDED_HOST = env.bool("DJANGO_USE_X_FORWARDED_HOST", False)
 
 # Local time zone. Choices are

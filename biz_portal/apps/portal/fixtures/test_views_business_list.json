@@ -43,5 +43,25 @@
     "registered_business_type": 1,
     "registration_date": "1990-01-04"
   }
+},
+{
+  "model": "sites.site",
+  "pk": 1,
+  "fields": {
+    "domain": "biz-portal.openup.org.za",
+    "name": "Cape Agulhas Business Portal"
+  }
+},
+{
+  "model": "portal.municipality",
+  "pk": 1,
+  "fields": {
+    "mdb_code": "WC033",
+    "label": "Cape Agulhas",
+    "site": 1,
+    "administrators": [
+      2
+    ]
+  }
 }
 ]
