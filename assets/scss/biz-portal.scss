@@ -1,5 +1,6 @@
 @import "./business-profile.scss";
 @import "./business-search-results.scss";
+@import "./top-sectors.scss";
 
 @import "@material/typography/mdc-typography";
 @import "@material/top-app-bar/mdc-top-app-bar";
@@ -189,18 +190,18 @@ body {
   }
 }
 
+.subtitle-business-directory, .subtitle-top-sectors {
+  color: rgba(0, 0, 0, 0.75);;
+  font-size: 20px;
+  font-weight: 500;
+  line-height:23px;
+  letter-spacing: 0.15px;
+  padding-bottom: 24px;
+  margin: 0;
+}
 
 .business-directory {
   margin-top: 36px;
-
-  .subtitle-business-directory {
-    color: rgba(0, 0, 0, 0.75);;
-    font-size: 20px;
-    font-weight: 500;
-    line-height:23px;
-    letter-spacing: 0.15px;
-    padding-bottom: 8px;
-  }
 
   .business-directory-categories-and-counts {
     padding: 12px 16px;
