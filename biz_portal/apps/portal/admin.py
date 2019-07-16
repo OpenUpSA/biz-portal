@@ -6,9 +6,9 @@ from . import models
 
 
 class BusinessResource(resources.ModelResource):
-    status = fields.Field(
-        column_name="status",
-        attribute="status",
+    registration_status = fields.Field(
+        column_name="registration_status",
+        attribute="registration_status",
         widget=widgets.ForeignKeyWidget(models.BusinessStatus, "label"),
     )
     sector = fields.Field(
@@ -16,9 +16,9 @@ class BusinessResource(resources.ModelResource):
         attribute="sector",
         widget=widgets.ForeignKeyWidget(models.Sector, "label"),
     )
-    business_type = fields.Field(
-        column_name="business_type",
-        attribute="business_type",
+    registered_business_type = fields.Field(
+        column_name="registered_business_type",
+        attribute="registered_business_type",
         widget=widgets.ForeignKeyWidget(models.BusinessType, "label"),
     )
     region = fields.Field(
@@ -35,13 +35,23 @@ class BusinessResource(resources.ModelResource):
         fields = (
             "registered_name",
             "registration_number",
-            "status",
+            "registration_status",
             "region",
-            "physical_address",
-            "postal_address",
+            "registered_physical_address",
+            "registered_postal_address",
             "sector",
-            "business_type",
+            "registered_business_type",
             "registration_date",
+            "website_url",
+            "cellphone_number",
+            "phone_number",
+            "fax_number",
+            "whatsapp_number",
+            "facebook_page_url",
+            "twitter_page_url",
+            "instagram_page_url",
+            "number_employed",
+            "annual_turnover",
         )
 
 
