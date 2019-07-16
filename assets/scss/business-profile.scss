@@ -67,7 +67,7 @@
     .mdc-expansion {
       &__summary {
 
-        [data-mdc-tooltip]:before {
+        [data-tooltip]:before {
           position: absolute;
           top: 0;
           right: 50px;
@@ -79,7 +79,7 @@
           padding: 4px 8px;
           font-weight: 400;
           font-size: 10px;
-          content: attr(data-mdc-tooltip);
+          content: attr(data-tooltip);
           visibility: hidden;
           display: flex;
 
@@ -100,11 +100,11 @@
           }
         }
 
-        [data-mdc-tooltip]:hover {
+        [data-tooltip]:hover {
           cursor: pointer;
         }
 
-        [data-mdc-tooltip]:hover:before {
+        [data-tooltip]:hover:before {
           visibility: visible;
           animation: .30s fadeIn;
         }
