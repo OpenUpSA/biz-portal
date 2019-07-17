@@ -42,7 +42,27 @@ class HomeView(generic.TemplateView):
         sector_queryset = SearchSnippet.get_sector_queryset(queryset)
         context["sector_business_counts"] = sector_queryset
 
+        top_sectors_qs = (
+            models.Business.objects.exclude(sector__label__in=["unknown", "generic"])
+            .values(label=F("sector__label"))
+            .annotate(count=Count("*"))
+            .order_by("-count")
+        )
+        context["top_sectors_counts"] = top_sectors_qs
         return context
+
+
+class MunicipalityDetailView(generic.DetailView):
+    model = models.Municipality
+    template_name = "portal/municipality_detail.html"
+
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+        self.request = request
+
+    def get_object(self, *args):
+        models.Site.objects.clear_cache()
+        return models.Site.objects.get_current(self.request).municipality
 
 
 class BusinessDetailView(generic.DetailView):
@@ -108,21 +128,11 @@ class BusinessSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Business
-        fields = (
-            "registered_name",
-            "registration_number",
-            "status",
-            "region",
-            "physical_address",
-            "postal_address",
-            "sector",
-            "business_type",
-            "registration_date",
-            "web_url",
-        )
+        fields = ("registered_name", "registration_number", "web_url")
 
 
 class BusinessViewSet(viewsets.ModelViewSet):
     queryset = models.Business.objects.all()
     serializer_class = BusinessSerializer
     search_fields = ("registered_name",)
+    filter_fields = ("region__label", "sector__label")

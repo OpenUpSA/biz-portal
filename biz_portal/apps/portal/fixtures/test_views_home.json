@@ -9,7 +9,7 @@
     "region": 4,
     "registered_physical_address": "18 HUXHAM STREET\nARNISTON\n7280",
     "registered_postal_address": "P O BOX 403\nBREDASDORP\n7280",
-    "sector": 1,
+    "sector": 14,
     "registered_business_type": 2,
     "registration_date": "1990-05-18"
   }
@@ -20,6 +20,21 @@
   "fields": {
     "registered_name": "BOORT DEVELOPMENT BUSINESS",
     "registration_number": "1990/000289/23",
+    "registration_status": 4,
+    "region": 1,
+    "registered_physical_address": "DIRKIE UYSSTRAAT 11\nBREDASDORP\n7280\n7280",
+    "registered_postal_address": "POSBUS 195\nBREDASDORP\n7280",
+    "sector": 29,
+    "registered_business_type": 1,
+    "registration_date": "1990-01-04"
+  }
+},
+{
+  "model": "portal.business",
+  "pk": 3,
+  "fields": {
+    "registered_name": "SAME AS SECOND BUT FOR THE NAME KWIX",
+    "registration_number": "1990/000289/24",
     "registration_status": 4,
     "region": 1,
     "registered_physical_address": "DIRKIE UYSSTRAAT 11\nBREDASDORP\n7280\n7280",

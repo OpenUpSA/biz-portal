@@ -39,24 +39,47 @@
       <hr class="mdc-list-divider">
       <div class="mdc-drawer__content">
         <nav class="mdc-list">
-          <a class="mdc-list-item mdc-list-item--activated mdc-theme--secondary-bg" href="#" aria-selected="true">
-            <i class="material-icons mdc-list-item__graphic mdc-theme--on-secondary" aria-hidden="true">
-              exit_to_app
-            </i>
-            <span class="mdc-list-item__text mdc-theme--on-secondary">Login</span>
-          </a>
-          <a class="mdc-list-item" href="#">
+
+          {% if current_site.municipality.add_update_business_url %}
+          <a class="mdc-list-item" href="{{  current_site.municipality.add_update_business_url }}">
             <i class="material-icons mdc-list-item__graphic" aria-hidden="true">store</i>
             <span class="mdc-list-item__text">Add my business</span>
           </a>
+          {% endif %}
+
+          {% if request.user.is_staff %}
           <a class="mdc-list-item" href="#">
             <i class="material-icons mdc-list-item__graphic" aria-hidden="true">arrow_downward</i>
             <span class="mdc-list-item__text">Download data</span>
           </a>
-          <a class="mdc-list-item" href="#">
+          {% endif %}
+
+          <a class="mdc-list-item" href="{% url 'municipality_detail' %}">
             <i class="material-icons mdc-list-item__graphic" aria-hidden="true">call</i>
             <span class="mdc-list-item__text">Contact municipality</span>
           </a>
+
+          {% if request.user %}
+          <a class="mdc-list-item mdc-list-item--activated mdc-theme--secondary-bg"
+             href="/admin/logout"
+             aria-selected="true"
+             >
+            <i class="material-icons mdc-list-item__graphic mdc-theme--on-secondary" aria-hidden="true">
+              exit_to_app
+            </i>
+            <span class="mdc-list-item__text mdc-theme--on-secondary">Logout</span>
+          </a>
+          {% else %}
+          <a class="mdc-list-item mdc-list-item--activated mdc-theme--secondary-bg"
+             href="{% url 'login' "
+             aria-selected="true"
+             >
+            <i class="material-icons mdc-list-item__graphic mdc-theme--on-secondary" aria-hidden="true">
+              exit_to_app
+            </i>
+            <span class="mdc-list-item__text mdc-theme--on-secondary">Admin Login</span>
+          </a>
+          {% endif %}
         </nav>
       </div>
     </aside>

@@ -1,0 +1,82 @@
+/**
+* Probably from https://codepen.io/eskimojo14/pen/gorWBx
+*/
+
+.mdc-expansion {
+  &__summary {
+    padding-right: 16px;
+    padding-left: 16px;
+
+    border-radius: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    outline: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    position: relative;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &:focus {
+      background-color: rgb(241, 241, 241);
+    }
+
+    .material-icons {
+      margin-right: 0;
+    }
+
+    .arrow-down, .close {
+      margin-right: 0;
+      color: rgba(0, 0, 0, 0.5);
+      margin-left: 20px;
+      transition: transform 200ms, color 200ms;
+    }
+
+    .type-header {
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.5);
+      margin-right: 4px;
+    }
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: normal;
+    color: rgba(0, 0, 0, 0.5);
+    text-transform: capitalize;
+  }
+
+  &__content {
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    & + .mdc-expansion__actions {
+      border-top: 1px solid rgba(0, 0, 0, 0.12);
+    }
+  }
+
+  &[open] {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+    & .mdc-expansion__summary {
+      background-color: rgb(241, 241, 241);
+    }
+
+    & .arrow-down {
+      transform: rotate(180deg);
+    }
+  }
+}
