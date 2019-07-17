@@ -7,13 +7,7 @@ from django.test import Client, TestCase
 class BusinessListTestCase(TestCase):
     """Test results for business list view"""
 
-    fixtures = [
-        "sectors",
-        "business_types",
-        "business_statuses",
-        "regions",
-        "test_views_business_list",
-    ]
+    fixtures = ["business_types", "business_statuses", "test_views_business_list"]
 
     def test_list_business_no_filter(self):
         """Given three businesses, all are returned without any query or filters"""
@@ -30,7 +24,7 @@ class BusinessListTestCase(TestCase):
         self.assertEqual(2, agric_option.get("count"))
 
         region_facet = response.context["region_business_counts"]
-        unknown_option = facet_option(self, region_facet, "Unknown")
+        unknown_option = facet_option(self, region_facet, "Napier")
         self.assertEqual(1, unknown_option.get("count"))
         bredasdorp_option = facet_option(self, region_facet, "Breda")
         self.assertEqual(2, bredasdorp_option.get("count"))
@@ -56,7 +50,7 @@ class BusinessListTestCase(TestCase):
         self.assertEqual(None, agric_option)
 
         region_facet = response.context["region_business_counts"]
-        unknown_option = facet_option(self, region_facet, "Unknown")
+        unknown_option = facet_option(self, region_facet, "Napier")
         self.assertEqual(1, unknown_option.get("count"))
         bredasdorp_option = facet_option(self, region_facet, "Breda")
         self.assertEqual(None, bredasdorp_option)
