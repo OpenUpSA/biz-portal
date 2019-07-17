@@ -11,7 +11,9 @@
               <img src="{% static 'images/accomodation.svg' %}" />
             </span>
         </div>
-        <div class="business-name">{{ object.registered_name }}</div>
+        <div class="business-name">
+          {% firstof object.supplied_name object.registered_name %}
+        </div>
       </div>
       <div class="business-profile-cards">
         <details class="mdc-expansion mdc-theme--background mdc-elevation--z2">
@@ -23,7 +25,7 @@
             <i class="material-icons mdc-list-item__graphic arrow-down" aria-hidden="true">keyboard_arrow_down</i>
           </summary>
           <div class="mdc-expansion__content">
-            <span class="mdc-expansion__header address-detail">{{ object.registered_physical_address }}</span>
+            <span class="mdc-expansion__header address-detail">{% firstof object.supplied_physical_address object.registered_physical_address %}</span>
           </div>
         </details>
         <details class="mdc-theme--background mdc-elevation--z2">

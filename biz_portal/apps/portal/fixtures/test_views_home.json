@@ -5,13 +5,8 @@
   "fields": {
     "registered_name": "Y-KWIX-YEET BRASS",
     "registration_number": "1990/002791/07",
-    "registration_status": 7,
-    "region": 4,
-    "registered_physical_address": "18 HUXHAM STREET\nARNISTON\n7280",
-    "registered_postal_address": "P O BOX 403\nBREDASDORP\n7280",
-    "sector": 14,
-    "registered_business_type": 2,
-    "registration_date": "1990-05-18"
+    "region": 2,
+    "sector": 14
   }
 },
 {
@@ -20,13 +15,8 @@
   "fields": {
     "registered_name": "BOORT DEVELOPMENT BUSINESS",
     "registration_number": "1990/000289/23",
-    "registration_status": 4,
     "region": 1,
-    "registered_physical_address": "DIRKIE UYSSTRAAT 11\nBREDASDORP\n7280\n7280",
-    "registered_postal_address": "POSBUS 195\nBREDASDORP\n7280",
-    "sector": 29,
-    "registered_business_type": 1,
-    "registration_date": "1990-01-04"
+    "sector": 29
   }
 },
 {
@@ -35,13 +25,76 @@
   "fields": {
     "registered_name": "SAME AS SECOND BUT FOR THE NAME KWIX",
     "registration_number": "1990/000289/24",
-    "registration_status": 4,
     "region": 1,
-    "registered_physical_address": "DIRKIE UYSSTRAAT 11\nBREDASDORP\n7280\n7280",
-    "registered_postal_address": "POSBUS 195\nBREDASDORP\n7280",
-    "sector": 3,
-    "registered_business_type": 1,
-    "registration_date": "1990-01-04"
+    "sector": 3
+  }
+},
+{
+  "model": "portal.business",
+  "pk": 4,
+  "fields": {
+    "registered_name": "KWIX business in another muni",
+    "registration_number": "1991/000281/21",
+    "region": 3,
+    "sector": 3
+  }
+},
+{
+  "model": "sites.site",
+  "pk": 1,
+  "fields": {
+    "domain": "muni1.gov.za",
+    "name": "Cape Agulhas Business Portal"
+  }
+},
+{
+  "model": "sites.site",
+  "pk": 2,
+  "fields": {
+    "domain": "muni2.gov.za",
+    "name": "Random Place Business Portal"
+  }
+},
+{
+  "model": "portal.municipality",
+  "pk": 1,
+  "fields": {
+    "mdb_code": "WC033",
+    "label": "Cape Agulhas",
+    "site": 1
+  }
+},
+{
+  "model": "portal.municipality",
+  "pk": 2,
+  "fields": {
+    "mdb_code": "FS010",
+    "label": "Random Place",
+    "site": 2
+  }
+},
+{
+  "model": "portal.region",
+  "pk": 1,
+  "fields": {
+    "label": "Bredasdorp",
+    "municipality": 1
+  }
+},
+{
+  "model": "portal.region",
+  "pk": 2,
+  "fields": {
+    "label": "Napier",
+    "municipality": 1
+  }
+},
+{
+  "model": "portal.region",
+  "pk": 3,
+  "fields": {
+    "label": "Random region place",
+    "municipality": 2
   }
 }
 ]
