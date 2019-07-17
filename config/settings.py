@@ -74,6 +74,7 @@ DJANGO_APPS = [
 ]
 THIRD_PARTY_APPS = [
     "rest_framework",
+    "django_filters",
     "django_extensions",
     "whitenoise.runserver_nostatic",
     "import_export",
@@ -255,6 +256,7 @@ LOGGING = {
     "root": {"level": "INFO", "handlers": ["console"]},
     "loggers": {
         "django": {"level": "DEBUG" if DEBUG else "INFO"},
+        "portal": {"level": "DEBUG" if DEBUG else "INFO"},
         "": {"level": "DEBUG"},
         # Errors logged by the SDK itself
         "sentry_sdk": {"level": "ERROR", "handlers": ["console"], "propagate": False},
@@ -314,5 +316,8 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 100,
-    "DEFAULT_FILTER_BACKENDS": ("rest_framework.filters.SearchFilter",),
+    "DEFAULT_FILTER_BACKENDS": (
+        "rest_framework.filters.SearchFilter",
+        "django_filters.rest_framework.DjangoFilterBackend",
+    ),
 }

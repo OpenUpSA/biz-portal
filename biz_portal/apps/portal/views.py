@@ -128,3 +128,4 @@ class BusinessViewSet(viewsets.ModelViewSet):
     queryset = models.Business.objects.all()
     serializer_class = BusinessSerializer
     search_fields = ("registered_name",)
+    filter_fields = ("region__label", "sector__label")

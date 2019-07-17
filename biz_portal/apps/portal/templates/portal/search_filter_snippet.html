@@ -1,0 +1,130 @@
+{% load param_replace %}
+
+<div class="find-business-section">
+  <div class="form-section mdc-theme--primary-bg">
+    <div class="layout">
+      <h1 class="mdc-typography--subtitle1 subtitle-find-business">Find a business</h1>
+      <form id="custom-templates" action="{% url "business_list" %}" method="get">
+        <div class="search-icon-container">
+          <i class="material-icons mdc-text-field__icon search-icon" tabindex="0" role="button">search</i>
+        </div>
+
+        {% if request.GET.region %}
+          <input type="hidden" name="region" value="{{ request.GET.region }}" />
+        {% endif %}
+
+        {% if request.GET.sector %}
+          <input type="hidden" name="sector" value="{{ request.GET.sector }}" />
+        {% endif %}
+
+        <input
+          class="typeahead"
+          id="search-bar"
+          type="text"
+          placeholder="Enter business name"
+          name="q"
+          value="{{ search_string }}"
+          autocomplete="off"
+          data-suggestion-url="{% url "api:business-list" %}?{% param_replace q="" sector="" region="" sector__label=request.GET.sector region__label=request.GET.region %}"
+          data-view-all-url="{% url "business_list" %}?{% param_replace sector=request.GET.sector region=request.GET.region q="" %}"
+        >
+    </div>
+  </div>
+
+  <div class="layout">
+    {% if request.GET.region %}
+    <div class="business-directory">
+      <h1 class="mdc-typography--subtitle1 subtitle-business-directory">Business directory</h1>
+      <div class="search-result"> {# Start Region #}
+        <summary class="close_summary">
+          <div class="icon-and-filter-option">
+            <i class="material-icons mdc-list-item__graphic mdc-theme--primary" aria-hidden="true">location_on</i>
+            <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">
+              {{ request.GET.region }}
+            </h3>
+          </div>
+          <div class="business-directory-count-arrow">
+            <a href="{% url "business_list" %}?{% param_replace page="" region="" %}">
+              <i class="material-icons mdc-list-item__graphic close" aria-hidden="true">close</i>
+            </a>
+          </div>
+        </summary>
+      </div>
+    {% else %}
+    <div class="business-directory">
+      <h1 class="mdc-typography--subtitle1 subtitle-business-directory">Business directory</h1>
+      <details class="mdc-expansion"> {# Start Region #}
+        <summary class="mdc-expansion__summary">
+          <div class="icon-and-filter-option">
+            <i class="material-icons mdc-list-item__graphic mdc-theme--primary" aria-hidden="true">location_on</i>
+            <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">
+              Location
+            </h3>
+          </div>
+          <div class="business-directory-count-arrow">
+            <i class="material-icons mdc-list-item__graphic arrow-down" aria-hidden="true">keyboard_arrow_down</i>
+          </div>
+        </summary>
+        {% for region in region_business_counts %}
+          <a class="business-directory-categories-and-counts" href="{% url "business_list" %}?{% param_replace page="" region=region.label %}">
+            <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">{{ region.label }}</h3>
+            <div class="business-directory-count-arrow">
+              <div class="location-count">{{ region.count }}</div>
+              <i class="material-icons mdc-list-item__graphic arrow-right" aria-hidden="true">keyboard_arrow_right</i>
+            </div>
+          </a>
+        {% endfor %}
+      </details>
+      {% endif %}
+
+
+      {% if request.GET.sector %}
+      <div class="search-result"> {# Start Sector #}
+        <summary class="close_summary">
+          <div class="icon-and-filter-option">
+            <i class="material-icons mdc-list-item__graphic mdc-theme--primary" aria-hidden="true">location_on</i>
+            <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">
+              {{ request.GET.sector }}
+            </h3>
+          </div>
+          <div class="business-directory-count-arrow">
+            <a href="{% url "business_list" %}?{% param_replace page="" sector="" %}">
+              <i class="material-icons mdc-list-item__graphic close" aria-hidden="true">close</i>
+            </a>
+          </div>
+        </summary>
+    {% else %}
+      <details class="mdc-expansion"> {# Start Sector #}
+        <summary class="mdc-expansion__summary">
+          <div class="icon-and-filter-option">
+            <i class="material-icons mdc-list-item__graphic mdc-theme--primary" aria-hidden="true">build</i>
+            <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">
+              Sector
+            </h3>
+          </div>
+          <div class="business-directory-count-arrow">
+            <i class="material-icons mdc-list-item__graphic arrow-down" aria-hidden="true">keyboard_arrow_down</i>
+          </div>
+        </summary>
+        {% for sector in sector_business_counts %}
+          <a class="business-directory-categories-and-counts" href="{% url "business_list" %}?{% param_replace page="" sector=sector.label %}">
+            <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">{{ sector.label }}</h3>
+            <div class="business-directory-count-arrow">
+              <div class="location-count">{{ sector.count }}</div>
+              <i class="material-icons mdc-list-item__graphic arrow-right" aria-hidden="true">keyboard_arrow_right</i>
+            </div>
+          </a>
+        {% endfor %}
+      </details>
+      {% endif %}
+
+      </div>
+      <a class="link-clear-search" href="{% url "business_list" %}">
+        <h4 class="mdc-typography--subtitle2 subtitle-clear-search">Clear search</h4>
+      </a>
+      <button class="mdc-button mdc-button--raised business-directory-submit">
+        <span class="mdc-button__label">Search</span>
+      </button>
+    </form>
+  </div>
+</div>
