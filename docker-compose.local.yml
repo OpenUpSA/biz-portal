@@ -43,7 +43,6 @@ services:
     environment:
       - DJANGO_DEBUG=False
       - DJANGO_SECRET_KEY=not-secret-in-dev
-      - DJANGO_SITE_ID=
       - DATABASE_URL=postgres://postgres@postgres/biz_portal
       - DJANGO_WHITENOISE_AUTOREFRESH=True
       - DJANGO_SECURE_SSL_REDIRECT=False
