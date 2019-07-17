@@ -6,38 +6,41 @@
 
 {% include 'portal/search_filter_snippet.html' %}
 
-<div class="top-sectors">
-  <div class="title-top-sectors">
-    <div class="layout">
-      <h2 class="mdc-typography--subtitle1 subtitle-top-sectors">Top Sectors</h2>
+<div class="top-sectors-section">
+  <div class="top-sectors">
+    <div class="title-top-sectors">
+      <div class="layout">
+        <h2 class="mdc-typography--subtitle1 subtitle-top-sectors">Top Sectors</h2>
+      </div>
     </div>
-  </div>
-    <div class="sectors-group">
-      {% for sector in top_sectors_counts|slice:":3" %}
-      <a class="link-to-top-sector" href="{% url "business_list" %}?{% param_replace page="" sector=sector.label %}">
-        <div class="list-sectors-container">
-          <div class="layout">
-            <li class="top-sectors-list">
-              <summary class="summary-top-sectors">
-                <span class="top-sectors-icon-sector">
-                  <span>
-                    <img src="{% static 'images/accomodation.svg' %}" />
+      <div class="sectors-group">
+        {% for sector in top_sectors_counts|slice:":3" %}
+        <a class="link-to-top-sector" href="{% url "business_list" %}?{% param_replace page="" sector=sector.label %}">
+          <div class="list-sectors-container">
+            <div class="layout">
+              <li class="top-sectors-list">
+                <summary class="summary-top-sectors">
+                  <span class="top-sectors-icon-sector">
+                    <span>
+                      <img src="{% static 'images/accomodation.svg' %}" />
+                    </span>
+                    <div class="sector-and-count">
+                      <p class="top-sector-label">
+                        {{ sector.label }}
+                      </p>
+                      <p class="top-sector-count">{{ sector.count }} Businesses</p>
+                    </div>
                   </span>
-                  <div class="sector-and-count">
-                    <p class="top-sector-label">
-                      {{ sector.label }}
-                    </p>
-                    <p class="top-sector-count">{{ sector.count }} Businesses</p>
-                  </div>
-                </span>
-                <i class="material-icons mdc-list-item__graphic arrow-right" aria-hidden="true">keyboard_arrow_right</i>
-              </summary>
-              </li>
+                  <i class="material-icons mdc-list-item__graphic arrow-right" aria-hidden="true">keyboard_arrow_right</i>
+                </summary>
+                </li>
+            </div>
           </div>
-        </div>
-      </a>
-      {% endfor %}
-    </div>
+        </a>
+        {% endfor %}
+      </div>
+  </div>
 </div>
+
 
 {% endblock content %}
