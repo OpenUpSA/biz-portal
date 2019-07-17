@@ -14,7 +14,7 @@ class BusinessListTestCase(TestCase):
         c = Client()
         response = c.get("/businesses/", HTTP_HOST="muni1.gov.za")
         self.assertEqual(3, len(response.context["business_list"]))
-        assertSuggestionCountEqual(self, 3, response.content)
+        assertSuggestionCountEqual(self, 3, "muni1.gov.za", response.content)
 
         # Facets
         sector_facet = response.context["sector_business_counts"]
@@ -34,7 +34,7 @@ class BusinessListTestCase(TestCase):
         c = Client()
         response = c.get("/businesses/", HTTP_HOST="muni2.gov.za")
         self.assertEqual(1, len(response.context["business_list"]))
-        assertSuggestionCountEqual(self, 1, response.content)
+        assertSuggestionCountEqual(self, 1, "muni2.gov.za", response.content)
 
     def test_list_business_filter(self):
         """
@@ -47,7 +47,7 @@ class BusinessListTestCase(TestCase):
             HTTP_HOST="muni1.gov.za",
         )
         self.assertEqual(1, len(response.context["business_list"]))
-        assertSuggestionCountEqual(self, 1, response.content)
+        assertSuggestionCountEqual(self, 1, "muni1.gov.za", response.content)
 
         # Facets
         sector_facet = response.context["sector_business_counts"]
@@ -70,7 +70,7 @@ class BusinessListTestCase(TestCase):
             HTTP_HOST="muni2.gov.za",
         )
         self.assertEqual(1, len(response.context["business_list"]))
-        assertSuggestionCountEqual(self, 1, response.content)
+        assertSuggestionCountEqual(self, 1, "muni2.gov.za", response.content)
 
     def test_list_business_search(self):
         """
@@ -85,7 +85,7 @@ class BusinessListTestCase(TestCase):
                 ["KWIX" in x.registered_name for x in response.context["business_list"]]
             )
         )
-        assertSuggestionCountEqual(self, 2, response.content)
+        assertSuggestionCountEqual(self, 2, "muni1.gov.za", response.content)
 
         # Facets
         sector_facet = response.context["sector_business_counts"]
@@ -104,7 +104,7 @@ class BusinessListTestCase(TestCase):
                 ["KWIX" in x.registered_name for x in response.context["business_list"]]
             )
         )
-        assertSuggestionCountEqual(self, 1, response.content)
+        assertSuggestionCountEqual(self, 1, "muni2.gov.za", response.content)
 
 
 class HomeTestCase(TestCase):
@@ -171,12 +171,12 @@ def facet_option(case, facet, starts_with):
         return options[0]
 
 
-def assertSuggestionCountEqual(testCase, expected, content):
+def assertSuggestionCountEqual(testCase, expected, HTTP_HOST, content):
     soup = BeautifulSoup(content, "html.parser")
     [input] = soup.select('input[name="q"]')
     suggestion_url = input.attrs["data-suggestion-url"]
     suggestion_url += "&search=" + input.attrs["value"]
     c = Client()
-    api_response = c.get(suggestion_url, HTTP_HOST="biz.capeagulhas.org")
+    api_response = c.get(suggestion_url, HTTP_HOST=HTTP_HOST)
     response_dict = json.loads(api_response.content)
     testCase.assertEqual(expected, response_dict["count"])

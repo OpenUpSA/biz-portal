@@ -77,6 +77,8 @@ class BusinessListView(generic.ListView):
 
     def setup(self, request, *args, **kwargs):
         super().setup(request, *args, **kwargs)
+        models.Site.objects.clear_cache()
+        self.current_site = models.Site.objects.get_current(self.request)
 
         self.search_string = request.GET.get("q", "")
         self.search_words = self.search_string.split()
@@ -97,6 +99,9 @@ class BusinessListView(generic.ListView):
 
     def get_queryset(self):
         self.queryset = super().get_queryset()
+        self.queryset = self.queryset.filter(
+            region__municipality=self.current_site.municipality
+        )
 
         for word in self.search_string.split():
             self.queryset = self.queryset.filter(registered_name__icontains=word)
@@ -135,6 +140,14 @@ class BusinessSerializer(serializers.ModelSerializer):
 
 class BusinessViewSet(viewsets.ModelViewSet):
     queryset = models.Business.objects.all()
+
+    def get_queryset(self):
+        models.Site.objects.clear_cache()
+        current_site = models.Site.objects.get_current(self.request)
+        return models.Business.objects.filter(
+            region__municipality=current_site.municipality
+        )
+
     serializer_class = BusinessSerializer
     search_fields = ("registered_name",)
     filter_fields = ("region__label", "sector__label")

@@ -36,7 +36,7 @@
   "model": "portal.business",
   "pk": 4,
   "fields": {
-    "registered_name": "kwix business in another muni",
+    "registered_name": "KWIX business in another muni",
     "registration_number": "1991/000281/21",
     "region": 3,
     "sector": 1
