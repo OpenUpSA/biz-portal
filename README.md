@@ -36,12 +36,21 @@ This will keep running and rebuilding our js and css upon changes.
 
 In another shell:
 
-    docker-compose -f docker-compose.local.yml up
-
-If you're setting it up for the first time, in another shell:
+Each time you pull in changes that might contain database changes:
 
 ```
 docker-compose -f docker-compose.local.yml run --rm django python manage.py migrate
+```
+
+Now you can start the server
+```
+docker-compose -f docker-compose.local.yml up
+```
+
+If you're setting up for the first time, you need to run this before starting
+the server, or in another shell:
+
+```
 docker-compose -f docker-compose.local.yml run --rm django python manage.py createsuperuser --username admin --email admin@admin.admin
 docker-compose -f docker-compose.local.yml run --rm django python manage.py loaddata business_statuses business_types regions sectors
 ```
@@ -50,7 +59,8 @@ Next you need to import businesses. Businessess' registration data is not direct
 
 Now you can visit http://localhost:8000
 
-Normally, `docker-compose down` won't delete the database so your database setup and changes will persist. To delete the database for a completely fresh setup, run
+Normally, `docker-compose down` won't delete the database so your database setup
+and changes will persist. To delete the database for a completely fresh setup, run
 
 ```
 docker-compose -f docker-compose.local.yml down --volumes
