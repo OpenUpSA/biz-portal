@@ -2,9 +2,82 @@
 {% load static %}
 
 {% block content %}
-<p>{{ object.label }}</p>
-{% if object.logo %}<p>{{ object.logo }}</p>{% endif %}
-{% if object.website_url %}<p>{{ object.website_url }}</p>{% endif %}
-{% if object.phone_number %}<p>{{ object.phone_number }}</p>{% endif %}
-{% if object.special_instructions %}<pre>{{ object.special_instructions }}</pre>{% endif %}
+
+<div class="muni-contact-details">
+  <div class="layout">
+    <div class="content-and-logo">
+        {% if object.logo %}
+        <span class="contact-heading-and-field">
+          <img class="municipality-logo" src="{% static object.logo %}" />
+        </span>
+        {% endif %}
+      <div class="contact-details">
+        <span class="contact-heading-and-field">
+          <p class="contact-main-heading">{{ object.label }}</p>
+        </span>
+        {% if object.website_url %}
+        <span class="contact-heading-and-field">
+          <h4 class="contact-heading">Website Url:</h4>
+          <a href="{{ object.website_url }}" class="contact-field mdc-theme--primary">{{ object.website_url }}</a>
+        </span>
+        {% endif %}
+        {% if object.phone_number %}
+        <span class="contact-heading-and-field">
+          <h4 class="contact-heading">Phone Number:</h4>
+          <a href="tel:{{ object.phone_number }}" class="contact-field mdc-theme--primary">{{ object.phone_number }}</a>
+        </span>
+        {% endif %}
+        {% if object.cellphone_number %}
+        <span class="contact-heading-and-field">
+          <h4 class="contact-heading">Cellphone Number:</h4>
+          <a href="tel:{{ object.cellphone_number }}" class="contact-field mdc-theme--primary">{{ object.cellphone_number }}</a>
+        </span>
+        {% endif %}
+        {% if object.fax_number %}
+        <span class="contact-heading-and-field">
+          <h4 class="contact-heading">Fax Number:</h4>
+          <p class="contact-field">{{ object.fax_number }}</p>
+        </span>
+        {% endif %}
+        {% if object.whatsapp_number %}
+        <span class="contact-heading-and-field">
+          <h4 class="contact-heading">Whatsapp Number:</h4>
+          <a href="tel:{{ object.whatsapp_number }}" class="contact-field mdc-theme--primary">{{ object.whatsapp_number }}</a>
+        </span>
+        {% endif %}
+        {% if object.email_address %}
+        <span class="contact-heading-and-field">
+          <h4 class="contact-heading">Email:</h4>
+          <a href="tel:{{ object.email_address }}" class="contact-field mdc-theme--primary">{{ object.email_address }}</a>
+        </span>
+        {% endif %}
+        {% if object.facebook_page_url %}
+        <span class="contact-heading-and-field">
+          <h4 class="contact-heading">Facebook:</h4>
+          <a href="{{ object.facebook_page_url }}" class="contact-field mdc-theme--primary">Facebook</a>
+        </span>
+        {% endif %}
+        {% if object.twitter_page_url %}
+        <span class="contact-heading-and-field">
+          <h4 class="contact-heading">Twitter:</h4>
+          <a href="{{ object.twitter_page_url }}" class="contact-field mdc-theme--primary">Twitter</a>
+        </span>
+        {% endif %}
+        {% if object.instagram_page_url %}
+        <span class="contact-heading-and-field">
+          <h4 class="contact-heading">Instagram:</h4>
+          <a href="{{ object.instagram_page_url }}" class="contact-field mdc-theme--primary">Instagram</a>
+        </span>
+        {% endif %}
+        {% if object.special_instructions %}
+        <span class="contact-heading-and-special-instructions">
+          <h4 class="contact-heading">Special Instructions:</h4>
+          <pre class="special-instructions">{{ object.special_instructions }}</pre>
+        </span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock content %}
