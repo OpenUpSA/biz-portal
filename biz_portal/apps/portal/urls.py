@@ -21,6 +21,4 @@ urlpatterns = [
     ),
     # API
     path(r"api/v1/", include((router.urls, "portal"), namespace="api")),
-    # UI WIP to be integrated in django templates
-    path("portal-test", views.DevView.as_view(), name="portal"),
 ]

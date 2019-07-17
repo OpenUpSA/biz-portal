@@ -1,3 +1,4 @@
+from django.contrib.sites.models import Site
 from django.db.models import Count, F
 from django.shortcuts import get_object_or_404
 from django.views import generic
@@ -24,16 +25,13 @@ class SearchSnippet:
         )
 
 
-class DevView(generic.TemplateView):
-    template_name = "portal/portal.html"
-
-
 class HomeView(generic.TemplateView):
     template_name = "portal/home.html"
 
     def setup(self, request, *args, **kwargs):
         super().setup(request, *args, **kwargs)
-        self.current_site = models.Site.objects.get_current(self.request)
+        Site.objects.clear_cache()
+        self.current_site = Site.objects.get_current(self.request)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -66,10 +64,11 @@ class MunicipalityDetailView(generic.DetailView):
 
     def setup(self, request, *args, **kwargs):
         super().setup(request, *args, **kwargs)
+        Site.objects.clear_cache()
         self.request = request
 
     def get_object(self, *args):
-        return models.Site.objects.get_current(self.request).municipality
+        return Site.objects.get_current(self.request).municipality
 
 
 class BusinessDetailView(generic.DetailView):
@@ -78,11 +77,12 @@ class BusinessDetailView(generic.DetailView):
 
     def setup(self, request, pk, *args, **kwargs):
         super().setup(request, *args, **kwargs)
+        Site.objects.clear_cache()
         self.request = request
         self.pk = pk
 
     def get_object(self, *args, **kwargs):
-        current_site = models.Site.objects.get_current(self.request)
+        current_site = Site.objects.get_current(self.request)
         return get_object_or_404(
             models.Business, pk=self.pk, region__municipality=current_site.municipality
         )
@@ -95,7 +95,8 @@ class BusinessListView(generic.ListView):
 
     def setup(self, request, *args, **kwargs):
         super().setup(request, *args, **kwargs)
-        self.current_site = models.Site.objects.get_current(self.request)
+        Site.objects.clear_cache()
+        self.current_site = Site.objects.get_current(self.request)
 
         self.search_string = request.GET.get("q", "")
         self.search_words = self.search_string.split()
@@ -159,7 +160,8 @@ class BusinessViewSet(viewsets.ModelViewSet):
     queryset = models.Business.objects.all()
 
     def get_queryset(self):
-        current_site = models.Site.objects.get_current(self.request)
+        Site.objects.clear_cache()
+        current_site = Site.objects.get_current(self.request)
         return models.Business.objects.filter(
             region__municipality=current_site.municipality
         )
