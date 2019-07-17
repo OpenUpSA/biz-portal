@@ -5,7 +5,6 @@
   "fields": {
     "registered_name": "Y-KWIX-YEET BRASS",
     "registration_number": "1990/002791/07",
-    "registration_status": 7,
     "region": 2,
     "sector": 1
   }
@@ -16,7 +15,6 @@
   "fields": {
     "registered_name": "BOORT DEVELOPMENT BUSINESS",
     "registration_number": "1990/000289/23",
-    "registration_status": 4,
     "region": 1,
     "sector": 2
   }
@@ -27,7 +25,6 @@
   "fields": {
     "registered_name": "SAME AS SECOND BUT FOR THE NAME KWIX",
     "registration_number": "1990/000289/24",
-    "registration_status": 4,
     "region": 1,
     "sector": 2
   }

@@ -110,13 +110,7 @@ class BusinessListTestCase(TestCase):
 class HomeTestCase(TestCase):
     """Test results for business list view"""
 
-    fixtures = [
-        "sectors",
-        "business_types",
-        "business_statuses",
-        "regions",
-        "test_views_home",
-    ]
+    fixtures = ["sectors", "business_types", "business_statuses", "test_views_home"]
 
     def test_facets_and_businesses(self):
         """
@@ -124,7 +118,7 @@ class HomeTestCase(TestCase):
         in Top Sectors.
         """
         c = Client()
-        response = c.get("/", HTTP_HOST="biz.capeagulhas.org")
+        response = c.get("/", HTTP_HOST="muni1.gov.za")
 
         # Facets
         sector_facet = response.context["sector_business_counts"]
@@ -140,6 +134,22 @@ class HomeTestCase(TestCase):
         self.assertEqual(1, len(sector_facet))
         agric_option = facet_option(self, sector_facet, "Agric")
         self.assertEqual(1, agric_option.get("count"))
+
+    def test_facets_and_businesses_other_muni(self):
+        """No filters, other muni"""
+        c = Client()
+        response = c.get("/", HTTP_HOST="muni2.gov.za")
+
+        # Facets
+        sector_facet = response.context["sector_business_counts"]
+        generic_option = facet_option(self, sector_facet, "generic")
+        self.assertEqual(1, generic_option.get("count"))
+        unknown_option = facet_option(self, sector_facet, "unknown")
+        self.assertEqual(None, unknown_option)
+
+        # Top Sectors
+        sector_facet = response.context["top_sectors_counts"]
+        self.assertEqual(1, len(sector_facet))
 
 
 class BusinessDetailTestCase(TestCase):

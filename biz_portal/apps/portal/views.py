@@ -30,9 +30,15 @@ class DevView(generic.TemplateView):
 class HomeView(generic.TemplateView):
     template_name = "portal/home.html"
 
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+        self.current_site = models.Site.objects.get_current(self.request)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        queryset = models.Business.objects.all()
+        queryset = models.Business.objects.filter(
+            region__municipality=self.current_site.municipality
+        )
 
         # Region counts
         region_queryset = SearchSnippet.get_region_queryset(queryset)
@@ -61,7 +67,6 @@ class MunicipalityDetailView(generic.DetailView):
         self.request = request
 
     def get_object(self, *args):
-        models.Site.objects.clear_cache()
         return models.Site.objects.get_current(self.request).municipality
 
 
@@ -77,7 +82,6 @@ class BusinessListView(generic.ListView):
 
     def setup(self, request, *args, **kwargs):
         super().setup(request, *args, **kwargs)
-        models.Site.objects.clear_cache()
         self.current_site = models.Site.objects.get_current(self.request)
 
         self.search_string = request.GET.get("q", "")
@@ -142,7 +146,6 @@ class BusinessViewSet(viewsets.ModelViewSet):
     queryset = models.Business.objects.all()
 
     def get_queryset(self):
-        models.Site.objects.clear_cache()
         current_site = models.Site.objects.get_current(self.request)
         return models.Business.objects.filter(
             region__municipality=current_site.municipality
