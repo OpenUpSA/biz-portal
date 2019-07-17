@@ -18,7 +18,7 @@
     "registration_number": "1990/000289/23",
     "registration_status": 4,
     "region": 1,
-    "sector": 3
+    "sector": 2
   }
 },
 {
@@ -29,7 +29,7 @@
     "registration_number": "1990/000289/24",
     "registration_status": 4,
     "region": 1,
-    "sector": 3
+    "sector": 2
   }
 },
 {
@@ -109,7 +109,7 @@
 },
 {
   "model": "portal.sector",
-  "pk": 3,
+  "pk": 2,
   "fields": {
     "label": "Agriculture, Forestry, Fishing and Hunting"
   }

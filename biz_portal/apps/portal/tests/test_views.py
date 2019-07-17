@@ -29,6 +29,13 @@ class BusinessListTestCase(TestCase):
         bredasdorp_option = facet_option(self, region_facet, "Breda")
         self.assertEqual(2, bredasdorp_option.get("count"))
 
+    def test_list_business_no_filter_other_muni(self):
+        """ no filter, other muni """
+        c = Client()
+        response = c.get("/businesses/", HTTP_HOST="muni2.gov.za")
+        self.assertEqual(1, len(response.context["business_list"]))
+        assertSuggestionCountEqual(self, 1, response.content)
+
     def test_list_business_filter(self):
         """
         Given three businesses, and one match, only matching businesss, sectors,
@@ -55,6 +62,16 @@ class BusinessListTestCase(TestCase):
         bredasdorp_option = facet_option(self, region_facet, "Breda")
         self.assertEqual(None, bredasdorp_option)
 
+    def test_list_business_filter_other_muni(self):
+        """ filter results for another muni """
+        c = Client()
+        response = c.get(
+            "/businesses/?sector=Accommodation and Food Services",
+            HTTP_HOST="muni2.gov.za",
+        )
+        self.assertEqual(1, len(response.context["business_list"]))
+        assertSuggestionCountEqual(self, 1, response.content)
+
     def test_list_business_search(self):
         """
         Given three businesses, two matching, only matching businesss, sectors,
@@ -76,6 +93,18 @@ class BusinessListTestCase(TestCase):
         self.assertEqual(1, accom_option.get("count"))
         agric_option = facet_option(self, sector_facet, "Agric")
         self.assertEqual(1, agric_option.get("count"))
+
+    def test_list_business_search_other_muni(self):
+        """ business search for another muni """
+        c = Client()
+        response = c.get("/businesses/?q=kwix", HTTP_HOST="muni2.gov.za")
+        self.assertEqual(1, len(response.context["business_list"]))
+        self.assertTrue(
+            all(
+                ["KWIX" in x.registered_name for x in response.context["business_list"]]
+            )
+        )
+        assertSuggestionCountEqual(self, 1, response.content)
 
 
 class HomeTestCase(TestCase):
