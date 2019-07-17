@@ -166,11 +166,23 @@ class BusinessDetailTestCase(TestCase):
     def test_load_correct_business(self):
         """Given two businesses, the correct one is loaded by URL"""
         c = Client()
-        response = c.get("/businesses/1", HTTP_HOST="biz.capeagulhas.org")
+        response = c.get("/businesses/1", HTTP_HOST="muni1.gov.za")
         self.assertContains(response, "Y-KWIX-YEET BRASS")
 
-        response = c.get("/businesses/2", HTTP_HOST="biz.capeagulhas.org")
+        response = c.get("/businesses/2", HTTP_HOST="muni1.gov.za")
         self.assertContains(response, "BOORT DEVELOPMENT")
+
+        response = c.get("/businesses/3", HTTP_HOST="muni1.gov.za")
+        self.assertNotContains(response, "Random", status_code=404)
+
+    def test_load_correct_business_other_muni(self):
+        """Load business for other muni"""
+        c = Client()
+        response = c.get("/businesses/1", HTTP_HOST="muni2.gov.za")
+        self.assertNotContains(response, "Y-KWIX-YEET BRASS", status_code=404)
+
+        response = c.get("/businesses/3", HTTP_HOST="muni2.gov.za")
+        self.assertContains(response, "Random")
 
 
 def facet_option(case, facet, starts_with):
