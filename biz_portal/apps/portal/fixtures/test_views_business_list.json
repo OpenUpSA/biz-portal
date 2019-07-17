@@ -48,7 +48,7 @@
   "model": "sites.site",
   "pk": 1,
   "fields": {
-    "domain": "biz-portal.openup.org.za",
+    "domain": "muni1.gov.za",
     "name": "Cape Agulhas Business Portal"
   }
 },
@@ -58,10 +58,7 @@
   "fields": {
     "mdb_code": "WC033",
     "label": "Cape Agulhas",
-    "site": 1,
-    "administrators": [
-      2
-    ]
+    "site": 1
   }
 }
 ]

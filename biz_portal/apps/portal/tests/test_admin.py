@@ -4,7 +4,7 @@ from django.urls import reverse
 from .. import models
 
 
-class AdminAddBusinessTest(TestCase):
+class AdminAddBusinessTestCase(TestCase):
     """ Tests of who can add businesses """
 
     fixtures = [

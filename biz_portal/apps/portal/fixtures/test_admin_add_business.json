@@ -55,10 +55,7 @@
   "fields": {
     "mdb_code": "BUF",
     "label": "Buffalo City",
-    "site": 2,
-    "administrators": [
-      3
-    ]
+    "site": 2
   }
 },
 {
@@ -67,14 +64,6 @@
   "fields": {
     "label": "Somewhere in BUF",
     "municipality": 2
-  }
-},
-{
-  "model": "portal.business",
-  "pk": 2,
-  "fields": {
-    "registration_number": "1990/000289/23",
-    "region": 6
   }
 }
 ]
