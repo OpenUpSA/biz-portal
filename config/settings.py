@@ -256,6 +256,7 @@ LOGGING = {
     "root": {"level": "INFO", "handlers": ["console"]},
     "loggers": {
         "django": {"level": "DEBUG" if DEBUG else "INFO"},
+        "portal": {"level": "DEBUG" if DEBUG else "INFO"},
         "": {"level": "DEBUG"},
         # Errors logged by the SDK itself
         "sentry_sdk": {"level": "ERROR", "handlers": ["console"], "propagate": False},
