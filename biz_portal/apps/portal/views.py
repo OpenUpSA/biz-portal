@@ -51,6 +51,7 @@ class HomeView(generic.TemplateView):
 
         top_sectors_qs = (
             models.Business.objects.exclude(sector__label__in=["unknown", "generic"])
+            .filter(region__municipality=self.current_site.municipality)
             .values(label=F("sector__label"))
             .annotate(count=Count("*"))
             .order_by("-count")
