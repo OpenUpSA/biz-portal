@@ -14,7 +14,7 @@
   </div>
     <div class="sectors-group">
       {% for sector in top_sectors_counts|slice:":3" %}
-      <a href="{% url "business_list" %}?{% param_replace page="" sector=sector.label %}">
+      <a class="link-to-top-sector" href="{% url "business_list" %}?{% param_replace page="" sector=sector.label %}">
         <div class="list-sectors-container">
           <div class="layout">
             <li class="top-sectors-list">
