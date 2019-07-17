@@ -1,4 +1,5 @@
 from django.db.models import Count, F
+from django.shortcuts import get_object_or_404
 from django.views import generic
 from rest_framework import serializers, viewsets
 
@@ -73,6 +74,17 @@ class MunicipalityDetailView(generic.DetailView):
 class BusinessDetailView(generic.DetailView):
     model = models.Business
     template_name = "portal/business_detail.html"
+
+    def setup(self, request, pk, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+        self.request = request
+        self.pk = pk
+
+    def get_object(self, *args, **kwargs):
+        current_site = models.Site.objects.get_current(self.request)
+        return get_object_or_404(
+            models.Business, pk=self.pk, region__municipality=current_site.municipality
+        )
 
 
 class BusinessListView(generic.ListView):
