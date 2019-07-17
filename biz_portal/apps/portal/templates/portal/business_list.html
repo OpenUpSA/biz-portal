@@ -1,32 +1,84 @@
+{% extends "base.html" %}
 {% load param_replace %}
+{% load static %}
 
-{% include 'portal/search_snippet.html' %}
+{% block content %}
 
-<h1>Businesses</h1>
-<ul>
-{% for business in object_list %}
-<li>
-  <a href="{{ business.get_absolute_url }}">
-    {{ business.registered_name }} - {{ business.registration_number }}
-  </a>
-</li>
-{% empty %}
-    <li>No businesses.</li>
-{% endfor %}
-</ul>
+{% include 'portal/search_filter_snippet.html' %}
 
-{% if is_paginated %}
-<div class="pagination">
-  <span class="page-links">
-    {% if page_obj.has_previous %}
-    <a href="{% url "business_list" %}?{% param_replace page=page_obj.previous_page_number %}">previous</a>
-    {% endif %}
-    <span class="page-current">
-      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+
+<div class="business-results">
+  <div class="layout">
+    <span class="search-results-counts">
+      <h4 class="mdc-typography--subtitle2 subtitle-clear-search">Showing</h4>
+      <h4 class="mdc-typography--subtitle2 subtitle-clear-search paginator-count mdc-theme--primary">{{ paginator.count }}</h4>
+      <h4 class="mdc-typography--subtitle2 subtitle-clear-search">results</h4>
     </span>
-    {% if page_obj.has_next %}
-    <a href="{% url "business_list" %}?{% param_replace page=page_obj.next_page_number %}">next</a>
+
+    {% for business in object_list %}
+    <a href="{{ business.get_absolute_url }}" class="link-to-business-profile">
+      <div class="mdc-card business-results-card">
+        <div class="business-category">
+          <span class="business-category-text">{{ business.registration_status.label }}</span>
+          <span>
+            <i class="material-icons mdc-list-item__graphic mdc-theme--primary" aria-hidden="true">home</i>
+          </span>
+        </div>
+        <div class="business-name mdc-theme--primary">{{ business.registered_name }}</div>
+
+        <hr class="mdc-list-divider">
+
+        <div class="location-and-status-container">
+          <div class="business-details-location">
+              <summary class="business-summary">
+                <span class="business-details-content">
+                  <i class="material-icons mdc-list-item__graphic mdc-theme--primary" aria-hidden="true">location_on</i>
+                  <span class="header-summary">{{ business.region.label }}</span>
+                </span>
+              </summary>
+            </div>
+            <div class="business-details-status">
+              <summary class="business-summary">
+                <span class="business-details-content">
+                  <span class="status-icon-span">
+                    <img class="status-icon" src="{% static 'images/ellipse.svg' %}" />
+                  </span>
+                  <span class="type-header">Status:</span>
+                  <span class="header-summary">{{ business.registration_status.label }}</span>
+                </span>
+              </summary>
+            </div>
+        </div>
+      </div>
+    </a>
+    {% empty %}
+    <p class="no-businesses-found">No businesses found</p>
+      {% endfor %}
+
+      {% if is_paginated %}
+      <div class="pagination">
+        <span class="page-links">
+          {% if page_obj.has_previous %}
+          <a class="previous-link" href="{% url "business_list" %}?{% param_replace page=page_obj.previous_page_number %}">
+            <button class="mdc-button">
+              <span class="mdc-button__label">Previous</span>
+            </button>
+          </a>
+          {% endif %}
+          <span>
+            Page <span class="page-current mdc-theme--primary">{{ page_obj.number }}</span> of {{ page_obj.paginator.num_pages }}
+          </span>
+          {% if page_obj.has_next %}
+          <a class="next-link" href="{% url "business_list" %}?{% param_replace page=page_obj.next_page_number %}">
+            <button class="mdc-button">
+              <span class="mdc-button__label">Next</span>
+            </button>
+          </a>
+          {% endif %}
+        </span>
+      </div>
     {% endif %}
-  </span>
+  </div>
 </div>
-{% endif %}
+
+{% endblock content %}
