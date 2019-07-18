@@ -14,6 +14,9 @@
         <div class="business-name">
           {% firstof object.supplied_name object.registered_name %}
         </div>
+        {% if object.description %}
+        <div class="business-description">{{ object.description }}</div>
+        {% endif %}
       </div>
       <div class="business-profile-cards">
         <details class="mdc-expansion mdc-theme--background mdc-elevation--z2">
