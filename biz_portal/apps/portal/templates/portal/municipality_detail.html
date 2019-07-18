@@ -48,7 +48,7 @@
         {% if object.email_address %}
         <span class="contact-heading-and-field">
           <h4 class="contact-heading">Email:</h4>
-          <a href="tel:{{ object.email_address }}" class="contact-field mdc-theme--primary">{{ object.email_address }}</a>
+          <a href="mailto:{{ object.email_address }}" class="contact-field mdc-theme--primary">{{ object.email_address }}</a>
         </span>
         {% endif %}
         {% if object.facebook_page_url %}
@@ -67,6 +67,12 @@
         <span class="contact-heading-and-field">
           <h4 class="contact-heading">Instagram:</h4>
           <a href="{{ object.instagram_page_url }}" class="contact-field mdc-theme--primary">Instagram</a>
+        </span>
+        {% endif %}
+        {% if object.linkedin_page_url %}
+        <span class="contact-heading-and-field">
+          <h4 class="contact-heading">LinkedIn:</h4>
+          <a href="{{ object.linkedin_page_url }}" class="contact-field mdc-theme--primary">LinkedIn</a>
         </span>
         {% endif %}
         {% if object.special_instructions %}
