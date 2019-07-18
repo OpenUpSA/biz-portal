@@ -37,7 +37,9 @@
               <span class="type-header">Status:</span>
               <span class="mdc-expansion__header">{{ object.registration_status.label }}</span>
             </span>
-            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
+            <div data-tooltip="Indicates the current registration status of the business. A business's status can range from being In business or Deregistered to Closed.">
+              <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
+            </div>
           </summary>
         </details>
         <details class="mdc-theme--background mdc-elevation--z2">
@@ -47,7 +49,9 @@
               <span class="type-header">Type:</span>
               <span class="mdc-expansion__header">{{ object.registered_business_type.label }}</span>
             </span>
-            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
+            <div data-tooltip="Describes the type of business registered, such as private company and non-profit company for example.">
+              <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
+            </div>
           </summary>
         </details>
         <details class="mdc-theme--background mdc-elevation--z2">
@@ -59,7 +63,9 @@
               <span class="type-header">Reg:</span>
               <span class="mdc-expansion__header">{{ object.registration_number }}</span>
             </span>
-            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
+            <div data-tooltip="Indicates the registration number of the business.">
+              <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
+            </div>
           </summary>
         </details>
       </div>
