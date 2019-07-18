@@ -25,10 +25,34 @@ services:
       - DJANGO_CSRF_COOKIE_SECURE=False
       - DJANGO_TEMPLATE_DEBUG=True
       - DJANGO_DEBUG_TOOLBAR=True
+      - DJANGO_DISABLE_PASSWORD_VALIDATORS=True
       - DISABLE_SENTRY=True
     ports:
       - "8000:8000"
     command: python manage.py runserver_plus 0.0.0.0:8000
+
+  test:
+    build:
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+    image: biz_portal_local_django
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app
+    environment:
+      - DJANGO_DEBUG=False
+      - DJANGO_SECRET_KEY=not-secret-in-dev
+      - DATABASE_URL=postgres://postgres@postgres/biz_portal
+      - DJANGO_WHITENOISE_AUTOREFRESH=True
+      - DJANGO_SECURE_SSL_REDIRECT=False
+      - DJANGO_SESSION_COOKIE_SECURE=False
+      - DJANGO_CSRF_COOKIE_SECURE=False
+      - DJANGO_TEMPLATE_DEBUG=True
+      - DJANGO_DEBUG_TOOLBAR=True
+      - DJANGO_DISABLE_PASSWORD_VALIDATORS=True
+      - DISABLE_SENTRY=True
+    command: pytest
 
   postgres:
     image: postgres:9.4
