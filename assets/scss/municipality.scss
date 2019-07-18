@@ -1,0 +1,104 @@
+.muni-contact-details {
+  margin-top: 32px;
+
+  @media screen and (min-width: 960px) {
+    display: flex;
+    justify-content: center;
+  }
+
+  .content-and-logo {
+    @media screen and (min-width: 960px) {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+  }
+
+  .municipality-logo {
+    margin: 0 auto;
+    margin-bottom: 12px;
+  }
+
+  .contact-heading-and-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+
+    @media screen and (min-width: 960px) {
+      margin-bottom: 8px;
+    }
+  }
+
+  .contact-heading-and-special-instructions {
+    display: flex;
+  }
+
+  .contact-heading {
+    padding-right: 4px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.15px;
+    color: rgba(0, 0, 0, 0.75);
+    margin: 0;
+
+    @media screen and (min-width: 960px) {
+      padding-right: 8px;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      width: 25%;
+    }
+  }
+
+  .contact-main-heading {
+    font-size: 20px;
+    padding-right: 4px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0.15px;
+    color: rgba(0, 0, 0, 0.75);
+    margin: 0;
+
+    @media screen and (min-width: 960px) {
+      font-size: 36px;
+      padding-right: 8px;
+      font-weight: 500;
+      line-height: 24px;
+      margin-bottom: 16px;
+    }
+  }
+
+  .contact-field {
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0.15px;
+    text-decoration: none;
+    margin: 0;
+
+    @media screen and (min-width: 960px) {
+      font-size: 16px;
+      line-height: 24px;
+      width: 75%;
+    }
+  }
+
+  .special-instructions {
+    white-space: pre-wrap;
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0.15px;
+    text-decoration: none;
+    margin: 0;
+
+    @media screen and (min-width: 960px) {
+      font-size: 16px;
+      line-height: 24px;
+      max-width: 600px;
+    }
+  }
+}
