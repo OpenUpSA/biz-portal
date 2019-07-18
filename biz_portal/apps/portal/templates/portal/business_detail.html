@@ -19,14 +19,6 @@
               <div class="mdc-dialog__surface">
                 <div class="mdc-dialog__content" id="my-dialog-content">
                   <ul class="mdc-list mdc-list--avatar-list">
-                    {% if request.user.is_staff %} 
-                    <!-- <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">Claim this business</span>
-                    </li> -->
-                     <!-- <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">Download data</span>
-                    </li> -->
-                    {% endif %}
                     <li class="mdc-list-item">
                       <span class="mdc-list-item__text">
                           <a href="{% url 'admin:portal_business_change' object.id %}">Edit business</a>
@@ -62,9 +54,6 @@
             <img src="{% static 'images/facebook.svg' %}" />
             </a>
           </span>
-          <!-- <span class="clipboard-icon">
-            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">attach_file</i>
-          </span> -->
         </div> 
       </div>
       <div class="business-profile-cards">
