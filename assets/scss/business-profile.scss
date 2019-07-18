@@ -2,6 +2,12 @@
 @import "@material/dialog/mdc-dialog";
 @import "./mdc-expansion.scss";
 
+.mdc-top-app-bar__title {
+  a {
+    text-decoration: none;
+  }
+}
+
 .business-details-section {
   margin-top: 16px;
 
