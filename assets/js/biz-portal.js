@@ -4,6 +4,7 @@ const Bloodhound = require('corejs-typeahead/dist/bloodhound');
 import {MDCTopAppBar} from "@material/top-app-bar";
 import {MDCDrawer} from "@material/drawer";
 import buttonRipple from "./business-profile";
+import openProfileModal from "./open-profile-modal";
 
 // Instantiate MDC Drawer
 const drawerEl = document.querySelector(".mdc-drawer");
