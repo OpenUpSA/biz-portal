@@ -71,12 +71,12 @@
             <span class="business-profile-location mdc-list-item">
               <i class="material-icons mdc-list-item__graphic" aria-hidden="true">account_circle</i>
               <span class="type-header">Directors:</span>
-              <span class="mdc-expansion__header">{{ object.directors | length }}</span>
+              <span class="mdc-expansion__header">{{ object.get_directors | length }}</span>
             </span>
             <i class="material-icons mdc-list-item__graphic arrow-down" aria-hidden="true">keyboard_arrow_down</i>
           </summary>
           <div class="mdc-expansion__content">
-            {% for director in object.directors %}
+            {% for director in object.get_directors %}
             <div class="directors-details">
               <span class="mdc-expansion__header director-first-name">{{ director.first_names }}</span>
               <span class="mdc-expansion__header director-last-name">{{ director.last_name }}</span>
