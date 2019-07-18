@@ -136,6 +136,11 @@ class BusinessAdmin(ImportMixin, ObjectPermissionsModelAdmin):
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
+class BusinessMemberAdmin(admin.ModelAdmin):
+    autocomplete_fields = ["business"]
+
+
 admin.site.register(models.Business, BusinessAdmin)
 admin.site.register(models.Municipality)
 admin.site.register(models.Region)
+admin.site.register(models.BusinessMember, BusinessMemberAdmin)

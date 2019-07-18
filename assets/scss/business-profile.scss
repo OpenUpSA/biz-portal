@@ -149,4 +149,18 @@
   .address-detail {
     white-space: pre-wrap;
   }
+
+  .directors-details {
+    display: flex;
+    padding-bottom: 4px;
+  }
+
+  .director-first-name {
+    text-transform: capitalize;
+  }
+
+  .director-last-name {
+    text-transform: capitalize;
+    padding-left: 4px;
+  }
 }
