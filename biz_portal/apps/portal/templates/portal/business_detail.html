@@ -76,9 +76,11 @@
             <i class="material-icons mdc-list-item__graphic arrow-down" aria-hidden="true">keyboard_arrow_down</i>
           </summary>
           <div class="mdc-expansion__content">
-              {% for director in object.directors %}
-            <span class="mdc-expansion__header address-detail">{{ director.first_names }}</span>
-            <span class="mdc-expansion__header address-detail">{{ director.last_name }}</span>
+            {% for director in object.directors %}
+            <div class="directors-details">
+              <span class="mdc-expansion__header director-first-name">{{ director.first_names }}</span>
+              <span class="mdc-expansion__header director-last-name">{{ director.last_name }}</span>
+            </div>
             {% endfor %}
           </div>
         </details>
