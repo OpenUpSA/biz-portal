@@ -19,7 +19,9 @@ class BusinessSearchTestCase(TestCase):
     def test_search_business(self):
         """Given two businesses, the correct one is returned for the search query"""
         c = Client()
-        response = c.get("/api/v1/businesses/?search=brass")
+        response = c.get(
+            "/api/v1/businesses/?search=brass", HTTP_HOST="biz.capeagulhas.org"
+        )
         response_dict = json.loads(response.content)
         self.assertEqual(1, response_dict["count"])
         business_dict = response_dict["results"][0]
@@ -31,7 +33,9 @@ class BusinessSearchTestCase(TestCase):
 
         # Do it again with different business to ensure we
         # dont' accidentally just have one in DB
-        response = c.get("/api/v1/businesses/?search=boort")
+        response = c.get(
+            "/api/v1/businesses/?search=boort", HTTP_HOST="biz.capeagulhas.org"
+        )
         response_dictionary = json.loads(response.content)
         self.assertEqual(1, response_dictionary["count"])
         business = response_dictionary["results"][0]
@@ -41,7 +45,7 @@ class BusinessSearchTestCase(TestCase):
 class BusinessCreationTestCase(TestCase):
     """Unauthenticated users are not able to create businesses"""
 
-    def test_search_business(self):
+    def test_create_business(self):
         """Given two businesses, the correct one is returned for the search query"""
         c = Client()
         business_dictionary = {
@@ -57,7 +61,10 @@ class BusinessCreationTestCase(TestCase):
         }
         business_json = json.dumps(business_dictionary)
         response = c.post(
-            "/api/v1/businesses/", business_json, content_type="application/json"
+            "/api/v1/businesses/",
+            business_json,
+            content_type="application/json",
+            HTTP_HOST="biz.capeagulhas.org",
         )
         self.assertContains(response, "Authentication", status_code=403)
         self.assertEqual(0, models.Business.objects.all().count())
@@ -74,7 +81,7 @@ class BusinessUpdateTestCase(TestCase):
         "test_api_businesses",
     ]
 
-    def test_search_business(self):
+    def test_update_business(self):
         """Given two businesses, the correct one is returned for the search query"""
         c = Client()
         business_dictionary = {
@@ -90,7 +97,10 @@ class BusinessUpdateTestCase(TestCase):
         }
         business_json = json.dumps(business_dictionary)
         response = c.put(
-            "/api/v1/businesses/1/", business_json, content_type="application/json"
+            "/api/v1/businesses/1/",
+            business_json,
+            content_type="application/json",
+            HTTP_HOST="biz.capeagulhas.org",
         )
         self.assertContains(response, "Authentication", status_code=403)
         self.assertNotEqual("aa", models.Business.objects.get(pk=1))

@@ -1,6 +1,7 @@
 from django.contrib import admin
 from import_export import fields, resources, widgets
 from import_export.admin import ImportMixin
+from rules.contrib.admin import ObjectPermissionsModelAdmin
 
 from . import models
 
@@ -55,12 +56,11 @@ class BusinessResource(resources.ModelResource):
         )
 
 
-class BusinessAdmin(ImportMixin, admin.ModelAdmin):
+class BusinessAdmin(ImportMixin, ObjectPermissionsModelAdmin):
     search_fields = ["registered_name"]
 
     readonly_fields = (
         "registered_name",
-        "registration_number",
         "registered_physical_address",
         "registered_postal_address",
         "registration_date",
@@ -68,7 +68,72 @@ class BusinessAdmin(ImportMixin, admin.ModelAdmin):
         "registered_business_type",
     )
 
+    fieldsets = (
+        (
+            "Registered details",
+            {
+                "description": (
+                    "Details of the business registered with the"
+                    " appropriate body, e.g. CIPC"
+                ),
+                "fields": [
+                    "registration_number",
+                    "registered_name",
+                    "registered_physical_address",
+                    "registered_postal_address",
+                    "registration_date",
+                    "registration_status",
+                    "registered_business_type",
+                ],
+            },
+        ),
+        (
+            "Contact details",
+            {
+                "fields": [
+                    "website_url",
+                    "cellphone_number",
+                    "phone_number",
+                    "fax_number",
+                    "whatsapp_number",
+                    "facebook_page_url",
+                    "twitter_page_url",
+                    "instagram_page_url",
+                    "supplied_physical_address",
+                    "supplied_postal_address",
+                    "region",
+                ]
+            },
+        ),
+        (
+            "Other details",
+            {
+                "fields": [
+                    "supplied_name",
+                    "description",
+                    "number_employed",
+                    "annual_turnover",
+                    "sector",
+                    "date_started",
+                ]
+            },
+        ),
+    )
     resource_class = BusinessResource
+
+    def get_municipality(business):
+        return business.region.municipality
+
+    list_display = ("registered_name", "supplied_name", get_municipality, "region")
+    list_display_links = ("registered_name", "supplied_name")
+    list_filter = ("region__municipality", "region", "registration_status", "sector")
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "region" and not request.user.is_superuser:
+            kwargs["queryset"] = models.Region.objects.filter(
+                municipality__in=[m.pk for m in request.user.municipality_set.all()]
+            )
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 admin.site.register(models.Business, BusinessAdmin)

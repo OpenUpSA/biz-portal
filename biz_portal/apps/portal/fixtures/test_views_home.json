@@ -6,7 +6,7 @@
     "registered_name": "Y-KWIX-YEET BRASS",
     "registration_number": "1990/002791/07",
     "region": 2,
-    "sector": 1
+    "sector": 14
   }
 },
 {
@@ -16,7 +16,7 @@
     "registered_name": "BOORT DEVELOPMENT BUSINESS",
     "registration_number": "1990/000289/23",
     "region": 1,
-    "sector": 2
+    "sector": 29
   }
 },
 {
@@ -26,7 +26,7 @@
     "registered_name": "SAME AS SECOND BUT FOR THE NAME KWIX",
     "registration_number": "1990/000289/24",
     "region": 1,
-    "sector": 2
+    "sector": 3
   }
 },
 {
@@ -36,7 +36,7 @@
     "registered_name": "KWIX business in another muni",
     "registration_number": "1991/000281/21",
     "region": 3,
-    "sector": 1
+    "sector": 3
   }
 },
 {
@@ -95,20 +95,6 @@
   "fields": {
     "label": "Random region place",
     "municipality": 2
-  }
-},
-{
-  "model": "portal.sector",
-  "pk": 1,
-  "fields": {
-    "label": "Accommodation and Food Services"
-  }
-},
-{
-  "model": "portal.sector",
-  "pk": 2,
-  "fields": {
-    "label": "Agriculture, Forestry, Fishing and Hunting"
   }
 }
 ]

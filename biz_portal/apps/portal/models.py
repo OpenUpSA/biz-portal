@@ -1,3 +1,4 @@
+from django.contrib import auth
 from django.contrib.sites.models import Site
 from django.db import models
 from django.urls import reverse
@@ -26,19 +27,22 @@ class Municipality(models.Model):
     )
     site = models.OneToOneField(Site, on_delete=models.CASCADE, unique=True)
     logo = models.CharField(
-        max_length=200, unique=True, blank=True, help_text="e.g. images/logo-WC033.png"
+        max_length=200, blank=True, null=True, help_text="e.g. images/logo-WC033.png"
     )
     # Contact details
-    website_url = models.CharField(max_length=500, blank=True)
-    cellphone_number = models.CharField(max_length=200, blank=True)
-    phone_number = models.CharField(max_length=200, blank=True)
-    fax_number = models.CharField(max_length=200, blank=True)
-    whatsapp_number = models.CharField(max_length=200, blank=True)
-    facebook_page_url = models.CharField(max_length=500, blank=True)
-    twitter_page_url = models.CharField(max_length=500, blank=True)
-    instagram_page_url = models.CharField(max_length=500, blank=True)
+    website_url = models.CharField(max_length=500, blank=True, null=True)
+    email_address = models.CharField(max_length=500, blank=True, null=True)
+    cellphone_number = models.CharField(max_length=200, blank=True, null=True)
+    phone_number = models.CharField(max_length=200, blank=True, null=True)
+    fax_number = models.CharField(max_length=200, blank=True, null=True)
+    whatsapp_number = models.CharField(max_length=200, blank=True, null=True)
+    facebook_page_url = models.CharField(max_length=500, blank=True, null=True)
+    twitter_page_url = models.CharField(max_length=500, blank=True, null=True)
+    instagram_page_url = models.CharField(max_length=500, blank=True, null=True)
+    linkedin_page_url = models.CharField(max_length=500, blank=True, null=True)
     special_instructions = models.TextField(
         blank=True,
+        null=True,
         help_text=(
             "Special instructions for contacting the municipality in"
             " relation to their business portal"
@@ -47,12 +51,14 @@ class Municipality(models.Model):
     add_update_business_url = models.CharField(
         max_length=500,
         blank=True,
+        null=True,
         verbose_name="Add/Update Business form URL",
         help_text=(
             "Public URL for the form where businesses can request for"
             " their business details to be added or updated"
         ),
     )
+    administrators = models.ManyToManyField(auth.models.User, blank=True)
 
     def __str__(self):
         return f"{self.label} ({self.mdb_code})"
@@ -90,38 +96,66 @@ class Sector(models.Model):
 
 
 class Business(models.Model):
-    registered_name = models.CharField(max_length=200)
-    registration_number = models.CharField(max_length=200, unique=True)
-    registration_status = models.ForeignKey(
-        BusinessStatus, on_delete=models.CASCADE, related_name="businesses"
+    # Registered details
+    registered_name = models.CharField(max_length=200, blank=True)
+    registration_number = models.CharField(
+        max_length=200,
+        unique=True,
+        help_text="This should only be modified if it was initially entered incorrectly.",
     )
+    registration_status = models.ForeignKey(
+        BusinessStatus,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="businesses",
+    )
+    registered_physical_address = models.TextField(blank=True)
+    registered_postal_address = models.TextField(blank=True)
+    registered_business_type = models.ForeignKey(
+        BusinessType,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="businesses",
+    )
+    registration_date = models.DateField(blank=True, null=True)
+
+    # Contact details
+    website_url = models.CharField(max_length=500, blank=True, null=True)
+    email_address = models.CharField(max_length=500, blank=True, null=True)
+    cellphone_number = models.CharField(max_length=200, blank=True, null=True)
+    phone_number = models.CharField(max_length=200, blank=True, null=True)
+    fax_number = models.CharField(max_length=200, blank=True, null=True)
+    whatsapp_number = models.CharField(max_length=200, blank=True, null=True)
+    facebook_page_url = models.CharField(max_length=500, blank=True, null=True)
+    twitter_page_url = models.CharField(max_length=500, blank=True, null=True)
+    instagram_page_url = models.CharField(max_length=500, blank=True, null=True)
+    supplied_physical_address = models.TextField(blank=True, null=True)
+    supplied_postal_address = models.TextField(blank=True, null=True)
     region = models.ForeignKey(
         Region, on_delete=models.CASCADE, related_name="businesses"
     )
-    registered_physical_address = models.TextField()
-    registered_postal_address = models.TextField()
-    sector = models.ForeignKey(
-        Sector, on_delete=models.CASCADE, related_name="businesses"
-    )
-    registered_business_type = models.ForeignKey(
-        BusinessType, on_delete=models.CASCADE, related_name="businesses"
-    )
-    registration_date = models.DateField()
 
-    website_url = models.CharField(max_length=500, blank=True)
-    cellphone_number = models.CharField(max_length=200, blank=True)
-    phone_number = models.CharField(max_length=200, blank=True)
-    fax_number = models.CharField(max_length=200, blank=True)
-    whatsapp_number = models.CharField(max_length=200, blank=True)
-    facebook_page_url = models.CharField(max_length=500, blank=True)
-    twitter_page_url = models.CharField(max_length=500, blank=True)
-    instagram_page_url = models.CharField(max_length=500, blank=True)
-    description = models.TextField(blank=True)
+    # Other details
+    supplied_name = models.CharField(max_length=200, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
     number_employed = models.IntegerField(null=True, blank=True)
     annual_turnover = models.IntegerField(null=True, blank=True, choices=TURNOVER_BANDS)
+    sector = models.ForeignKey(
+        Sector,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="businesses",
+    )
+    date_started = models.DateField(blank=True, null=True)
 
     def get_absolute_url(self):
         return reverse("business_detail", args=[str(self.id)])
 
+    def get_presentation_name(self):
+        return self.supplied_name or self.registered_name
+
     def __str__(self):
-        return f"{self.registered_name} ({self.registration_number})"
+        return f"{self.get_presentation_name()} ({self.registration_number})"

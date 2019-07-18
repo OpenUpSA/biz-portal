@@ -5,13 +5,61 @@
   <div class="business-details-section">
     <div class="layout">
       <div>
+          <div class="business-menu">
+              <button class="mdc-button business-menu-button" id="show-business-menu">
+                <i class="material-icons mdc-button__icon" aria-hidden="true">more_horiz</i>
+              </button>
+          </div>
+          <div class="mdc-dialog"
+             role="alertdialog"
+              aria-modal="true"
+              aria-labelledby="my-dialog-title"
+              aria-describedby="my-dialog-content">
+            <div class="mdc-dialog__container">
+              <div class="mdc-dialog__surface">
+                <div class="mdc-dialog__content" id="my-dialog-content">
+                  <ul class="mdc-list mdc-list--avatar-list">
+                    <li class="mdc-list-item">
+                      <span class="mdc-list-item__text">
+                          <a href="{% url 'admin:portal_business_change' object.id %}">Edit business</a>
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="mdc-dialog__scrim"></div>
+          </div> 
         <div class="business-category">
             <span class="business-category-text">{{ object.sector.label }}</span>
             <span>
               <img src="{% static 'images/accomodation.svg' %}" />
             </span>
         </div>
-        <div class="business-name">{{ object.registered_name }}</div>
+        <div class="business-name">
+          {% firstof object.supplied_name object.registered_name %}
+        </div>
+        {% if object.description %}
+        <div class="business-description">{{ object.description }}</div>
+        {% endif %}
+      </div>
+      <hr>
+      <div class="social-sharing">
+        <div class="social-sharing-text">
+          <p class="sharing-text">Share this business:</p>
+        </div> 
+        <div class="social-sharing-icons">
+          <span>
+            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" target="_blank">
+            <img src="{% static 'images/twitter.svg' %}" />
+            </a>
+          </span>
+          <span>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://{{ current_site.domain }}{{ request.get_full_path|iriencode }}" target="_blank">
+            <img src="{% static 'images/facebook.svg' %}" />
+            </a>
+          </span>
+        </div> 
       </div>
       <div class="business-profile-cards">
         <details class="mdc-expansion mdc-theme--background mdc-elevation--z2">
@@ -23,7 +71,7 @@
             <i class="material-icons mdc-list-item__graphic arrow-down" aria-hidden="true">keyboard_arrow_down</i>
           </summary>
           <div class="mdc-expansion__content">
-            <span class="mdc-expansion__header address-detail">{{ object.registered_physical_address }}</span>
+            <span class="mdc-expansion__header address-detail">{% firstof object.supplied_physical_address object.registered_physical_address %}</span>
           </div>
         </details>
         <details class="mdc-theme--background mdc-elevation--z2">
@@ -35,7 +83,9 @@
               <span class="type-header">Status:</span>
               <span class="mdc-expansion__header">{{ object.registration_status.label }}</span>
             </span>
-            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
+            <div data-tooltip="Indicates the current registration status of the business. A business's status can range from being In business or Deregistered to Closed.">
+              <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
+            </div>
           </summary>
         </details>
         <details class="mdc-theme--background mdc-elevation--z2">
@@ -45,7 +95,9 @@
               <span class="type-header">Type:</span>
               <span class="mdc-expansion__header">{{ object.registered_business_type.label }}</span>
             </span>
-            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
+            <div data-tooltip="Describes the type of business registered, such as private company and non-profit company for example.">
+              <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
+            </div>
           </summary>
         </details>
         <details class="mdc-theme--background mdc-elevation--z2">
@@ -57,7 +109,9 @@
               <span class="type-header">Reg:</span>
               <span class="mdc-expansion__header">{{ object.registration_number }}</span>
             </span>
-            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
+            <div data-tooltip="Indicates the registration number of the business.">
+              <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
+            </div>
           </summary>
         </details>
       </div>

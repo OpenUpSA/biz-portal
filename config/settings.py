@@ -23,8 +23,8 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 # Rely on nginx to direct only allowed hosts, allow all for dokku checks to work.
 ALLOWED_HOSTS = ["*"]
 
-if env.int("DJANGO_SITE_ID", None):
-    SITE_ID = env.int("DJANGO_SITE_ID", None)
+if env("DJANGO_SITE_ID", default=None):
+    SITE_ID = env.int("DJANGO_SITE_ID")
 USE_X_FORWARDED_HOST = env.bool("DJANGO_USE_X_FORWARDED_HOST", False)
 
 # Local time zone. Choices are
@@ -42,6 +42,8 @@ USE_L10N = True
 USE_TZ = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#locale-paths
 LOCALE_PATHS = [ROOT_DIR.path("locale")]
+
+WERKZEUG_DEBUG_PIN = "off"
 
 
 # DATABASES
@@ -78,6 +80,7 @@ THIRD_PARTY_APPS = [
     "django_extensions",
     "whitenoise.runserver_nostatic",
     "import_export",
+    "rules",
 ]
 
 LOCAL_APPS = ["biz_portal.apps.portal.apps.PortalConfig"]
@@ -87,7 +90,10 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#authentication-backends
-AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend"]
+AUTHENTICATION_BACKENDS = [
+    "rules.permissions.ObjectPermissionBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
 
 
 # PASSWORDS
@@ -101,19 +107,15 @@ PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
-    },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
-]
-
-# ADMIN
-# ------------------------------------------------------------------------------
-# Django Admin URL.
-ADMIN_URL = "admin/"
+if not env.bool("DJANGO_DISABLE_PASSWORD_VALIDATORS", False):
+    AUTH_PASSWORD_VALIDATORS = [
+        {
+            "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+        },
+        {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+        {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+        {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
+    ]
 
 
 # MIDDLEWARE
@@ -256,7 +258,7 @@ LOGGING = {
     "root": {"level": "INFO", "handlers": ["console"]},
     "loggers": {
         "django": {"level": "DEBUG" if DEBUG else "INFO"},
-        "portal": {"level": "DEBUG" if DEBUG else "INFO"},
+        "biz_portal": {"level": "DEBUG" if DEBUG else "INFO"},
         "": {"level": "DEBUG"},
         # Errors logged by the SDK itself
         "sentry_sdk": {"level": "ERROR", "handlers": ["console"], "propagate": False},
