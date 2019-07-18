@@ -11,6 +11,13 @@ TURNOVER_BANDS = [
     (5, "More than R5,000,000"),
 ]
 
+POSITIONS = [
+    (1, "Member"),
+    (2, "Director"),
+    (3, "Alternate Director"),
+    (4, "Company Secretary"),
+]
+
 
 class Municipality(models.Model):
     class Meta:
@@ -152,5 +159,25 @@ class Business(models.Model):
     def get_presentation_name(self):
         return self.supplied_name or self.registered_name
 
+    def get_directors(self):
+        return self.members.filter(position=get_position_id("Director"))
+
     def __str__(self):
         return f"{self.get_presentation_name()} ({self.registration_number})"
+
+
+class BusinessMember(models.Model):
+    censored_id_number = models.CharField(max_length=200)
+    first_names = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    position = models.IntegerField(choices=POSITIONS)
+    business = models.ForeignKey(
+        Business, on_delete=models.CASCADE, related_name="members"
+    )
+
+    def __str__(self):
+        return f"{self.first_names} {self.last_name} ({self.censored_id_number})"
+
+
+def get_position_id(label):
+    return [p[0] for p in POSITIONS if p[1] == label][0]
