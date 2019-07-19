@@ -1,0 +1,12 @@
+[
+{
+  "model": "portal.business",
+  "pk": 1,
+  "fields": {
+    "registered_name": "Y-KWIX-YEET BRASS",
+    "registration_number": "1990/002791/07",
+    "region": 2,
+    "sector": 1
+  }
+},
+]
