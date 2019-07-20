@@ -1,5 +1,6 @@
 import json
 
+import html5lib
 from bs4 import BeautifulSoup
 from django.test import Client, TestCase
 
@@ -15,6 +16,7 @@ class BusinessListTestCase(TestCase):
         response = c.get("/businesses/", HTTP_HOST="muni1.gov.za")
         self.assertEqual(3, len(response.context["business_list"]))
         assertSuggestionCountEqual(self, 3, "muni1.gov.za", response.content)
+        assertValidHTML(response.content)
 
         # Facets
         sector_facet = response.context["sector_business_counts"]
@@ -48,6 +50,7 @@ class BusinessListTestCase(TestCase):
         )
         self.assertEqual(1, len(response.context["business_list"]))
         assertSuggestionCountEqual(self, 1, "muni1.gov.za", response.content)
+        assertValidHTML(response.content)
 
         # Facets
         sector_facet = response.context["sector_business_counts"]
@@ -86,6 +89,7 @@ class BusinessListTestCase(TestCase):
             )
         )
         assertSuggestionCountEqual(self, 2, "muni1.gov.za", response.content)
+        assertValidHTML(response.content)
 
         # Facets
         sector_facet = response.context["sector_business_counts"]
@@ -151,6 +155,11 @@ class HomeTestCase(TestCase):
         agric_option = facet_option(self, sector_facet, "Agric")
         self.assertEqual(1, agric_option.get("count"))
 
+    def test_homepage_valid_html(self):
+        c = Client()
+        response = c.get("/", HTTP_HOST="muni1.gov.za")
+        assertValidHTML(response.content)
+
 
 class BusinessDetailTestCase(TestCase):
     """Loads the business requested in the URL"""
@@ -184,6 +193,11 @@ class BusinessDetailTestCase(TestCase):
         response = c.get("/businesses/3", HTTP_HOST="muni2.gov.za")
         self.assertContains(response, "Random")
 
+    def test_business_detail_valid_html(self):
+        c = Client()
+        response = c.get("/businesses/1", HTTP_HOST="muni1.gov.za")
+        assertValidHTML(response.content)
+
 
 def facet_option(case, facet, starts_with):
     options = [o for o in facet if o["label"].startswith(starts_with)]
@@ -202,3 +216,12 @@ def assertSuggestionCountEqual(testCase, expected, HTTP_HOST, content):
     api_response = c.get(suggestion_url, HTTP_HOST=HTTP_HOST)
     response_dict = json.loads(api_response.content)
     testCase.assertEqual(expected, response_dict["count"])
+
+
+def assertValidHTML(string):
+    """
+    Raises exception if the string is not valid HTML, e.g. has unmatched tags
+    that need to be matched.
+    """
+    parser = html5lib.HTMLParser(strict=True)
+    parser.parse(string)
