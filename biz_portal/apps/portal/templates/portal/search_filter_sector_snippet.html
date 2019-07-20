@@ -1,0 +1,42 @@
+{% load param_replace %}
+
+{% if request.GET.sector %}
+<div class="search-result">
+  <summary class="close_summary">
+    <div class="icon-and-filter-option">
+      <i class="material-icons mdc-list-item__graphic mdc-theme--primary" aria-hidden="true">location_on</i>
+      <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">
+        {{ request.GET.sector }}
+      </h3>
+    </div>
+    <div class="business-directory-count-arrow">
+      <a href="{% url "business_list" %}?{% param_replace page="" sector="" %}">
+        <i class="material-icons mdc-list-item__graphic close" aria-hidden="true">close</i>
+      </a>
+    </div>
+  </summary>
+</div> <!-- end .search-result -->
+{% else %}
+<details class="mdc-expansion">
+  <summary class="mdc-expansion__summary">
+    <div class="icon-and-filter-option">
+      <i class="material-icons mdc-list-item__graphic mdc-theme--primary" aria-hidden="true">build</i>
+      <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">
+        Sector
+      </h3>
+    </div>
+    <div class="business-directory-count-arrow">
+      <i class="material-icons mdc-list-item__graphic arrow-down" aria-hidden="true">keyboard_arrow_down</i>
+    </div>
+  </summary>
+  {% for sector in sector_business_counts %}
+  <a class="business-directory-categories-and-counts" href="{% url "business_list" %}?{% param_replace page="" sector=sector.label %}">
+    <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">{{ sector.label }}</h3>
+    <div class="business-directory-count-arrow">
+      <div class="location-count">{{ sector.count }}</div>
+      <i class="material-icons mdc-list-item__graphic arrow-right" aria-hidden="true">keyboard_arrow_right</i>
+    </div>
+  </a>
+  {% endfor %}
+</details>
+{% endif %}

@@ -92,9 +92,9 @@ body {
 }
 
 #custom-templates {
-  width: 100%;
-  height: 100%;
-  position: relative;
+  .search-query-input-container {
+    position: relative;
+  }
 
   .search-result-links {
     text-decoration: none;
