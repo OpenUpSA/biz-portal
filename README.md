@@ -69,7 +69,7 @@ docker-compose -f docker-compose.local.yml down --volumes
 ### Running tests
 
 ```
-docker-compose -f docker-compose.local.yml run --rm django pytest
+docker-compose -f docker-compose.local.yml run --rm test
 ```
 
 ### Javascript and CSS
