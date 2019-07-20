@@ -43,17 +43,22 @@ function themeBundle(name) {
         },
       },
       {loader: 'extract-loader'},
-      {loader: 'css-loader'},
+      {
+        loader: 'css-loader',
+        options: { sourceMap: true }
+      },
       {
         loader: 'postcss-loader',
         options: {
-          plugins: () => [autoprefixer()]
+          plugins: () => [autoprefixer()],
+          sourceMap: true
         }
       },
       {
         loader: 'sass-loader',
         options: {
-          importer: materialImporter
+          importer: materialImporter,
+          sourceMap: true
         },
       }
     ],
