@@ -1,13 +1,10 @@
 {% load param_replace %}
 
-<div class="find-business-section">
-  <div class="form-section mdc-theme--primary-bg">
-    <form id="custom-templates" action="{% url "business_list" %}" method="get">
+<form id="custom-templates" action="{% url "business_list" %}" method="get">
+  <div class="find-business-section">
+    <div class="form-section mdc-theme--primary-bg">
       <div class="layout">
         <h1 class="mdc-typography--subtitle1 subtitle-find-business">Find a business</h1>
-        <div class="search-icon-container">
-          <i class="material-icons mdc-text-field__icon search-icon" tabindex="0" role="button">search</i>
-        </div>
 
         {% if request.GET.region %}
         <input type="hidden" name="region" value="{{ request.GET.region }}" />
@@ -17,20 +14,28 @@
         <input type="hidden" name="sector" value="{{ request.GET.sector }}" />
         {% endif %}
 
-        <input
-          class="typeahead"
-          id="search-bar"
-          type="text"
-          placeholder="Enter business name"
-          name="q"
-          value="{{ search_string }}"
-          autocomplete="off"
-          data-suggestion-url="{% url "api:business-list" %}?{% param_replace q="" sector="" region="" sector__label=request.GET.sector region__label=request.GET.region %}"
-          data-view-all-url="{% url "business_list" %}?{% param_replace sector=request.GET.sector region=request.GET.region q="" %}"
-          >
+        <div class="search-query-input-container">
+          <input
+            class="typeahead"
+            id="search-bar"
+            type="text"
+            placeholder="Enter business name"
+            name="q"
+            value="{{ search_string }}"
+            autocomplete="off"
+            data-suggestion-url="{% url "api:business-list" %}?{% param_replace q="" sector="" region="" sector__label=request.GET.sector region__label=request.GET.region %}"
+            data-view-all-url="{% url "business_list" %}?{% param_replace sector=request.GET.sector region=request.GET.region q="" %}"
+            >
+          <div class="search-icon-container">
+            <i class="material-icons mdc-text-field__icon search-icon" tabindex="0" role="button">search</i>
+          </div>
+        </div><!-- end .search-query-input-container -->
       </div><!-- end .layout -->
+    </div><!-- end .form-section -->
 
-      <div class="layout">
+    <div class="layout">
+      <div class="business-directory">
+        <h2 class="mdc-typography--subtitle1 subtitle-business-directory">Business directory</h2>
         {% include "portal/search_filter_region_snippet.html" %}
 
         {% include "portal/search_filter_sector_snippet.html" %}
@@ -42,7 +47,7 @@
         <button class="mdc-button mdc-button--raised business-directory-submit">
           <span class="mdc-button__label">Search</span>
         </button>
-      </div><!-- end .layout -->
-    </form>
-  </div>
-</div>
+      </div><!-- end .business-directory -->
+    </div><!-- end .layout -->
+  </div><!-- end .find-business-section -->
+</form>
