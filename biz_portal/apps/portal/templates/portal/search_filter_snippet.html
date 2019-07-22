@@ -78,9 +78,9 @@
         </details>
         {% endif %}
 
-
-        {% if request.GET.sector %}
         <div class="search-result"> {# Start Sector #}
+        {% if request.GET.sector %}
+          <details class="mdc-expansion"> {# Start Sector #}
           <summary class="close_summary">
             <div class="icon-and-filter-option">
               <i class="material-icons mdc-list-item__graphic mdc-theme--primary" aria-hidden="true">location_on</i>
@@ -94,6 +94,7 @@
               </a>
             </div>
           </summary>
+          </details>
           {% else %}
           <details class="mdc-expansion"> {# Start Sector #}
             <summary class="mdc-expansion__summary">
@@ -119,8 +120,8 @@
             {% endfor %}
           </details>
           {% endif %}
-
         </div>
+
         <a class="link-clear-search" href="{% url 'business_list' %}">
           <h4 class="mdc-typography--subtitle2 subtitle-clear-search">Clear search</h4>
         </a>
