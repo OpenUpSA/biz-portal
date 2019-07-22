@@ -5,15 +5,16 @@
   "main": "index.js",
   "dependencies": {
     "@material/button": "^2.3.0",
+    "@material/dialog": "^3.0.0",
     "@material/card": "^3.0.0",
     "@material/drawer": "^2.3.0",
+    "@material/icon-button": "^3.0.0",
     "@material/ripple": "^2.3.0",
     "@material/textfield": "^2.3.1",
     "@material/top-app-bar": "^2.3.0",
     "corejs-typeahead": "^1.2.1",
     "install": "^0.12.2",
-    "jquery": "^3.4.1",
-    "material-components-web": "^2.3.1"
+    "jquery": "^3.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",

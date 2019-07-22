@@ -27,19 +27,22 @@ class Municipality(models.Model):
     )
     site = models.OneToOneField(Site, on_delete=models.CASCADE, unique=True)
     logo = models.CharField(
-        max_length=200, blank=True, help_text="e.g. images/logo-WC033.png"
+        max_length=200, blank=True, null=True, help_text="e.g. images/logo-WC033.png"
     )
     # Contact details
-    website_url = models.CharField(max_length=500, blank=True)
-    cellphone_number = models.CharField(max_length=200, blank=True)
-    phone_number = models.CharField(max_length=200, blank=True)
-    fax_number = models.CharField(max_length=200, blank=True)
-    whatsapp_number = models.CharField(max_length=200, blank=True)
-    facebook_page_url = models.CharField(max_length=500, blank=True)
-    twitter_page_url = models.CharField(max_length=500, blank=True)
-    instagram_page_url = models.CharField(max_length=500, blank=True)
+    website_url = models.CharField(max_length=500, blank=True, null=True)
+    email_address = models.CharField(max_length=500, blank=True, null=True)
+    cellphone_number = models.CharField(max_length=200, blank=True, null=True)
+    phone_number = models.CharField(max_length=200, blank=True, null=True)
+    fax_number = models.CharField(max_length=200, blank=True, null=True)
+    whatsapp_number = models.CharField(max_length=200, blank=True, null=True)
+    facebook_page_url = models.CharField(max_length=500, blank=True, null=True)
+    twitter_page_url = models.CharField(max_length=500, blank=True, null=True)
+    instagram_page_url = models.CharField(max_length=500, blank=True, null=True)
+    linkedin_page_url = models.CharField(max_length=500, blank=True, null=True)
     special_instructions = models.TextField(
         blank=True,
+        null=True,
         help_text=(
             "Special instructions for contacting the municipality in"
             " relation to their business portal"
@@ -48,6 +51,7 @@ class Municipality(models.Model):
     add_update_business_url = models.CharField(
         max_length=500,
         blank=True,
+        null=True,
         verbose_name="Add/Update Business form URL",
         help_text=(
             "Public URL for the form where businesses can request for"
@@ -118,23 +122,24 @@ class Business(models.Model):
     registration_date = models.DateField(blank=True, null=True)
 
     # Contact details
-    website_url = models.CharField(max_length=500, blank=True)
-    cellphone_number = models.CharField(max_length=200, blank=True)
-    phone_number = models.CharField(max_length=200, blank=True)
-    fax_number = models.CharField(max_length=200, blank=True)
-    whatsapp_number = models.CharField(max_length=200, blank=True)
-    facebook_page_url = models.CharField(max_length=500, blank=True)
-    twitter_page_url = models.CharField(max_length=500, blank=True)
-    instagram_page_url = models.CharField(max_length=500, blank=True)
-    supplied_physical_address = models.TextField(blank=True)
-    supplied_postal_address = models.TextField(blank=True)
+    website_url = models.CharField(max_length=500, blank=True, null=True)
+    email_address = models.CharField(max_length=500, blank=True, null=True)
+    cellphone_number = models.CharField(max_length=200, blank=True, null=True)
+    phone_number = models.CharField(max_length=200, blank=True, null=True)
+    fax_number = models.CharField(max_length=200, blank=True, null=True)
+    whatsapp_number = models.CharField(max_length=200, blank=True, null=True)
+    facebook_page_url = models.CharField(max_length=500, blank=True, null=True)
+    twitter_page_url = models.CharField(max_length=500, blank=True, null=True)
+    instagram_page_url = models.CharField(max_length=500, blank=True, null=True)
+    supplied_physical_address = models.TextField(blank=True, null=True)
+    supplied_postal_address = models.TextField(blank=True, null=True)
     region = models.ForeignKey(
         Region, on_delete=models.CASCADE, related_name="businesses"
     )
 
     # Other details
-    supplied_name = models.CharField(max_length=200, blank=True)
-    description = models.TextField(blank=True)
+    supplied_name = models.CharField(max_length=200, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
     number_employed = models.IntegerField(null=True, blank=True)
     annual_turnover = models.IntegerField(null=True, blank=True, choices=TURNOVER_BANDS)
     sector = models.ForeignKey(

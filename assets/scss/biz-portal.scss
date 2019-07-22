@@ -1,6 +1,7 @@
 @import "./business-profile.scss";
 @import "./business-search-results.scss";
 @import "./top-sectors.scss";
+@import "./municipality.scss";
 
 @import "@material/typography/mdc-typography";
 @import "@material/top-app-bar/mdc-top-app-bar";
@@ -91,9 +92,9 @@ body {
 }
 
 #custom-templates {
-  width: 100%;
-  height: 100%;
-  position: relative;
+  .search-query-input-container {
+    position: relative;
+  }
 
   .search-result-links {
     text-decoration: none;
