@@ -31,7 +31,13 @@
         <div class="mdc-dialog__scrim"></div>
       </div>
       <div class="business-category">
-        <span class="business-category-text">{{ object.sector.label }}</span>
+        <span class="business-category-text">
+          {% if object.sector.label %}
+            {{ object.sector.label }}
+          {% else %}
+            Unknown sector
+          {% endif %}
+        </span>
         <span>
           <img src="{% static 'images/accomodation.svg' %}" />
         </span>
