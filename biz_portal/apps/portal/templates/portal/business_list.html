@@ -20,11 +20,7 @@
       <div class="mdc-card business-results-card">
         <div class="business-category">
           <span class="business-category-text">
-            {% if business.sector %}
-              {{ business.sector.label }}
-            {% else %}
-              Unknown sector
-            {% endif %}
+            {{ business.sector.label }}
           </span>
           <span>
             <i class="material-icons mdc-list-item__graphic mdc-theme--primary" aria-hidden="true">home</i>

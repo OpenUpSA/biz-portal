@@ -32,11 +32,7 @@
       </div>
       <div class="business-category">
         <span class="business-category-text">
-          {% if object.sector %}
-            {{ object.sector.label }}
-          {% else %}
-            Unknown sector
-          {% endif %}
+          {{ object.sector.label }}
         </span>
         <span>
           <img src="{% static 'images/accomodation.svg' %}" />
