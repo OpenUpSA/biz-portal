@@ -122,7 +122,9 @@ class BusinessListView(generic.ListView):
         )
 
         for word in self.search_string.split():
-            self.queryset = self.queryset.filter(Q(registered_name__icontains=word) | Q(supplied_name__icontains=word))
+            self.queryset = self.queryset.filter(
+                Q(registered_name__icontains=word) | Q(supplied_name__icontains=word)
+            )
         if self.selected_region:
             self.queryset = self.queryset.filter(region=self.selected_region)
         if self.selected_sector:
