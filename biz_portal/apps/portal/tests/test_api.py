@@ -41,6 +41,28 @@ class BusinessSearchTestCase(TestCase):
         business = response_dictionary["results"][0]
         self.assertEqual("BOORT DEVELOPMENT BUSINESS", business["registered_name"])
 
+    def test_searches_supplied_and_registered_names(self):
+        """Businesses should be searchable by their supplied or registered names"""
+        c = Client()
+
+        # Registered name
+        response = c.get(
+            "/api/v1/businesses/?search=brass", HTTP_HOST="biz.capeagulhas.org"
+        )
+        response_dict = json.loads(response.content)
+        self.assertEqual(1, response_dict["count"])
+        business_dict = response_dict["results"][0]
+        self.assertEqual("Y-KWIX-YEET BRASS", business_dict["registered_name"])
+
+        # Supplied name
+        response = c.get(
+            "/api/v1/businesses/?search=copper", HTTP_HOST="biz.capeagulhas.org"
+        )
+        response_dict = json.loads(response.content)
+        self.assertEqual(1, response_dict["count"])
+        business_dict = response_dict["results"][0]
+        self.assertEqual("Y-KWIX-YEET BRASS", business_dict["registered_name"])
+
 
 class BusinessCreationTestCase(TestCase):
     """Unauthenticated users are not able to create businesses"""
