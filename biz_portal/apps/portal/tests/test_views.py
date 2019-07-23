@@ -128,7 +128,7 @@ class HomeTestCase(TestCase):
         sector_facet = response.context["sector_business_counts"]
         generic_option = facet_option(self, sector_facet, "generic")
         self.assertEqual(1, generic_option.get("count"))
-        unknown_option = facet_option(self, sector_facet, "unknown")
+        unknown_option = facet_option(self, sector_facet, "Sector unknown")
         self.assertEqual(1, unknown_option.get("count"))
         agric_option = facet_option(self, sector_facet, "Agric")
         self.assertEqual(1, agric_option.get("count"))
