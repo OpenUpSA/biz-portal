@@ -144,8 +144,6 @@ class Business(models.Model):
     annual_turnover = models.IntegerField(null=True, blank=True, choices=TURNOVER_BANDS)
     sector = models.ForeignKey(
         Sector,
-        blank=True,
-        null=True,
         on_delete=models.CASCADE,
         related_name="businesses",
     )
