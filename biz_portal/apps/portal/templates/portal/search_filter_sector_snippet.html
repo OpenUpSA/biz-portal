@@ -32,7 +32,7 @@
   {% for sector in sector_business_counts %}
   <a class="business-directory-categories-and-counts" href="{% url "business_list" %}?{% param_replace page="" sector=sector.label %}">
     <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">
-      {% if sector.label %}
+      {% if sector %}
         {{ sector.label }}
       {% else %}
         Unknown sector

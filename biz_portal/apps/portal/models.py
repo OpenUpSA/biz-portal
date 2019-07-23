@@ -92,10 +92,7 @@ class Sector(models.Model):
     label = models.CharField(max_length=200, unique=True)
 
     def __str__(self):
-        if self.label:
-            return self.label
-        else:
-            return 'Unknown sector'
+        return self.label
 
 
 class Business(models.Model):
