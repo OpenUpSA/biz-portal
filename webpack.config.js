@@ -71,7 +71,7 @@ module.exports = {
     // Entry for each theme
     './assets/scss/biz-portal-default.scss',
     './assets/scss/biz-portal-WC033.scss',
-
+    './assets/js/html5-details-polyfill.js',
     './assets/js/biz-portal.js'
   ],
   output: {
