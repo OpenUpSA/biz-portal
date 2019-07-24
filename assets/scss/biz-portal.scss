@@ -22,6 +22,10 @@ body {
   overflow: auto;
   position: relative;
 }
+.fa-list-icon {
+  margin-right: 4px;
+  text-align: center;
+}
 
 .navbar {
   @include mdc-top-app-bar-fill-color(#fff);
@@ -89,6 +93,10 @@ body {
 
 .text-field-business.mdc-text-field--focused {
   @include mdc-text-field-label-color(rgba(0, 0, 0, 0.8));
+}
+
+.info-icon {
+    color: #737373;
 }
 
 #custom-templates {
