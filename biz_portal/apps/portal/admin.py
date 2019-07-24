@@ -129,10 +129,11 @@ class BusinessAdmin(ImportMixin, ObjectPermissionsModelAdmin):
     list_filter = ("region__municipality", "region", "registration_status", "sector")
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == "region" and not request.user.is_superuser:
-            kwargs["queryset"] = models.Region.objects.filter(
-                municipality__in=[m.pk for m in request.user.municipality_set.all()]
-            )
+        if db_field.name == "region":
+            if not request.user.is_superuser and not request.user.groups.filter(name='Integration Admins').exists():
+                kwargs["queryset"] = models.Region.objects.filter(
+                    municipality__in=[m.pk for m in request.user.municipality_set.all()]
+                )
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 

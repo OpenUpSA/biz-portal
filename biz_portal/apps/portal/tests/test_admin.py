@@ -101,6 +101,43 @@ class AdminModifyBusinessTest(TestCase):
         business = models.Business.objects.get(pk=business.pk)
         self.assertEqual(business.supplied_name, "DEADBEEF")
 
+    def test_integration_admin_edit_all_businesses_ok(self):
+        """ Superuser who is not listed as muni edit any businesses """
+        self.assertTrue(self.client.login(username="integration_admin", password="password"))
+
+        # Business in first muni
+        business = models.Business.objects.get(pk=1)
+        self.assertNotEqual(business.supplied_name, "DEADBEEF")
+        post_data = {
+            "registration_number": business.registration_number,
+            "region": business.region.id,
+            "supplied_name": "DEADBEEF",
+        }
+        response = self.client.post(
+            reverse("admin:portal_business_change", args=[business.pk]),
+            post_data,
+            HTTP_HOST="biz-portal.openup.org.za",
+        )
+        self.assertEqual(response.status_code, 302)
+
+        # Business in second muni
+        business = models.Business.objects.get(pk=2)
+        self.assertNotEqual(business.supplied_name, "DEADBEEF 2")
+        post_data = {
+            "registration_number": business.registration_number,
+            "region": business.region.id,
+            "supplied_name": "DEADBEEF 2",
+        }
+        response = self.client.post(
+            reverse("admin:portal_business_change", args=[business.pk]),
+            post_data,
+            HTTP_HOST="biz-portal.openup.org.za",
+        )
+        self.assertEqual(response.status_code, 302)
+
+        business = models.Business.objects.get(pk=business.pk)
+        self.assertEqual(business.supplied_name, "DEADBEEF 2")
+
     def test_muni_admin_edit_muni_businesses_ok(self):
         """ User who is listed as muni admin may edit businesses in muni """
         self.assertTrue(
@@ -164,6 +201,19 @@ class AdminModifyBusinessTest(TestCase):
     def test_superuser_can_select_any_muni(self):
         """ Superuser who is not listed as muni admin can select any muni businesses """
         self.assertTrue(self.client.login(username="admin", password="password"))
+
+        business = models.Business.objects.get(pk=1)
+
+        view_response = self.client.get(
+            reverse("admin:portal_business_change", args=[business.pk]),
+            HTTP_HOST="biz-portal.openup.org.za",
+        )
+        self.assertContains(view_response, "Bredasdorp")
+        self.assertContains(view_response, "Somewhere in BUF")
+
+    def test_integration_admin_can_select_any_muni(self):
+        """ Superuser who is not listed as muni admin can select any muni businesses """
+        self.assertTrue(self.client.login(username="integration_admin", password="password"))
 
         business = models.Business.objects.get(pk=1)
 
