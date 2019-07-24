@@ -71,7 +71,7 @@ class Region(models.Model):
     )
 
     def __str__(self):
-        return self.label
+        return "{}, {}".format(self.label, self.municipality.label)
 
 
 class BusinessStatus(models.Model):
