@@ -26,7 +26,7 @@ def is_muni_admin(user):
     return user.is_staff and user.municipality_set.exists()
 
 
-is_integration_admin = rules.is_group_member('Integration Admins')
+is_integration_admin = rules.is_group_member("Integration Admins")
 is_muni_or_integration_admin = is_integration_admin | is_muni_admin
 is_business_muni_or_integration_admin = is_integration_admin | is_business_muni_admin
 
