@@ -9,7 +9,9 @@ RUN apk update \
   # CFFI dependencies
   && apk add libffi-dev py-cffi \
   # https://docs.djangoproject.com/en/dev/ref/django-admin/#dbshell
-  && apk add postgresql-client
+  && apk add postgresql-client \
+  # wkhtmltopdf binary
+  && apk add wkhtmltopdf
 
 # Requirements are installed here to ensure they will be cached.
 COPY ./requirements /requirements
