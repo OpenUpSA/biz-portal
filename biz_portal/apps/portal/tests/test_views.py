@@ -162,7 +162,9 @@ class HomeTestCase(TestCase):
 
         soup = BeautifulSoup(response.content, "html.parser")
         script = soup.select_one(
-            'script[src="https://www.googletagmanager.com/gtag/js?id={}"]'.format("randomgooglecode")
+            'script[src="https://www.googletagmanager.com/gtag/js?id={}"]'.format(
+                "randomgooglecode"
+            )
         )
         self.assertTrue(script)
 
