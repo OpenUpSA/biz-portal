@@ -14,6 +14,19 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
 
+    {% if current_site.municipality.google_analytics_code %}
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ current_site.municipality.google_analytics_code }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', '{{ current_site.municipality.google_analytics_code }}');
+    </script>
+    {% endif %}
+
+
     <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}">
 
     {% block css %}
