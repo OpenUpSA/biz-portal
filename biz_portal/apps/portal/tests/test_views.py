@@ -155,6 +155,17 @@ class HomeTestCase(TestCase):
         agric_option = facet_option(self, sector_facet, "Agric")
         self.assertEqual(1, agric_option.get("count"))
 
+    def test_google_analytics_code(self):
+        """No filters, other muni"""
+        c = Client()
+        response = c.get("/", HTTP_HOST="muni2.gov.za")
+
+        soup = BeautifulSoup(response.content, "html.parser")
+        script = soup.select_one(
+            'script[src="https://www.googletagmanager.com/gtag/js?id={}"]'.format("randomgooglecode")
+        )
+        self.assertTrue(script)
+
     def test_homepage_valid_html(self):
         c = Client()
         response = c.get("/", HTTP_HOST="muni1.gov.za")
