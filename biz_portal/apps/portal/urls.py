@@ -19,6 +19,11 @@ urlpatterns = [
         views.BusinessDetailView.as_view(),
         name="business_detail",
     ),
+    path(
+        "businesses/<int:pk>/download",
+        views.BusinessDetailPDFView.as_view(),
+        name="business_detail_pdf",
+    ),
     # API
     path(r"api/v1/", include((router.urls, "portal"), namespace="api")),
 ]

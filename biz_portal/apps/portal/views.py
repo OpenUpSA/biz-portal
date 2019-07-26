@@ -3,6 +3,8 @@ from django.db.models import Count, F
 from django.shortcuts import get_object_or_404
 from django.views import generic
 from rest_framework import serializers, viewsets
+from wkhtmltopdf import wkhtmltopdf
+from wkhtmltopdf.views import PDFResponse, PDFTemplateResponse
 
 from . import models
 
@@ -12,16 +14,16 @@ class SearchSnippet:
     def get_region_queryset(business_queryset):
         return (
             business_queryset.values(label=F("region__label"))
-            .annotate(count=Count("*"))
-            .order_by("-count")
+                .annotate(count=Count("*"))
+                .order_by("-count")
         )
 
     @staticmethod
     def get_sector_queryset(business_queryset):
         return (
             business_queryset.values(label=F("sector__label"))
-            .annotate(count=Count("*"))
-            .order_by("-count")
+                .annotate(count=Count("*"))
+                .order_by("-count")
         )
 
 
@@ -49,10 +51,10 @@ class HomeView(generic.TemplateView):
 
         top_sectors_qs = (
             models.Business.objects.exclude(sector__label__in=["unknown", "generic"])
-            .filter(region__municipality=self.current_site.municipality)
-            .values(label=F("sector__label"))
-            .annotate(count=Count("*"))
-            .order_by("-count")
+                .filter(region__municipality=self.current_site.municipality)
+                .values(label=F("sector__label"))
+                .annotate(count=Count("*"))
+                .order_by("-count")
         )
         context["top_sectors_counts"] = top_sectors_qs
         return context
@@ -86,6 +88,35 @@ class BusinessDetailView(generic.DetailView):
         return get_object_or_404(
             models.Business, pk=self.pk, region__municipality=current_site.municipality
         )
+
+
+# class PDF(BusinessDetailView):
+#
+#     def get(self, request, *args, **kwargs):
+#         # render as pdf
+#         url = '/businesses/{}'.format(self.get_object().pk)
+#         url = request.build_absolute_uri(url)
+#         pdf = wkhtmltopdf(url, javascript_delay=1000)
+#         filename = '{}.pdf'.format(self.get_object().registered_name)
+#
+#         return PDFResponse(pdf, filename=filename)
+
+
+class BusinessDetailPDFView(BusinessDetailView):
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        context = self.get_context_data(object=self.object)
+        context['object'] = self.get_object()
+
+        response = PDFTemplateResponse(request=request,
+                                       template=self.template_name,
+                                       filename="hello.pdf",
+                                       context=context,
+                                       show_content_in_browser=False,
+                                       cmd_options={'margin-top': 50, 'javascript-delay': 5000}
+                                       )
+        return response
 
 
 class BusinessListView(generic.ListView):
@@ -148,7 +179,6 @@ class BusinessListView(generic.ListView):
 
 
 class BusinessSerializer(serializers.ModelSerializer):
-
     web_url = serializers.URLField(source="get_absolute_url", read_only=True)
 
     class Meta:
