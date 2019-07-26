@@ -5,14 +5,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('portal', '0021_municipality_linkedin_page_url'),
-    ]
+    dependencies = [("portal", "0021_municipality_linkedin_page_url")]
 
     operations = [
         migrations.AddField(
-            model_name='municipality',
-            name='google_analytics_code',
+            model_name="municipality",
+            name="google_analytics_code",
             field=models.CharField(blank=True, max_length=200, null=True),
-        ),
+        )
     ]
