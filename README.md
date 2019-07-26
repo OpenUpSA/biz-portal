@@ -42,6 +42,18 @@ Each time you pull in changes that might contain database changes:
 docker-compose -f docker-compose.local.yml run --rm django python manage.py migrate
 ```
 
+Build the necessary services
+
+```
+docker-compose -f docker-compose.local.yml build django test
+```
+
+Then run collectstatic
+
+```
+docker-compose -f docker-compose.local.yml run --rm django python manage.py collectstatic
+```
+
 Now you can start the server
 ```
 docker-compose -f docker-compose.local.yml up
