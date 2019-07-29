@@ -19,7 +19,9 @@
     <a href="{{ business.get_absolute_url }}" class="link-to-business-profile">
       <div class="mdc-card business-results-card">
         <div class="business-category">
-          <span class="business-category-text">{{ business.sector.label }}</span>
+          <span class="business-category-text">
+            {{ business.sector.label }}
+          </span>
           <span>
             <i class="material-icons mdc-list-item__graphic mdc-theme--primary" aria-hidden="true">home</i>
           </span>

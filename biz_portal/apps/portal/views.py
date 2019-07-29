@@ -48,7 +48,9 @@ class HomeView(generic.TemplateView):
         context["sector_business_counts"] = sector_queryset
 
         top_sectors_qs = (
-            models.Business.objects.exclude(sector__label__in=["unknown", "generic"])
+            models.Business.objects.exclude(
+                sector__label__in=["Sector unknown", "generic"]
+            )
             .filter(region__municipality=self.current_site.municipality)
             .values(label=F("sector__label"))
             .annotate(count=Count("*"))
