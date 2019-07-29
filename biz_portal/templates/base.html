@@ -26,8 +26,15 @@
 
   </head>
 
+  {% if render_as_print %}
+  <style>
+    .main-content {overflow: visible !important}
+  </style>
+  {% endif %}
+
+
   <body class="mdc-typography">
-    <aside class="mdc-drawer mdc-drawer--dismissible">
+  <aside class="mdc-drawer mdc-drawer--dismissible">
       <div class="mdc-drawer__header">
         {% if current_site.municipality.logo %}
         <img class="drawer-header-image"

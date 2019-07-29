@@ -90,31 +90,20 @@ class BusinessDetailView(generic.DetailView):
         )
 
 
-# class PDF(BusinessDetailView):
-#
-#     def get(self, request, *args, **kwargs):
-#         # render as pdf
-#         url = '/businesses/{}'.format(self.get_object().pk)
-#         url = request.build_absolute_uri(url)
-#         pdf = wkhtmltopdf(url, javascript_delay=1000)
-#         filename = '{}.pdf'.format(self.get_object().registered_name)
-#
-#         return PDFResponse(pdf, filename=filename)
-
-
 class BusinessDetailPDFView(BusinessDetailView):
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
         context = self.get_context_data(object=self.object)
         context['object'] = self.get_object()
+        context['render_as_print'] = True
 
         response = PDFTemplateResponse(request=request,
                                        template=self.template_name,
                                        filename="hello.pdf",
                                        context=context,
                                        show_content_in_browser=False,
-                                       cmd_options={'margin-top': 50, 'javascript-delay': 5000}
+                                       cmd_options={'margin-top': 50, 'javascript-delay': 1000}
                                        )
         return response
 
