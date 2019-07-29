@@ -91,6 +91,24 @@ class BusinessListTestCase(TestCase):
         assertSuggestionCountEqual(self, 2, "muni1.gov.za", response.content)
         assertValidHTML(response.content)
 
+        # Test if the supplied name returns the correct result
+        supplied_name_response = c.get(
+            "/businesses/?q=sticks", HTTP_HOST="muni1.gov.za"
+        )
+        self.assertEqual(1, len(supplied_name_response.context["business_list"]))
+        self.assertTrue(
+            all(
+                [
+                    "KWIX" in x.registered_name
+                    for x in supplied_name_response.context["business_list"]
+                ]
+            )
+        )
+        assertSuggestionCountEqual(
+            self, 1, "muni1.gov.za", supplied_name_response.content
+        )
+        assertValidHTML(supplied_name_response.content)
+
         # Facets
         sector_facet = response.context["sector_business_counts"]
         accom_option = facet_option(self, sector_facet, "Accom")
