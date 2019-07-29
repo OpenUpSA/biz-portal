@@ -69,7 +69,12 @@
 
 
     <div class="business-profile-cards">
-      <details class="mdc-expansion mdc-theme--background mdc-elevation--z2">
+      {% if render_as_pdf %}
+      <details class="mdc-expansion mdc-theme--background mdc-elevation--z2" open>
+        {% else %}
+              <details class="mdc-expansion mdc-theme--background mdc-elevation--z2">
+
+        {% endif %}
         <summary class="mdc-expansion__summary">
           <span class="business-profile-location mdc-list-item">
             <i class="material-icons mdc-list-item__graphic" aria-hidden="true">location_on</i>

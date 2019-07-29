@@ -14,16 +14,16 @@ class SearchSnippet:
     def get_region_queryset(business_queryset):
         return (
             business_queryset.values(label=F("region__label"))
-                .annotate(count=Count("*"))
-                .order_by("-count")
+            .annotate(count=Count("*"))
+            .order_by("-count")
         )
 
     @staticmethod
     def get_sector_queryset(business_queryset):
         return (
             business_queryset.values(label=F("sector__label"))
-                .annotate(count=Count("*"))
-                .order_by("-count")
+            .annotate(count=Count("*"))
+            .order_by("-count")
         )
 
 
@@ -51,10 +51,10 @@ class HomeView(generic.TemplateView):
 
         top_sectors_qs = (
             models.Business.objects.exclude(sector__label__in=["unknown", "generic"])
-                .filter(region__municipality=self.current_site.municipality)
-                .values(label=F("sector__label"))
-                .annotate(count=Count("*"))
-                .order_by("-count")
+            .filter(region__municipality=self.current_site.municipality)
+            .values(label=F("sector__label"))
+            .annotate(count=Count("*"))
+            .order_by("-count")
         )
         context["top_sectors_counts"] = top_sectors_qs
         return context
@@ -91,20 +91,20 @@ class BusinessDetailView(generic.DetailView):
 
 
 class BusinessDetailPDFView(BusinessDetailView):
-
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
         context = self.get_context_data(object=self.object)
-        context['object'] = self.get_object()
-        context['render_as_print'] = True
+        context["object"] = self.get_object()
+        context["render_as_pdf"] = True
 
-        response = PDFTemplateResponse(request=request,
-                                       template=self.template_name,
-                                       filename="hello.pdf",
-                                       context=context,
-                                       show_content_in_browser=False,
-                                       cmd_options={'margin-top': 50, 'javascript-delay': 1000}
-                                       )
+        response = PDFTemplateResponse(
+            request=request,
+            template=self.template_name,
+            filename="{}.pdf".format(self.get_object().registered_name),
+            context=context,
+            show_content_in_browser=False,
+            cmd_options={"margin-top": 50, "javascript-delay": 1000},
+        )
         return response
 
 

@@ -198,6 +198,15 @@ class BusinessDetailTestCase(TestCase):
         response = c.get("/businesses/1", HTTP_HOST="muni1.gov.za")
         assertValidHTML(response.content)
 
+    def test_business_download(self):
+        c = Client()
+        response = c.get("/businesses/1/download", HTTP_HOST="muni1.gov.za")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.get("Content-Disposition"),
+            'attachment; filename="Y-KWIX-YEET BRASS.pdf"',
+        )
+
 
 def facet_option(case, facet, starts_with):
     options = [o for o in facet if o["label"].startswith(starts_with)]
