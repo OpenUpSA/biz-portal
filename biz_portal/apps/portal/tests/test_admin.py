@@ -214,7 +214,7 @@ class AdminModifyBusinessTest(TestCase):
         self.assertContains(view_response, "Somewhere in BUF")
 
     def test_integration_admin_can_select_any_muni(self):
-        """ Superuser who is not listed as muni admin can select any muni businesses """
+        """ Non-superuser in Integration Admins group, who is not listed as muni admin can select any muni businesses """
         self.assertTrue(
             self.client.login(username="integration_admin", password="password")
         )
