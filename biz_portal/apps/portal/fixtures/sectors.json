@@ -199,7 +199,7 @@
   "model": "portal.sector",
   "pk": 29,
   "fields": {
-    "label": "unknown"
+    "label": "Sector unknown"
   }
 },
 {
