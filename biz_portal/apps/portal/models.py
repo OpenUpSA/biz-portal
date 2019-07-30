@@ -59,6 +59,7 @@ class Municipality(models.Model):
         ),
     )
     administrators = models.ManyToManyField(auth.models.User, blank=True)
+    google_analytics_code = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
         return f"{self.label} ({self.mdb_code})"

@@ -70,7 +70,8 @@
   "fields": {
     "mdb_code": "FS010",
     "label": "Random Place",
-    "site": 2
+    "site": 2,
+    "google_analytics_code": "randomgooglecode"
   }
 },
 {
