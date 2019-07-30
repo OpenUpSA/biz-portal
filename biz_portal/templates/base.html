@@ -27,6 +27,7 @@
     {% endif %}
 
     <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}">
+    <script src="https://kit.fontawesome.com/7373e11076.js"></script>
 
     {% block css %}
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
@@ -56,20 +57,20 @@
 
           {% if current_site.municipality.add_update_business_url %}
           <a class="mdc-list-item" href="{{  current_site.municipality.add_update_business_url }}">
-            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">store</i>
+            <i class="fas fa-building-o mdc-list-item__graphic" aria-hidden="true">store</i>
             <span class="mdc-list-item__text">Add my business</span>
           </a>
           {% endif %}
 
           {% if request.user.is_staff %}
           <a class="mdc-list-item" href="#">
-            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">arrow_downward</i>
+            <i class="fas fa-chevron-down mdc-list-item__graphic" aria-hidden="true"></i>
             <span class="mdc-list-item__text">Download data</span>
           </a>
           {% endif %}
 
           <a class="mdc-list-item" href="{% url 'municipality_detail' %}">
-            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">call</i>
+            <i class="fas fa-phone mdc-list-item__graphic" aria-hidden="true"></i>
             <span class="mdc-list-item__text">Contact municipality</span>
           </a>
 
@@ -78,9 +79,7 @@
              href="/admin/"
              aria-selected="true"
              >
-            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">
-              edit
-            </i>
+            <i class="fas fa-edit mdc-list-item__graphic" aria-hidden="true"></i>
             <span class="mdc-list-item__text">Manage businesses</span>
           </a>
           {% endif %}
@@ -90,9 +89,7 @@
              href="/admin/logout"
              aria-selected="true"
              >
-            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">
-              exit_to_app
-            </i>
+            <i class="fas fa-sign-out-alt mdc-list-item__graphic" aria-hidden="true"></i>
             <span class="mdc-list-item__text">Logout</span>
           </a>
           {% else %}
@@ -100,8 +97,8 @@
              href="/admin/"
              aria-selected="true"
              >
-            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">
-              exit_to_app
+            <i class="fas fa-sign-in-alt mdc-list-item__graphic" aria-hidden="true">
+
             </i>
             <span class="mdc-list-item__text">Admin Login</span>
           </a>
@@ -117,7 +114,7 @@
           </span>
         </section>
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
-          <button class="demo-menu material-icons mdc-top-app-bar__navigation-icon">menu</button>
+          <button class="demo-menu mdc-top-app-bar__navigation-icon"><i class="fas fa-bars"></i></button>
         </section>
       </div>
     </header>
