@@ -83,7 +83,7 @@
               <img class="status-icon" src="{% static 'images/ellipse.svg' %}" />
             </span>
             <span class="type-header">Status:</span>
-            <span class="mdc-expansion__header">{% if object.registration_status %} {{ object.registration_status.label }} {% else %} Status unknown {% endif %}</span>
+            <span class="mdc-expansion__header">{% firstof object.registration_status.label "Status unknown" %}</span>
           </span>
           <div data-tooltip="Indicates the current registration status of the business. A business's status can range from being In business or Deregistered to Closed.">
             <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
