@@ -48,7 +48,7 @@ Build the necessary services
 docker-compose -f docker-compose.local.yml build django test
 ```
 
-Then run collectstatic
+Then run collectstatic (only needed for tests, the dev server will serve static files without `collectstatic`)
 
 ```
 docker-compose -f docker-compose.local.yml run --rm django python manage.py collectstatic
