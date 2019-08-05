@@ -24,6 +24,11 @@
                     <a href="{% url 'admin:portal_business_change' object.id %}">Edit business</a>
                   </span>
                 </li>
+                <li class="mdc-list-item">
+                  <span class="mdc-list-item__text">
+                    <a href="{% url 'business_detail_pdf' object.id %}">Download PDF</a>
+                  </span>
+                </li>
               </ul>
             </div>
           </div>
@@ -66,7 +71,12 @@
 
 
     <div class="business-profile-cards">
-      <details class="mdc-expansion mdc-theme--background mdc-elevation--z2">
+      {% if render_as_pdf %}
+      <details class="mdc-expansion mdc-theme--background mdc-elevation--z2" open>
+        {% else %}
+              <details class="mdc-expansion mdc-theme--background mdc-elevation--z2">
+
+        {% endif %}
         <summary class="mdc-expansion__summary">
           <span class="business-profile-location mdc-list-item">
             <i class="fas fa-map-marker-alt fa-list-icon mdc-theme--primary mdc-list-item__graphic" aria-hidden="true"></i>

@@ -2,13 +2,14 @@ dist: xenial
 
 services:
   - postgresql
+  - xvfb
 
 before_install:
   - sudo apt-get update -qq
   - >
     sudo apt-get install -qq build-essential gettext python-dev zlib1g-dev
     libpq-dev python-setuptools python3-dev python-virtualenv python-pip automake
-    libtool libsqlite3-dev libxml2 libxml2-dev libssl-dev  llvm
+    libtool libsqlite3-dev libxml2 libxml2-dev libssl-dev llvm wkhtmltopdf
 
 language: python
 
@@ -34,3 +35,4 @@ script:
   - "pytest"
   - "black --check --diff config biz_portal"
   - "isort --check-only --diff --recursive config biz_portal"
+  - "docker-compose -f docker-compose.local.yml build django"

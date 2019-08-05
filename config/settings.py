@@ -81,6 +81,7 @@ THIRD_PARTY_APPS = [
     "whitenoise.runserver_nostatic",
     "import_export",
     "rules",
+    "wkhtmltopdf",
 ]
 
 LOCAL_APPS = ["biz_portal.apps.portal.apps.PortalConfig"]

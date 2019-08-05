@@ -39,8 +39,19 @@
 
   </head>
 
+  {% if render_as_pdf %}
+  <style>
+    .main-content {
+      overflow: visible !important;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+  {% endif %}
+
+
   <body class="mdc-typography">
-    <aside class="mdc-drawer mdc-drawer--dismissible">
+  <aside class="mdc-drawer mdc-drawer--dismissible">
       <div class="mdc-drawer__header">
         {% if current_site.municipality.logo %}
         <img class="drawer-header-image"

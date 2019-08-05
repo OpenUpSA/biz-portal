@@ -3,6 +3,8 @@ from django.db.models import Count, F, Q
 from django.shortcuts import get_object_or_404
 from django.views import generic
 from rest_framework import serializers, viewsets
+from wkhtmltopdf import wkhtmltopdf
+from wkhtmltopdf.views import PDFResponse, PDFTemplateResponse
 
 from . import models
 
@@ -90,6 +92,24 @@ class BusinessDetailView(generic.DetailView):
         )
 
 
+class BusinessDetailPDFView(BusinessDetailView):
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        context = self.get_context_data(object=self.object)
+        context["object"] = self.get_object()
+        context["render_as_pdf"] = True
+
+        response = PDFTemplateResponse(
+            request=request,
+            template=self.template_name,
+            filename="{}.pdf".format(self.get_object().registered_name),
+            context=context,
+            show_content_in_browser=False,
+            cmd_options={"margin-top": 50, "javascript-delay": 1000},
+        )
+        return response
+
+
 class BusinessListView(generic.ListView):
     model = models.Business
     paginate_by = 20
@@ -152,7 +172,6 @@ class BusinessListView(generic.ListView):
 
 
 class BusinessSerializer(serializers.ModelSerializer):
-
     web_url = serializers.URLField(source="get_absolute_url", read_only=True)
 
     class Meta:
