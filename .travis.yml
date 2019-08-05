@@ -35,3 +35,4 @@ script:
   - "pytest"
   - "black --check --diff config biz_portal"
   - "isort --check-only --diff --recursive config biz_portal"
+  - "docker-compose -f docker-compose.local.yml build django"
