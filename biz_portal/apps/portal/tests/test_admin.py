@@ -125,6 +125,8 @@ class AdminModifyBusinessTest(TestCase):
             HTTP_HOST="biz-portal.openup.org.za",
         )
         self.assertEqual(response.status_code, 302)
+        business = models.Business.objects.get(pk=business.pk)
+        self.assertEqual(business.supplied_name, "DEADBEEF")
 
         # Business in second muni
         business = models.Business.objects.get(pk=2)
