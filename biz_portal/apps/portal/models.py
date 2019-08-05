@@ -59,6 +59,7 @@ class Municipality(models.Model):
         ),
     )
     administrators = models.ManyToManyField(auth.models.User, blank=True)
+    google_analytics_code = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
         return f"{self.label} ({self.mdb_code})"
@@ -143,11 +144,7 @@ class Business(models.Model):
     number_employed = models.IntegerField(null=True, blank=True)
     annual_turnover = models.IntegerField(null=True, blank=True, choices=TURNOVER_BANDS)
     sector = models.ForeignKey(
-        Sector,
-        blank=True,
-        null=True,
-        on_delete=models.CASCADE,
-        related_name="businesses",
+        Sector, on_delete=models.CASCADE, related_name="businesses"
     )
     date_started = models.DateField(blank=True, null=True)
 

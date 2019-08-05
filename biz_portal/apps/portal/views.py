@@ -1,5 +1,5 @@
 from django.contrib.sites.models import Site
-from django.db.models import Count, F
+from django.db.models import Count, F, Q
 from django.shortcuts import get_object_or_404
 from django.views import generic
 from rest_framework import serializers, viewsets
@@ -48,7 +48,9 @@ class HomeView(generic.TemplateView):
         context["sector_business_counts"] = sector_queryset
 
         top_sectors_qs = (
-            models.Business.objects.exclude(sector__label__in=["unknown", "generic"])
+            models.Business.objects.exclude(
+                sector__label__in=["Sector unknown", "generic"]
+            )
             .filter(region__municipality=self.current_site.municipality)
             .values(label=F("sector__label"))
             .annotate(count=Count("*"))
@@ -122,7 +124,9 @@ class BusinessListView(generic.ListView):
         )
 
         for word in self.search_string.split():
-            self.queryset = self.queryset.filter(registered_name__icontains=word)
+            self.queryset = self.queryset.filter(
+                Q(registered_name__icontains=word) | Q(supplied_name__icontains=word)
+            )
         if self.selected_region:
             self.queryset = self.queryset.filter(region=self.selected_region)
         if self.selected_sector:
@@ -167,5 +171,5 @@ class BusinessViewSet(viewsets.ModelViewSet):
         )
 
     serializer_class = BusinessSerializer
-    search_fields = ("registered_name",)
+    search_fields = ("registered_name", "supplied_name")
     filter_fields = ("region__label", "sector__label")

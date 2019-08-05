@@ -4,6 +4,7 @@
   "pk": 1,
   "fields": {
     "registered_name": "Y-KWIX-YEET BRASS",
+    "supplied_name": "COPPER",
     "registration_number": "1990/002791/07",
     "region": 2,
     "sector": 1
@@ -14,6 +15,7 @@
   "pk": 2,
   "fields": {
     "registered_name": "BOORT DEVELOPMENT BUSINESS",
+    "supplied_name": "BOAT",
     "registration_number": "1990/000289/23",
     "region": 1,
     "sector": 2
@@ -24,6 +26,7 @@
   "pk": 3,
   "fields": {
     "registered_name": "SAME AS SECOND BUT FOR THE NAME KWIX",
+    "supplied_name": "STICKS",
     "registration_number": "1990/000289/24",
     "region": 1,
     "sector": 2
@@ -34,6 +37,7 @@
   "pk": 4,
   "fields": {
     "registered_name": "KWIX business in another muni",
+      "supplied_name": "BONES",
     "registration_number": "1991/000281/21",
     "region": 3,
     "sector": 1

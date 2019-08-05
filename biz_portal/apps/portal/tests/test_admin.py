@@ -23,6 +23,7 @@ class AdminAddBusinessTestCase(TestCase):
         post_data = {
             "registration_number": "123",
             "region": models.Region.objects.first().pk,
+            "sector": models.Sector.objects.first().pk,
         }
         response = self.client.post(
             reverse("admin:portal_business_add"),
@@ -39,6 +40,7 @@ class AdminAddBusinessTestCase(TestCase):
         post_data = {
             "registration_number": "123",
             "region": models.Region.objects.first().pk,
+            "sector": models.Sector.objects.first().pk,
         }
         response = self.client.post(
             reverse("admin:portal_business_add"),
@@ -59,6 +61,7 @@ class AdminAddBusinessTestCase(TestCase):
         post_data = {
             "registration_number": "123",
             "region": models.Region.objects.first().pk,
+            "sector": models.Sector.objects.first().pk,
         }
         response = self.client.post(
             reverse("admin:portal_business_add"),
@@ -90,6 +93,7 @@ class AdminModifyBusinessTest(TestCase):
             "registration_number": business.registration_number,
             "region": business.region.id,
             "supplied_name": "DEADBEEF",
+            "sector": business.sector.id,
         }
         response = self.client.post(
             reverse("admin:portal_business_change", args=[business.pk]),
@@ -159,6 +163,7 @@ class AdminModifyBusinessTest(TestCase):
             "registration_number": business.registration_number,
             "region": business.region.id,
             "supplied_name": "DEADBEEF",
+            "sector": business.sector.id,
         }
         response = self.client.post(
             reverse("admin:portal_business_change", args=[business.pk]),
@@ -189,6 +194,7 @@ class AdminModifyBusinessTest(TestCase):
             "registration_number": business.registration_number,
             "region": business.region.id,
             "supplied_name": "DEADBEEF",
+            "sector": business.sector.id,
         }
         response = self.client.post(
             reverse("admin:portal_business_change", args=[business.pk]),

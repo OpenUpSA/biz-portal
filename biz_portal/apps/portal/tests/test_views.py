@@ -91,6 +91,24 @@ class BusinessListTestCase(TestCase):
         assertSuggestionCountEqual(self, 2, "muni1.gov.za", response.content)
         assertValidHTML(response.content)
 
+        # Test if the supplied name returns the correct result
+        supplied_name_response = c.get(
+            "/businesses/?q=sticks", HTTP_HOST="muni1.gov.za"
+        )
+        self.assertEqual(1, len(supplied_name_response.context["business_list"]))
+        self.assertTrue(
+            all(
+                [
+                    "KWIX" in x.registered_name
+                    for x in supplied_name_response.context["business_list"]
+                ]
+            )
+        )
+        assertSuggestionCountEqual(
+            self, 1, "muni1.gov.za", supplied_name_response.content
+        )
+        assertValidHTML(supplied_name_response.content)
+
         # Facets
         sector_facet = response.context["sector_business_counts"]
         accom_option = facet_option(self, sector_facet, "Accom")
@@ -128,7 +146,7 @@ class HomeTestCase(TestCase):
         sector_facet = response.context["sector_business_counts"]
         generic_option = facet_option(self, sector_facet, "generic")
         self.assertEqual(1, generic_option.get("count"))
-        unknown_option = facet_option(self, sector_facet, "unknown")
+        unknown_option = facet_option(self, sector_facet, "Sector unknown")
         self.assertEqual(1, unknown_option.get("count"))
         agric_option = facet_option(self, sector_facet, "Agric")
         self.assertEqual(1, agric_option.get("count"))
@@ -154,6 +172,19 @@ class HomeTestCase(TestCase):
         self.assertEqual(1, len(sector_facet))
         agric_option = facet_option(self, sector_facet, "Agric")
         self.assertEqual(1, agric_option.get("count"))
+
+    def test_google_analytics_code(self):
+        """No filters, other muni"""
+        c = Client()
+        response = c.get("/", HTTP_HOST="muni2.gov.za")
+
+        soup = BeautifulSoup(response.content, "html.parser")
+        script = soup.select_one(
+            'script[src="https://www.googletagmanager.com/gtag/js?id={}"]'.format(
+                "randomgooglecode"
+            )
+        )
+        self.assertTrue(script)
 
     def test_homepage_valid_html(self):
         c = Client()

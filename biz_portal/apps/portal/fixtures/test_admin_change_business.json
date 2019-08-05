@@ -105,7 +105,8 @@
   "pk": 1,
   "fields": {
     "registration_number": "1990/002791/07",
-    "region": 4
+    "region": 4,
+    "sector": 29
   }
 },
 {
@@ -113,7 +114,8 @@
   "pk": 2,
   "fields": {
     "registration_number": "1990/000289/23",
-    "region": 6
+    "region": 6,
+    "sector": 29
   }
 }
 ]

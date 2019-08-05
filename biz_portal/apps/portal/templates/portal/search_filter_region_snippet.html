@@ -4,14 +4,14 @@
 <div class="search-result">
   <summary class="close_summary">
     <div class="icon-and-filter-option">
-      <i class="material-icons mdc-list-item__graphic mdc-theme--primary" aria-hidden="true">location_on</i>
+      <i class="fas fa-map-marker-alt fa-list-icon mdc-theme--primary" aria-hidden="true"></i>
       <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">
         {{ request.GET.region }}
       </h3>
     </div>
     <div class="business-directory-count-arrow">
       <a href="{% url "business_list" %}?{% param_replace page="" region="" %}">
-        <i class="material-icons mdc-list-item__graphic close" aria-hidden="true">close</i>
+        <i class="fas fa-times close" aria-hidden="true"></i>
       </a>
     </div>
   </summary>
@@ -20,13 +20,13 @@
 <details class="mdc-expansion">
   <summary class="mdc-expansion__summary">
     <div class="icon-and-filter-option">
-      <i class="material-icons mdc-list-item__graphic mdc-theme--primary" aria-hidden="true">location_on</i>
+      <i class="fas fa-map-marker-alt fa-list-icon mdc-theme--primary" aria-hidden="true"></i>
       <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">
         Location
       </h3>
     </div>
     <div class="business-directory-count-arrow">
-      <i class="material-icons mdc-list-item__graphic arrow-down" aria-hidden="true">keyboard_arrow_down</i>
+      <i class="fas fa-chevron-down arrow-down" aria-hidden="true"></i>
     </div>
   </summary>
   {% for region in region_business_counts %}
@@ -34,7 +34,7 @@
     <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">{{ region.label }}</h3>
     <div class="business-directory-count-arrow">
       <div class="location-count">{{ region.count }}</div>
-      <i class="material-icons mdc-list-item__graphic arrow-right" aria-hidden="true">keyboard_arrow_right</i>
+      <i class="fas fa-arrow-right arrow-right" aria-hidden="true"></i>
     </div>
   </a>
   {% endfor %}
