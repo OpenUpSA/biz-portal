@@ -1,6 +1,6 @@
 from django.contrib import admin
 from import_export import fields, resources, widgets
-from import_export.admin import ImportMixin
+from import_export.admin import ImportExportMixin
 from rules.contrib.admin import ObjectPermissionsModelAdmin
 
 from . import models
@@ -35,6 +35,7 @@ class BusinessResource(resources.ModelResource):
         report_skipped = False
         fields = (
             "registered_name",
+            "supplied_name",
             "registration_number",
             "registration_status",
             "region",
@@ -56,7 +57,7 @@ class BusinessResource(resources.ModelResource):
         )
 
 
-class BusinessAdmin(ImportMixin, ObjectPermissionsModelAdmin):
+class BusinessAdmin(ImportExportMixin, ObjectPermissionsModelAdmin):
     search_fields = ["registered_name"]
 
     readonly_fields = (
