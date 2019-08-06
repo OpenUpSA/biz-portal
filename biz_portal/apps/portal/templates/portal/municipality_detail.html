@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block meta %}
+  <meta name="twitter:title" content="Contact - {{ current_site.municipality.label }} Business Portal">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:card" content="summary">
+  {% if current_site.municipality.logo %}
+  <meta name="twitter:image" content="{% static current_site.municipality.logo %}">
+  {% endif %}
+{% endblock %}
+
 {% block content %}
 
 <div class="muni-contact-details">
