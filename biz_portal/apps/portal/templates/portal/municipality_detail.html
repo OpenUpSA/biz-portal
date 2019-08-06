@@ -4,9 +4,12 @@
 {% block meta %}
   <meta name="twitter:title" content="Contact - {{ current_site.municipality.label }} Business Portal">
   <meta name="twitter:description" content="">
+  <meta property="og:title" content="Contact - {{ current_site.municipality.label }} Business Portal">
+  <meta property="og:description" content="">
   <meta name="twitter:card" content="summary">
   {% if current_site.municipality.logo %}
   <meta name="twitter:image" content="{% static current_site.municipality.logo %}">
+  <meta property="og:image" content="{% static current_site.municipality.logo %}">
   {% endif %}
 {% endblock %}
 

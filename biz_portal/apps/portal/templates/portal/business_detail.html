@@ -5,7 +5,9 @@
     <meta name="twitter:title" content="{{ object.get_presentation_name }} - {{ current_site.municipality.label }} Business Portal">
     <meta name="twitter:description" content="Business details in the {{ current_site.municipality.label }} Business Portal">
     <meta name="twitter:card" content="summary">
-  {% endblock %}
+    <meta property="og:title" content="{{ object.get_presentation_name }} - {{ current_site.municipality.label }} Business Portal">
+    <meta property="og:description" content="Business details in the {{ current_site.municipality.label }} Business Portal">
+{% endblock %}
 
 {% block content %}
 <div class="business-details-section">
