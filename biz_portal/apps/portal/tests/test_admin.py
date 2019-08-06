@@ -80,6 +80,7 @@ class AdminModifyBusinessTest(TestCase):
         "business_types",
         "business_statuses",
         "regions",
+        "test_permissions",
         "test_admin_change_business",
     ]
 
@@ -118,6 +119,7 @@ class AdminModifyBusinessTest(TestCase):
             "registration_number": business.registration_number,
             "region": business.region.id,
             "supplied_name": "DEADBEEF",
+            "sector": business.sector.id,
         }
         response = self.client.post(
             reverse("admin:portal_business_change", args=[business.pk]),
@@ -135,6 +137,7 @@ class AdminModifyBusinessTest(TestCase):
             "registration_number": business.registration_number,
             "region": business.region.id,
             "supplied_name": "DEADBEEF 2",
+            "sector": business.sector.id,
         }
         response = self.client.post(
             reverse("admin:portal_business_change", args=[business.pk]),
