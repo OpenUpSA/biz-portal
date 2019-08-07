@@ -36,7 +36,7 @@ if (!!input) {
   // Instantiate the Typeahead UI
   $("#custom-templates .typeahead").typeahead(null, {
     name: "businesses",
-    displayKey: "registered_name",
+    displayKey: "supplied_name",
     source: businesses,
     templates: {
       empty: [
@@ -50,10 +50,11 @@ if (!!input) {
         </a>`
       ),
       suggestion: data => {
-        const { web_url, registered_name } = data;
+        const { web_url, registered_name , supplied_name} = data;
+        const name = (supplied_name !== '') ? supplied_name : registered_name;
         return (
           `<a class="search-result-links" href="${web_url}">
-            <p class="text-menu-search">${registered_name}</p>
+            <p class="text-menu-search">${name}</p>
           </a>`
         );
       }
