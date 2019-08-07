@@ -1,6 +1,7 @@
 from django.contrib import admin
 from import_export import fields, resources, widgets
 from import_export.admin import ImportExportMixin
+from import_export.formats.base_formats import XLSX
 from rules.contrib.admin import ObjectPermissionsModelAdmin
 
 from . import models
@@ -167,6 +168,12 @@ class BusinessAdmin(ImportExportMixin, ObjectPermissionsModelAdmin):
                 municipality__in=[m.pk for m in request.user.municipality_set.all()]
             )
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+    def get_export_formats(self):
+        return [XLSX]
+
+    def has_import_permission(self, request):
+        return request.user.is_superuser
 
 
 admin.site.register(models.Business, BusinessAdmin)
