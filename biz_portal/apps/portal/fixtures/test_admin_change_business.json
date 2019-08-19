@@ -33,6 +33,20 @@
   }
 },
 {
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "argon2$argon2i$v=19$m=512,t=2,p=2$RUZnTFNUVUhCTjg1$kUTw7onWQfUlE6dr/mkvvw",
+    "is_superuser": false,
+    "username": "integration_admin",
+    "is_staff": true,
+    "is_active": true,
+    "groups": [
+      1
+    ]
+  }
+},
+{
   "model": "sites.site",
   "pk": 1,
   "fields": {
