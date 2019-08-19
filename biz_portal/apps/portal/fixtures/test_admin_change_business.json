@@ -1,147 +1,115 @@
 [
-  {
-    "model": "auth.group",
-    "pk": 1,
-    "fields": {
-      "name": "Integration Admins",
-      "permissions": [
-        24,
-        8,
-        4,
-        9,
-        10,
-        11,
-        12,
-        25,
-        26,
-        27,
-        28,
-        32,
-        36,
-        49,
-        50,
-        51,
-        52,
-        37,
-        38,
-        39,
-        40,
-        44,
-        48
-      ]
-    }
-  },
-  {
-    "model": "auth.user",
-    "pk": 1,
-    "fields": {
-      "password": "argon2$argon2i$v=19$m=512,t=2,p=2$RUZnTFNUVUhCTjg1$kUTw7onWQfUlE6dr/mkvvw",
-      "is_superuser": true,
-      "username": "admin",
-      "is_staff": true,
-      "is_active": true
-    }
-  },
-  {
-    "model": "auth.user",
-    "pk": 2,
-    "fields": {
-      "password": "argon2$argon2i$v=19$m=512,t=2,p=2$NkhKd1BrUmJkUFYz$18diV8b41/ASYUUMzBzWhg",
-      "is_superuser": false,
-      "username": "capeagulhasadmin",
-      "is_staff": true,
-      "is_active": true
-    }
-  },
-  {
-    "model": "auth.user",
-    "pk": 3,
-    "fields": {
-      "password": "argon2$argon2i$v=19$m=512,t=2,p=2$ZTh2VVZNZzlLZ2NS$zq4jwJn/MPGMjZMQfChuJQ",
-      "is_superuser": false,
-      "username": "buf",
-      "is_staff": true,
-      "is_active": true
-    }
-  },
-  {
-    "model": "auth.user",
-    "pk": 4,
-    "fields": {
-      "password": "argon2$argon2i$v=19$m=512,t=2,p=2$RUZnTFNUVUhCTjg1$kUTw7onWQfUlE6dr/mkvvw",
-      "is_superuser": false,
-      "username": "integration_admin",
-      "is_staff": true,
-      "is_active": true,
-      "groups": [
-        1
-      ]
-    }
-  },
-  {
-    "model": "sites.site",
-    "pk": 1,
-    "fields": {
-      "domain": "biz-portal.openup.org.za",
-      "name": "Cape Agulhas Business Portal"
-    }
-  },
-  {
-    "model": "sites.site",
-    "pk": 2,
-    "fields": {
-      "domain": "biz.buf.gov.za",
-      "name": "Buffalo City Metro Municipality"
-    }
-  },
-  {
-    "model": "portal.municipality",
-    "pk": 1,
-    "fields": {
-      "mdb_code": "WC033",
-      "label": "Cape Agulhas",
-      "site": 1,
-      "administrators": [
-        2
-      ]
-    }
-  },
-  {
-    "model": "portal.municipality",
-    "pk": 2,
-    "fields": {
-      "mdb_code": "BUF",
-      "label": "Buffalo City",
-      "site": 2,
-      "administrators": [
-        3
-      ]
-    }
-  },
-  {
-    "model": "portal.region",
-    "pk": 6,
-    "fields": {
-      "label": "Somewhere in BUF",
-      "municipality": 2
-    }
-  },
-  {
-    "model": "portal.business",
-    "pk": 1,
-    "fields": {
-      "registration_number": "1990/002791/07",
-      "region": 4,
-      "sector": 29
-    }
-  },
-  {
-    "model": "portal.business",
-    "pk": 2,
-    "fields": {
-      "registration_number": "1990/000289/23",
-      "region": 6,
-      "sector": 29
-    }
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "argon2$argon2i$v=19$m=512,t=2,p=2$RUZnTFNUVUhCTjg1$kUTw7onWQfUlE6dr/mkvvw",
+    "is_superuser": true,
+    "username": "admin",
+    "is_staff": true,
+    "is_active": true
   }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "argon2$argon2i$v=19$m=512,t=2,p=2$NkhKd1BrUmJkUFYz$18diV8b41/ASYUUMzBzWhg",
+    "is_superuser": false,
+    "username": "capeagulhasadmin",
+    "is_staff": true,
+    "is_active": true
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "argon2$argon2i$v=19$m=512,t=2,p=2$ZTh2VVZNZzlLZ2NS$zq4jwJn/MPGMjZMQfChuJQ",
+    "is_superuser": false,
+    "username": "buf",
+    "is_staff": true,
+    "is_active": true
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "argon2$argon2i$v=19$m=512,t=2,p=2$RUZnTFNUVUhCTjg1$kUTw7onWQfUlE6dr/mkvvw",
+    "is_superuser": false,
+    "username": "integration_admin",
+    "is_staff": true,
+    "is_active": true,
+    "groups": [
+      1
+    ]
+  }
+},
+{
+  "model": "sites.site",
+  "pk": 1,
+  "fields": {
+    "domain": "biz-portal.openup.org.za",
+    "name": "Cape Agulhas Business Portal"
+  }
+},
+{
+  "model": "sites.site",
+  "pk": 2,
+  "fields": {
+    "domain": "biz.buf.gov.za",
+    "name": "Buffalo City Metro Municipality"
+  }
+},
+{
+  "model": "portal.municipality",
+  "pk": 1,
+  "fields": {
+    "mdb_code": "WC033",
+    "label": "Cape Agulhas",
+    "site": 1,
+    "administrators": [
+      2
+    ]
+  }
+},
+{
+  "model": "portal.municipality",
+  "pk": 2,
+  "fields": {
+    "mdb_code": "BUF",
+    "label": "Buffalo City",
+    "site": 2,
+    "administrators": [
+      3
+    ]
+  }
+},
+{
+  "model": "portal.region",
+  "pk": 6,
+  "fields": {
+    "label": "Somewhere in BUF",
+    "municipality": 2
+  }
+},
+{
+  "model": "portal.business",
+  "pk": 1,
+  "fields": {
+    "registration_number": "1990/002791/07",
+    "region": 4,
+    "sector": 29
+  }
+},
+{
+  "model": "portal.business",
+  "pk": 2,
+  "fields": {
+    "registration_number": "1990/000289/23",
+    "region": 6,
+    "sector": 29
+  }
+}
 ]

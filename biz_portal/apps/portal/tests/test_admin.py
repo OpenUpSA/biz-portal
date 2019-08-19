@@ -80,7 +80,7 @@ class AdminModifyBusinessTest(TestCase):
         "business_types",
         "business_statuses",
         "regions",
-        "test_permissions",
+        "groups",
         "test_admin_change_business",
     ]
 
@@ -107,7 +107,10 @@ class AdminModifyBusinessTest(TestCase):
         self.assertEqual(business.supplied_name, "DEADBEEF")
 
     def test_integration_admin_edit_all_businesses_ok(self):
-        """ Non-superuser in Integration Admins group who is not listed as muni edit any businesses """
+        """
+        Non-superuser in Integration Admins group who is not listed as muni
+        admin can edit any businesses
+        """
         self.assertTrue(
             self.client.login(username="integration_admin", password="password")
         )
