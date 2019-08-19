@@ -194,3 +194,15 @@ class AdminModifyBusinessTest(TestCase):
         )
         self.assertContains(view_response, "Bredasdorp")
         self.assertNotContains(view_response, "Somewhere in BUF")
+
+    def test_superuser_can_export_businesses(self):
+        """ Superuser who is not listed as muni admin can export businesses """
+        self.assertTrue(self.client.login(username="admin", password="password"))
+
+        post_data = {"file_format": 0}
+        response = self.client.post(
+            reverse("admin:portal_business_export"),
+            post_data,
+            HTTP_HOST="biz-portal.openup.org.za",
+        )
+        self.assertEqual(response.status_code, 200)
