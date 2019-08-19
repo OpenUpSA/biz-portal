@@ -25,6 +25,7 @@ body {
 .fa-list-icon {
   margin-right: 4px;
   text-align: center;
+  font-size: 18px;
 }
 
 .navbar {
@@ -93,10 +94,6 @@ body {
 
 .text-field-business.mdc-text-field--focused {
   @include mdc-text-field-label-color(rgba(0, 0, 0, 0.8));
-}
-
-.info-icon {
-    color: #737373;
 }
 
 #custom-templates {
@@ -261,11 +258,6 @@ body {
       .icon-and-filter-option {
         display: flex;
         align-items: center;
-
-        .fa-list-icon {
-          margin-right: 9px;
-          text-align: center;
-        }
       }
     }
   }
@@ -298,11 +290,6 @@ body {
       .icon-and-filter-option {
         display: flex;
         align-items: center;
-
-        .fa-list-icon {
-          margin-right: 9px;
-          text-align: center;
-        }
       }
     }
   }
