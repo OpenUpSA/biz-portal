@@ -1,6 +1,7 @@
 from django.contrib import admin
 from import_export import fields, resources, widgets
-from import_export.admin import ImportMixin
+from import_export.admin import ImportExportMixin
+from import_export.formats.base_formats import XLSX
 from rules.contrib.admin import ObjectPermissionsModelAdmin
 
 from . import models
@@ -35,6 +36,7 @@ class BusinessResource(resources.ModelResource):
         report_skipped = False
         fields = (
             "registered_name",
+            "supplied_name",
             "registration_number",
             "registration_status",
             "region",
@@ -53,10 +55,42 @@ class BusinessResource(resources.ModelResource):
             "instagram_page_url",
             "number_employed",
             "annual_turnover",
+            "email_address",
+            "supplied_physical_address",
+            "supplied_postal_address",
+            "date_started",
+            "description",
+        )
+        export_order = (
+            "registration_number",
+            "registered_name",
+            "supplied_name",
+            "description",
+            "registered_physical_address",
+            "supplied_physical_address",
+            "registered_postal_address",
+            "supplied_postal_address",
+            "registration_status",
+            "registered_business_type",
+            "registration_date",
+            "region",
+            "sector",
+            "email_address",
+            "website_url",
+            "cellphone_number",
+            "phone_number",
+            "fax_number",
+            "whatsapp_number",
+            "facebook_page_url",
+            "twitter_page_url",
+            "instagram_page_url",
+            "number_employed",
+            "annual_turnover",
+            "date_started",
         )
 
 
-class BusinessAdmin(ImportMixin, ObjectPermissionsModelAdmin):
+class BusinessAdmin(ImportExportMixin, ObjectPermissionsModelAdmin):
     search_fields = ["registered_name"]
 
     readonly_fields = (
@@ -134,6 +168,12 @@ class BusinessAdmin(ImportMixin, ObjectPermissionsModelAdmin):
                 municipality__in=[m.pk for m in request.user.municipality_set.all()]
             )
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+    def get_export_formats(self):
+        return [XLSX]
+
+    def has_import_permission(self, request):
+        return request.user.is_superuser
 
 
 admin.site.register(models.Business, BusinessAdmin)
