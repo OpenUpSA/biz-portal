@@ -44,6 +44,8 @@ USE_TZ = True
 LOCALE_PATHS = [ROOT_DIR.path("locale")]
 
 WERKZEUG_DEBUG_PIN = "off"
+# use database transactions on data import
+IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 
 # DATABASES

@@ -156,3 +156,26 @@ class Business(models.Model):
 
     def __str__(self):
         return f"{self.get_presentation_name()} ({self.registration_number})"
+
+
+class BusinessMembership(models.Model):
+    class Meta:
+        unique_together = ('id_number', 'position', 'registration_number')
+
+    id_number = models.CharField(max_length=500, unique=False, blank=True, null=True)
+    position = models.CharField(max_length=500, blank=True, null=True, choices=(
+        "Company Secretary",
+        "Director",
+        "Member"
+    ))
+    first_names = models.CharField(max_length=500, unique=False, blank=True, null=True)
+    surname = models.CharField(max_length=500, unique=False, blank=True, null=True)
+    registration_number = models.ForeignKey(
+        Business,
+        on_delete=models.CASCADE,
+        related_name="business_members"
+    )
+
+
+def get_business_members(self):
+    return self.business_members

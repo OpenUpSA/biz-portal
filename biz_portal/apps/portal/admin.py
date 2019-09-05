@@ -1,10 +1,83 @@
+import tablib
 from django.contrib import admin
+from django import forms
+from import_export.admin import ImportForm, ConfirmImportForm
 from import_export import fields, resources, widgets
-from import_export.admin import ImportExportMixin
+from import_export.admin import ImportExportMixin, ImportExportModelAdmin
 from import_export.formats.base_formats import XLSX
 from rules.contrib.admin import ObjectPermissionsModelAdmin
 
+from biz_portal.apps.portal.models import BusinessMembership
 from . import models
+
+
+class BusinessMembershipResource(resources.ModelResource):
+
+    def __init__(self, request=None):
+        super(BusinessMembershipResource, self).__init__()
+        self.request = request
+
+    id_number = fields.Field(
+        column_name="id_number",
+        attribute="id_number",
+    )
+    position = fields.Field(
+        column_name="position",
+        attribute="position",
+    )
+    first_names = fields.Field(
+        column_name="first_names",
+        attribute="first_names",
+    )
+    surname = fields.Field(
+        column_name="surname",
+        attribute="surname",
+    )
+    registration_number = fields.Field(
+        column_name="registration_number",
+        attribute="registration_number",
+        widget=widgets.ForeignKeyWidget(models.Business, "registration_number"),
+    )
+
+    class Meta:
+        model = BusinessMembership
+        fields = ('id_number', 'position', 'first_names', 'surname', 'registration_number')
+        export_order = ('id_number', 'position', 'first_names', 'surname', 'registration_number')
+
+
+dataset = tablib.Dataset(['', 'directors-cape-agulhas'],
+                         headers=['id_number', 'position', 'first_name', 'surname', 'registration_number'])
+result = BusinessMembershipResource.import_data(dataset, dry_run=True)
+
+
+class BusinessMembershipImportForm(ImportForm):
+    company = forms.ModelChoiceField(
+        queryset=BusinessMembership.objects.all(),
+        required=True
+    )
+
+
+class BusinessMembershipConfirmImportForm(ConfirmImportForm):
+    company = forms.ModelChoiceField(
+        queryset=BusinessMembership.objects.all(),
+        required=True
+    )
+
+
+class BusinessMembershipAdmin(ImportExportModelAdmin):
+    list_display = ('id_number', 'position', 'first_name', 'surname', 'registration_number')
+    resource_class = BusinessMembershipResource
+
+    def get_import_form(self):
+        return BusinessMembershipImportForm
+
+    def get_confirm_import_form(self):
+        return BusinessMembershipConfirmImportForm
+
+    def get_resource_kwargs(self, request, *args, **kwargs):
+        rk = super().get_resource_kwargs(request, *args, **kwargs)
+        rk['request'] = request
+        return rk
 
 
 class BusinessResource(resources.ModelResource):
@@ -179,7 +252,17 @@ class BusinessAdmin(ImportExportMixin, ObjectPermissionsModelAdmin):
     def has_import_permission(self, request):
         return request.user.is_superuser
 
+    def has_add_permission(self, request, obj=models.BusinessMembership):
+        return request.user.is_superuser
+
+    def has_delete_permission(self, request, obj=models.BusinessMembership):
+        return request.user.is_superuser
+
+    def has_change_permission(self, request, obj=models.BusinessMembership):
+        return request.user.is_superuser
+
 
 admin.site.register(models.Business, BusinessAdmin)
 admin.site.register(models.Municipality)
 admin.site.register(models.Region)
+admin.site.register(models.BusinessMembership)
