@@ -1,9 +1,8 @@
 from django.contrib import admin
 from import_export import fields, resources, widgets
-from import_export.admin import ImportExportMixin, ImportExportModelAdmin
+from import_export.admin import ImportExportMixin
 from import_export.formats.base_formats import XLSX
 from rules.contrib.admin import ObjectPermissionsModelAdmin
-import tablib
 from . import models
 
 
@@ -131,7 +130,7 @@ class BusinessResource(resources.ModelResource):
 
 class BusinessAdmin(ImportExportMixin, ObjectPermissionsModelAdmin):
     search_fields = ["registered_name"]
-    # inlines = [BusinessMembershipInlineAdmin, ]
+    inlines = [BusinessMembershipInlineAdmin, ]
 
     readonly_fields = (
         "registered_name",
