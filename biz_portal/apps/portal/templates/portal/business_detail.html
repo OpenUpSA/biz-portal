@@ -116,6 +116,23 @@
           </div>
         </summary>
       </details>
+       {% if request.user.is_staff %}
+        <details class="mdc-expansion mdc-theme--background mdc-elevation--z2">
+          <summary class="mdc-expansion__summary">
+            <span class="business-profile-location mdc-list-item">
+              <i class="material-icons mdc-list-item__graphic" aria-hidden="true">account_circle</i>
+              <span class="type-header">Directors:</span>
+              <span class="mdc-expansion__header">{{ object.get_directors | length }}</span>
+            </span>
+            <i class="material-icons mdc-list-item__graphic arrow-down" aria-hidden="true">keyboard_arrow_down</i>
+          </summary>
+          <div class="mdc-expansion__content">
+              {% for director in object.get_directors %}
+            <span class="mdc-expansion__header director-name">{{ director.first_names }} {{ director.surname }}</span>
+            {% endfor %}
+          </div>
+        </details>
+      {% endif %}
     </div><!-- end .business-profile-cards -->
 
 

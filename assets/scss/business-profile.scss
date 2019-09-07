@@ -292,3 +292,13 @@
     white-space: pre-wrap;
   }
 }
+
+  .directors-details {
+    display: flex;
+    padding-bottom: 4px;
+  }
+
+  .director-name {
+    text-transform: capitalize;
+    padding-left: 4px;
+  }
