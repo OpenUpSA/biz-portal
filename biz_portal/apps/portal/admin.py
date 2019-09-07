@@ -1,10 +1,49 @@
 from django.contrib import admin
 from import_export import fields, resources, widgets
-from import_export.admin import ImportExportMixin
+from import_export.admin import ImportExportMixin, ImportExportModelAdmin
 from import_export.formats.base_formats import XLSX
 from rules.contrib.admin import ObjectPermissionsModelAdmin
-
+import tablib
 from . import models
+
+
+class BusinessMembershipResource(resources.ModelResource):
+
+    def __init__(self, request=None):
+        super(BusinessMembershipResource, self).__init__()
+        self.request = request
+
+    business = fields.Field(
+        column_name="business",
+        attribute="business",
+        widget=widgets.ForeignKeyWidget(models.Business, "registration_number"),
+    )
+
+    class Meta:
+        model = models.BusinessMembership
+        import_id_fields = ("id_number",)
+        skip_unchanged = True
+        report_skipped = False
+        fields = (
+            "id",
+            "business",
+            "id_number",
+            "first_names",
+            "surname",
+            "membership_type",
+        )
+        export_order = (
+            "id",
+            "business",
+            "id_number",
+            "first_names",
+            "surname",
+            "membership_type",
+        )
+
+
+class BusinessMembershipInlineAdmin(admin.TabularInline):
+    model = models.BusinessMembership
 
 
 class BusinessResource(resources.ModelResource):
@@ -92,6 +131,7 @@ class BusinessResource(resources.ModelResource):
 
 class BusinessAdmin(ImportExportMixin, ObjectPermissionsModelAdmin):
     search_fields = ["registered_name"]
+    # inlines = [BusinessMembershipInlineAdmin, ]
 
     readonly_fields = (
         "registered_name",
