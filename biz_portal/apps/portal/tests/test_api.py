@@ -14,6 +14,7 @@ class BusinessSearchTestCase(TestCase):
         "business_statuses",
         "regions",
         "test_api_businesses",
+        "businessmembership",
     ]
 
     def test_search_business(self):

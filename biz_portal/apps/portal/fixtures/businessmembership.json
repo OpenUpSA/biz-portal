@@ -1,0 +1,145 @@
+[
+{
+  "model": "portal.businessmembership",
+  "pk": 1,
+  "fields": {
+    "id_number": "WC033",
+    "business": 1,
+    "first_names": "CHANGE",
+    "surname": "TEST",
+    "membership_type": 2
+  }
+},
+{
+  "model": "portal.businessmembership",
+  "pk": 2,
+  "fields": {
+    "id_number": "2",
+    "business": 2,
+    "first_names": "BARIS",
+    "surname": "BARIS",
+    "membership_type": 1
+  }
+},
+{
+  "model": "portal.businessmembership",
+  "pk": 3,
+  "fields": {
+    "id_number": "3",
+    "business": 2,
+    "first_names": "BARYAM",
+    "surname": "BAYRAM",
+    "membership_type": 3
+  }
+},
+{
+  "model": "portal.businessmembership",
+  "pk": 5,
+  "fields": {
+    "id_number": "760715 XXXX 08 X",
+    "business": 2,
+    "first_names": "WILLIAM JACOBUS",
+    "surname": "VAN RHEEDE",
+    "membership_type": 2
+  }
+},
+{
+  "model": "portal.businessmembership",
+  "pk": 6,
+  "fields": {
+    "id_number": "590326 XXXX 08 X",
+    "business": 1,
+    "first_names": "PHILIP",
+    "surname": "FENWICK",
+    "membership_type": 2
+  }
+},
+{
+  "model": "portal.businessmembership",
+  "pk": 7,
+  "fields": {
+    "id_number": "630211 XXXX 08 X",
+    "business": 1,
+    "first_names": "JOHAN MARIUS",
+    "surname": "CASTELYN",
+    "membership_type": 3
+  }
+},
+{
+  "model": "portal.businessmembership",
+  "pk": 8,
+  "fields": {
+    "id_number": "670519 XXXX 08 X",
+    "business": 1,
+    "first_names": "TERTIA",
+    "surname": "CASTELYN",
+    "membership_type": 3
+  }
+},
+{
+  "model": "portal.businessmembership",
+  "pk": 9,
+  "fields": {
+    "id_number": "650412 XXXX 08 X",
+    "business": 2,
+    "first_names": "FREDY HENDRY",
+    "surname": "MARTHINUS",
+    "membership_type": 2
+  }
+},
+{
+  "model": "portal.businessmembership",
+  "pk": 10,
+  "fields": {
+    "id_number": "760715 XXXX 08 X",
+    "business": 2,
+    "first_names": "WILLIAM JACOBUS",
+    "surname": "VAN RHEEDE",
+    "membership_type": 2
+  }
+},
+{
+  "model": "portal.businessmembership",
+  "pk": 11,
+  "fields": {
+    "id_number": "590326 XXXX 08 X",
+    "business": 1,
+    "first_names": "PHILIP",
+    "surname": "FENWICK",
+    "membership_type": 2
+  }
+},
+{
+  "model": "portal.businessmembership",
+  "pk": 12,
+  "fields": {
+    "id_number": "630211 XXXX 08 X",
+    "business": 1,
+    "first_names": "JOHAN MARIUS",
+    "surname": "CASTELYN",
+    "membership_type": 3
+  }
+},
+{
+  "model": "portal.businessmembership",
+  "pk": 14,
+  "fields": {
+    "id_number": "670519 XXXX 08 X",
+    "business": 1,
+    "first_names": "TERTIA",
+    "surname": "CASTELYN",
+    "membership_type": 3
+  }
+},
+{
+  "model": "portal.businessmembership",
+  "pk": 15,
+  "fields": {
+    "id_number": "650412 XXXX 08 X",
+    "business": 2,
+    "first_names": "FREDY HENDRY",
+    "surname": "MARTHINUS",
+    "membership_type": 2
+  }
+}
+]

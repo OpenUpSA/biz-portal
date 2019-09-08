@@ -1,6 +1,8 @@
+import tablib
 from django.test import TestCase
 from django.urls import reverse
 
+from biz_portal.apps.portal.admin import BusinessMembershipResource
 from .. import models
 
 
@@ -13,6 +15,7 @@ class AdminAddBusinessTestCase(TestCase):
         "business_statuses",
         "regions",
         "test_admin_add_business",
+        "businessmembership",
     ]
 
     def test_superuser_add_business_ok(self):
@@ -268,3 +271,45 @@ class AdminModifyBusinessTest(TestCase):
             HTTP_HOST="biz-portal.openup.org.za",
         )
         self.assertEqual(response.status_code, 200)
+
+
+class AdminBulkLoadDirectorsTestCase(TestCase):
+    """Test for Bulk loads"""
+
+    fixtures = [
+        "sectors",
+        "business_types",
+        "business_statuses",
+        "regions",
+        "groups",
+        "test_api_businesses",
+        "test_bulk_load",
+    ]
+
+    def test_bulk_load_directors_correctly_match(self):
+        """It verifies bulk upload functionality including correct matching of business by its registration number"""
+        self.assertTrue(
+            self.client.login(username="admin", password="password"))
+        self.assertEqual(models.BusinessMembership.objects.count(), 0)
+
+        data = tablib.Dataset()
+        data.headers = ["id", "business", "id_number", "membership_type",
+                        "first_names", "surname"]
+        data.append([10, "1990/002791/07", "760712", 2, "WILLIAM",
+                     "VAN RHEEDE"])
+        data.append(
+            [15, "1990/000289/23", "TEST", 1, "JACOBUS",
+             "VAN RHEEDE"])
+        business_membership = BusinessMembershipResource()
+        business_membership.import_data(data, dry_run=False)
+        self.assertEqual(models.BusinessMembership.objects.count(), 2)
+
+        business = models.Business.objects.get(
+            registration_number="1990/002791/07")
+        director = models.BusinessMembership.objects.get(pk=10)
+        self.assertEqual(business.id, director.business.id)
+
+        business_2 = models.Business.objects.get(
+            registration_number="1990/000289/23")
+        director_2 = models.BusinessMembership.objects.get(pk=15)
+        self.assertEqual(business_2.id, director_2.business.id)
