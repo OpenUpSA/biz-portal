@@ -3,11 +3,11 @@ from import_export import fields, resources, widgets
 from import_export.admin import ImportExportMixin, ImportMixin
 from import_export.formats.base_formats import XLSX
 from rules.contrib.admin import ObjectPermissionsModelAdmin
+
 from . import models
 
 
 class BusinessMembershipResource(resources.ModelResource):
-
     def __init__(self, request=None):
         super(BusinessMembershipResource, self).__init__()
         self.request = request
@@ -49,26 +49,20 @@ class BusinessMembershipInlineAdmin(admin.TabularInline):
 
     def get_resource_kwargs(self, request, *args, **kwargs):
         rk = super().get_resource_kwargs(request, *args, **kwargs)
-        rk['request'] = request
+        rk["request"] = request
         return rk
 
 
 class BusinessMembershipAdmin(ImportMixin):
     model = models.BusinessMembership
     resource_class = BusinessMembershipResource
-    fields = (
-        "business",
-        "id_number",
-        "first_names",
-        "surname",
-        "membership_type",
-    )
+    fields = ("business", "id_number", "first_names", "surname", "membership_type")
     list_display = (
         "id_number",
         "first_names",
         "surname",
         "membership_type",
-        "business"
+        "business",
     )
     list_display_links = ("id_number",)
 
@@ -77,7 +71,7 @@ class BusinessMembershipAdmin(ImportMixin):
 
     def get_resource_kwargs(self, request, *args, **kwargs):
         rk = super().get_resource_kwargs(request, *args, **kwargs)
-        rk['request'] = request
+        rk["request"] = request
         return rk
 
 
@@ -166,7 +160,7 @@ class BusinessResource(resources.ModelResource):
 
 class BusinessAdmin(ImportExportMixin, ObjectPermissionsModelAdmin):
     search_fields = ["registered_name"]
-    inlines = [BusinessMembershipInlineAdmin, ]
+    inlines = [BusinessMembershipInlineAdmin]
 
     readonly_fields = (
         "registered_name",

@@ -201,7 +201,7 @@ class BusinessDetailTestCase(TestCase):
         "business_statuses",
         "regions",
         "test_views_business_detail",
-        "test_staff_views_directors"
+        "test_staff_views_directors",
     ]
 
     def test_load_correct_business(self):

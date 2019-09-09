@@ -10,11 +10,7 @@ TURNOVER_BANDS = [
     (4, "R1,500,000 to R5,000,000"),
     (5, "More than R5,000,000"),
 ]
-MEMBERSHIP_TYPES = [
-    (1, "Company Secretary"),
-    (2, "Member"),
-    (3, "Director"),
-]
+MEMBERSHIP_TYPES = [(1, "Company Secretary"), (2, "Member"), (3, "Director")]
 
 
 class Municipality(models.Model):
@@ -169,10 +165,8 @@ class Business(models.Model):
 class BusinessMembership(models.Model):
     id_number = models.CharField(max_length=200)
     business = models.ForeignKey(
-        Business,
-        on_delete=models.CASCADE,
-        related_name="members"
-     )
+        Business, on_delete=models.CASCADE, related_name="members"
+    )
     first_names = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
     membership_type = models.IntegerField(choices=MEMBERSHIP_TYPES)

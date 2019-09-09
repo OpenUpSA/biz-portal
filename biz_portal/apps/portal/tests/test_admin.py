@@ -1,9 +1,10 @@
+import tablib
 from django.test import TestCase
 from django.urls import reverse
 
 from biz_portal.apps.portal.admin import BusinessMembershipResource
+
 from .. import models
-import tablib
 
 
 class AdminAddBusinessTestCase(TestCase):
@@ -309,18 +310,20 @@ class AdminBulkLoadDirectorsTestCase(TestCase):
 
     def test_bulk_load_directors_correctly_match(self):
         """It verifies bulk upload functionality including correct matching of business by its registration number"""
-        self.assertTrue(
-            self.client.login(username="admin", password="password"))
+        self.assertTrue(self.client.login(username="admin", password="password"))
         self.assertEqual(models.BusinessMembership.objects.count(), 0)
 
         data = tablib.Dataset()
-        data.headers = ["id", "business", "id_number", "membership_type",
-                        "first_names", "surname"]
-        data.append([10, "1990/002791/07", "760712", 2, "WILLIAM",
-                     "VAN RHEEDE"])
-        data.append(
-            [15, "1990/000289/23", "TEST", 1, "JACOBUS",
-             "VAN RHEEDE"])
+        data.headers = [
+            "id",
+            "business",
+            "id_number",
+            "membership_type",
+            "first_names",
+            "surname",
+        ]
+        data.append([10, "1990/002791/07", "760712", 2, "WILLIAM", "VAN RHEEDE"])
+        data.append([15, "1990/000289/23", "TEST", 1, "JACOBUS", "VAN RHEEDE"])
         business_membership = BusinessMembershipResource()
         business_membership.import_data(data, dry_run=False)
         self.assertEqual(models.BusinessMembership.objects.count(), 2)
