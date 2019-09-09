@@ -1,6 +1,6 @@
 from django.contrib import admin
 from import_export import fields, resources, widgets
-from import_export.admin import ImportExportMixin
+from import_export.admin import ImportExportMixin, ImportMixin
 from import_export.formats.base_formats import XLSX
 from rules.contrib.admin import ObjectPermissionsModelAdmin
 from . import models
@@ -43,6 +43,42 @@ class BusinessMembershipResource(resources.ModelResource):
 
 class BusinessMembershipInlineAdmin(admin.TabularInline):
     model = models.BusinessMembership
+
+    def has_import_permission(self, request):
+        return request.user.is_superuser
+
+    def get_resource_kwargs(self, request, *args, **kwargs):
+        rk = super().get_resource_kwargs(request, *args, **kwargs)
+        rk['request'] = request
+        return rk
+
+
+class BusinessMembershipAdmin(ImportMixin):
+    model = models.BusinessMembership
+    resource_class = BusinessMembershipResource
+    fields = (
+        "business",
+        "id_number",
+        "first_names",
+        "surname",
+        "membership_type",
+    )
+    list_display = (
+        "id_number",
+        "first_names",
+        "surname",
+        "membership_type",
+        "business"
+    )
+    list_display_links = ("id_number",)
+
+    def has_import_permission(self, request):
+        return request.user.is_superuser
+
+    def get_resource_kwargs(self, request, *args, **kwargs):
+        rk = super().get_resource_kwargs(request, *args, **kwargs)
+        rk['request'] = request
+        return rk
 
 
 class BusinessResource(resources.ModelResource):

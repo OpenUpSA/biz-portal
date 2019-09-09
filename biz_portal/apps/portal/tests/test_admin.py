@@ -1,9 +1,9 @@
-import tablib
 from django.test import TestCase
 from django.urls import reverse
 
 from biz_portal.apps.portal.admin import BusinessMembershipResource
 from .. import models
+import tablib
 
 
 class AdminAddBusinessTestCase(TestCase):
@@ -15,7 +15,6 @@ class AdminAddBusinessTestCase(TestCase):
         "business_statuses",
         "regions",
         "test_admin_add_business",
-        "businessmembership",
     ]
 
     def test_superuser_add_business_ok(self):
@@ -27,6 +26,10 @@ class AdminAddBusinessTestCase(TestCase):
             "registration_number": "123",
             "region": models.Region.objects.first().pk,
             "sector": models.Sector.objects.first().pk,
+            "members-TOTAL_FORMS": 0,
+            "members-INITIAL_FORMS": 0,
+            "members-MIN_NUM_FORMS": 0,
+            "members-MAX_NUM_FORMS": 1000,
         }
         response = self.client.post(
             reverse("admin:portal_business_add"),
@@ -65,6 +68,10 @@ class AdminAddBusinessTestCase(TestCase):
             "registration_number": "123",
             "region": models.Region.objects.first().pk,
             "sector": models.Sector.objects.first().pk,
+            "members-TOTAL_FORMS": 0,
+            "members-INITIAL_FORMS": 0,
+            "members-MIN_NUM_FORMS": 0,
+            "members-MAX_NUM_FORMS": 1000,
         }
         response = self.client.post(
             reverse("admin:portal_business_add"),
@@ -98,6 +105,10 @@ class AdminModifyBusinessTest(TestCase):
             "region": business.region.id,
             "supplied_name": "DEADBEEF",
             "sector": business.sector.id,
+            "members-TOTAL_FORMS": 0,
+            "members-INITIAL_FORMS": 0,
+            "members-MIN_NUM_FORMS": 0,
+            "members-MAX_NUM_FORMS": 1000,
         }
         response = self.client.post(
             reverse("admin:portal_business_change", args=[business.pk]),
@@ -126,6 +137,10 @@ class AdminModifyBusinessTest(TestCase):
             "region": business.region.id,
             "supplied_name": "DEADBEEF",
             "sector": business.sector.id,
+            "members-TOTAL_FORMS": 0,
+            "members-INITIAL_FORMS": 0,
+            "members-MIN_NUM_FORMS": 0,
+            "members-MAX_NUM_FORMS": 1000,
         }
         response = self.client.post(
             reverse("admin:portal_business_change", args=[business.pk]),
@@ -144,6 +159,10 @@ class AdminModifyBusinessTest(TestCase):
             "region": business.region.id,
             "supplied_name": "DEADBEEF 2",
             "sector": business.sector.id,
+            "members-TOTAL_FORMS": 0,
+            "members-INITIAL_FORMS": 0,
+            "members-MIN_NUM_FORMS": 0,
+            "members-MAX_NUM_FORMS": 1000,
         }
         response = self.client.post(
             reverse("admin:portal_business_change", args=[business.pk]),
@@ -175,6 +194,10 @@ class AdminModifyBusinessTest(TestCase):
             "region": business.region.id,
             "supplied_name": "DEADBEEF",
             "sector": business.sector.id,
+            "members-TOTAL_FORMS": 0,
+            "members-INITIAL_FORMS": 0,
+            "members-MIN_NUM_FORMS": 0,
+            "members-MAX_NUM_FORMS": 1000,
         }
         response = self.client.post(
             reverse("admin:portal_business_change", args=[business.pk]),
@@ -195,17 +218,15 @@ class AdminModifyBusinessTest(TestCase):
         business = models.Business.objects.get(pk=2)
         self.assertNotEqual(business.supplied_name, "DEADBEEF")
 
-        view_response = self.client.get(
-            reverse("admin:portal_business_change", args=[business.pk]),
-            HTTP_HOST="biz-portal.openup.org.za",
-        )
-        self.assertNotContains(view_response, "Save")
-
         post_data = {
             "registration_number": business.registration_number,
             "region": business.region.id,
             "supplied_name": "DEADBEEF",
             "sector": business.sector.id,
+            "members-TOTAL_FORMS": 0,
+            "members-INITIAL_FORMS": 0,
+            "members-MIN_NUM_FORMS": 0,
+            "members-MAX_NUM_FORMS": 1000,
         }
         response = self.client.post(
             reverse("admin:portal_business_change", args=[business.pk]),
@@ -304,12 +325,10 @@ class AdminBulkLoadDirectorsTestCase(TestCase):
         business_membership.import_data(data, dry_run=False)
         self.assertEqual(models.BusinessMembership.objects.count(), 2)
 
-        business = models.Business.objects.get(
-            registration_number="1990/002791/07")
+        business = models.Business.objects.get(registration_number="1990/002791/07")
         director = models.BusinessMembership.objects.get(pk=10)
         self.assertEqual(business.id, director.business.id)
 
-        business_2 = models.Business.objects.get(
-            registration_number="1990/000289/23")
+        business_2 = models.Business.objects.get(registration_number="1990/000289/23")
         director_2 = models.BusinessMembership.objects.get(pk=15)
         self.assertEqual(business_2.id, director_2.business.id)

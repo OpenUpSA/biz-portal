@@ -201,6 +201,7 @@ class BusinessDetailTestCase(TestCase):
         "business_statuses",
         "regions",
         "test_views_business_detail",
+        "test_staff_views_directors"
     ]
 
     def test_load_correct_business(self):
@@ -228,6 +229,18 @@ class BusinessDetailTestCase(TestCase):
         c = Client()
         response = c.get("/businesses/1", HTTP_HOST="muni1.gov.za")
         assertValidHTML(response.content)
+
+    def test_staff_views_directors(self):
+        c = Client()
+        c.login(username="staff", password="password")
+        response = c.get("/businesses/1", HTTP_HOST="muni1.gov.za")
+        self.assertContains(response, "Directors")
+
+    def test_non_staff_cant_view_directors(self):
+        c = Client()
+        c.login(username="non_staff", password="password")
+        response = c.get("/businesses/1", HTTP_HOST="muni1.gov.za")
+        self.assertNotContains(response, "Directors")
 
 
 def facet_option(case, facet, starts_with):
