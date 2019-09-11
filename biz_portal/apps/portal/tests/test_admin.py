@@ -218,6 +218,11 @@ class AdminModifyBusinessTest(TestCase):
 
         business = models.Business.objects.get(pk=2)
         self.assertNotEqual(business.supplied_name, "DEADBEEF")
+        view_response = self.client.get(
+            reverse("admin:portal_business_change", args=[business.pk]),
+            HTTP_HOST="biz-portal.openup.org.za",
+        )
+        self.assertNotContains(view_response, "Save")
 
         post_data = {
             "registration_number": business.registration_number,

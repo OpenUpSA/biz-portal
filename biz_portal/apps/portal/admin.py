@@ -61,11 +61,6 @@ class BusinessMembershipAdmin(ImportMixin):
     def has_import_permission(self, request):
         return request.user.is_superuser
 
-    def get_resource_kwargs(self, request, *args, **kwargs):
-        rk = super().get_resource_kwargs(request, *args, **kwargs)
-        rk["request"] = request
-        return rk
-
 
 class BusinessResource(resources.ModelResource):
     registration_status = fields.Field(
