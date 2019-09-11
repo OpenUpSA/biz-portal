@@ -315,23 +315,22 @@ class AdminBulkLoadDirectorsTestCase(TestCase):
 
         data = tablib.Dataset()
         data.headers = [
-            "id",
             "business",
             "id_number",
             "membership_type",
             "first_names",
             "surname",
         ]
-        data.append([10, "1990/002791/07", "760712", 2, "WILLIAM", "VAN RHEEDE"])
-        data.append([15, "1990/000289/23", "TEST", 1, "JACOBUS", "VAN RHEEDE"])
+        data.append(["1990/002791/07", "760712", 2, "WILLIAM", "VAN RHEEDE"])
+        data.append(["1990/000289/23", "TEST", 1, "JACOBUS", "VAN RHEEDE"])
         business_membership = BusinessMembershipResource()
         business_membership.import_data(data, dry_run=False)
         self.assertEqual(models.BusinessMembership.objects.count(), 2)
 
         business = models.Business.objects.get(registration_number="1990/002791/07")
-        director = models.BusinessMembership.objects.get(pk=10)
+        director = models.BusinessMembership.objects.get(pk=1)
         self.assertEqual(business.id, director.business.id)
 
         business_2 = models.Business.objects.get(registration_number="1990/000289/23")
-        director_2 = models.BusinessMembership.objects.get(pk=15)
+        director_2 = models.BusinessMembership.objects.get(pk=2)
         self.assertEqual(business_2.id, director_2.business.id)

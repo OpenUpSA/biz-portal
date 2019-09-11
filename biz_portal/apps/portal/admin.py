@@ -23,16 +23,8 @@ class BusinessMembershipResource(resources.ModelResource):
         import_id_fields = ("id_number",)
         skip_unchanged = True
         report_skipped = False
-        fields = (
-            "id",
-            "business",
-            "id_number",
-            "first_names",
-            "surname",
-            "membership_type",
-        )
+        fields = ("business", "id_number", "first_names", "surname", "membership_type")
         export_order = (
-            "id",
             "business",
             "id_number",
             "first_names",
