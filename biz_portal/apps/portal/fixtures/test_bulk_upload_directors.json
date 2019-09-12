@@ -1,0 +1,103 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "password": "argon2$argon2i$v=19$m=512,t=2,p=2$RUZnTFNUVUhCTjg1$kUTw7onWQfUlE6dr/mkvvw",
+      "is_superuser": true,
+      "username": "admin",
+      "is_staff": true,
+      "is_active": true
+    }
+  },
+  {
+    "model": "portal.region",
+    "pk": 1,
+    "fields": {
+      "label": "Bredasdorp",
+      "municipality": 1
+    }
+  },
+  {
+    "model": "portal.region",
+    "pk": 4,
+    "fields": {
+      "label": "Unknown",
+      "municipality": 1
+    }
+  },
+  {
+    "model": "portal.sector",
+    "pk": 1,
+    "fields": {
+      "label": "Accommodation and Food Services"
+    }
+  },
+  {
+    "model": "portal.sector",
+    "pk": 3,
+    "fields": {
+      "label": "Agriculture, Forestry, Fishing and Hunting"
+    }
+  },
+  {
+    "model": "portal.businesstype",
+    "pk": 1,
+    "fields": {
+      "label": "Close Corporation"
+    }
+  },
+  {
+    "model": "portal.businesstype",
+    "pk": 2,
+    "fields": {
+      "label": "Private Company"
+    }
+  },
+  {
+    "model": "portal.businessstatus",
+    "pk": 7,
+    "fields": {
+      "label": "In Business"
+    }
+  },
+  {
+    "model": "portal.businessstatus",
+    "pk": 4,
+    "fields": {
+      "label": "Deregistration Final"
+    }
+  },
+  {
+    "model": "portal.business",
+    "pk": 1,
+    "fields": {
+      "registered_name": "Y-KWIX-YEET BRASS",
+      "registration_number": "1990/002791/07",
+      "registration_status": 7,
+      "region": 4,
+      "registered_physical_address": "18 HUXHAM STREET\nARNISTON\n7280",
+      "registered_postal_address": "P O BOX 403\nBREDASDORP\n7280",
+      "sector": 1,
+      "registered_business_type": 2,
+      "registration_date": "1990-05-18",
+      "supplied_name": "COPPER"
+    }
+  },
+  {
+    "model": "portal.business",
+    "pk": 2,
+    "fields": {
+      "registered_name": "BOORT DEVELOPMENT BUSINESS",
+      "registration_number": "1990/000289/23",
+      "registration_status": 4,
+      "region": 1,
+      "registered_physical_address": "DIRKIE UYSSTRAAT 11\nBREDASDORP\n7280\n7280",
+      "registered_postal_address": "POSBUS 195\nBREDASDORP\n7280",
+      "sector": 3,
+      "registered_business_type": 1,
+      "registration_date": "1990-01-04",
+      "supplied_name": "BOAT"
+    }
+  }
+]

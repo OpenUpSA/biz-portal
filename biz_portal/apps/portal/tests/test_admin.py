@@ -303,15 +303,7 @@ class AdminModifyBusinessTest(TestCase):
 class AdminBulkLoadDirectorsTestCase(TestCase):
     """Test for Bulk loads"""
 
-    fixtures = [
-        "sectors",
-        "business_types",
-        "business_statuses",
-        "regions",
-        "groups",
-        "test_api_businesses",
-        "test_bulk_load",
-    ]
+    fixtures = ["test_bulk_upload_directors"]
 
     def test_bulk_load_directors_correctly_match(self):
         """It verifies bulk upload functionality including correct matching of business by its registration number"""
