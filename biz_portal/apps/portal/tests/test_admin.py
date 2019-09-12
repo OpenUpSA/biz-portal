@@ -328,9 +328,9 @@ class AdminBulkLoadDirectorsTestCase(TestCase):
         self.assertEqual(models.BusinessMembership.objects.count(), 2)
 
         business = models.Business.objects.get(registration_number="1990/002791/07")
-        director = models.BusinessMembership.objects.get(pk=1)
+        director = models.BusinessMembership.objects.get(id_number="760712")
         self.assertEqual(business.id, director.business.id)
 
         business_2 = models.Business.objects.get(registration_number="1990/000289/23")
-        director_2 = models.BusinessMembership.objects.get(pk=2)
+        director_2 = models.BusinessMembership.objects.get(id_number="TEST")
         self.assertEqual(business_2.id, director_2.business.id)
