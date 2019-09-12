@@ -318,8 +318,9 @@ class AdminBulkLoadDirectorsTestCase(TestCase):
             "first_names",
             "surname",
         ]
-        data.append(["1990/002791/07", "760712", 2, "WILLIAM", "VAN RHEEDE"])
-        data.append(["1990/000289/23", "TEST", 1, "JACOBUS", "VAN RHEEDE"])
+        data.append(["1990/002791/07", "760712", "Member", "WILLIAM", "VAN RHEEDE"])
+        data.append(["1990/000289/23", "TEST", "Director", "JACOBUS", "VAN RHEEDE"])
+
         business_membership = BusinessMembershipResource()
         business_membership.import_data(data, dry_run=False)
         self.assertEqual(models.BusinessMembership.objects.count(), 2)

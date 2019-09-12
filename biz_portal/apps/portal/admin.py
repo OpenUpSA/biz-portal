@@ -4,6 +4,8 @@ from import_export.admin import ImportExportMixin, ImportMixin
 from import_export.formats.base_formats import XLSX
 from rules.contrib.admin import ObjectPermissionsModelAdmin
 
+from biz_portal.apps.portal.models import get_member_id
+
 from . import models
 
 
@@ -17,6 +19,11 @@ class BusinessMembershipResource(resources.ModelResource):
         attribute="business",
         widget=widgets.ForeignKeyWidget(models.Business, "registration_number"),
     )
+
+    def before_import_row(self, row, **kwargs):
+        name = row.get("membership_type")
+        id_ = get_member_id(name)
+        row["membership_type"] = id_
 
     class Meta:
         model = models.BusinessMembership

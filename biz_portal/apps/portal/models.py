@@ -13,6 +13,10 @@ TURNOVER_BANDS = [
 MEMBERSHIP_TYPES = [(1, "Company Secretary"), (2, "Member"), (3, "Director")]
 
 
+def get_member_id(label):
+    return [p[0] for p in MEMBERSHIP_TYPES if p[1] == label][0]
+
+
 class Municipality(models.Model):
     class Meta:
         verbose_name_plural = "municipalities"
