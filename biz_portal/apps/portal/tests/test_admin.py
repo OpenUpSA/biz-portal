@@ -223,6 +223,8 @@ class AdminModifyBusinessTest(TestCase):
             HTTP_HOST="biz-portal.openup.org.za",
         )
         self.assertNotContains(view_response, "Save")
+        self.assertContains(view_response, "Business memberships")
+        self.assertContains(view_response, "BARIS")
 
         post_data = {
             "registration_number": business.registration_number,

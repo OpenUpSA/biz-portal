@@ -111,5 +111,16 @@
     "region": 6,
     "sector": 29
   }
+},
+{
+  "model": "portal.businessmembership",
+  "pk": 8,
+  "fields": {
+    "id_number": "2",
+    "business": 2,
+    "first_names": "BARIS",
+    "surname": "BARIS",
+    "membership_type": 2
+  }
 }
 ]
