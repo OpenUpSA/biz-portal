@@ -2,9 +2,10 @@ from django.contrib import admin
 from import_export import fields, resources, widgets
 from import_export.admin import ImportExportMixin, ImportMixin
 from import_export.formats.base_formats import XLSX
-from rules.contrib.admin import ObjectPermissionsModelAdmin
+from rules.contrib import admin as rules_admin
 
 from biz_portal.apps.portal.models import get_member_id
+from biz_portal.apps.portal.rules import is_business_muni_admin
 
 from . import models
 
@@ -40,16 +41,44 @@ class BusinessMembershipResource(resources.ModelResource):
         )
 
 
-class BusinessMembershipInlineAdmin(admin.TabularInline):
+class BusinessMembershipInlineAdmin(rules_admin.ObjectPermissionsTabularInline):
     model = models.BusinessMembership
 
-    def has_import_permission(self, request):
-        return request.user.is_superuser
+    def has_import_permission(self, request, obj=None):
+        if (
+            request.user.is_superuser
+            or request.user.groups.filter(name="Integration Admins").exists()
+        ):
+            return True
 
-    def get_resource_kwargs(self, request, *args, **kwargs):
-        rk = super().get_resource_kwargs(request, *args, **kwargs)
-        rk["request"] = request
-        return rk
+        business = None
+        if obj:
+            business = models.Business.objects.get(pk=obj.pk)
+        return is_business_muni_admin(request.user, business)
+
+    def has_change_permission(self, request, obj=None):
+        if (
+            request.user.is_superuser
+            or request.user.groups.filter(name="Integration Admins").exists()
+        ):
+            return True
+
+        business = None
+        if obj:
+            business = models.Business.objects.get(pk=obj.pk)
+        return is_business_muni_admin(request.user, business)
+
+    def has_delete_permission(self, request, obj=None):
+        if (
+            request.user.is_superuser
+            or request.user.groups.filter(name="Integration Admins").exists()
+        ):
+            return True
+
+        business = None
+        if obj:
+            business = models.Business.objects.get(pk=obj.pk)
+        return is_business_muni_admin(request.user, business)
 
 
 class BusinessMembershipAdmin(ImportMixin):
@@ -152,7 +181,7 @@ class BusinessResource(resources.ModelResource):
         )
 
 
-class BusinessAdmin(ImportExportMixin, ObjectPermissionsModelAdmin):
+class BusinessAdmin(ImportExportMixin, rules_admin.ObjectPermissionsModelAdmin):
     search_fields = ["registered_name"]
     inlines = [BusinessMembershipInlineAdmin]
 
