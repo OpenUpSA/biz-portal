@@ -114,13 +114,24 @@
 },
 {
   "model": "portal.businessmembership",
-  "pk": 8,
+  "pk": 1,
   "fields": {
-    "id_number": "2",
-    "business": 2,
+    "id_number": "1111",
+    "business": 1,
     "first_names": "BARIS",
     "surname": "BARIS",
     "membership_type": 2
+  }
+},
+{
+  "model": "portal.businessmembership",
+  "pk": 2,
+  "fields": {
+    "id_number": "XXXX",
+    "business": 2,
+    "first_names": "Test",
+    "surname": "User",
+    "membership_type": 3
   }
 }
 ]
