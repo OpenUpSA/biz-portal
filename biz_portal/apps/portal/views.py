@@ -52,7 +52,7 @@ class HomeView(generic.TemplateView):
                 sector__label__in=["Sector unknown", "generic"]
             )
             .filter(region__municipality=self.current_site.municipality)
-            .values(label=F("sector__label"))
+            .values(label=F("sector__label"), icon_name=F("sector__icon_name"))
             .annotate(count=Count("*"))
             .order_by("-count")
         )
