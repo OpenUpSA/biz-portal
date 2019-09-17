@@ -5,6 +5,7 @@ from biz_portal.apps.portal.importexport import BusinessMembershipResource
 
 from .. import models
 
+
 class AdminBulkLoadDirectorsTestCase(TestCase):
     """Test for Bulk loads"""
 
