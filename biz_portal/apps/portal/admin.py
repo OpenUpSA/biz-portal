@@ -10,6 +10,10 @@ from biz_portal.apps.portal.rules import is_business_muni_admin
 from . import models
 
 
+class BusinessMembershipInlineAdmin(rules_admin.ObjectPermissionsTabularInline):
+    model = models.BusinessMembership
+
+
 class BusinessMembershipResource(resources.ModelResource):
     def __init__(self, request=None):
         super(BusinessMembershipResource, self).__init__()
@@ -39,63 +43,6 @@ class BusinessMembershipResource(resources.ModelResource):
             "surname",
             "membership_type",
         )
-
-
-class BusinessMembershipInlineAdmin(rules_admin.ObjectPermissionsTabularInline):
-    model = models.BusinessMembership
-
-    def has_import_permission(self, request, obj=None):
-        if (
-            request.user.is_superuser
-            or request.user.groups.filter(name="Integration Admins").exists()
-        ):
-            return True
-
-        business = None
-        if obj:
-            business = models.Business.objects.get(pk=obj.pk)
-        return is_business_muni_admin(request.user, business)
-
-    def has_change_permission(self, request, obj=None):
-        if (
-            request.user.is_superuser
-            or request.user.groups.filter(name="Integration Admins").exists()
-        ):
-            return True
-
-        business = None
-        if obj:
-            business = models.Business.objects.get(pk=obj.pk)
-        return is_business_muni_admin(request.user, business)
-
-    def has_delete_permission(self, request, obj=None):
-        if (
-            request.user.is_superuser
-            or request.user.groups.filter(name="Integration Admins").exists()
-        ):
-            return True
-
-        business = None
-        if obj:
-            business = models.Business.objects.get(pk=obj.pk)
-        return is_business_muni_admin(request.user, business)
-
-
-class BusinessMembershipAdmin(ImportMixin):
-    model = models.BusinessMembership
-    resource_class = BusinessMembershipResource
-    fields = ("business", "id_number", "first_names", "surname", "membership_type")
-    list_display = (
-        "id_number",
-        "first_names",
-        "surname",
-        "membership_type",
-        "business",
-    )
-    list_display_links = ("id_number",)
-
-    def has_import_permission(self, request):
-        return request.user.is_superuser
 
 
 class BusinessResource(resources.ModelResource):
