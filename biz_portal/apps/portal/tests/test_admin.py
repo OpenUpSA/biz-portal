@@ -24,6 +24,10 @@ class AdminAddBusinessTestCase(TestCase):
             "registration_number": "123",
             "region": models.Region.objects.first().pk,
             "sector": models.Sector.objects.first().pk,
+            "members-TOTAL_FORMS": 0,
+            "members-INITIAL_FORMS": 0,
+            "members-MIN_NUM_FORMS": 0,
+            "members-MAX_NUM_FORMS": 1000,
         }
         response = self.client.post(
             reverse("admin:portal_business_add"),
@@ -62,6 +66,10 @@ class AdminAddBusinessTestCase(TestCase):
             "registration_number": "123",
             "region": models.Region.objects.first().pk,
             "sector": models.Sector.objects.first().pk,
+            "members-TOTAL_FORMS": 0,
+            "members-INITIAL_FORMS": 0,
+            "members-MIN_NUM_FORMS": 0,
+            "members-MAX_NUM_FORMS": 1000,
         }
         response = self.client.post(
             reverse("admin:portal_business_add"),
@@ -90,11 +98,23 @@ class AdminModifyBusinessTest(TestCase):
 
         business = models.Business.objects.get(pk=1)
         self.assertNotEqual(business.supplied_name, "DEADBEEF")
+        business_member = models.BusinessMembership.objects.get(business=business.id)
+        self.assertNotEqual(business_member.first_names, "DEADBEEF_2")
         post_data = {
             "registration_number": business.registration_number,
             "region": business.region.id,
             "supplied_name": "DEADBEEF",
             "sector": business.sector.id,
+            "members-TOTAL_FORMS": 4,
+            "members-INITIAL_FORMS": 1,
+            "members-MIN_NUM_FORMS": 0,
+            "members-MAX_NUM_FORMS": 1000,
+            "members-0-id": business_member.id,
+            "members-0-business": business_member.business.id,
+            "members-0-id_number": business_member.id_number,
+            "members-0-first_names": "DEADBEEF_2",
+            "members-0-surname": business_member.surname,
+            "members-0-membership_type": business_member.membership_type,
         }
         response = self.client.post(
             reverse("admin:portal_business_change", args=[business.pk]),
@@ -105,6 +125,9 @@ class AdminModifyBusinessTest(TestCase):
 
         business = models.Business.objects.get(pk=business.pk)
         self.assertEqual(business.supplied_name, "DEADBEEF")
+
+        business_member = models.BusinessMembership.objects.get(pk=business_member.pk)
+        self.assertEqual(business_member.first_names, "DEADBEEF_2")
 
     def test_integration_admin_edit_all_businesses_ok(self):
         """
@@ -123,6 +146,10 @@ class AdminModifyBusinessTest(TestCase):
             "region": business.region.id,
             "supplied_name": "DEADBEEF",
             "sector": business.sector.id,
+            "members-TOTAL_FORMS": 0,
+            "members-INITIAL_FORMS": 0,
+            "members-MIN_NUM_FORMS": 0,
+            "members-MAX_NUM_FORMS": 1000,
         }
         response = self.client.post(
             reverse("admin:portal_business_change", args=[business.pk]),
@@ -141,6 +168,10 @@ class AdminModifyBusinessTest(TestCase):
             "region": business.region.id,
             "supplied_name": "DEADBEEF 2",
             "sector": business.sector.id,
+            "members-TOTAL_FORMS": 0,
+            "members-INITIAL_FORMS": 0,
+            "members-MIN_NUM_FORMS": 0,
+            "members-MAX_NUM_FORMS": 1000,
         }
         response = self.client.post(
             reverse("admin:portal_business_change", args=[business.pk]),
@@ -161,17 +192,32 @@ class AdminModifyBusinessTest(TestCase):
         business = models.Business.objects.get(pk=1)
         self.assertNotEqual(business.supplied_name, "DEADBEEF")
 
+        business_member = models.BusinessMembership.objects.get(business=business.id)
+        self.assertNotEqual(business_member.first_names, "DEADBEEF_2")
+
         view_response = self.client.get(
             reverse("admin:portal_business_change", args=[business.pk]),
             HTTP_HOST="biz-portal.openup.org.za",
         )
         self.assertContains(view_response, "Save")
+        self.assertContains(view_response, "Business memberships")
+        self.assertContains(view_response, "BARIS")
 
         post_data = {
             "registration_number": business.registration_number,
             "region": business.region.id,
             "supplied_name": "DEADBEEF",
             "sector": business.sector.id,
+            "members-TOTAL_FORMS": 4,
+            "members-INITIAL_FORMS": 1,
+            "members-MIN_NUM_FORMS": 0,
+            "members-MAX_NUM_FORMS": 1000,
+            "members-0-id": business_member.id,
+            "members-0-business": business_member.business.id,
+            "members-0-id_number": business_member.id_number,
+            "members-0-first_names": "DEADBEEF_2",
+            "members-0-surname": business_member.surname,
+            "members-0-membership_type": business_member.membership_type,
         }
         response = self.client.post(
             reverse("admin:portal_business_change", args=[business.pk]),
@@ -183,6 +229,10 @@ class AdminModifyBusinessTest(TestCase):
         business = models.Business.objects.get(pk=business.pk)
         self.assertEqual(business.supplied_name, "DEADBEEF")
 
+        # User was able to modify business member
+        business_member = models.BusinessMembership.objects.get(pk=business_member.pk)
+        self.assertEqual(business_member.first_names, "DEADBEEF_2")
+
     def test_muni_admin_edit_non_muni_businesses_denied(self):
         """ User who is not listed as muni admin may not edit businesses in muni """
         self.assertTrue(
@@ -192,18 +242,35 @@ class AdminModifyBusinessTest(TestCase):
         business = models.Business.objects.get(pk=2)
         self.assertNotEqual(business.supplied_name, "DEADBEEF")
 
+        business_member = models.BusinessMembership.objects.get(business=business.pk)
+        self.assertNotEqual(business_member.first_names, "DEADBEEF_2")
+
         view_response = self.client.get(
             reverse("admin:portal_business_change", args=[business.pk]),
             HTTP_HOST="biz-portal.openup.org.za",
         )
+
         self.assertNotContains(view_response, "Save")
+        self.assertContains(view_response, "Business memberships")
+        self.assertContains(view_response, "Test")
 
         post_data = {
             "registration_number": business.registration_number,
             "region": business.region.id,
             "supplied_name": "DEADBEEF",
             "sector": business.sector.id,
+            "members-TOTAL_FORMS": 4,
+            "members-INITIAL_FORMS": 1,
+            "members-MIN_NUM_FORMS": 0,
+            "members-MAX_NUM_FORMS": 1000,
+            "members-0-id": business_member.id,
+            "members-0-business": business_member.business.id,
+            "members-0-id_number": business_member.id_number,
+            "members-0-first_names": "DEADBEEF_2",
+            "members-0-surname": business_member.surname,
+            "members-0-membership_type": business_member.membership_type,
         }
+
         response = self.client.post(
             reverse("admin:portal_business_change", args=[business.pk]),
             post_data,
@@ -213,6 +280,10 @@ class AdminModifyBusinessTest(TestCase):
 
         business = models.Business.objects.get(pk=business.pk)
         self.assertNotEqual(business.supplied_name, "DEADBEEF")
+
+        # User was NOT able to modify business member.
+        business_member = models.BusinessMembership.objects.get(pk=business_member.pk)
+        self.assertNotEqual(business_member.first_names, "DEADBEEF_2")
 
     def test_superuser_can_select_any_muni(self):
         """ Superuser who is not listed as muni admin can select any muni businesses """

@@ -60,6 +60,26 @@
         "business"
       ],
       [
+        "add_businessmembership",
+        "portal",
+        "businessmembership"
+      ],
+      [
+        "change_businessmembership",
+        "portal",
+        "businessmembership"
+      ],
+      [
+        "delete_businessmembership",
+        "portal",
+        "businessmembership"
+      ],
+      [
+        "view_businessmembership",
+        "portal",
+        "businessmembership"
+      ],
+      [
         "view_businessstatus",
         "portal",
         "businessstatus"
@@ -121,8 +141,8 @@
       ]
     ]
   }
-},
-{
+  },
+  {
   "model": "auth.group",
   "fields": {
     "name": "Intra-muni Admins",
@@ -146,6 +166,11 @@
         "view_business",
         "portal",
         "business"
+      ],
+      [
+        "view_businessmembership",
+        "portal",
+        "businessmembership"
       ],
       [
         "view_businessstatus",

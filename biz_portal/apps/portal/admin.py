@@ -1,10 +1,27 @@
 from django.contrib import admin
+from django.contrib.auth import get_permission_codename
 from import_export import fields, resources, widgets
-from import_export.admin import ImportExportMixin
+from import_export.admin import ImportExportMixin, ImportMixin
 from import_export.formats.base_formats import XLSX
-from rules.contrib.admin import ObjectPermissionsModelAdmin
+from rules.contrib import admin as rules_admin
 
 from . import models
+
+
+class BusinessMembershipInlineAdmin(rules_admin.ObjectPermissionsTabularInline):
+    model = models.BusinessMembership
+
+    # Copied from https://github.com/dfunckt/django-rules/blob/46c594ec2abb605647af49bfbbca17326c3f9df3/rules/contrib/admin.py#L28
+    # because they don't define add permission handler
+    def has_add_permission(self, request, obj=None):
+        opts = self.opts
+        if opts.auto_created:
+            for field in opts.fields:
+                if field.rel and field.rel.to != self.parent_model:
+                    opts = field.rel.to._meta
+                    break
+        codename = get_permission_codename("add", opts)
+        return request.user.has_perm("%s.%s" % (opts.app_label, codename), obj)
 
 
 class BusinessResource(resources.ModelResource):
@@ -90,8 +107,9 @@ class BusinessResource(resources.ModelResource):
         )
 
 
-class BusinessAdmin(ImportExportMixin, ObjectPermissionsModelAdmin):
+class BusinessAdmin(ImportExportMixin, rules_admin.ObjectPermissionsModelAdmin):
     search_fields = ["registered_name"]
+    inlines = [BusinessMembershipInlineAdmin]
 
     readonly_fields = (
         "registered_name",

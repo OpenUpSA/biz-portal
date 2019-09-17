@@ -10,6 +10,11 @@ TURNOVER_BANDS = [
     (4, "R1,500,000 to R5,000,000"),
     (5, "More than R5,000,000"),
 ]
+MEMBERSHIP_TYPES = [(1, "Company Secretary"), (2, "Member"), (3, "Director")]
+
+
+def get_member_id(label):
+    return [p[0] for p in MEMBERSHIP_TYPES if p[1] == label][0]
 
 
 class Municipality(models.Model):
@@ -154,5 +159,21 @@ class Business(models.Model):
     def get_presentation_name(self):
         return self.supplied_name or self.registered_name
 
+    def get_directors(self):
+        return self.members.all()
+
     def __str__(self):
         return f"{self.get_presentation_name()} ({self.registration_number})"
+
+
+class BusinessMembership(models.Model):
+    id_number = models.CharField(max_length=200)
+    business = models.ForeignKey(
+        Business, on_delete=models.CASCADE, related_name="members"
+    )
+    first_names = models.CharField(max_length=50)
+    surname = models.CharField(max_length=50)
+    membership_type = models.IntegerField(choices=MEMBERSHIP_TYPES)
+
+    def __str__(self):
+        return f"{self.first_names} {self.surname}"
