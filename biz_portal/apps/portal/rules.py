@@ -1,3 +1,10 @@
+"""
+We use this for object-level authorisation.
+
+Don't implement something here that can be fully handled by built-in
+Django permissions
+"""
+
 import logging
 
 import rules
@@ -28,23 +35,15 @@ def is_muni_admin(user):
     logger.debug(f"Predicate {is_muni_admin.__name__}")
     return user.is_staff and user.municipality_set.exists()
 
-
-is_integration_admin = rules.is_group_member("Integration Admins")
-is_muni_or_integration_admin = is_integration_admin | is_muni_admin
-is_business_muni_or_integration_admin = is_integration_admin | is_business_muni_admin
-
-rules.add_perm("portal", rules.always_allow)
-rules.add_perm("portal.view_business", rules.always_allow)
 # This rule can't restrict addition of business to the munis the user can
 # admin so we rely on that being enforced in the ModelAdmin.
-rules.add_perm("portal.add_business", is_muni_or_integration_admin)
-rules.add_perm("portal.change_business", is_business_muni_or_integration_admin)
-rules.add_perm("portal.delete_business", is_business_muni_or_integration_admin)
-rules.add_perm("portal.add_businessmembership", is_business_muni_or_integration_admin)
+rules.add_perm("portal.add_business", is_muni_admin)
+rules.add_perm("portal.change_business", is_business_muni_admin)
+rules.add_perm("portal.delete_business", is_business_muni_admin)
+rules.add_perm("portal.add_businessmembership", is_business_muni_admin)
 rules.add_perm(
-    "portal.change_businessmembership", is_business_muni_or_integration_admin
+    "portal.change_businessmembership", is_business_muni_admin
 )
-rules.add_perm("portal.view_businessmembership", rules.always_allow)
 rules.add_perm(
-    "portal.delete_businessmembership", is_business_muni_or_integration_admin
+    "portal.delete_businessmembership", is_business_muni_admin
 )
