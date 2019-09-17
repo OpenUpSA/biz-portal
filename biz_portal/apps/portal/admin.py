@@ -10,10 +10,6 @@ from biz_portal.apps.portal.rules import is_business_muni_admin
 from . import models
 
 
-class BusinessMembershipInlineAdmin(rules_admin.ObjectPermissionsTabularInline):
-    model = models.BusinessMembership
-
-
 class BusinessMembershipResource(resources.ModelResource):
     def __init__(self, request=None):
         super(BusinessMembershipResource, self).__init__()
@@ -43,6 +39,10 @@ class BusinessMembershipResource(resources.ModelResource):
             "surname",
             "membership_type",
         )
+
+
+class BusinessMembershipInlineAdmin(rules_admin.ObjectPermissionsTabularInline):
+    model = models.BusinessMembership
 
 
 class BusinessResource(resources.ModelResource):
