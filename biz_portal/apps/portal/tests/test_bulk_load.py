@@ -6,14 +6,13 @@ from biz_portal.apps.portal.importexport import BusinessMembershipResource
 from .. import models
 
 
-class AdminBulkLoadDirectorsTestCase(TestCase):
+class BulkLoadDirectorsTestCase(TestCase):
     """Test for Bulk loads"""
 
     fixtures = ["test_bulk_upload_directors"]
 
     def test_bulk_load_directors_correctly_match(self):
         """It verifies bulk upload functionality including correct matching of business by its registration number"""
-        self.assertTrue(self.client.login(username="admin", password="password"))
         self.assertEqual(models.BusinessMembership.objects.count(), 0)
 
         data = tablib.Dataset()
