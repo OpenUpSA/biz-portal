@@ -54,8 +54,9 @@ class BusinessMembershipInlineAdmin(rules_admin.ObjectPermissionsTabularInline):
                 if field.rel and field.rel.to != self.parent_model:
                     opts = field.rel.to._meta
                     break
-        codename = get_permission_codename('add', opts)
-        return request.user.has_perm('%s.%s' % (opts.app_label, codename), obj)
+        codename = get_permission_codename("add", opts)
+        return request.user.has_perm("%s.%s" % (opts.app_label, codename), obj)
+
 
 class BusinessResource(resources.ModelResource):
     registration_status = fields.Field(
