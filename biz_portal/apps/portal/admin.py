@@ -5,41 +5,7 @@ from import_export.admin import ImportExportMixin, ImportMixin
 from import_export.formats.base_formats import XLSX
 from rules.contrib import admin as rules_admin
 
-from biz_portal.apps.portal.models import get_member_id
-from biz_portal.apps.portal.rules import is_business_muni_admin
-
 from . import models
-
-
-class BusinessMembershipResource(resources.ModelResource):
-    def __init__(self, request=None):
-        super(BusinessMembershipResource, self).__init__()
-        self.request = request
-
-    business = fields.Field(
-        column_name="business",
-        attribute="business",
-        widget=widgets.ForeignKeyWidget(models.Business, "registration_number"),
-    )
-
-    def before_import_row(self, row, **kwargs):
-        name = row.get("membership_type")
-        id_ = get_member_id(name)
-        row["membership_type"] = id_
-
-    class Meta:
-        model = models.BusinessMembership
-        import_id_fields = ("id_number",)
-        skip_unchanged = True
-        report_skipped = False
-        fields = ("business", "id_number", "first_names", "surname", "membership_type")
-        export_order = (
-            "business",
-            "id_number",
-            "first_names",
-            "surname",
-            "membership_type",
-        )
 
 
 class BusinessMembershipInlineAdmin(rules_admin.ObjectPermissionsTabularInline):

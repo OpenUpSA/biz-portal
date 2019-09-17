@@ -1,8 +1,5 @@
-import tablib
 from django.test import TestCase
 from django.urls import reverse
-
-from biz_portal.apps.portal.admin import BusinessMembershipResource
 
 from .. import models
 
@@ -232,6 +229,7 @@ class AdminModifyBusinessTest(TestCase):
         business = models.Business.objects.get(pk=business.pk)
         self.assertEqual(business.supplied_name, "DEADBEEF")
 
+        # User was able to modify business member
         business_member = models.BusinessMembership.objects.get(pk=business_member.pk)
         self.assertEqual(business_member.first_names, "DEADBEEF_2")
 
@@ -251,6 +249,7 @@ class AdminModifyBusinessTest(TestCase):
             reverse("admin:portal_business_change", args=[business.pk]),
             HTTP_HOST="biz-portal.openup.org.za",
         )
+
         self.assertNotContains(view_response, "Save")
         self.assertContains(view_response, "Business memberships")
         self.assertContains(view_response, "Test")
@@ -282,6 +281,7 @@ class AdminModifyBusinessTest(TestCase):
         business = models.Business.objects.get(pk=business.pk)
         self.assertNotEqual(business.supplied_name, "DEADBEEF")
 
+        # User was NOT able to modify business member.
         business_member = models.BusinessMembership.objects.get(pk=business_member.pk)
         self.assertNotEqual(business_member.first_names, "DEADBEEF_2")
 
@@ -339,37 +339,3 @@ class AdminModifyBusinessTest(TestCase):
             HTTP_HOST="biz-portal.openup.org.za",
         )
         self.assertEqual(response.status_code, 200)
-
-
-class AdminBulkLoadDirectorsTestCase(TestCase):
-    """Test for Bulk loads"""
-
-    fixtures = ["test_bulk_upload_directors"]
-
-    def test_bulk_load_directors_correctly_match(self):
-        """It verifies bulk upload functionality including correct matching of business by its registration number"""
-        self.assertTrue(self.client.login(username="admin", password="password"))
-        self.assertEqual(models.BusinessMembership.objects.count(), 0)
-
-        data = tablib.Dataset()
-        data.headers = [
-            "business",
-            "id_number",
-            "membership_type",
-            "first_names",
-            "surname",
-        ]
-        data.append(["1990/002791/07", "760712", "Member", "WILLIAM", "VAN RHEEDE"])
-        data.append(["1990/000289/23", "TEST", "Director", "JACOBUS", "VAN RHEEDE"])
-
-        business_membership = BusinessMembershipResource()
-        business_membership.import_data(data, dry_run=False)
-        self.assertEqual(models.BusinessMembership.objects.count(), 2)
-
-        business = models.Business.objects.get(registration_number="1990/002791/07")
-        director = models.BusinessMembership.objects.get(id_number="760712")
-        self.assertEqual(business.id, director.business.id)
-
-        business_2 = models.Business.objects.get(registration_number="1990/000289/23")
-        director_2 = models.BusinessMembership.objects.get(id_number="TEST")
-        self.assertEqual(business_2.id, director_2.business.id)

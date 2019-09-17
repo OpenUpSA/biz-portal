@@ -3,7 +3,7 @@ from django.utils.encoding import force_text
 from import_export.formats import base_formats
 from tablib import Dataset
 
-from biz_portal.apps.portal.admin import BusinessMembershipResource
+from biz_portal.apps.portal.importexport import BusinessMembershipResource
 
 
 class Command(BaseCommand):
