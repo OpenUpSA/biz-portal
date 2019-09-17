@@ -202,7 +202,7 @@ class AdminModifyBusinessTest(TestCase):
             reverse("admin:portal_business_change", args=[business.pk]),
             HTTP_HOST="biz-portal.openup.org.za",
         )
-        # self.assertContains(view_response, "Save")
+        self.assertContains(view_response, "Save")
         self.assertContains(view_response, "Business memberships")
         self.assertContains(view_response, "BARIS")
 
@@ -251,7 +251,7 @@ class AdminModifyBusinessTest(TestCase):
             reverse("admin:portal_business_change", args=[business.pk]),
             HTTP_HOST="biz-portal.openup.org.za",
         )
-        # self.assertNotContains(view_response, "Save")
+        self.assertNotContains(view_response, "Save")
         self.assertContains(view_response, "Business memberships")
         self.assertContains(view_response, "Test")
 
