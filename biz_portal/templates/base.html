@@ -124,6 +124,35 @@
 
         {% endblock content %}
       </div>
+      <footer class="footer-section">
+        <div class="layout">
+          <div class="footer-container">
+            <a href="https://openup.org.za/">
+              <img class="openup-logo" src="{% static 'images/OpenUplogo.png' %}" alt="OpenUp logo" />
+            </a>
+            <div class="footer-content">
+              <div class="right-column">
+                <div class="shareAndContribute">
+                  <p class="mdc-typography--subtitle2 follow-openup">Follow OpenUp:</p>
+                  <a href="https://twitter.com/OpenUpSA">
+                    <img class="twitter-icon" src="{% static 'images/twitter.svg' %}" alt="twitter" />
+                  </a>
+                </div>
+                <div class="shareAndContribute">
+                  <p class="mdc-typography--subtitle2 github-text">Pull requests are welcome:</p>
+                  <a href="https://github.com/OpenUpSA/biz-portal">
+                    <img class="github-icon" src="{% static 'images/github.svg' %}" alt="github repository" />
+                  </a>
+                </div>
+              </div>
+              <div class="left-column">
+                <p class="mdc-typography--subtitle2 mail-text">Contact <a class="mail-link mdc-theme--primary" href="mailto:info@openup.org.za">info@openup.org.za</a> for more information</p>
+                <p class="mdc-typography--subtitle2 data-source-text">Initial data seeded from the companies register</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </main>
 
 
