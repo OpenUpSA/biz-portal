@@ -1,0 +1,42 @@
+.footer-section {
+  margin-top: 24px;
+
+  @media screen and (min-width: 960px) {
+    display: flex;
+    justify-content: center;
+    margin-top: 36px;
+  }
+
+  .openup-logo {
+    width: 200px;
+    height: auto;
+  }
+
+  .shareAndContribute {
+    display: flex;
+    align-items: center;
+  }
+
+  .follow-openup, .github-text, .mail-text, .data-source-text {
+    margin: 0;
+    padding: 10px 0;
+    padding-right: 15px;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: normal;
+  }
+
+  .footer-content {
+    @media screen and (min-width: 600px) {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .mail-link {
+    text-decoration: none;
+  }
+}
