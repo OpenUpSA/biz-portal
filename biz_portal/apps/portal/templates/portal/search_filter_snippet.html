@@ -14,6 +14,10 @@
         <input type="hidden" name="sector" value="{{ request.GET.sector }}" />
         {% endif %}
 
+        {% if request.GET.icon %}
+        <input type="hidden" name="icon" value="{{ request.GET.icon }}" />
+        {% endif %}
+
         <div class="search-query-input-container">
           <input
             class="typeahead"
@@ -23,8 +27,8 @@
             name="q"
             value="{{ search_string }}"
             autocomplete="off"
-            data-suggestion-url="{% url "api:business-list" %}?{% param_replace q="" sector="" region="" sector__label=request.GET.sector region__label=request.GET.region %}"
-            data-view-all-url="{% url "business_list" %}?{% param_replace sector=request.GET.sector region=request.GET.region q="" %}"
+            data-suggestion-url="{% url "api:business-list" %}?{% param_replace q="" sector="" icon="" region="" sector__label=request.GET.sector sector__icon_name=request.GET.icon region__label=request.GET.region %}"
+            data-view-all-url="{% url "business_list" %}?{% param_replace sector=request.GET.sector icon=request.GET.icon region=request.GET.region q="" %}"
             >
           <div class="search-icon-container">
             <i class="search-icon fas fa-search" tabindex="0" role="button"></i>
