@@ -3,217 +3,248 @@
   "model": "portal.sector",
   "pk": 1,
   "fields": {
-    "label": "Accommodation and Food Services"
+    "label": "Accommodation and Food Services",
+    "icon_name": "fa-hotel"
   }
 },
 {
   "model": "portal.sector",
   "pk": 2,
   "fields": {
-    "label": "Advertising"
+    "label": "Advertising",
+    "icon_name": "fa-ad"
   }
 },
 {
   "model": "portal.sector",
   "pk": 3,
   "fields": {
-    "label": "Agriculture, Forestry, Fishing and Hunting"
+    "label": "Agriculture, Forestry, Fishing and Hunting",
+    "icon_name": "fa-tractor"
   }
 },
 {
   "model": "portal.sector",
   "pk": 4,
   "fields": {
-    "label": "Arts, Entertainment, and Recreation"
+    "label": "Arts, Entertainment, and Recreation",
+    "icon_name": "fa-palette"
   }
 },
 {
   "model": "portal.sector",
   "pk": 5,
   "fields": {
-    "label": "Automotive Repair and Maintenance"
+    "label": "Automative Repair and Maintenance",
+    "icon_name": "fa-tachometer-alt"
   }
 },
 {
   "model": "portal.sector",
   "pk": 6,
   "fields": {
-    "label": "Beverage and Tobacco Product Manufacturing"
+    "label": "Beverage and Tobacco Product Manufacturing",
+    "icon_name": "fa-smoking"
   }
 },
 {
   "model": "portal.sector",
   "pk": 7,
   "fields": {
-    "label": "Business Services"
-  }
+    "label": "Business Services",
+    "icon_name": "fa-briefcase"
+}
 },
 {
   "model": "portal.sector",
   "pk": 8,
   "fields": {
-    "label": "Construction"
+    "label": "Construction",
+    "icon_name": "fa-hard-hat"
   }
 },
 {
   "model": "portal.sector",
   "pk": 9,
   "fields": {
-    "label": "Couriers and Express Delivery Services"
+    "label": "Couriers and Express Delivery Services",
+    "icon_name": "fa-shipping-fast"
   }
 },
 {
   "model": "portal.sector",
   "pk": 10,
   "fields": {
-    "label": "Educational Services"
+    "label": "Educational Services",
+    "icon_name": "fa-graduation-cap"
   }
 },
 {
   "model": "portal.sector",
   "pk": 11,
   "fields": {
-    "label": "Engineers"
+    "label": "Engineers",
+    "icon_name": "fa-lightbulb"
   }
 },
 {
   "model": "portal.sector",
   "pk": 12,
   "fields": {
-    "label": "Finance and Insurance"
+    "label": "Finance and Insurance",
+    "icon_name": "fa-coins"
   }
 },
 {
   "model": "portal.sector",
   "pk": 13,
   "fields": {
-    "label": "Food Manufacturing"
+    "label": "Food Manufacturing",
+    "icon_name": "fa-utensils"
   }
 },
 {
   "model": "portal.sector",
   "pk": 14,
   "fields": {
-    "label": "generic"
+    "label": "generic",
+    "icon_name": "fa-puzzle-piece"
   }
 },
 {
   "model": "portal.sector",
   "pk": 15,
   "fields": {
-    "label": "Janitorial Services"
+    "label": "Janitorial Services",
+    "icon_name": "fa-broom"
   }
 },
 {
   "model": "portal.sector",
   "pk": 16,
   "fields": {
-    "label": "Justice, Public Order and Safety Activities"
+    "label": "Justice, Public Order and Safety Activities",
+    "icon_name": "fa-balance-scale"
   }
 },
 {
   "model": "portal.sector",
   "pk": 17,
   "fields": {
-    "label": "Lawn and Garden Services"
+    "label": "Lawn and Garden Services",
+    "icon_name": "fa-seeding"
   }
 },
 {
   "model": "portal.sector",
   "pk": 18,
   "fields": {
-    "label": "Manufactoring"
+    "label": "Manufacturing",
+    "icon_name": "fa-industry"
   }
 },
 {
   "model": "portal.sector",
   "pk": 19,
   "fields": {
-    "label": "Mining, Quarrying, and Oil and Gas Extraction"
+    "label": "Mining, Quarrying, and Oil and Gas Extraction",
+    "icon_name": "fa-gas-pump"
   }
 },
 {
   "model": "portal.sector",
   "pk": 20,
   "fields": {
-    "label": "Miscellaneous Manufacturing"
+    "label": "Miscellaneous Manufacturing",
+    "icon_name": "fa-city"
   }
 },
 {
   "model": "portal.sector",
   "pk": 21,
   "fields": {
-    "label": "Personal and Laundry Services"
-  }
+    "label": "Personal and Laundry Services",
+    "icon_name": "fa-socks"
+ }
 },
 {
   "model": "portal.sector",
   "pk": 22,
   "fields": {
-    "label": "Plumbing, Heating and Air-Conditioning"
+    "label": "Plumbing, Heating and Air-Conditioning",
+    "icon_name": "fa-tools"
   }
 },
 {
   "model": "portal.sector",
   "pk": 23,
   "fields": {
-    "label": "Real Estate"
-  }
+    "label": "Real Estate",
+     "icon_name": "fa-sign"
+ }
 },
 {
   "model": "portal.sector",
   "pk": 24,
   "fields": {
-    "label": "Retail Trade"
-  }
+    "label": "Retail Trade",
+     "icon_name": "fa-store"
+ }
 },
 {
   "model": "portal.sector",
   "pk": 25,
   "fields": {
-    "label": "Speciality trade contractors"
+    "label": "Speciality trade contractors",
+    "icon_name": "fa-wrench"
   }
 },
 {
   "model": "portal.sector",
   "pk": 26,
   "fields": {
-    "label": "Technical"
+    "label": "Technical",
+    "icon_name": "fa-cogs"
   }
 },
 {
   "model": "portal.sector",
   "pk": 27,
   "fields": {
-    "label": "textiles"
+    "label": "textiles",
+    "icon_name": "fa-tshirt"
   }
 },
 {
   "model": "portal.sector",
   "pk": 28,
   "fields": {
-    "label": "Transportation and Warehousing"
-  }
+    "label": "Transportation and Warehousing",
+    "icon_name": "fa-truck"
+}
 },
 {
   "model": "portal.sector",
   "pk": 29,
   "fields": {
-    "label": "Sector unknown"
+    "label": "Sector unknown",
+    "icon_name": "fa-question"
   }
 },
 {
   "model": "portal.sector",
   "pk": 30,
   "fields": {
-    "label": "Wholesale Trade"
+    "label": "Wholesale Trade",
+    "icon_name": "fa-truck-loading"
   }
 },
 {
   "model": "portal.sector",
   "pk": 31,
   "fields": {
-    "label": "Wood Product Manufacturing"
+    "label": "Wood Product Manufacturing",
+    "icon_name": "fa-tree"
   }
 }
 ]
