@@ -27,8 +27,10 @@
     font-weight: normal;
   }
 
-  .twitter-icon, .github-icon {
+  .twitter-icon, .github-icon, .mail-icon, .info-icon {
     margin-right: 15px;
+    width: 24px;
+    height: 24px;
   }
 
   .footer-container {
@@ -51,5 +53,6 @@
   .mail-link, .info {
     text-decoration: none;
     display: flex;
+    align-items: center;
   }
 }
