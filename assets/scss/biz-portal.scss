@@ -263,7 +263,6 @@ body {
   }
 
   .search-result {
-    margin-bottom: 16px;
     border: 1px solid rgba(0, 0, 0, 0.12);
     border-bottom: none;
 
@@ -308,11 +307,12 @@ body {
   line-height: 16px;
   font-weight: normal;
   letter-spacing: 0.25px;
+  margin-top: 0;
 }
 
 .business-directory-submit {
   width: 100%;
-  margin-bottom: 36px;
+  margin-bottom: 24px;
   font-weight: 500;
   font-size: 20px;
   line-height: 23px;
