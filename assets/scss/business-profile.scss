@@ -11,7 +11,7 @@
 .business-details-section {
   margin-top: 16px;
 
-  @media screen and (min-width: 960px) {
+  @media screen and (min-width: 768px) {
     display: flex;
     justify-content: center;
   }
@@ -51,8 +51,8 @@
       width: 100%;
       margin: 0 16px;
 
-      @media screen and (min-width: 960px) {
-        max-width: 960px;
+      @media screen and (min-width: 768px) {
+        max-width: 768px;
       }
 
       .mdc-dialog__surface {
@@ -68,7 +68,7 @@
           top: 80px;
         }
 
-        @media screen and (min-width: 960px) {
+        @media screen and (min-width: 768px) {
           top: 85px;
         }
 
