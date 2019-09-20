@@ -28,6 +28,10 @@
       padding: 8px;
       border-radius: 1px;
       @include mdc-button-container-fill-color(#f4f4f4);
+
+      .dots-icon {
+        margin-right: 0;
+      }
     }
 
     .material-icons {
