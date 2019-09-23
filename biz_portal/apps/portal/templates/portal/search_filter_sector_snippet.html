@@ -31,10 +31,12 @@
   </summary>
   {% for sector in sector_business_counts %}
   <a class="business-directory-categories-and-counts" href="{% url "business_list" %}?{% param_replace page="" sector=sector.label icon=sector.icon_name %}">
-    <i class="fas {{ sector.icon_name }} fa-list-icon mdc-theme--primary" aria-hidden="true"></i>
-    <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">
-      {{ sector.label }}
-    </h3>
+    <div class="sector-icon-and-label">
+      <i class="fas {{ sector.icon_name }} fa-list-icon mdc-theme--primary" aria-hidden="true"></i>
+      <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">
+        {{ sector.label }}
+      </h3>
+    </div>
     <div class="business-directory-count-arrow">
       <div class="location-count">{{ sector.count }}</div>
       <i class="fas fa-arrow-right arrow-right" aria-hidden="true"></i>
