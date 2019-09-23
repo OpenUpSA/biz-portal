@@ -4,7 +4,7 @@
 <div class="search-result">
   <summary class="close_summary">
     <div class="icon-and-filter-option">
-      <i class="fas fa-wrench fa-list-icon mdc-theme--primary" aria-hidden="true"></i>
+      <i class="fas {{ request.GET.icon }} fa-list-icon mdc-theme--primary" aria-hidden="true"></i>
       <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">
         {{ request.GET.sector }}
       </h3>
@@ -30,7 +30,8 @@
     </div>
   </summary>
   {% for sector in sector_business_counts %}
-  <a class="business-directory-categories-and-counts" href="{% url "business_list" %}?{% param_replace page="" sector=sector.label %}">
+  <a class="business-directory-categories-and-counts" href="{% url "business_list" %}?{% param_replace page="" sector=sector.label icon=sector.icon_name %}">
+    <i class="fas {{ sector.icon_name }} fa-list-icon mdc-theme--primary" aria-hidden="true"></i>
     <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">
       {{ sector.label }}
     </h3>

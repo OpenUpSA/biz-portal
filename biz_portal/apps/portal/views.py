@@ -19,7 +19,9 @@ class SearchSnippet:
     @staticmethod
     def get_sector_queryset(business_queryset):
         return (
-            business_queryset.values(label=F("sector__label"))
+            business_queryset.values(
+                label=F("sector__label"), icon_name=F("sector__icon_name")
+            )
             .annotate(count=Count("*"))
             .order_by("-count")
         )
@@ -52,7 +54,7 @@ class HomeView(generic.TemplateView):
                 sector__label__in=["Sector unknown", "generic"]
             )
             .filter(region__municipality=self.current_site.municipality)
-            .values(label=F("sector__label"))
+            .values(label=F("sector__label"), icon_name=F("sector__icon_name"))
             .annotate(count=Count("*"))
             .order_by("-count")
         )
@@ -104,7 +106,6 @@ class BusinessListView(generic.ListView):
         self.search_words = self.search_string.split()
         self.selected_sector = None
         self.selected_region = None
-
         selected_sector_label = request.GET.get("sector", "")
         if selected_sector_label:
             self.selected_sector = models.Sector.objects.get(
@@ -116,6 +117,8 @@ class BusinessListView(generic.ListView):
             self.selected_region = models.Region.objects.get(
                 label=selected_region_label
             )
+
+        self.icon = request.GET.get("icon", "")
 
     def get_queryset(self):
         self.queryset = super().get_queryset()
@@ -137,7 +140,7 @@ class BusinessListView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
+        context["icon"] = self.icon
         context["search_string"] = self.search_string
 
         # Region counts
