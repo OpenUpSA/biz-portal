@@ -153,7 +153,7 @@
 
   .social-sharing {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     margin-top: 12px;
     margin-bottom: 12px;
@@ -174,7 +174,7 @@
       line-height: 20px;
       letter-spacing: 0.25px;
       color: rgba(0, 0, 0, 0.5);
-      margin: 0;
+      margin: 0 10px;
     }
 
     .clipboard-icon {
@@ -284,11 +284,12 @@
 
   .business-profile-more-details {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     margin-top: 16px;
 
     .more-details-text {
+      margin: 0 10px;
       font-size: 10px;
       line-height: 20px;
       letter-spacing: 0.25px;

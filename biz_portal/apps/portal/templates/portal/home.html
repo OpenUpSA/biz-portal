@@ -12,14 +12,14 @@
       <h2 class="mdc-typography--subtitle1 subtitle-top-sectors">Top Sectors</h2>
       <div class="sectors-group">
         {% for sector in top_sectors_counts|slice:":3" %}
-          <a class="link-to-top-sector" href="{% url "business_list" %}?{% param_replace page="" sector=sector.label %}">
+          <a class="link-to-top-sector" href="{% url "business_list" %}?{% param_replace page="" sector=sector.label icon=sector.icon_name %}">
             <div class="list-sectors-container">
               <div class="list-sectors-layout">
                 <li class="top-sectors-list">
                   <summary class="summary-top-sectors">
                     <span class="top-sectors-icon-sector">
                       <span>
-                        <i class="fas fa-building fa-list-icon mdc-theme--primary" aria-hidden="true"></i>
+                        <i class="fas {{sector.icon_name}} fa-list-icon mdc-theme--primary" aria-hidden="true"></i>
                       </span>
                       <div class="sector-and-count">
                         <p class="top-sector-label">
