@@ -1,6 +1,6 @@
 var ua = window.navigator.userAgent;
 var isIE = /MSIE|Trident/.test(ua);
-var isEdge = (window.navigator.appName === "Netscape");
+var isEdge = /Edge/.test(navigator.userAgent);
 
 
 if (isIE || isEdge) {
