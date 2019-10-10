@@ -1,8 +1,9 @@
 @import "@material/card/mdc-card";
 
 .business-results {
+  background-color: #f4f4f4;
 
-  @media screen and (min-width: 960px) {
+  @media screen and (min-width: 768px) {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -91,7 +92,7 @@
           justify-content: center;
           width: 24px;
           height: 24px;
-          margin-right: 8px;
+          margin-right: 4px;
 
           .status-icon {
             margin-left: 8px;

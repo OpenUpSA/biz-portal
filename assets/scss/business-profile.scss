@@ -11,7 +11,7 @@
 .business-details-section {
   margin-top: 16px;
 
-  @media screen and (min-width: 960px) {
+  @media screen and (min-width: 768px) {
     display: flex;
     justify-content: center;
   }
@@ -28,6 +28,10 @@
       padding: 8px;
       border-radius: 1px;
       @include mdc-button-container-fill-color(#f4f4f4);
+
+      .dots-icon {
+        margin-right: 0;
+      }
     }
 
     .material-icons {
@@ -47,8 +51,8 @@
       width: 100%;
       margin: 0 16px;
 
-      @media screen and (min-width: 960px) {
-        max-width: 960px;
+      @media screen and (min-width: 768px) {
+        max-width: 768px;
       }
 
       .mdc-dialog__surface {
@@ -64,7 +68,7 @@
           top: 80px;
         }
 
-        @media screen and (min-width: 960px) {
+        @media screen and (min-width: 768px) {
           top: 85px;
         }
 
@@ -102,6 +106,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    .icon-under-menu {
+      padding: 8px;
+      display: flex;
+      justify-content: center;
+
+      .icon {
+        margin-right: 0;
+      }
+    }
 
     .business-category-text {
       font-size: 10px;

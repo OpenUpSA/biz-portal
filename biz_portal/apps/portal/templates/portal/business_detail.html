@@ -7,7 +7,7 @@
     <div>
       <div class="business-menu">
         <button class="mdc-button business-menu-button" id="show-business-menu">
-          <i class="fas fa-ellipsis-h mdc-button__icon" aria-hidden="true"></i>
+          <i class="fas fa-ellipsis-h mdc-button__icon dots-icon" aria-hidden="true"></i>
         </button>
       </div>
       <div class="mdc-dialog"
@@ -34,8 +34,8 @@
         <span class="business-category-text">
           {{ object.sector.label }}
         </span>
-        <span>
-          <i class="fas {{object.sector.icon_name}} fa-list-icon mdc-theme--primary" aria-hidden="true"></i>
+        <span class="icon-under-menu">
+          <i class="fas {{object.sector.icon_name}} fa-list-icon icon mdc-theme--primary" aria-hidden="true"></i>
         </span>
       </div>
       <div class="business-name mdc-theme--primary">
