@@ -1,0 +1,55 @@
+.footer-section {
+  margin-top: 24px;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: center;
+    margin-top: 36px;
+  }
+
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .openup-logo {
+    width: 100px;
+    height: auto;
+  }
+
+  .shareAndContribute {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .follow-openup, .github-text, .mail-text, .data-source-text {
+    margin: 0;
+    padding: 10px 0;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: normal;
+  }
+
+  .twitter-icon, .github-icon, .mail-icon, .info-icon {
+    margin-right: 15px;
+    width: 24px;
+    height: 24px;
+  }
+
+  .footer-container {
+    @media screen and (min-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .mail-link, .info {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+}
