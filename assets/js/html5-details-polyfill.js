@@ -1,8 +1,9 @@
 var ua = window.navigator.userAgent;
 var isIE = /MSIE|Trident/.test(ua);
+var isEdge = /Edge/.test(navigator.userAgent);
 
 
-if (isIE) {
+if (isIE || isEdge) {
     /*! http://mths.be/details v0.1.0 by @mathias | includes http://mths.be/noselect v1.0.3 */
     ;(function (document, $) {
 
