@@ -31,7 +31,7 @@
   </summary>
   {% for region in region_business_counts %}
   <a class="business-directory-categories-and-counts" href="{% url "business_list" %}?{% param_replace page="" region=region.label %}">
-    <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category">{{ region.label }}</h3>
+    <h3 class="mdc-typography--subtitle2 subtitle-business-directory-category-region">{{ region.label }}</h3>
     <div class="business-directory-count-arrow">
       <div class="location-count">{{ region.count }}</div>
       <i class="fas fa-arrow-right arrow-right" aria-hidden="true"></i>

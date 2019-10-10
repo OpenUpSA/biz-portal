@@ -1,9 +1,27 @@
 from django.contrib import admin
+from django.contrib.auth import get_permission_codename
 from import_export import fields, resources, widgets
-from import_export.admin import ImportMixin
-from rules.contrib.admin import ObjectPermissionsModelAdmin
+from import_export.admin import ImportExportMixin, ImportMixin
+from import_export.formats.base_formats import XLSX
+from rules.contrib import admin as rules_admin
 
 from . import models
+
+
+class BusinessMembershipInlineAdmin(rules_admin.ObjectPermissionsTabularInline):
+    model = models.BusinessMembership
+
+    # Copied from https://github.com/dfunckt/django-rules/blob/46c594ec2abb605647af49bfbbca17326c3f9df3/rules/contrib/admin.py#L28
+    # because they don't define add permission handler
+    def has_add_permission(self, request, obj=None):
+        opts = self.opts
+        if opts.auto_created:
+            for field in opts.fields:
+                if field.rel and field.rel.to != self.parent_model:
+                    opts = field.rel.to._meta
+                    break
+        codename = get_permission_codename("add", opts)
+        return request.user.has_perm("%s.%s" % (opts.app_label, codename), obj)
 
 
 class BusinessResource(resources.ModelResource):
@@ -35,6 +53,7 @@ class BusinessResource(resources.ModelResource):
         report_skipped = False
         fields = (
             "registered_name",
+            "supplied_name",
             "registration_number",
             "registration_status",
             "region",
@@ -53,11 +72,44 @@ class BusinessResource(resources.ModelResource):
             "instagram_page_url",
             "number_employed",
             "annual_turnover",
+            "email_address",
+            "supplied_physical_address",
+            "supplied_postal_address",
+            "date_started",
+            "description",
+        )
+        export_order = (
+            "registration_number",
+            "registered_name",
+            "supplied_name",
+            "description",
+            "registered_physical_address",
+            "supplied_physical_address",
+            "registered_postal_address",
+            "supplied_postal_address",
+            "registration_status",
+            "registered_business_type",
+            "registration_date",
+            "region",
+            "sector",
+            "email_address",
+            "website_url",
+            "cellphone_number",
+            "phone_number",
+            "fax_number",
+            "whatsapp_number",
+            "facebook_page_url",
+            "twitter_page_url",
+            "instagram_page_url",
+            "number_employed",
+            "annual_turnover",
+            "date_started",
         )
 
 
-class BusinessAdmin(ImportMixin, ObjectPermissionsModelAdmin):
+class BusinessAdmin(ImportExportMixin, rules_admin.ObjectPermissionsModelAdmin):
     search_fields = ["registered_name"]
+    inlines = [BusinessMembershipInlineAdmin]
 
     readonly_fields = (
         "registered_name",
@@ -129,11 +181,21 @@ class BusinessAdmin(ImportMixin, ObjectPermissionsModelAdmin):
     list_filter = ("region__municipality", "region", "registration_status", "sector")
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == "region" and not request.user.is_superuser:
-            kwargs["queryset"] = models.Region.objects.filter(
-                municipality__in=[m.pk for m in request.user.municipality_set.all()]
-            )
+        if db_field.name == "region":
+            if (
+                not request.user.is_superuser
+                and not request.user.groups.filter(name="Integration Admins").exists()
+            ):
+                kwargs["queryset"] = models.Region.objects.filter(
+                    municipality__in=[m.pk for m in request.user.municipality_set.all()]
+                )
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+    def get_export_formats(self):
+        return [XLSX]
+
+    def has_import_permission(self, request):
+        return request.user.is_superuser
 
 
 admin.site.register(models.Business, BusinessAdmin)

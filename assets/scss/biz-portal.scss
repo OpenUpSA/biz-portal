@@ -2,6 +2,7 @@
 @import "./business-search-results.scss";
 @import "./top-sectors.scss";
 @import "./municipality.scss";
+@import "./footer.scss";
 
 @import "@material/typography/mdc-typography";
 @import "@material/top-app-bar/mdc-top-app-bar";
@@ -25,6 +26,7 @@ body {
 .fa-list-icon {
   margin-right: 4px;
   text-align: center;
+  font-size: 18px;
 }
 
 .navbar {
@@ -34,6 +36,10 @@ body {
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2),
               0px 4px 5px rgba(0, 0, 0, 0.12),
               0px 2px 4px rgba(0, 0, 0, 0.14);
+  /* because box shadow on Edge isn't showing top left as expected */
+  @supports (-ms-ime-align:auto) {
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5)
+  }
 }
 
 .main-content {
@@ -45,16 +51,16 @@ body {
 .layout {
   margin: 0 16px;
 
-  @media screen and (min-width: 960px) {
+  @media screen and (min-width: 768px) {
     width: 100%;
-    max-width: 960px;
+    max-width: 768px;
   }
 }
 
 .find-business-section {
   width: 100%;
 
-  @media screen and (min-width: 960px) {
+  @media screen and (min-width: 768px) {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,10 +68,10 @@ body {
 }
 
 .form-section {
-  height: 126px;
   padding-top: 16px;
+  padding-bottom: 16px;
 
-  @media screen and (min-width: 960px) {
+  @media screen and (min-width: 768px) {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -93,10 +99,6 @@ body {
 
 .text-field-business.mdc-text-field--focused {
   @include mdc-text-field-label-color(rgba(0, 0, 0, 0.8));
-}
-
-.info-icon {
-    color: #737373;
 }
 
 #custom-templates {
@@ -177,6 +179,10 @@ body {
     padding: 0;
     background-color: #fff;
     box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14);
+    /* because box shadow on Edge isn't showing top left as expected */
+    @supports (-ms-ime-align:auto) {
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5)
+    }
     position: static !important;
   }
 
@@ -205,19 +211,20 @@ body {
   font-weight: 500;
   line-height:23px;
   letter-spacing: 0.15px;
-  padding-bottom: 24px;
+  padding-bottom: 16px;
   margin: 0;
 }
 
 .business-directory {
-  margin-top: 36px;
+  margin-top:16px;
 
   .business-directory-categories-and-counts {
     padding: 12px 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-top: none;
     border-radius: 1px;
     text-decoration: none;
 
@@ -226,7 +233,22 @@ body {
     }
   }
 
+  .sector-icon-and-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .subtitle-business-directory-category, .location-count {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: normal;
+    margin: 0;
+    padding-left: 12px;
+  }
+
+  .subtitle-business-directory-category-region {
     color: rgba(0, 0, 0, 0.6);
     font-size: 14px;
     line-height: 24px;
@@ -251,27 +273,21 @@ body {
   }
 
   .mdc-expansion {
-    margin-bottom: 16px;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    border-bottom: none;
+    margin-bottom: 8px;
+    display: block;
 
     &__summary {
       padding: 12px 16px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
 
       .icon-and-filter-option {
         display: flex;
         align-items: center;
-
-        .fa-list-icon {
-          margin-right: 9px;
-          text-align: center;
-        }
       }
     }
   }
 
   .search-result {
-    margin-bottom: 16px;
     border: 1px solid rgba(0, 0, 0, 0.12);
     border-bottom: none;
 
@@ -298,11 +314,6 @@ body {
       .icon-and-filter-option {
         display: flex;
         align-items: center;
-
-        .fa-list-icon {
-          margin-right: 9px;
-          text-align: center;
-        }
       }
     }
   }
@@ -325,7 +336,7 @@ body {
 
 .business-directory-submit {
   width: 100%;
-  margin-bottom: 36px;
+  margin-bottom: 24px;
   font-weight: 500;
   font-size: 20px;
   line-height: 23px;
@@ -336,4 +347,15 @@ body {
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2),
               0px 2px 2px rgba(0, 0, 0, 0.12),
               0px 0px 2px rgba(0, 0, 0, 0.14);
+  /* because box shadow on Edge isn't showing top left as expected */
+  @supports (-ms-ime-align:auto) {
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5)
+  }
+}
+
+.mdc-card {
+    /* because box shadow on Edge isn't showing top left as expected */
+    @supports (-ms-ime-align:auto) {
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5)
+    }
 }

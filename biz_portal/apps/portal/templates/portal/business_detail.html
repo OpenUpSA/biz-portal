@@ -15,7 +15,7 @@
     <div>
       <div class="business-menu">
         <button class="mdc-button business-menu-button" id="show-business-menu">
-          <i class="fas fa-ellipsis-h mdc-button__icon" aria-hidden="true"></i>
+          <i class="fas fa-ellipsis-h mdc-button__icon dots-icon" aria-hidden="true"></i>
         </button>
       </div>
       <div class="mdc-dialog"
@@ -42,11 +42,11 @@
         <span class="business-category-text">
           {{ object.sector.label }}
         </span>
-        <span>
-          <img src="{% static 'images/accomodation.svg' %}" />
+        <span class="icon-under-menu">
+          <i class="fas {{object.sector.icon_name}} fa-list-icon icon mdc-theme--primary" aria-hidden="true"></i>
         </span>
       </div>
-      <div class="business-name">
+      <div class="business-name mdc-theme--primary">
         {% firstof object.supplied_name object.registered_name %}
       </div>
       {% if object.description %}
@@ -60,13 +60,13 @@
       </div>
       <div class="social-sharing-icons">
         <span>
-          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" target="_blank">
-            <img src="{% static 'images/twitter.svg' %}" />
+          <a href="https://twitter.com/share?url=https://{{ current_site.domain }}{{ request.get_full_path|iriencode }}" target="_blank">
+            <i class="fab fa-twitter fa-list-icon mdc-theme--primary" aria-hidden="true"></i>
           </a>
         </span>
         <span>
           <a href="https://www.facebook.com/sharer/sharer.php?u=https://{{ current_site.domain }}{{ request.get_full_path|iriencode }}" target="_blank">
-            <img src="{% static 'images/facebook.svg' %}" />
+            <i class="fab fa-facebook fa-list-icon mdc-theme--primary" aria-hidden="true"></i>
           </a>
         </span>
       </div>
@@ -96,7 +96,7 @@
             <span class="mdc-expansion__header">{% firstof object.registration_status.label "Status unknown" %}</span>
           </span>
           <div data-tooltip="Indicates the current registration status of the business. A business's status can range from being In business or Deregistered to Closed.">
-            <i class="fas fa-info-circle info-icon" aria-hidden="true"></i>
+            <i class="fas fa-info-circle mdc-theme--primary " aria-hidden="true"></i>
           </div>
         </summary>
       </details>
@@ -108,24 +108,39 @@
             <span class="mdc-expansion__header">{{ object.registered_business_type.label }}</span>
           </span>
           <div data-tooltip="Describes the type of business registered, such as private company and non-profit company for example.">
-            <i class="fas fa-info-circle info-icon" aria-hidden="true"></i>
+            <i class="fas fa-info-circle mdc-theme--primary" aria-hidden="true"></i>
           </div>
         </summary>
       </details>
       <details class="mdc-theme--background mdc-elevation--z2">
         <summary class="mdc-expansion__summary">
           <span class="business-profile-location mdc-list-item">
-            <span class="registration-icon-span">
-              <img class="registration-icon" src="{% static 'images/content-paste.svg' %}" />
-            </span>
+            <i class="fas fa-clipboard fa-list-icon mdc-theme--primary mdc-list-item__graphic" aria-hidden="true"></i>
             <span class="type-header">Reg:</span>
             <span class="mdc-expansion__header">{{ object.registration_number }}</span>
           </span>
           <div data-tooltip="Indicates the registration number of the business.">
-            <i class="fas fa-info-circle info-icon" aria-hidden="true"></i>
+            <i class="fas fa-info-circle mdc-theme--primary" aria-hidden="true"></i>
           </div>
         </summary>
       </details>
+       {% if request.user.is_staff %}
+        <details class="mdc-expansion mdc-theme--background mdc-elevation--z2">
+          <summary class="mdc-expansion__summary">
+            <span class="business-profile-location mdc-list-item">
+              <i class="material-icons mdc-list-item__graphic" aria-hidden="true">account_circle</i>
+              <span class="type-header">Directors:</span>
+              <span class="mdc-expansion__header">{{ object.get_directors | length }}</span>
+            </span>
+            <i class="material-icons mdc-list-item__graphic arrow-down" aria-hidden="true">keyboard_arrow_down</i>
+          </summary>
+          <div class="mdc-expansion__content">
+              {% for director in object.get_directors %}
+            <span class="mdc-expansion__header director-name">{{ director.first_names }} {{ director.surname }}</span>
+            {% endfor %}
+          </div>
+        </details>
+      {% endif %}
     </div><!-- end .business-profile-cards -->
 
 

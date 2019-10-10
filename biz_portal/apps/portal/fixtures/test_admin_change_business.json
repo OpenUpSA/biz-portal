@@ -33,6 +33,20 @@
   }
 },
 {
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "argon2$argon2i$v=19$m=512,t=2,p=2$RUZnTFNUVUhCTjg1$kUTw7onWQfUlE6dr/mkvvw",
+    "is_superuser": false,
+    "username": "integration_admin",
+    "is_staff": true,
+    "is_active": true,
+    "groups": [
+      1
+    ]
+  }
+},
+{
   "model": "sites.site",
   "pk": 1,
   "fields": {
@@ -96,6 +110,28 @@
     "registration_number": "1990/000289/23",
     "region": 6,
     "sector": 29
+  }
+},
+{
+  "model": "portal.businessmembership",
+  "pk": 1,
+  "fields": {
+    "id_number": "1111",
+    "business": 1,
+    "first_names": "BARIS",
+    "surname": "BARIS",
+    "membership_type": 2
+  }
+},
+{
+  "model": "portal.businessmembership",
+  "pk": 2,
+  "fields": {
+    "id_number": "XXXX",
+    "business": 2,
+    "first_names": "Test",
+    "surname": "User",
+    "membership_type": 3
   }
 }
 ]
