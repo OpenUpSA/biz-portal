@@ -2,6 +2,16 @@
 {% load param_replace %}
 {% load static %}
 
+{% block title %}Search results - {{ current_site.municipality.label }} Business Portal{% endblock title %}
+
+{% block meta %}
+<meta name="twitter:title" content="Search results - {{ current_site.municipality.label }} Business Portal">
+<meta name="twitter:description" content="{{ current_site.municipality.label }} business database providing listed contact details">
+<meta name="twitter:card" content="summary">
+<meta property="og:title" content="Search results - {{ current_site.municipality.label }} Business Portal" />
+<meta property="og:description" content="{{ current_site.municipality.label }} business database providing listed contact details" />
+{% endblock %}
+
 {% block content %}
 
 {% include 'portal/search_filter_snippet.html' %}

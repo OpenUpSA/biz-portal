@@ -1,6 +1,20 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}Contact - {{ current_site.municipality.label }} Business Portal{% endblock title %}
+
+{% block meta %}
+  <meta name="twitter:title" content="Contact - {{ current_site.municipality.label }} Business Portal">
+  <meta name="twitter:description" content="{{ current_site.municipality.label }} contact details for their business database">
+  <meta property="og:title" content="Contact - {{ current_site.municipality.label }} Business Portal">
+  <meta property="og:description" content="{{ current_site.municipality.label }} contact details for their business database">
+  <meta name="twitter:card" content="summary">
+  {% if current_site.municipality.logo %}
+  <meta name="twitter:image" content="{% static current_site.municipality.logo %}">
+  <meta property="og:image" content="{% static current_site.municipality.logo %}">
+  {% endif %}
+{% endblock %}
+
 {% block content %}
 
 <div class="muni-contact-details">
