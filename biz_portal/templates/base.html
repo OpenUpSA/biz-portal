@@ -4,16 +4,16 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{% block title %}Open Business Portal{% endblock title %}</title>
+    <title>{% block title %}{{ current_site.municipality.label }} Business Portal{% endblock title %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="">
 
     {% block meta %}
     <meta name="twitter:title" content="{{ current_site.municipality.label }} Business Portal">
-    <meta name="twitter:description" content="">
+    <meta name="twitter:description" content="{{ current_site.municipality.label }} business database providing listed contact details">
     <meta name="twitter:card" content="summary">
     <meta property="og:title" content="{{ current_site.municipality.label }} Business Portal" />
-    <meta property="og:description" content="" />
+    <meta property="og:description" content="{{ current_site.municipality.label }} business database providing listed contact details" />
     {% if current_site.municipality.logo %}
     <meta name="twitter:image" content="{% static current_site.municipality.logo %}">
     <meta property="og:image" content="{% static current_site.municipality.logo %}">
