@@ -71,7 +71,10 @@ class Municipality(models.Model):
 
 
 class Region(models.Model):
-    label = models.CharField(max_length=200, unique=True)
+    class Meta:
+        unique_together = [['label', 'municipality']]
+
+    label = models.CharField(max_length=200)
     municipality = models.ForeignKey(
         Municipality, on_delete=models.CASCADE, related_name="regions"
     )
